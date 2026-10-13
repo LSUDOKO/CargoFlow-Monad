@@ -608,8 +608,8 @@ Report vulnerabilities as described in [`SECURITY.md`](SECURITY.md). The threat 
 
 ## Demo video
 
-The Metropolis demo (≤ 3:00) and pitch (≤ 2:00) are cut from the original CargoFlow film (Remotion), with every
-Robinhood, Arbitrum and USDG frame removed and new Monad recordings added: the note book ticking per block, a bid
+The Metropolis demo (≤ 3:00) and pitch (≤ 2:00) are cut from the original CargoFlow film (Remotion), re-rendered for Monad and
+USDC (the earlier chain's frames are cut) and new Monad recordings added: the note book ticking per block, a bid
 filled, and settlement paying the note holder on MonadVision. Shot list, voice-over and the clips to record:
 [`docs/submission/VIDEO-SCRIPT.md`](docs/submission/VIDEO-SCRIPT.md).
 

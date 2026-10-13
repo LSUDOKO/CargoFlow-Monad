@@ -25,31 +25,12 @@
 > 4. Optional: create your own shipment at /exporter, fund it at /financier, pay it at /buyer.
 > The API runs on Render's free tier: if a page shows skeletons, the first request is waking it (about a minute).
 
-## Technical demo video (max 3:00): shot list
+## Videos
 
-Record the live site, not slides. Have two browser profiles: financier (0x2198…6414) and a trader wallet with test USDC.
+The full shot lists, voice-over, captions and the clips to record are in **[`VIDEO-SCRIPT.md`](VIDEO-SCRIPT.md)**:
 
-| Time | Screen | Say |
-|---|---|---|
-| 0:00-0:15 | Landing page, then `/notes` | "CargoFlow turns a trade-finance position into a Cargo Note: an asset you can trade mid-voyage, priced on chain by the cargo's own sensor evidence. This is live on Monad testnet." |
-| 0:15-0:45 | Fleet → the settled shipment's dashboard: Evidence tab, then Audit trail | "A financier escrowed USDC. Each milestone released only when the container's signed readings cleared the on-chain policy. Here the reefer failed: probe-1 hit 11.7 °C, the score fell to 48 and the facility paused automatically. A Groth16 proof from the second probe resumed it, verified on chain." |
-| 0:45-1:05 | MonadVision: the `buy` transaction, then the `settle` transaction's transfers | "Mid-voyage, the financier sold the note 1% under its evidence mark. When the buyer paid, the vault paid principal plus fee to the note holder, not the original lender." |
-| 1:05-1:40 | `/notes`: point at the block counter, mark, ask, bid, upside; show the paused note's haircut | "The book re-reads every block. The mark is computed by the contract: undrawn escrow at par, the drawn leg discounted by the evidence score, 30% off while paused. When a container goes out of range, the price moves within a block." |
-| 1:40-2:20 | Trader wallet: place a bid on the active note (approve + place bid, toasts with explorer links) | "Anyone can bid; USDC is escrowed by the market contract. Sub-second finality means the fill is final before the next sensor reading lands." |
-| 2:20-2:45 | Financier wallet: "Sell into best bid" → holder changes in the panel | "The holder sells into the bid; the position moves atomically with the payment. Settlement, default recovery, the bill of lading and insurance cover now follow the new holder." |
-| 2:45-3:00 | `/deployments` page | "Eleven contracts, verified on MonadVision; 379 contract tests. CargoFlow on Monad." |
-
-Tip: before recording, refresh the active note with `STOP=active FACILITY_USDC=3 INVOICE_USDC=5 npx tsx frontend/scripts/testnet-lifecycle.ts https://cargoflow-monad-api.onrender.com` (needs ~3 USDC on the financier and some MON on each role key).
-
-## Pitch video (max 2:00): script
-
-1. **Who (10 s):** "I'm Arpit, a CS student at NIT Hamirpur; I build trade-finance infrastructure on chain."
-2. **Problem (30 s):** "Trade finance has a $2.5 trillion gap; 41% of SME applications are rejected. In India, exporters wait 52 days to be paid. Lenders can't see the cargo they lend against, and once they lend, their money is locked until the buyer pays. No exit, no price, so capital stays scarce and expensive."
-3. **Solution (35 s):** "CargoFlow releases working capital milestone by milestone, only when the container's own signed sensor evidence clears an on-chain policy, with zero-knowledge recovery when something goes wrong. On Monad we added Cargo Notes: the lender's position becomes a tradeable asset with an on-chain price that follows the evidence, block by block."
-4. **Why Monad (15 s):** "Marking a fleet of positions to live evidence and trading them needs cheap updates and sub-second finality. That's Monad."
-5. **First users and next step (25 s):** "Our first user is an NBFC funding Indian pharma exporters (a $30 billion, temperature-controlled export market), with credit funds buying the notes for short, self-liquidating USDC yield. Next: a pilot of 10 shipments with one exporter and one lender, Kuru listings for notes, then audit and mainnet. Target: $1M in notes outstanding six months after mainnet."
-6. **Close (5 s):** "CargoFlow: capital that moves with your cargo."
-
-## Product ad (optional, max 0:30)
-
-Hook "Your loan is stuck at sea." → container + temperature graph → "Now it trades." → `/notes` book ticking → "Cargo Notes on Monad."
+- **Technical demo (≤ 3:00):** re-rendered scenes from the original CargoFlow film (now USDC on Monad) plus new Monad
+  recordings: the `/notes` book ticking per block, a bid and its acceptance, the settled dashboard, and MonadVision
+  transactions for the ZK resume, the note buy and the settlement paid to the note holder.
+- **Pitch (≤ 2:00):** team, problem (sourced), Cargo Notes, why Monad, first users, next steps.
+- **Product ad (≤ 0:30, optional).**
