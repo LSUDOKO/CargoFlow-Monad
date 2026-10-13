@@ -1,0 +1,69 @@
+{
+  "name": "cargoflow-frontend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "prebuild": "node scripts/copy-openapi.mjs",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "e2e": "playwright test",
+    "abi": "node scripts/gen-abi.mjs && node scripts/copy-openapi.mjs",
+    "cf:build": "opennextjs-cloudflare build",
+    "cf:preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "cf:deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
+  },
+  "dependencies": {
+    "@gsap/react": "2.1.2",
+    "@noble/curves": "^1.9.7",
+    "@noble/hashes": "^1.8.0",
+    "@privy-io/react-auth": "^3.47.0",
+    "@privy-io/wagmi": "^4.0.18",
+    "@simplewebauthn/browser": "8.3.7",
+    "@tanstack/react-query": "5.104.0",
+    "@walletconnect/ethereum-provider": "^2.25.0",
+    "@zerodev/passkey-validator": "5.6.0",
+    "@zerodev/sdk": "5.5.10",
+    "@zerodev/webauthn-key": "5.5.0",
+    "gsap": "3.15.0",
+    "maplibre-gl": "^5.24.0",
+    "motion": "13.5.0",
+    "next": "16.3.8",
+    "pdf-lib": "^1.17.1",
+    "qrcode": "^1.5.3",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "searoute-js": "^0.1.0",
+    "viem": "2.57.2",
+    "wagmi": "3.7.7",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@opennextjs/cloudflare": "^1.20.7",
+    "@playwright/test": "1.63.0",
+    "@tailwindcss/postcss": "4.3.3",
+    "@testing-library/react": "16.3.3",
+    "@types/node": "^22",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.8",
+    "jsdom": "^26",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.9.3",
+    "vitest": "^3",
+    "wrangler": "^4.146.0"
+  },
+  "packageManager": "pnpm@10.19.0",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "unrs-resolver"
+    ]
+  }
+}
