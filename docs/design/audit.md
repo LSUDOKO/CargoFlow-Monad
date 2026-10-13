@@ -1,6 +1,6 @@
 # CargoFlow UI audit (2026-10-03)
 
-Live site, https://cargoflow.adoranto737.workers.dev, captured with Playwright at 390, 768 and 1440 px (full page).
+Live site, https://cargoflow-monad.adoranto737.workers.dev, captured with Playwright at 390, 768 and 1440 px (full page).
 Screenshots: `/tmp/claude-1000/-home-arpit-Desktop-hackathon-projects-CargoFlow/45772ef8-6504-4b33-8b81-937635b28fa8/scratchpad/audit/`
 (`<route>-<width>.png`, tiles in `view/`; track tabs as `track-<tab>-<width>.png`).
 Benchmarks held in mind: Stripe Dashboard (density, tables, numerals), Mercury (calm surfaces), Linear (precision,

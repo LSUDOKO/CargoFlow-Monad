@@ -11,7 +11,7 @@
 //
 // Auth: NODE_AUTH_TOKEN (a GITHUB_TOKEN in Actions, or `gh auth token` with write:packages locally) is written to a
 // temporary .npmrc next to each copy; without it npm uses your own login (`npm login --registry=https://npm.pkg.github.com`).
-// Env: GH_PACKAGES_SCOPE (default "lsudoko"), GH_PACKAGES_REPO (default "https://github.com/LSUDOKO/CargoFlow").
+// Env: GH_PACKAGES_SCOPE (default "lsudoko"), GH_PACKAGES_REPO (default "https://github.com/LSUDOKO/CargoFlow-Monad").
 
 import { execFileSync } from "node:child_process";
 import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
@@ -22,7 +22,7 @@ import { fileURLToPath } from "node:url";
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const REGISTRY = "https://npm.pkg.github.com";
 const SCOPE = (process.env.GH_PACKAGES_SCOPE ?? "lsudoko").toLowerCase();
-const REPO = process.env.GH_PACKAGES_REPO ?? "https://github.com/LSUDOKO/CargoFlow";
+const REPO = process.env.GH_PACKAGES_REPO ?? "https://github.com/LSUDOKO/CargoFlow-Monad";
 const ALL = ["sdk", "mcp", "gateway"]; // sdk first: mcp depends on it
 
 const args = process.argv.slice(2);

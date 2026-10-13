@@ -41,14 +41,14 @@
 <text x="336" y="196" class="b" font-size="13" text-anchor="start">Next.js 16, wagmi, viem; built with OpenNext</text>
 <text x="336" y="218" class="b" font-size="13" text-anchor="start">Landing, live dashboard, fleet, exporter /</text>
 <text x="336" y="238" class="b" font-size="13" text-anchor="start">financier / buyer portals, arbiter console</text>
-<text x="336" y="266" class="m" font-size="12" style="fill:#C6F432" text-anchor="start">cargoflow.adoranto737.workers.dev</text>
+<text x="336" y="266" class="m" font-size="12" style="fill:#C6F432" text-anchor="start">cargoflow-monad.adoranto737.workers.dev</text>
 <line x1="250" y1="236" x2="312" y2="236" stroke="#9AABBC" stroke-width="1.6" marker-end="url(#arr)"/>
 <text x="316" y="344" class="lbl" font-size="13" text-anchor="start">RENDER · DOCKER</text>
 <line x1="526.0" y1="290" x2="526.0" y2="330" stroke="#9AABBC" stroke-width="1.6" marker-end="url(#arr)"/>
 <text x="536.0" y="322" class="m" font-size="12" style="fill:#9AABBC" text-anchor="start">REST + WebSocket</text>
 <rect x="316" y="356" width="420" height="330" rx="12" fill="#13293D" stroke="#2A3F54" stroke-width="1"/>
 <text x="336" y="388" class="h" font-size="18" text-anchor="start">Go service (one binary)</text>
-<text x="336" y="674" class="m" font-size="12" style="fill:#C6F432" text-anchor="start">cargoflow-api-75ul.onrender.com</text>
+<text x="336" y="674" class="m" font-size="12" style="fill:#C6F432" text-anchor="start">cargoflow-monad-api.onrender.com</text>
 <rect x="336" y="408" width="184" height="54" rx="9" fill="#0B1B2B" stroke="#2A3F54" stroke-width="1"/>
 <text x="348" y="431" class="b" font-size="13.5" style="fill:#F7F9F4" font-weight="600" text-anchor="start">Ingestion</text>
 <text x="348" y="450" class="m" font-size="10.5" style="fill:#9AABBC" text-anchor="start">signatures, replay, fraud</text>

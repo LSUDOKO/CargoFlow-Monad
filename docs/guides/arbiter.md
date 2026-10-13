@@ -15,7 +15,7 @@ and a little testnet ETH.
 
 <p align="center"><img src="../assets/shot-arbiter.webp" alt="Arbiter console listing the queue with one paused shipment, opened with a wallet that does not hold the dispute role (captured 2 October 2026, before the redesign)." width="100%"></p>
 
-[/arbiter](https://cargoflow.adoranto737.workers.dev/arbiter) lists every paused or disputed facility with its evidence,
+[/arbiter](https://cargoflow-monad.adoranto737.workers.dev/arbiter) lists every paused or disputed facility with its evidence,
 the AI monitor's audit and the explanation. Acting needs the role; with any other wallet the console is read-only, as
 in this capture.
 

@@ -15,7 +15,7 @@ little testnet ETH.
 
 <p align="center"><img src="../assets/v3/how-facility.gif" alt="Animated: while Daniel escrows the facility, the carrier hands a bill of lading to Meera, who slots it into the vault's title slot; the route then draws to Singapore." width="720"></p>
 
-On [/ebl](https://cargoflow.adoranto737.workers.dev/ebl) I choose **Issue a bill**: the shipper (the exporter's
+On [/ebl](https://cargoflow-monad.adoranto737.workers.dev/ebl) I choose **Issue a bill**: the shipper (the exporter's
 address), the consignee (a named buyer), and the bill-of-lading PDF, which is hashed in my browser and never uploaded.
 **Issue bill of lading** mints the token to the shipper. Each document can be issued only once.
 

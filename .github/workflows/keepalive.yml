@@ -18,4 +18,4 @@ jobs:
         run: |
           curl --silent --show-error --max-time 90 --retry 3 --retry-delay 10 --retry-all-errors \
             --output /dev/null --write-out "status %{http_code} in %{time_total}s\n" \
-            https://cargoflow-api-75ul.onrender.com/v1/health
+            https://cargoflow-monad-api.onrender.com/v1/health

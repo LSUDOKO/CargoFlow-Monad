@@ -4,7 +4,7 @@
 // A private repository does not serve its files to anyone who is not signed in, so a README (or a hackathon
 // submission page that embeds it) would show broken images. The website serves them from its own `public/` folder:
 //   repo file  docs/assets/v3/banner.png
-//   website    https://cargoflow.adoranto737.workers.dev/readme/docs/assets/v3/banner.png
+//   website    https://cargoflow-monad.adoranto737.workers.dev/readme/docs/assets/v3/banner.png
 // The URL path after /readme/ is the repo path, so the script can run again at any time: it maps every hosted URL
 // in the README back to its source file, copies the current version, and leaves the README unchanged.
 //
@@ -18,7 +18,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const SITE = process.env.SITE_URL ?? "https://cargoflow.adoranto737.workers.dev";
+const SITE = process.env.SITE_URL ?? "https://cargoflow-monad.adoranto737.workers.dev";
 const PREFIX = `${SITE}/readme/`;
 const OUT = join(ROOT, "frontend", "public", "readme");
 const MEDIA = "png|jpe?g|gif|webp|svg|mp4|pdf|pptx";

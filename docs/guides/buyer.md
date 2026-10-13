@@ -6,7 +6,7 @@ I import pharmaceuticals in Singapore. I want the right cargo, at the right temp
 same moment I pay. With CargoFlow I can see the whole voyage's evidence before I confirm, I pay the invoice once, and
 the contract sends the financier and the exporter their shares and hands me the electronic bill of lading in that same
 transaction. I use a passkey, so I need no browser extension. The links are my live passkey run `CF-SG-VAX-0401`
-([dashboard](https://cargoflow.adoranto737.workers.dev/track/0x195c3fb058809fac41122a6540827510c79c7fe29462c8dea46bc18549c53f51)).
+([dashboard](https://cargoflow-monad.adoranto737.workers.dev/track/0x195c3fb058809fac41122a6540827510c79c7fe29462c8dea46bc18549c53f51)).
 
 ## 1 · Sign in with a passkey (or any wallet)
 
@@ -21,7 +21,7 @@ chain verifies the passkey's P-256 signature through its RIP-7212 precompile. A 
 
 <p align="center"><img src="../assets/v3/web-recovery.jpg" alt="The shipment page: zero-knowledge recovery card reading Groth16 proof verified on-chain, the route map marked paused and resumed, and the temperature strip with one out-of-band reading." width="100%"></p>
 
-On the shipment page (or [/buyer](https://cargoflow.adoranto737.workers.dev/buyer)) I see every committed epoch, the
+On the shipment page (or [/buyer](https://cargoflow-monad.adoranto737.workers.dev/buyer)) I see every committed epoch, the
 excursion and the verified recovery. When the reefer is on my quay I press **Confirm delivery**. With a passkey this is
 an ERC-4337 user operation; the first one also deploys my account.
 
