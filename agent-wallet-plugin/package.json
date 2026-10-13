@@ -14,12 +14,15 @@
   "files": [
     "dist",
     "oclif.manifest.json",
-    "SKILL.md"
+    "SKILL.md",
+    "scripts-link-host.mjs"
   ],
   "scripts": {
     "build": "rm -rf dist && tsc -p tsconfig.json && oclif manifest",
     "prepack": "npm run build",
-    "test": "vitest run"
+    "test": "vitest run",
+    "link-host": "node scripts-link-host.mjs",
+    "postinstall": "node scripts-link-host.mjs"
   },
   "oclif": {
     "bin": "mm",
