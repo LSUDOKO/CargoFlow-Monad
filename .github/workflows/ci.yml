@@ -1,0 +1,191 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: contracts
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: v1.4.2
+      - run: forge fmt --check
+      - run: forge build --sizes
+      - run: FOUNDRY_PROFILE=ci forge test -vvv
+
+  backend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: cargoflow_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      # enables the database, chain (anvil) and end-to-end integration tests instead of skipping them
+      TEST_DATABASE_URL: postgres://postgres:postgres@localhost:5432/cargoflow_test?sslmode=disable
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: v1.4.2
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: backend/go.mod
+          cache-dependency-path: backend/go.sum
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: circuits/package-lock.json
+      - name: Install circom 2.2.3 and circuit dependencies (for ZK recovery tests)
+        working-directory: circuits
+        run: |
+          sudo curl -sSfL -o /usr/local/bin/circom \
+            https://github.com/iden3/circom/releases/download/v2.2.3/circom-linux-amd64
+          sudo chmod +x /usr/local/bin/circom
+          npm ci
+      - run: test -z "$(gofmt -l .)" || (gofmt -l . && exit 1)
+      - run: go vet ./...
+      - run: go test -race -timeout 20m ./...
+
+  circuits:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: circuits
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: circuits/package-lock.json
+      - run: npm ci
+      - name: Install circom 2.2.3
+        run: |
+          sudo curl -sSfL -o /usr/local/bin/circom \
+            https://github.com/iden3/circom/releases/download/v2.2.3/circom-linux-amd64
+          sudo chmod +x /usr/local/bin/circom
+          circom --version
+      - run: npm test
+
+  stylus:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: stylus
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install the pinned Rust toolchain
+        run: rustup show active-toolchain || rustup toolchain install
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            stylus/target
+          key: stylus-${{ hashFiles('stylus/Cargo.lock', 'stylus/rust-toolchain.toml') }}
+      - name: Rust engine reproduces the Go vectors
+        run: cargo test -p cargoflow-engine --locked
+      - name: Stylus contract compiles to WASM
+        run: cargo build --release --target wasm32-unknown-unknown --locked
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: frontend/package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build
+
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: [frontend]
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: cargoflow_e2e
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: v1.4.2
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: backend/go.mod
+          cache-dependency-path: backend/go.sum
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: frontend/package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - name: Install circom and circuit dependencies (the recovery scene proves with them)
+        working-directory: circuits
+        run: |
+          sudo curl -sSfL -o /usr/local/bin/circom https://github.com/iden3/circom/releases/download/v2.2.3/circom-linux-amd64
+          sudo chmod +x /usr/local/bin/circom
+          npm ci
+      - name: Install frontend dependencies and the browser
+        working-directory: frontend
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm exec playwright install --with-deps chromium
+      - name: Full stack end-to-end and accessibility tests
+        env:
+          E2E_DATABASE_URL: postgres://postgres:postgres@localhost:5432/cargoflow_e2e?sslmode=disable
+        run: bash frontend/scripts/e2e-stack.sh
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: |
+            frontend/playwright-report
+            frontend/test-results
