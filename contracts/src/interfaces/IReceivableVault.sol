@@ -44,6 +44,7 @@ interface IReceivableVault {
 
     /// @notice v3: a facility cancelled before transit returned its deposit (0 when never funded).
     event CapitalReturned(bytes32 indexed shipmentId, address indexed financier, uint256 amount);
+    event FinancierTransferred(bytes32 indexed shipmentId, address indexed from, address indexed to);
 
     error FacilityNotFound();
     error FacilityAlreadyExists();
@@ -75,6 +76,10 @@ interface IReceivableVault {
 
     /// @notice Defence-in-depth pause: a paused facility cannot release regardless of controller bugs.
     function setPaused(bytes32 shipmentId, bool paused) external;
+
+    /// @notice Monad: moves the facility's financier (the payee of every financier payout). Controller
+    ///         only; the facility must be open.
+    function transferFinancier(bytes32 shipmentId, address to) external;
 
     /// @notice Pulls the invoice from the payer and runs the waterfall:
     ///         principal + fee + undrawn commitment -> financier, the remainder -> supplier.

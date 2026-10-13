@@ -155,6 +155,19 @@ contract ReceivableVault is Controlled, ReentrancyGuard, IReceivableVault {
     }
 
     /// @inheritdoc IReceivableVault
+    function transferFinancier(bytes32 shipmentId, address to)
+        external
+        onlyRole(Roles.CONTROLLER_ROLE)
+    {
+        Facility storage f = _load(shipmentId);
+        if (f.closed) revert FacilityClosed();
+        if (to == address(0) || to == f.supplier || to == f.payer) revert InvalidFacility();
+        address from = f.financier;
+        f.financier = to;
+        emit FinancierTransferred(shipmentId, from, to);
+    }
+
+    /// @inheritdoc IReceivableVault
     function getFacility(bytes32 shipmentId) external view returns (Facility memory) {
         if (!_exists[shipmentId]) revert FacilityNotFound();
         return _facilities[shipmentId];
