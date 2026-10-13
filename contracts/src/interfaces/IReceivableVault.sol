@@ -1,0 +1,96 @@
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.28;
+
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+
+interface IReceivableVault {
+    struct Facility {
+        address financier;
+        address supplier; // the only address that can ever receive an advance
+        address payer; // the buyer who settles the invoice
+        uint256 committed;
+        uint256 drawn;
+        uint256 invoiceValue;
+        uint16 feeBps;
+        bool funded;
+        bool paused;
+        bool closed;
+    }
+
+    event FacilityOpened(
+        bytes32 indexed shipmentId,
+        address indexed financier,
+        address indexed supplier,
+        address payer,
+        uint256 committed,
+        uint256 invoiceValue,
+        uint16 feeBps
+    );
+    event CapitalDeposited(bytes32 indexed shipmentId, address indexed financier, uint256 amount);
+    event AdvanceReleased(
+        bytes32 indexed shipmentId, address indexed supplier, uint256 amount, uint256 totalDrawn
+    );
+    event FacilityPauseSet(bytes32 indexed shipmentId, bool paused);
+    event FacilityDefaulted(
+        bytes32 indexed shipmentId, uint256 undrawnRefund, uint256 outstandingPrincipal
+    );
+    event FacilitySettled(
+        bytes32 indexed shipmentId,
+        uint256 principal,
+        uint256 fee,
+        uint256 residual,
+        uint256 undrawnRefund
+    );
+
+    /// @notice v3: a facility cancelled before transit returned its deposit (0 when never funded).
+    event CapitalReturned(bytes32 indexed shipmentId, address indexed financier, uint256 amount);
+
+    error FacilityNotFound();
+    error FacilityAlreadyExists();
+    error InvalidFacility();
+    error AlreadyFunded();
+    error NotFunded();
+    error FacilityClosed();
+    error FacilityPaused();
+    error ExceedsCommittedFacility();
+    error ZeroAmount();
+    error CannotCancel();
+
+    function openFacility(
+        bytes32 shipmentId,
+        address financier,
+        address supplier,
+        address payer,
+        uint256 committed,
+        uint256 invoiceValue,
+        uint16 feeBps
+    ) external;
+
+    /// @notice Pulls the full committed amount from the financier (who approved this vault).
+    function deposit(bytes32 shipmentId) external;
+
+    /// @notice Sends `amount` to the facility's fixed supplier. Reverts if paused, unfunded, or if
+    ///         cumulative draws would exceed the commitment.
+    function release(bytes32 shipmentId, uint256 amount) external;
+
+    /// @notice Defence-in-depth pause: a paused facility cannot release regardless of controller bugs.
+    function setPaused(bytes32 shipmentId, bool paused) external;
+
+    /// @notice Pulls the invoice from the payer and runs the waterfall:
+    ///         principal + fee + undrawn commitment -> financier, the remainder -> supplier.
+    function settle(bytes32 shipmentId) external;
+
+    /// @notice Stops all future draws and returns the undrawn commitment to the financier.
+    ///         `drawn` is preserved as the record of the outstanding exposure. No off-chain recovery
+    ///         claims are modelled.
+    function closeDefaulted(bytes32 shipmentId) external;
+
+    /// @notice v3: closes a facility that never drew (cancelled before transit) and returns the whole
+    ///         deposit, if any, to the financier. Reverts CannotCancel if anything was drawn.
+    function closeCancelled(bytes32 shipmentId) external;
+
+    function getFacility(bytes32 shipmentId) external view returns (Facility memory);
+
+    /// @notice The settlement token (USDG, 6 decimals) this vault custodies.
+    function USDG() external view returns (IERC20);
+}
