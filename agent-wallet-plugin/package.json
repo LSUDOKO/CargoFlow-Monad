@@ -13,7 +13,8 @@
   ],
   "files": [
     "dist",
-    "oclif.manifest.json"
+    "oclif.manifest.json",
+    "SKILL.md"
   ],
   "scripts": {
     "build": "rm -rf dist && tsc -p tsconfig.json && oclif manifest",
@@ -35,12 +36,79 @@
     "minCliVersion": ">=6.2.0",
     "capabilities": [],
     "commands": [
-      { "id": "cargo:list", "capabilities": [], "dataAccess": [], "targetChains": [10143] },
-      { "id": "cargo:quote", "capabilities": ["wallet-read"], "dataAccess": [], "targetChains": [10143] },
-      { "id": "cargo:buy", "capabilities": ["wallet-read", "wallet-submit"], "dataAccess": ["accounts", "balances"], "targetChains": [10143] },
-      { "id": "cargo:bid", "capabilities": ["wallet-read", "wallet-submit"], "dataAccess": ["accounts", "balances"], "targetChains": [10143] },
-      { "id": "cargo:cancel-bid", "capabilities": ["wallet-read", "wallet-submit"], "dataAccess": ["accounts"], "targetChains": [10143] },
-      { "id": "cargo:scan", "capabilities": ["wallet-read", "wallet-submit"], "dataAccess": ["accounts", "balances"], "targetChains": [10143] }
+      {
+        "id": "cargo:list",
+        "capabilities": [],
+        "dataAccess": [],
+        "targetChains": [
+          10143
+        ]
+      },
+      {
+        "id": "cargo:quote",
+        "capabilities": [
+          "wallet-read"
+        ],
+        "dataAccess": [],
+        "targetChains": [
+          10143
+        ]
+      },
+      {
+        "id": "cargo:buy",
+        "capabilities": [
+          "wallet-read",
+          "wallet-submit"
+        ],
+        "dataAccess": [
+          "accounts",
+          "balances"
+        ],
+        "targetChains": [
+          10143
+        ]
+      },
+      {
+        "id": "cargo:bid",
+        "capabilities": [
+          "wallet-read",
+          "wallet-submit"
+        ],
+        "dataAccess": [
+          "accounts",
+          "balances"
+        ],
+        "targetChains": [
+          10143
+        ]
+      },
+      {
+        "id": "cargo:cancel-bid",
+        "capabilities": [
+          "wallet-read",
+          "wallet-submit"
+        ],
+        "dataAccess": [
+          "accounts"
+        ],
+        "targetChains": [
+          10143
+        ]
+      },
+      {
+        "id": "cargo:scan",
+        "capabilities": [
+          "wallet-read",
+          "wallet-submit"
+        ],
+        "dataAccess": [
+          "accounts",
+          "balances"
+        ],
+        "targetChains": [
+          10143
+        ]
+      }
     ]
   },
   "peerDependencies": {
