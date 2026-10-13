@@ -91,7 +91,7 @@ export function PasskeyStep({ onDone }: { onDone: () => void }) {
 
       <ul className="space-y-1.5 text-xs leading-relaxed text-text-muted">
         <li>Your passkey never leaves your device. CargoFlow stores only its public key.</li>
-        <li>The account is a ZeroDev Kernel smart account on Robinhood Chain Testnet; it is set up on chain with your first action.</li>
+        <li>The account is a ZeroDev Kernel smart account on Monad Testnet; it is set up on chain with your first action.</li>
       </ul>
     </div>
   );

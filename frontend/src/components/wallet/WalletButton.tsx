@@ -42,7 +42,7 @@ export function WalletButton({ compact, onDark }: { compact?: boolean; onDark?: 
     abi: usdgAbi,
     functionName: "balanceOf",
     args: address ? [address] : undefined,
-    chainId: appChain as 46630 | 31337 | undefined,
+    chainId: appChain as 10143 | 31337 | undefined,
     query: { enabled: !!address && !!contracts && chainId === appChain, refetchInterval: 15_000 },
   });
 
@@ -86,14 +86,14 @@ export function WalletButton({ compact, onDark }: { compact?: boolean; onDark?: 
         {gas.low && !wrongChain && <span className="sr-only">Low on gas.</span>}
         {isPasskey && <span className="hidden rounded-full bg-current/10 px-2 py-0.5 text-xs font-semibold md:inline">Passkey account</span>}
         <span className="font-mono">{shortHash(address, 4, 4)}</span>
-        {!compact && balance !== undefined && <span className="hidden opacity-70 lg:inline">{formatUSDG(balance as bigint)} USDG</span>}
+        {!compact && balance !== undefined && <span className="hidden opacity-70 lg:inline">{formatUSDG(balance as bigint)} USDC</span>}
       </button>
       {menu && (
         <div role="menu" className="surface-light absolute right-0 z-(--z-overlay) mt-2 w-72 rounded-tile border border-border bg-surface p-2 text-ink shadow-3">
           <div className="px-3 py-2 text-sm">
             <p className="font-semibold">{wrongChain ? "Wrong network" : chainName(chainId)}{isEmail && <span className="ml-2 rounded-full bg-surface-sunken px-2 py-0.5 text-xs font-semibold text-text-muted">Email wallet</span>}{isPasskey && <span className="ml-2 rounded-full bg-surface-sunken px-2 py-0.5 text-xs font-semibold text-text-muted">Passkey account</span>}</p>
             <p className="font-mono text-xs break-all text-text-muted">{address}</p>
-            {balance !== undefined && <p className="mt-1 text-text-muted">{formatUSDG(balance as bigint)} USDG</p>}
+            {balance !== undefined && <p className="mt-1 text-text-muted">{formatUSDG(balance as bigint)} USDC</p>}
           </div>
           {isPasskey && <PasskeyGasNote sponsorship={passkey.sponsorship} />}
           {!wrongChain && !(isPasskey && passkey.sponsorship === "on") && <GasHelper address={address} />}

@@ -232,7 +232,7 @@ export function WalletModal({ open, onClose }: { open: boolean; onClose: () => v
           </div>
 
           <footer className="shrink-0 border-t border-border bg-surface px-5 pt-3 pb-[max(env(safe-area-inset-bottom),0.875rem)] text-caption text-text-muted sm:px-6 sm:pb-4">
-            CargoFlow never holds your keys: you approve every transaction in your own wallet. Live on Robinhood Chain Testnet; mainnet release is next.
+            CargoFlow never holds your keys: you approve every transaction in your own wallet. Live on Monad Testnet; mainnet release is next.
           </footer>
         </div>
       </div>

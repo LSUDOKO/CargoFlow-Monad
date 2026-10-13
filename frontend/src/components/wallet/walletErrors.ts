@@ -27,7 +27,7 @@ export function connectError(err: unknown, wallet: string): ConnectFailure {
     return { message: `${wallet} already has a request open. Open ${wallet} to finish or cancel it.`, rejected: false };
   }
   if (has((e) => /ChainNotConfigured|ChainMismatch|SwitchChain|UnsupportedChain/.test(e.name ?? "") || e.code === 4902)) {
-    return { message: `${wallet} is on a network CargoFlow does not use. Switch it to Robinhood Chain Testnet, then try again.`, rejected: false };
+    return { message: `${wallet} is on a network CargoFlow does not use. Switch it to Monad Testnet, then try again.`, rejected: false };
   }
   if (has((e) => e.name === "ProviderNotFoundError")) {
     return { message: `${wallet} did not respond. Unlock it (or reload the page) and try again.`, rejected: false };

@@ -10,7 +10,7 @@ import { PrivyProvider, useCreateWallet, useLoginWithEmail, usePrivy, useWallets
 import { Component, useEffect, useRef } from "react";
 import type { EIP1193Provider } from "viem";
 import { connect } from "wagmi/actions";
-import { EMBEDDED_CONNECTOR_ID, localChain, PRIVY_APP_ID, robinhoodTestnet, setEmbeddedProvider, wagmiConfig } from "@/lib/chain/config";
+import { EMBEDDED_CONNECTOR_ID, localChain, PRIVY_APP_ID, monadTestnet, setEmbeddedProvider, wagmiConfig } from "@/lib/chain/config";
 import { registerEmbedded, setEmbeddedState, useEmbedded } from "../embedded";
 import { emailError } from "../walletErrors";
 
@@ -44,8 +44,8 @@ export default function PrivyBridge() {
           loginMethods: ["email"],
           embeddedWallets: { ethereum: { createOnLogin: "users-without-wallets" } },
           // both CargoFlow networks as custom chains; the app switches between them through the connector
-          supportedChains: [robinhoodTestnet, localChain],
-          defaultChain: robinhoodTestnet,
+          supportedChains: [monadTestnet, localChain],
+          defaultChain: monadTestnet,
           // Privy is only the email wallet here: wagmi owns browser wallets and WalletConnect. Without this Privy
           // starts its own WalletConnect core ("Init() was called 2 times") and Coinbase connectors on every page.
           externalWallets: { walletConnect: { enabled: false }, disableAllExternalWallets: true },

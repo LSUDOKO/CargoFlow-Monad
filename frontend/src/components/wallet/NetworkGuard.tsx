@@ -86,7 +86,7 @@ export function NetworkGuard({ children, purpose, title = "Connect your wallet",
         variant="warning"
         title={`Switch to ${chainName(appChain)}`}
         action={
-          <Button loading={isPending} onClick={() => switchChain({ chainId: appChain as 46630 | 31337 })}>
+          <Button loading={isPending} onClick={() => switchChain({ chainId: appChain as 10143 | 31337 })}>
             Switch network
           </Button>
         }
