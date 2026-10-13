@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=./node_modules/envio/evm.schema.json
+# CargoFlow on Monad Testnet: the Cargo Note order book, position transfers, facility states and evidence scores.
+name: cargoflow-indexer
+address_format: lowercase
+field_selection:
+  transaction_fields:
+    - hash
+contracts:
+  - name: CargoNoteMarket
+    events:
+      - event: "AskPlaced(bytes32 indexed shipmentId, address indexed seller, uint256 price, uint256 mark)"
+      - event: "AskCancelled(bytes32 indexed shipmentId, address indexed seller)"
+      - event: "BidPlaced(bytes32 indexed shipmentId, address indexed bidder, uint256 price, uint256 mark)"
+      - event: "BidCancelled(bytes32 indexed shipmentId, address indexed bidder, uint256 refund)"
+      - event: "NoteTraded(bytes32 indexed shipmentId, address indexed seller, address indexed buyer, uint256 price, uint256 mark, bool takerWasBuyer)"
+  - name: FinancingController
+    events:
+      - event: "FacilityCreated(bytes32 indexed shipmentId, address indexed financier, address indexed exporter, uint256 committed, uint16 feeBps, uint8 milestoneCount)"
+      - event: "PositionTransferred(bytes32 indexed shipmentId, address indexed from, address indexed to)"
+      - event: "StatusChanged(bytes32 indexed shipmentId, uint8 from, uint8 to)"
+  - name: EvidenceRegistry
+    events:
+      - event: "EvidenceEpochCommitted(bytes32 indexed shipmentId, bytes32 indexed epochId, uint8 milestoneIndex, uint32 seq, bytes32 merkleRoot, uint32 score, uint32 conflictBps, uint32 riskBps, bool compliant)"
+chains:
+  - id: 10143
+    start_block: 70736162
+    # HyperSync (https://10143.hypersync.xyz) is the primary source; the public RPC is the fallback
+    rpc:
+      - url: https://testnet-rpc.monad.xyz
+        for: fallback
+    contracts:
+      - name: CargoNoteMarket
+        address: "0x120142b2e5A90F2676F41d8d20bDCC94C66ec55d"
+      - name: FinancingController
+        address: "0x172f8B86a9368ef729fa76c773ECA03d166DEB4d"
+      - name: EvidenceRegistry
+        address: "0x4aD47799586B4793b7952BA849013F5D0eC2e66a"

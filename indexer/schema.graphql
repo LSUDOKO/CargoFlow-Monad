@@ -1,0 +1,62 @@
+"""A Cargo Note: the financier position in one shipment's facility."""
+type Note {
+  id: ID! # shipment id (bytes32, lowercase hex)
+  status: String!
+  holder: String!
+  lastScore: Int!
+  epochs: Int!
+  trades: Int!
+  volume: BigInt!
+  lastTradePrice: BigInt
+  askPrice: BigInt
+  askSeller: String
+  updatedAt: Int!
+}
+
+"""A fill on the CargoNoteMarket (buy at the ask, or the holder accepting a bid)."""
+type Trade {
+  id: ID!
+  note: Note!
+  seller: String!
+  buyer: String!
+  price: BigInt!
+  mark: BigInt!
+  takerWasBuyer: Boolean!
+  blockNumber: Int!
+  timestamp: Int!
+  txHash: String!
+}
+
+"""Every order-book action, newest first in the UI's activity feed."""
+type OrderEvent {
+  id: ID!
+  note: Note!
+  kind: String! # ASK, ASK_CANCELLED, BID, BID_CANCELLED, TRADE, TRANSFER
+  account: String!
+  price: BigInt
+  mark: BigInt
+  blockNumber: Int!
+  timestamp: Int!
+  txHash: String!
+}
+
+"""An evidence epoch committed on chain: the input the mark is priced from."""
+type Epoch {
+  id: ID!
+  note: Note!
+  milestoneIndex: Int!
+  seq: Int!
+  score: Int!
+  conflictBps: Int!
+  compliant: Boolean!
+  timestamp: Int!
+}
+
+"""Protocol-wide counters (Envio Cloud exposes no _aggregate queries, so they are kept here)."""
+type MarketStats {
+  id: ID! # "global"
+  trades: Int!
+  volume: BigInt!
+  asks: Int!
+  bids: Int!
+}
