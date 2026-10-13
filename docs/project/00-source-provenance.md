@@ -43,14 +43,14 @@ It also carries forward the source's principal mechanisms:
 
 ## Important corrections and implementation boundaries
 
-### 1. Stylus on Robinhood Chain is not assumed
+### 1. Stylus on Monad is not assumed
 
-The source proposes Arbitrum Stylus on both Robinhood Chain and Arbitrum Sepolia. Current public Arbitrum docs support Stylus on Arbitrum chains, including Rust/WASM. Current public Robinhood documentation supports EVM/Solidity deployment but does not establish direct Stylus support. The build plan therefore uses:
+The source proposes Arbitrum Stylus on both Monad and Arbitrum Sepolia. Current public Arbitrum docs support Stylus on Arbitrum chains, including Rust/WASM. Current public Monad documentation supports EVM/Solidity deployment but does not establish direct Stylus support. The build plan therefore uses:
 
-- **Robinhood Chain:** financial contracts and USDG settlement.
+- **Monad:** financial contracts and USDG settlement.
 - **Arbitrum Sepolia:** optional Stylus/Rust evidence engine experimentation.
 
-A future implementation may consolidate these if official Robinhood documentation confirms Stylus support.
+A future implementation may consolidate these if official Monad documentation confirms Stylus support.
 
 ### 2. Gas-savings numbers are design hypotheses until measured
 

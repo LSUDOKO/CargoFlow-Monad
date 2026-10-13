@@ -11,8 +11,8 @@ This is the execution plan for turning the design into a working hackathon proto
 
 **Verify:** one command installs/boots the repo and all empty services compile.
 
-### CF-002 — Configure Robinhood Testnet
-- Add chain ID `46630`.
+### CF-002 — Configure Monad Testnet
+- Add chain ID `10143`.
 - Add RPC and explorer.
 - Create Foundry network profile.
 

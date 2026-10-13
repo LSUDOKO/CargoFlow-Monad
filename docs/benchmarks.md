@@ -1,7 +1,7 @@
 # Measured benchmarks
 
 Every number here comes from a command in this repository, `make bench`, run on the machine named below. No
-figure is estimated, and none has been measured on Robinhood Chain: Arbitrum-orbit chains meter some
+figure is estimated, and none has been measured on Monad: Arbitrum-orbit chains meter some
 operations differently from a local EVM, so treat gas as the local EVM's, and re-measure after deployment.
 
 Machine: 16 x AMD Ryzen 7 5700U, Node 22.22.2, Foundry 1.4.2 (solc 0.8.28, optimizer 200 runs).

@@ -14,7 +14,7 @@ Show:
 
 - one-line problem;
 - live demo CTA;
-- USDG / Robinhood Chain badges;
+- USDG / Monad badges;
 - evidence-to-finance flow.
 
 ### B. Exporter portal
@@ -135,7 +135,7 @@ Each event should show:
 Support:
 
 - MetaMask or WalletConnect-compatible flow;
-- Robinhood Chain Testnet;
+- Monad Testnet;
 - token balance visibility;
 - one-click network switch where wallet supports it.
 

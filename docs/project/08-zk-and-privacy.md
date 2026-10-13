@@ -166,7 +166,7 @@ CargoFlow uses two privacy technologies. They do not compete; they protect diffe
 | Who holds the secret | the backend prover holds the readings (the witness); nobody else needs them | nobody holds the plaintext on chain; the three parties decrypt with permits |
 | What reaches the chain | a Merkle root, bounded aggregates and a proof; the verifier learns one bit (in range or not) | ciphertext handles; the contract computes on them and stores an encrypted result |
 | Who learns the answer | everyone: the proof result is public and releases funds | only the exporter, financier and buyer (the margin: exporter and financier only) |
-| Chain | Robinhood Chain Testnet (`Groth16Verifier`, `resumeWithProof`) | Arbitrum Sepolia (`contracts/confidential/ConfidentialInvoiceTerms.sol`) |
+| Chain | Monad Testnet (`Groth16Verifier`, `resumeWithProof`) | Arbitrum Sepolia (`contracts/confidential/ConfidentialInvoiceTerms.sol`) |
 | Trust | math only (plus the trusted setup); the proof is bound to facility, epoch, pause, chain and submitter (section 3) | CoFHE's threshold decryption network and its ZK input verifier; computation is verifiable against CoFHE's commitments |
 
 Why both:
@@ -179,7 +179,7 @@ Why both:
   gateways and the ZK circuit), and ZK does not hide numbers that must be computed on and then kept secret.
 
 How they meet: the excursion count that feeds the encrypted penalty is derived from the same public evidence epochs
-the ZK path protects. There is no bridge between Robinhood Chain and Arbitrum Sepolia; the link is the shipment id
-and the public `termsCommitment`, and anyone can recompute the excursion count from Robinhood's public epochs.
-Status: the ZK path is live on Robinhood Chain Testnet; the FHE contract is built and tested against the CoFHE mocks
+the ZK path protects. There is no bridge between Monad and Arbitrum Sepolia; the link is the shipment id
+and the public `termsCommitment`, and anyone can recompute the excursion count from Monad's public epochs.
+Status: the ZK path is live on Monad Testnet; the FHE contract is built and tested against the CoFHE mocks
 and awaits deployment on Arbitrum Sepolia.

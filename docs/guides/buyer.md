@@ -14,7 +14,7 @@ transaction. I use a passkey, so I need no browser extension. The links are my l
 
 **Connect wallet → Continue with passkey → Create a passkey account** (or **Sign in with an existing passkey**). Face ID,
 a fingerprint or a security key creates a ZeroDev Kernel smart account; my address is the account
-[`0xBCf2…5E56`](https://explorer.testnet.chain.robinhood.com/address/0xBCf284379b7Ce7144d4154BCc73043A750125E56). The
+[`0xBCf2…5E56`](https://testnet.monadvision.com/address/0xBCf284379b7Ce7144d4154BCc73043A750125E56). The
 chain verifies the passkey's P-256 signature through its RIP-7212 precompile. A browser wallet works the same way.
 
 ## 2 · Check the evidence and confirm delivery
@@ -27,21 +27,21 @@ an ERC-4337 user operation; the first one also deploys my account.
 
 | On chain | Contract | My run (user operation → transaction) |
 |---|---|---|
-| deploy account + `markDelivered` | FinancingController | `0x8d15b67b…a302abf` → [`0x485e2b6e…`](https://explorer.testnet.chain.robinhood.com/tx/0x485e2b6e38bf99c3cda001b0c166d0e045e282fec907c72103a58a4ffed0f121) |
+| deploy account + `markDelivered` | FinancingController | `0x8d15b67b…a302abf` → [`0x485e2b6e…`](https://testnet.monadvision.com/tx/0x485e2b6e38bf99c3cda001b0c166d0e045e282fec907c72103a58a4ffed0f121) |
 
 ## 3 · Approve and pay the invoice
 
 <p align="center"><img src="../assets/v3/how-settlement.gif" alt="Animated: the single invoice payment splits into the exporter's residual and the financier's principal plus fee." width="720"></p>
 
-**1. Approve 30 USDG**, then **2. Pay the 30 USDG invoice**. The controller runs the waterfall through the vault: the
+**1. Approve 30 USDC**, then **2. Pay the 30 USDC invoice**. The controller runs the waterfall through the vault: the
 financier gets principal plus fee (20.6), the exporter the rest (9.4).
 
 | On chain | Contract | My run (user operation → transaction) |
 |---|---|---|
-| `approve` 30 USDG to the vault | USDG | `0x677b82a9…1ed156827` → [`0x6dd4b06d…`](https://explorer.testnet.chain.robinhood.com/tx/0x6dd4b06d67b31d72e8a4df1fb92c81b8c090ee6754a4cf8b848d05cc6eb8c742) |
-| `settle` | FinancingController → ReceivableVault | `0xf70d30af…ead4cc1d` → [`0xee1d5ba8…`](https://explorer.testnet.chain.robinhood.com/tx/0xee1d5ba8731c027a79c1ce68696360e694f687c7926cd36bca1a6db215815956) |
+| `approve` 30 USDC to the vault | USDC | `0x677b82a9…1ed156827` → [`0x6dd4b06d…`](https://testnet.monadvision.com/tx/0x6dd4b06d67b31d72e8a4df1fb92c81b8c090ee6754a4cf8b848d05cc6eb8c742) |
+| `settle` | FinancingController → ReceivableVault | `0xf70d30af…ead4cc1d` → [`0xee1d5ba8…`](https://testnet.monadvision.com/tx/0xee1d5ba8731c027a79c1ce68696360e694f687c7926cd36bca1a6db215815956) |
 
-Gas: my account paid nothing and holds no ETH. On Robinhood Chain Testnet ZeroDev quotes a zero gas price and its
+Gas: my account paid nothing and holds no ETH. On Monad Testnet ZeroDev quotes a zero gas price and its
 bundler covers the chain fee; CargoFlow's own sponsorship policy is built and tested and takes over where gas is priced.
 
 ## 4 · The title is mine, and so is the certificate
@@ -50,7 +50,7 @@ bundler covers the chain fee; CargoFlow's own sponsorship policy is built and te
 
 When the exporter has bound a bill of lading, it moves to me inside the payment transaction: its possession history
 ends *Released to Wei Lin* and the title card reads *With the buyer*. On the film's shipment `CF-SG-VAX-0202` bill #2
-left escrow for the buyer in the [`settle`](https://explorer.testnet.chain.robinhood.com/tx/0xabba66b6f602ed9e04bbabcd1a56e118cf188ae8bd9934b3f7e405e341f6e562)
+left escrow for the buyer in the [`settle`](https://testnet.monadvision.com/tx/0xabba66b6f602ed9e04bbabcd1a56e118cf188ae8bd9934b3f7e405e341f6e562)
 transaction (my passkey run had no bill bound). **Download certificate** gives a PDF with every epoch, the proof and the
 split.
 

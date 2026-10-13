@@ -44,9 +44,9 @@ https://github.com/OffchainLabs/stylus-sdk-rs
 
 Reference implementation / SDK source.
 
-## C. Robinhood Chain
+## C. Monad
 
-### Add Robinhood Chain to wallet
+### Add Monad to wallet
 
 https://docs.robinhood.com/chain/add-network-to-wallet/
 
@@ -54,11 +54,11 @@ https://docs.robinhood.com/chain/add-network-to-wallet/
 
 https://docs.robinhood.com/chain/deploy-smart-contracts/
 
-### Robinhood Chain overview / consumer support
+### Monad overview / consumer support
 
 https://robinhood.com/us/en/support/articles/robinhood-chain-mainnet/
 
-### Robinhood Chain Testnet faucet
+### Monad Testnet faucet
 
 https://faucet.testnet.chain.robinhood.com/
 
@@ -100,7 +100,7 @@ Current general usage information.
 
 ### USDG testnet faucet
 
-https://faucet.paxos.com/?network=robinhood
+https://faucet.circle.com
 
 ## E. Ethereum standards
 
@@ -218,7 +218,7 @@ These were present in the supplied source document. They are useful for backgrou
 
 For the final hackathon submission:
 
-- Prefer official Arbitrum, Robinhood, Paxos, Ethereum EIP, and UNCITRAL sources for platform claims.
+- Prefer official Arbitrum, Monad, Paxos, Ethereum EIP, and UNCITRAL sources for platform claims.
 - Prefer arXiv records for research-paper claims.
 - Label secondary web articles as background.
 - Never cite the supplied source document as proof that the underlying external fact is true; it is evidence of the project's design history.

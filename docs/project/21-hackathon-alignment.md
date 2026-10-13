@@ -8,22 +8,22 @@ general prize pool (<https://blog.colosseum.com/expanding-the-arena/>). The deta
 prizes are on <https://www.colosseum.com/worldsfair>; check them there before submitting, because they are not repeated
 here.
 
-CargoFlow targets the **Robinhood Chain** track of **Colosseum Crypto World's Fair**.
+CargoFlow targets the **Monad** track of **Colosseum Crypto World's Fair**.
 Arbitrum Sepolia deployments are optional technical extensions, not a separate hackathon submission.
 
-## Evidence for the Robinhood Chain submission
+## Evidence for the Monad submission
 
 | Area | CargoFlow implementation |
 |---|---|
-| Robinhood Chain | Ten core contracts live and source-verified on Robinhood Chain Testnet (46630), settling in Paxos USDG. |
-| Robinhood Chain features | The RIP-7212 P-256 precompile carries the passkey flow; a passkey smart account paid a live invoice. |
+| Monad | Ten core contracts live and source-verified on Monad Testnet (10143), settling in Paxos USDG. |
+| Monad features | The RIP-7212 P-256 precompile carries the passkey flow; a passkey smart account paid a live invoice. |
 | Optional technical extensions | Stylus (Rust) evidence engine, Fhenix confidential invoice terms and a GMX hedge vault on Arbitrum Sepolia. |
 | General pool | A working product (five portals, API, MCP server, four packages), 366 contract tests, live end-to-end runs. |
 | Funding path | Milestone roadmap M1 to M5 with exit tests, in the funding deck. |
 
 ## How to make the alignment visible
 
-Do not merely write "built on Robinhood Chain" in the README.
+Do not merely write "built on Monad" in the README.
 
 Show:
 

@@ -2,9 +2,9 @@
 
 ## 1. Network placement of Stylus
 
-**Decision:** do not assume Stylus on Robinhood Chain.
+**Decision:** do not assume Stylus on Monad.
 
-**Action:** build Solidity core on Robinhood; validate a minimal Stylus contract on Arbitrum Sepolia.
+**Action:** build Solidity core on Monad; validate a minimal Stylus contract on Arbitrum Sepolia.
 
 ## 2. Hash function consistency
 

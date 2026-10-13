@@ -12,7 +12,7 @@ The original supplied research/design file contains a large reference set. The l
 - https://limechain.tech/blog/alternative-virtual-machines-in-decentralized-networks-a-benchmark-of-on-chain-performance
 - https://blockeden.xyz/blog/2026/02/01/arbitrum-2026-roadmap-arbos-dia-gaming-catalyst-stylus/
 
-## Robinhood Chain
+## Monad
 
 - https://robinhood.com/us/en/support/articles/robinhood-chain-mainnet/
 - https://docs.robinhood.com/chain/add-network-to-wallet/
@@ -24,7 +24,7 @@ The original supplied research/design file contains a large reference set. The l
 
 - https://docs.paxos.com/guides/stablecoin/usdg/testnet
 - https://docs.paxos.com/guides/stablecoin/usdg/mainnet
-- https://faucet.paxos.com/?network=robinhood
+- https://faucet.circle.com
 - https://www.paxos.com/newsroom/introducing-global-dollar-network-an-open-network-to-accelerate-and-reward-global-stablecoin-adoption-driven-by-anchorage-digital-bullish-galaxy-digital-kraken-nuvei-paxos-and-robinhood
 - https://www.paxos.com/terms-and-conditions/usdg-eu-whitepaper
 - https://www.coindesk.com/price/global-dollar

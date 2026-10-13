@@ -157,13 +157,13 @@ It is a financing state machine controlled by verifiable physical evidence.
 
 Then display:
 
-`Robinhood Chain + USDG + ZK + multi-sensor evidence + bounded AI`
+`Monad + USDG + ZK + multi-sensor evidence + bounded AI`
 
 ## Judge proof checklist
 
 During the demo, make sure the judge can visibly see:
 
-- actual Robinhood testnet transactions;
+- actual Monad testnet transactions;
 - USDG token movement;
 - contract state transition;
 - pause transaction;

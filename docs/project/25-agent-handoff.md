@@ -8,13 +8,13 @@ Build a working hackathon prototype called **CargoFlow**:
 
 ## Primary chain
 
-Robinhood Chain Testnet.
+Monad Testnet.
 
 ```text
-chainId: 46630
-rpc: https://rpc.testnet.chain.robinhood.com
-explorer: https://explorer.testnet.chain.robinhood.com
-USDG: 0x7E955252E15c84f5768B83c41a71F9eba181802F
+chainId: 10143
+rpc: https://testnet-rpc.monad.xyz
+explorer: https://testnet.monadvision.com
+USDG: 0x534b2f3A21130d7a60830c2Df862319e593943A3
 ```
 
 Use current official docs to confirm values immediately before deployment.

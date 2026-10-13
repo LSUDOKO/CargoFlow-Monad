@@ -20,12 +20,12 @@ flowchart LR
         API["REST + WebSocket API"]
         DB[("Postgres<br/>operational evidence")]
     end
-    subgraph on["On-chain: Robinhood Chain Testnet"]
+    subgraph on["On-chain: Monad Testnet"]
         SR["ShipmentRegistry"]
         PE["PolicyEngine"]
         ER["EvidenceRegistry"]
         FC["FinancingController<br/>state machine"]
-        RV["ReceivableVault<br/>sole USDG custodian"]
+        RV["ReceivableVault<br/>sole USDC custodian"]
         GV["Groth16Verifier"]
         AC["CargoFlowAccess<br/>roles"]
         CP["CoverPool (v2)<br/>default cover, no role"]
@@ -136,10 +136,10 @@ Contracts v3 (one redeploy; additive: every v2 function, struct, event and error
   `registerDevice`. Exits are never pausable: milestone release, `markDelivered`, `settle`, pauses and dispute
   resolution, defaults, `cancelFacility` refunds, cover `release` / `claim` / `triggerParametric` /
   `withdraw` / `withdrawOffer`, device revocation. Funds can therefore never be trapped by a pause.
-- **Rescue.** The access contract's admin can sweep tokens sent to the CoverPool by mistake: for USDG only
+- **Rescue.** The access contract's admin can sweep tokens sent to the CoverPool by mistake: for USDC only
   the excess over open offers + active covers + credited payouts, for other tokens the balance.
 - **Smart-account callers.** No contract uses `tx.origin` or assumes an EOA: buyer, exporter and arbiter may
-  be ERC-4337 accounts (ZeroDev Kernel with the WebAuthn validator is already deployed on Robinhood Chain
+  be ERC-4337 accounts (ZeroDev Kernel with the WebAuthn validator is already deployed on Monad
   Testnet, and the RIP-7212 P-256 precompile at `0x100` answers there). Gas sponsorship is off chain (Alchemy
   Gas Manager); CargoFlow ships no account or paymaster contracts. Titles are moved with `transferFrom`, so a
   contract recipient needs no receiver hook and cannot block a transition.

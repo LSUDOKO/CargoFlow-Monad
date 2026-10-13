@@ -19,7 +19,7 @@ Tasks:
 - Postgres;
 - Rust/Cargo;
 - Circom/snarkjs;
-- Robinhood testnet network config;
+- Monad testnet network config;
 - USDG faucet.
 
 Definition of done:
@@ -209,7 +209,7 @@ Days 20–21:
 
 ### Day 1
 
-Deploy basic Solidity contract to Robinhood Testnet.
+Deploy basic Solidity contract to Monad Testnet.
 
 ### Day 2
 

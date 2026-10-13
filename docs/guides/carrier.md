@@ -3,7 +3,7 @@
 # Carrier guide: the ship's officer
 
 I issue the bill of lading: the document of title to the cargo. In CargoFlow it is an ERC-721 token on the
-[`EBLRegistry`](https://explorer.testnet.chain.robinhood.com/address/0x72278056f6537e4F3437b96898BB439ab7BF68A9)
+[`EBLRegistry`](https://testnet.monadvision.com/address/0x72278056f6537e4F3437b96898BB439ab7BF68A9)
 ("CFEBL"), one per bill, carrying the document's fingerprint, the shipper, the consignee and its possession history.
 Once the exporter binds it to a facility, the contract holds it and moves it under documents against payment. The
 links are bill #2 on `CF-SG-VAX-0202`, recorded for the demo film on 3 October 2026.
@@ -21,7 +21,7 @@ address), the consignee (a named buyer), and the bill-of-lading PDF, which is ha
 
 | On chain | Contract | Real run |
 |---|---|---|
-| `issue(documentHash, shipper, consignee)` | EBLRegistry | [`0x86b63198…`](https://explorer.testnet.chain.robinhood.com/tx/0x86b6319841759e126154dd71fb1959b6a34f085cdbd858ce3d2e0f07e34f11df) (bill #2) |
+| `issue(documentHash, shipper, consignee)` | EBLRegistry | [`0x86b63198…`](https://testnet.monadvision.com/tx/0x86b6319841759e126154dd71fb1959b6a34f085cdbd858ce3d2e0f07e34f11df) (bill #2) |
 
 Every bill has a public page with its number, fingerprint and possession history; anyone can check a paper or PDF copy
 against the fingerprint.
@@ -31,7 +31,7 @@ against the fingerprint.
 <p align="center"><img src="../assets/v3/web-ebl.jpg" alt="The shipment's title card: bill of lading #2 held by the financing contract, In escrow, with documents against payment explained." width="100%"></p>
 
 The exporter approves the controller and binds the bill to her facility
-([`bindTitle`](https://explorer.testnet.chain.robinhood.com/tx/0xc13143ddd3ebd67249e6e24df969eb29723f844711d05258bd0f887be30f4707)).
+([`bindTitle`](https://testnet.monadvision.com/tx/0xc13143ddd3ebd67249e6e24df969eb29723f844711d05258bd0f887be30f4707)).
 From then on the `FinancingController` holds the token; the title card reads *In escrow*. I cannot move a bill the
 controller holds, and neither can anyone else.
 
@@ -43,7 +43,7 @@ The controller releases the bill in exactly three cases, each in the same transa
 
 | Outcome | Bill goes to | On chain |
 |---|---|---|
-| The buyer pays | the buyer | inside `settle` ([real run](https://explorer.testnet.chain.robinhood.com/tx/0xabba66b6f602ed9e04bbabcd1a56e118cf188ae8bd9934b3f7e405e341f6e562)) |
+| The buyer pays | the buyer | inside `settle` ([real run](https://testnet.monadvision.com/tx/0xabba66b6f602ed9e04bbabcd1a56e118cf188ae8bd9934b3f7e405e341f6e562)) |
 | The facility defaults | the financier | inside `markDefaulted` / `resolveDispute` (default) |
 | The facility is cancelled before transit | back to the exporter | inside `cancelFacility` |
 

@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/v3/architecture.png" alt="CargoFlow architecture in the film's theme: the cast at their entry points (Meera, Daniel, Wei Lin, the carrier and arbiter, the reefer logger, Claude), the web app and remote MCP server on Cloudflare Workers, the Go evidence service on Render with Postgres, and the v3 contracts on Robinhood Chain Testnet holding final authority." width="100%"></p>
+<p align="center"><img src="assets/v3/architecture.png" alt="CargoFlow architecture in the film's theme: the cast at their entry points (Meera, Daniel, Wei Lin, the carrier and arbiter, the reefer logger, Claude), the web app and remote MCP server on Cloudflare Workers, the Go evidence service on Render with Postgres, and the v3 contracts on Monad Testnet holding final authority." width="100%"></p>
 
 # CargoFlow documentation
 
@@ -12,7 +12,7 @@ end to end; these pages go deeper.
 | [README](../README.md) | The problem, the cast, how it works in twelve beats, the live product, Claude, architecture, every contract and live run |
 | [Role guides](guides/README.md) | One per party, told by its character, with the exact contract calls: [exporter](guides/exporter.md) · [financier](guides/financier.md) · [buyer](guides/buyer.md) · [carrier](guides/carrier.md) · [arbiter](guides/arbiter.md) |
 | [All links](../README.md#all-links) | Every link in one table: website, app, API, contracts, pitch deck, film, MCP, packages, Telegram |
-| [Live app](https://cargoflow.adoranto737.workers.dev) | Production build, live on Robinhood Chain Testnet; connect a wallet or sign in with a passkey |
+| [Live app](https://cargoflow.adoranto737.workers.dev) | Production build, live on Monad Testnet; connect a wallet or sign in with a passkey |
 | Pitch deck | [PDF](pitch/CargoFlow-pitch.pdf) · [PPTX](pitch/CargoFlow-pitch.pptx) · [HTML, animated](https://lsudoko.github.io/CargoFlow/pitch/) · [Google Drive](https://drive.google.com/drive/folders/1sW6rVx2dLyr5migHmV8UKXKU-88mCg8W?usp=sharing) |
 | [Use CargoFlow in Claude](../README.md#use-cargoflow-in-claude) | The remote MCP server: `https://cargoflow-mcp.adoranto737.workers.dev/mcp` ([add it](https://claude.ai/new?modal=add-custom-connector)) |
 
@@ -24,7 +24,7 @@ end to end; these pages go deeper.
 | [Backend service](../backend/README.md) | The Go service: API, configuration, startup checks, the evidence score, commitments, AI monitor, automatic ZK recovery, device trust, EPCIS, fee guidance, ZeroDev gas policy, Alchemy webhook, Dune upload, guarantees and known limits |
 | [Frontend](../frontend/README.md) | The Next.js web app, its tests and the testnet lifecycle script |
 | [Design system](design/system.md) | Tokens, type, layout, components and motion shared by the website and the film ([audit](design/audit.md)) |
-| [Contracts deployments](../contracts/deployments/robinhood-testnet.json) | Machine-readable v3 manifest ([Arbitrum Sepolia](../contracts/deployments/arbitrum-sepolia.json), [v1](../contracts/deployments/robinhood-testnet-v1.json)) |
+| [Contracts deployments](../contracts/deployments/monad-testnet.json) | Machine-readable v3 manifest ([Arbitrum Sepolia](../contracts/deployments/arbitrum-sepolia.json), [v1](../contracts/deployments/monad-testnet-v1.json)) |
 | [Stylus engine](../stylus/README.md) | Optional Rust evidence engine on Arbitrum Sepolia, benchmarked against Solidity |
 
 ## For developers
@@ -53,7 +53,7 @@ end to end; these pages go deeper.
 
 | | |
 |---|---|
-| [Protocol knowledge base](project/README.md) | Chapters 00 to 27: problem, research, architecture, roles, evidence engine, ZK and privacy, AI monitoring, risk, contracts, USDG and Robinhood Chain, testing, roadmap |
+| [Protocol knowledge base](project/README.md) | Chapters 00 to 27: problem, research, architecture, roles, evidence engine, ZK and privacy, AI monitoring, risk, contracts, USDC and Monad, testing, roadmap |
 | [Design spec](superpowers/specs/2026-09-30-cargoflow-design.md) | The decisions behind the build and where they depart from the knowledge base |
 | [Roadmap](superpowers/plans/2026-09-30-cargoflow-roadmap.md) and [advanced roadmap](project/22-advanced-roadmap.md) | What comes next |
 | [Plans](superpowers/plans) | Every workstream plan, including [this documentation's](superpowers/plans/2026-10-04-story-readme-site.md) |

@@ -96,7 +96,7 @@ The AI must not directly own the vault or arbitrary transfer authority.
 
 ## 3. Chain architecture decision
 
-### Robinhood Chain
+### Monad
 
 Use for:
 
@@ -147,6 +147,6 @@ Every off-chain action that can influence capital must leave a cryptographic or 
 
 The critical path should be:
 
-`frontend → Robinhood Chain contracts`
+`frontend → Monad contracts`
 
 The backend enhances evidence but should not become the only source of financial truth.

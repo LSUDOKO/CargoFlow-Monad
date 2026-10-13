@@ -73,8 +73,8 @@ Keep network-specific values outside source code.
 Example variables:
 
 ```text
-ROBINHOOD_RPC_URL
-ROBINHOOD_CHAIN_ID
+MONAD_RPC_URL
+MONAD_CHAIN_ID
 USDG_ADDRESS
 FINANCING_CONTROLLER_ADDRESS
 RECEIVABLE_VAULT_ADDRESS
@@ -93,8 +93,8 @@ Keep a JSON manifest per network:
 
 ```json
 {
-  "network": "robinhood-testnet",
-  "chainId": 46630,
+  "network": "monad-testnet",
+  "chainId": 10143,
   "contracts": {
     "shipmentRegistry": "0x...",
     "policyEngine": "0x...",
@@ -102,6 +102,6 @@ Keep a JSON manifest per network:
     "financingController": "0x...",
     "receivableVault": "0x..."
   },
-  "usdg": "0x7E955252E15c84f5768B83c41a71F9eba181802F"
+  "usdg": "0x534b2f3A21130d7a60830c2Df862319e593943A3"
 }
 ```

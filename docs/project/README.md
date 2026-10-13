@@ -22,11 +22,11 @@ The project is deliberately different from a simple supply-chain tracker or a ge
 
 ## Primary hackathon deployment decision
 
-**Primary financial chain:** Robinhood Chain Testnet.
+**Primary financial chain:** Monad Testnet.
 
 **Secondary Arbitrum environment:** Arbitrum Sepolia, used where Arbitrum Stylus/Rust experimentation is useful and supported.
 
-This split is intentional. Current public Arbitrum documentation clearly supports Stylus on Arbitrum chains, while the current public Robinhood documentation establishes EVM/Solidity deployment but does not establish direct Stylus deployment. Do not assume Stylus support on Robinhood Chain without a current documented confirmation.
+This split is intentional. Current public Arbitrum documentation clearly supports Stylus on Arbitrum chains, while the current public Monad documentation establishes EVM/Solidity deployment but does not establish direct Stylus deployment. Do not assume Stylus support on Monad without a current documented confirmation.
 
 ## Must-build MVP
 

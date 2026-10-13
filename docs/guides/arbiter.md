@@ -3,7 +3,7 @@
 # Arbiter guide: the referee
 
 I hold the on-chain dispute role (`DISPUTE`) in
-[`CargoFlowAccess`](https://explorer.testnet.chain.robinhood.com/address/0x6b334b4C73c27CB297470140c86311075408b050).
+[`CargoFlowAccess`](https://testnet.monadvision.com/address/0x6b334b4C73c27CB297470140c86311075408b050).
 I can pause a facility, resume a paused one on a verified basis, resolve disputes and declare a default. I can never
 release a tranche: the contract has no path for it. Every decision I make is a transaction with a hashed reference,
 so it is on the record.
@@ -44,8 +44,8 @@ releases. Only the dispute role can close it:
 ## 4 · Declare a default
 
 `markDefaulted(shipmentId, ref)` on a paused or delivered facility (or the default branch of `resolveDispute`): the
-vault returns any undrawn USDG to the financier, an escrowed bill of lading moves to the financier, and default cover in
-the [`CoverPool`](https://explorer.testnet.chain.robinhood.com/address/0x4e4f09Da01f466275b586b0cc32613a90b1B69e5) becomes
+vault returns any undrawn USDC to the financier, an escrowed bill of lading moves to the financier, and default cover in
+the [`CoverPool`](https://testnet.monadvision.com/address/0x4e4f09Da01f466275b586b0cc32613a90b1B69e5) becomes
 claimable (min(cover, drawn principal)).
 
 ## 5 · What I cannot do

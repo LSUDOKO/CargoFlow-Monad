@@ -1,21 +1,21 @@
-# USDG and Robinhood Chain Integration
+# USDG and Monad Integration
 
 ## 1. Verified current testnet values
 
-### Robinhood Chain Testnet
+### Monad Testnet
 
-- Chain ID: `46630`
-- RPC: `https://rpc.testnet.chain.robinhood.com`
-- Explorer: `https://explorer.testnet.chain.robinhood.com`
+- Chain ID: `10143`
+- RPC: `https://testnet-rpc.monad.xyz`
+- Explorer: `https://testnet.monadvision.com`
 - Native gas asset: ETH
 
-### USDG on Robinhood Chain Testnet
+### USDG on Monad Testnet
 
-- USDG contract: `0x7E955252E15c84f5768B83c41a71F9eba181802F`
+- USDG contract: `0x534b2f3A21130d7a60830c2Df862319e593943A3`
 - Paxos testnet docs explicitly state testnet tokens have no value.
 - Paxos also lists the Arbitrum Sepolia USDG token as `0xFFC95faa3d63Cde504a05B567C600B78C0b41892`.
 
-### Robinhood Chain Mainnet reference
+### Monad Mainnet reference
 
 - Chain ID: `4663`
 - USDG: `0x5fc5360D0400a0Fd4f2af552ADD042D716F1d168`
@@ -24,13 +24,13 @@ Do not use mainnet in the hackathon demo.
 
 ## 2. Faucet / setup references
 
-Robinhood Chain Testnet faucet:
+Monad Testnet faucet:
 
 `https://faucet.testnet.chain.robinhood.com/`
 
 Paxos USDG faucet:
 
-`https://faucet.paxos.com/?network=robinhood`
+`https://faucet.circle.com`
 
 Network helper:
 
@@ -94,23 +94,23 @@ ReceivableVault
 
 Current Paxos documentation describes USDG as a single-currency US-dollar stablecoin issued by Paxos Digital Singapore, designed for payments, settlements and treasury, with 1:1 redeemability. Use those documented properties rather than adding unsupported economics to the pitch.
 
-## 7. Robinhood Chain role
+## 7. Monad role
 
-Robinhood Chain is the best place in this architecture for the user-visible financial contracts because it lets the project visibly use Robinhood Chain, an Arbitrum chain, and directly integrate USDG.
+Monad is the best place in this architecture for the user-visible financial contracts because it lets the project visibly use Monad, an Arbitrum chain, and directly integrate USDG.
 
 ## 8. Stylus boundary
 
-Arbitrum's official docs support Stylus/Rust/WASM for Arbitrum chains. Because direct Stylus support on Robinhood Chain is not established in the current public docs used for this plan, the safe implementation plan is:
+Arbitrum's official docs support Stylus/Rust/WASM for Arbitrum chains. Because direct Stylus support on Monad is not established in the current public docs used for this plan, the safe implementation plan is:
 
 ```text
-Robinhood Chain:
+Monad:
   Solidity financial layer
 
 Arbitrum Sepolia:
   optional Stylus EvidenceEngine
 ```
 
-If a current official Robinhood source confirms Stylus support during implementation, revisit the split.
+If a current official Monad source confirms Stylus support during implementation, revisit the split.
 
 ## 9. Interoperability (future)
 
