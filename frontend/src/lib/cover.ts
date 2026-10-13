@@ -1,4 +1,4 @@
-// Default cover (contracts v2, CoverPool). An insurer escrows cover in USDG; the financier accepts an offer by paying
+// Default cover (contracts v2, CoverPool). An insurer escrows cover in USDC; the financier accepts an offer by paying
 // the premium straight to the insurer. If the facility settles, the cover returns to the insurer; if it defaults,
 // the financier is paid min(cover, principal drawn) and the rest returns to the insurer. Pure helpers: what each
 // wallet may do now, the amounts involved and the words for them.
@@ -36,8 +36,8 @@ export function validateOffer(f: OfferForm, committed: bigint | string): { error
   const errors: Partial<Record<keyof OfferForm, string>> = {};
   const c = BigInt(committed);
   const amount = usdgUnits(f.amount);
-  if (amount === undefined || amount <= 0n) errors.amount = "Enter how much cover to escrow, in USDG.";
-  else if (amount > c) errors.amount = `Cover cannot exceed the facility's ${formatUSDG(c)} USDG.`;
+  if (amount === undefined || amount <= 0n) errors.amount = "Enter how much cover to escrow, in USDC.";
+  else if (amount > c) errors.amount = `Cover cannot exceed the facility's ${formatUSDG(c)} USDC.`;
   const pct = f.premiumPct.trim() === "" ? NaN : Number(f.premiumPct);
   const bps = Math.round(pct * 100);
   if (!Number.isFinite(pct) || pct < 0 || bps > MAX_PREMIUM_BPS) errors.premiumPct = "Use a premium from 0% to 20%.";
@@ -90,14 +90,14 @@ export function coverActions(input: { status: string | undefined; financier: str
   };
 }
 
-/** One line for the overview: "Covered: 20,000 USDG by 0x12…ab (premium 400 USDG)" and so on. */
+/** One line for the overview: "Covered: 20,000 USDC by 0x12…ab (premium 400 USDC)" and so on. */
 export function coverSummary(cover: Cover | null, openOffers: number, status: string | undefined, short: (a: string) => string): string {
   if (cover) {
-    if (cover.status === "RELEASED") return status === "CANCELLED" ? `The ${formatUSDG(cover.amount)} USDG cover went back to the insurer when the facility was cancelled.` : `The ${formatUSDG(cover.amount)} USDG cover went back to the insurer when the invoice was paid.`;
-    if (cover.status === "TRIGGERED") return `The parametric trigger was met: the financier was credited ${formatUSDG(cover.financierPayout)} USDG, the exporter ${formatUSDG(cover.parametric?.exporterSalvage ?? "0")} USDG salvage and ${formatUSDG(cover.insurerReturn)} USDG went back to the insurer.`;
-    if (cover.status === "CLAIMED") return `The cover paid the financier ${formatUSDG(cover.financierPayout)} USDG after the default; ${formatUSDG(cover.insurerReturn)} USDG went back to the insurer.`;
+    if (cover.status === "RELEASED") return status === "CANCELLED" ? `The ${formatUSDG(cover.amount)} USDC cover went back to the insurer when the facility was cancelled.` : `The ${formatUSDG(cover.amount)} USDC cover went back to the insurer when the invoice was paid.`;
+    if (cover.status === "TRIGGERED") return `The parametric trigger was met: the financier was credited ${formatUSDG(cover.financierPayout)} USDC, the exporter ${formatUSDG(cover.parametric?.exporterSalvage ?? "0")} USDC salvage and ${formatUSDG(cover.insurerReturn)} USDC went back to the insurer.`;
+    if (cover.status === "CLAIMED") return `The cover paid the financier ${formatUSDG(cover.financierPayout)} USDC after the default; ${formatUSDG(cover.insurerReturn)} USDC went back to the insurer.`;
     const trig = cover.parametric?.consecutiveFailedEpochs ? ` Parametric: pays out after ${cover.parametric.consecutiveFailedEpochs} failed evidence ${cover.parametric.consecutiveFailedEpochs === 1 ? "batch" : "batches"} in a row.` : "";
-    return `Covered: ${formatUSDG(cover.amount)} USDG escrowed by ${short(cover.insurer)}, who was paid a ${formatUSDG(cover.premium)} USDG premium.${trig}`;
+    return `Covered: ${formatUSDG(cover.amount)} USDC escrowed by ${short(cover.insurer)}, who was paid a ${formatUSDG(cover.premium)} USDC premium.${trig}`;
   }
   if (openOffers > 0) return `${openOffers} cover ${openOffers === 1 ? "offer is" : "offers are"} waiting for the financier.`;
   return coverOpen(status) ? "Not covered yet. Insurers can offer cover until transit starts." : "No default cover was taken out.";
@@ -118,8 +118,8 @@ export function validateParametric(f: ParametricForm, cover: bigint | undefined)
   const n = f.epochs.trim() === "" ? NaN : Number(f.epochs);
   if (!Number.isInteger(n) || n < 1 || n > MAX_TRIGGER_EPOCHS) errors.epochs = `Use a whole number of batches from 1 to ${MAX_TRIGGER_EPOCHS}.`;
   const salvage = f.salvage.trim() === "" ? 0n : usdgUnits(f.salvage);
-  if (salvage === undefined || salvage < 0n) errors.salvage = "Enter the salvage in USDG, or leave it at 0.";
-  else if (cover !== undefined && salvage > cover) errors.salvage = `The salvage cannot exceed the ${formatUSDG(cover)} USDG cover.`;
+  if (salvage === undefined || salvage < 0n) errors.salvage = "Enter the salvage in USDC, or leave it at 0.";
+  else if (cover !== undefined && salvage > cover) errors.salvage = `The salvage cannot exceed the ${formatUSDG(cover)} USDC cover.`;
   return Object.keys(errors).length ? { errors } : { errors, epochs: n, salvage: salvage! };
 }
 

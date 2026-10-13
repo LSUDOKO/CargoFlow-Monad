@@ -71,7 +71,7 @@ const hexOf = (s: string) => Buffer.from(s, "latin1").toString("hex").toUpperCas
 describe("settlement certificate", () => {
   it("is a valid PDF with the expected pages, title and reference", async () => {
     const { view, epochs, audit, documents } = fixture("SETTLED");
-    const out = await buildCertificate({ view, epochs, audit, documents, chainId: 46630, generatedAt: new Date("2026-10-03T12:00:00Z"), trackUrl: `https://cargoflow.example/track/${ID}` });
+    const out = await buildCertificate({ view, epochs, audit, documents, chainId: 10143, generatedAt: new Date("2026-10-03T12:00:00Z"), trackUrl: `https://cargoflow.example/track/${ID}` });
     expect(Buffer.from(out.bytes.slice(0, 5)).toString()).toBe("%PDF-");
     const doc = await PDFDocument.load(out.bytes);
     expect(doc.getPageCount()).toBe(out.pages);
@@ -102,9 +102,9 @@ describe("settlement certificate", () => {
     view.milestones[4] = { ...view.milestones[4]!, latE6: -23_960_000, lonE6: -46_330_000, radiusM: 100_000, placeLabel: "Santos" };
     epochs[5] = { ...epochs[5]!, decisionAction: "HELD_NOT_AT_PLACE", heldDistanceM: 412_000 };
     view.cover = { insurer: "0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65", financier: view.facility!.financier, amount: "20000000000", premium: "400000000", status: "RELEASED", financierPayout: "0", insurerReturn: "20000000000", parametric: null };
-    const out = await buildCertificate({ view, epochs, audit, documents, chainId: 46630, generatedAt: new Date("2026-10-03T12:00:00Z") });
+    const out = await buildCertificate({ view, epochs, audit, documents, chainId: 10143, generatedAt: new Date("2026-10-03T12:00:00Z") });
     const text = await contentText(out.bytes);
-    for (const s of ["85% relative humidity", "3 g", "Milestone 5 place", "Held: not at", "(412 km", "Default cover", "Returned to the insurer: 20,000 USDG", "400 USDG"]) expect(text, s).toContain(hexOf(s));
+    for (const s of ["85% relative humidity", "3 g", "Milestone 5 place", "Held: not at", "(412 km", "Default cover", "Returned to the insurer: 20,000 USDC", "400 USDC"]) expect(text, s).toContain(hexOf(s));
   });
 
   it("never throws on characters the standard fonts cannot encode", () => {

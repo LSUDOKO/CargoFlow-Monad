@@ -63,8 +63,8 @@ describe("coverActions", () => {
 describe("coverSummary", () => {
   const short = (a: string) => a.slice(0, 6);
   it("says where the cover stands in one sentence", () => {
-    expect(coverSummary(cover("ACTIVE"), 0, "ACTIVE", short)).toBe("Covered: 20,000 USDG escrowed by 0x15d3, who was paid a 400 USDG premium.");
-    expect(coverSummary(cover("CLAIMED"), 0, "DEFAULTED", short)).toMatch(/paid the financier 16,000 USDG.*4,000 USDG went back/);
+    expect(coverSummary(cover("ACTIVE"), 0, "ACTIVE", short)).toBe("Covered: 20,000 USDC escrowed by 0x15d3, who was paid a 400 USDC premium.");
+    expect(coverSummary(cover("CLAIMED"), 0, "DEFAULTED", short)).toMatch(/paid the financier 16,000 USDC.*4,000 USDC went back/);
     expect(coverSummary(cover("RELEASED"), 0, "SETTLED", short)).toMatch(/went back to the insurer/);
     expect(coverSummary(null, 2, "FINANCED", short)).toBe("2 cover offers are waiting for the financier.");
     expect(coverSummary(null, 0, "CREATED", short)).toMatch(/Not covered yet/);
@@ -111,6 +111,6 @@ describe("parametric cover", () => {
     const acts = coverActions({ status: "CANCELLED", financier: FIN, cover: cover("ACTIVE"), offers: [], address: undefined });
     expect(acts.release).toBe(true);
     const trig = { ...cover("TRIGGERED"), parametric: { consecutiveFailedEpochs: 3, salvageToExporter: "5000000000", epochFloor: 2, exporterSalvage: "4000000000" } };
-    expect(coverSummary(trig, 0, "PAUSED", (a) => a)).toContain("4,000 USDG salvage");
+    expect(coverSummary(trig, 0, "PAUSED", (a) => a)).toContain("4,000 USDC salvage");
   });
 });

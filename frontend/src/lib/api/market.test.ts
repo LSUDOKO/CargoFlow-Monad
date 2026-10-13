@@ -65,7 +65,7 @@ describe("schemas", () => {
 });
 
 describe("inputs", () => {
-  it("parse USDG and percentages without floats", () => {
+  it("parse USDC and percentages without floats", () => {
     expect(parseUsdg("40,000.5")).toBe(40_000_500_000n);
     expect(parseUsdg("1.1234567")).toBeUndefined();
     expect(parseUsdg("abc")).toBeUndefined();

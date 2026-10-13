@@ -12,7 +12,7 @@ import { ApiError, apiGet, apiPost } from "./client";
 import { Policy, RoutePoint } from "./schemas";
 
 const list = <T extends z.ZodTypeAny>(item: T) => z.array(item).nullish().transform((v) => v ?? []);
-// USDG base units: a decimal string on the wire, tolerated as a number
+// USDC base units: a decimal string on the wire, tolerated as a number
 const amount = z.union([z.string(), z.number()]).transform((v) => String(v));
 const count = z.number().nullish().transform((v) => v ?? 0);
 
@@ -140,7 +140,7 @@ export const nowSec = () => Math.floor(Date.now() / 1000);
 
 // ---------------------------------------------------------------------------------------------------- pure helpers
 
-/** A USDG amount typed by a person ("40,000.5") in base units, or undefined when it is not a number. */
+/** A USDC amount typed by a person ("40,000.5") in base units, or undefined when it is not a number. */
 export function parseUsdg(v: string): bigint | undefined {
   const t = v.trim().replace(/,/g, "");
   if (!/^\d+(\.\d{0,6})?$/.test(t)) return undefined;
@@ -177,7 +177,7 @@ export function validateRequest(f: RequestForm, invoiceValue: bigint): RequestEr
   const n = Number(f.milestones);
   if (bps === undefined || bps > MAX_FEE_BPS) e.maxFeePct = "Use a fee from 0% to 10%, up to two decimals.";
   if (!Number.isInteger(n) || n < 1 || n > 8 || f.milestones.trim() === "") e.milestones = "Use 1 to 8 milestones.";
-  if (amt === undefined || amt <= 0n) e.amount = "Enter how much capital to raise, in USDG.";
+  if (amt === undefined || amt <= 0n) e.amount = "Enter how much capital to raise, in USDC.";
   else {
     const fee = (amt * BigInt(bps ?? 0)) / 10_000n;
     if (amt + fee > invoiceValue) e.amount = "The invoice must cover the amount plus the maximum fee.";

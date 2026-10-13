@@ -36,11 +36,11 @@ export async function registerShipment(page: Page, ref: string, invoice = "10000
   await connectAs(page, "exporter");
   await page.getByLabel("Shipment reference").fill(ref);
   await page.getByLabel("Buyer address").fill(BUYER);
-  await page.getByLabel("Invoice value (USDG)").fill(invoice);
+  await page.getByLabel("Invoice value (USDC)").fill(invoice);
   await page.getByRole("button", { name: "Continue" }).click();
   await page.getByRole("button", { name: "Continue" }).click(); // the cold-chain defaults
   await page.getByLabel("Financier address").fill(FINANCIER);
-  await page.getByLabel("Total facility (USDG)").fill(facility);
+  await page.getByLabel("Total facility (USDC)").fill(facility);
   await page.getByRole("button", { name: "Continue" }).click();
   await page.getByRole("button", { name: "Sign and submit" }).click();
   const dashboard = page.getByRole("link", { name: "View dashboard" });
@@ -53,12 +53,12 @@ export async function fund(page: Page, ref: string, amount = "40,000") {
   await page.goto("/financier");
   await connectAs(page, "financier");
   const card = page.getByRole("listitem").filter({ hasText: ref });
-  const mint = card.getByRole("button", { name: /Mint .* test USDG/ });
-  const approve = card.getByRole("button", { name: new RegExp(`Approve ${amount} USDG`) });
+  const mint = card.getByRole("button", { name: /Mint .* test USDC/ });
+  const approve = card.getByRole("button", { name: new RegExp(`Approve ${amount} USDC`) });
   await expect(mint.or(approve)).toBeVisible({ timeout: 120_000 }); // the balance read is slow on CI runners
   if (await mint.isVisible()) await mint.click();
   await approve.click();
-  await card.getByRole("button", { name: new RegExp(`Deposit ${amount} USDG`) }).click();
+  await card.getByRole("button", { name: new RegExp(`Deposit ${amount} USDC`) }).click();
   await expect(page.getByText("Facility funded")).toBeVisible({ timeout: 60_000 });
 }
 

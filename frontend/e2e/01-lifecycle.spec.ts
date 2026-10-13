@@ -78,12 +78,12 @@ test("a shipment runs from registration to settlement through real wallets and l
   await connectAs(page, "buyer");
   await page.getByRole("button", { name: "Confirm delivery" }).click();
   await expect(page.getByText("Delivery confirmed")).toBeVisible({ timeout: 60_000 });
-  const mint = page.getByRole("button", { name: /Mint .* test USDG/ });
-  const approve = page.getByRole("button", { name: /Approve 100,000 USDG/ });
+  const mint = page.getByRole("button", { name: /Mint .* test USDC/ });
+  const approve = page.getByRole("button", { name: /Approve 100,000 USDC/ });
   await expect(mint.or(approve)).toBeVisible({ timeout: 120_000 }); // the balance read is slow on CI runners // the payment panel renders after the status updates
   if (await mint.isVisible()) await mint.click();
   await approve.click();
-  await page.getByRole("button", { name: /Pay the 100,000 USDG invoice/ }).click();
+  await page.getByRole("button", { name: /Pay the 100,000 USDC invoice/ }).click();
   await expect(page.getByText("Invoice paid and settled")).toBeVisible({ timeout: 60_000 });
   await expect(page.getByTestId("status-pill").first()).toHaveText("Settled");
 });

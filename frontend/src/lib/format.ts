@@ -1,4 +1,4 @@
-// Display formatting. USDG amounts arrive as decimal strings of base units (6 decimals) and are formatted with
+// Display formatting. USDC amounts arrive as decimal strings of base units (6 decimals) and are formatted with
 // bigint arithmetic only, so no amount is ever rounded through a float.
 
 const DECIMALS = 6n;
@@ -11,7 +11,7 @@ function toBig(v: string | bigint): bigint {
   return t === "" ? 0n : BigInt(t);
 }
 
-/** Formats USDG base units, e.g. "40000000000" -> "40,000"; `compact` gives "98.8K". */
+/** Formats USDC base units, e.g. "40000000000" -> "40,000"; `compact` gives "98.8K". */
 export function formatUSDG(v: string | bigint, opts: { compact?: boolean } = {}): string {
   const n = toBig(v);
   const sign = n < 0n ? "-" : "";

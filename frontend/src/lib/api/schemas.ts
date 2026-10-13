@@ -3,7 +3,7 @@
 import { z } from "zod";
 
 const list = <T extends z.ZodTypeAny>(item: T) => z.array(item).nullish().transform((v) => v ?? []);
-const amount = z.string(); // USDG base units as a decimal string
+const amount = z.string(); // USDC base units as a decimal string
 
 export const Policy = z.object({
   minTempX100: z.number(),
@@ -147,7 +147,7 @@ export const Parametric = z
   .transform((v) => (v && v.consecutiveFailedEpochs > 0 ? v : null));
 export type Parametric = z.infer<typeof Parametric>;
 
-/** A facility's accepted default cover (CoverPool). Amounts in USDG base units. */
+/** A facility's accepted default cover (CoverPool). Amounts in USDC base units. */
 export const Cover = z.object({
   insurer: z.string(),
   financier: z.string(),

@@ -243,7 +243,7 @@ const utc = (d: Date | string | number) => {
   const t = typeof d === "number" ? new Date(d * 1000) : new Date(d);
   return Number.isNaN(t.getTime()) ? String(d) : `${t.toISOString().slice(0, 16).replace("T", " ")} UTC`;
 };
-const usdg = (v: string | bigint) => `${formatUSDG(v)} USDG`;
+const usdg = (v: string | bigint) => `${formatUSDG(v)} USDC`;
 const minutes = (sec: number) => (sec % 60 === 0 ? `${sec / 60} min` : `${sec} s`);
 
 /* ---------- the document ---------- */
@@ -459,7 +459,7 @@ export async function buildCertificate(input: CertificateInput): Promise<{ bytes
     w.table(
       [
         { label: "Line", width: 60 },
-        { label: "Amount (USDG)", width: 40, align: "right" },
+        { label: "Amount (USDC)", width: 40, align: "right" },
       ],
       [
         ["Invoice paid by the buyer", formatUSDG(s.invoiceValue)],
@@ -475,7 +475,7 @@ export async function buildCertificate(input: CertificateInput): Promise<{ bytes
   // default cover (contracts v2)
   const cv = view.cover;
   if (cv || view.openCoverOffers > 0) {
-    w.section("Default cover", "An insurer escrowed USDG in the CoverPool contract; the financier bought the cover with a premium paid straight to the insurer. On settlement the cover returns to the insurer; on default the financier is paid up to the principal drawn.");
+    w.section("Default cover", "An insurer escrowed USDC in the CoverPool contract; the financier bought the cover with a premium paid straight to the insurer. On settlement the cover returns to the insurer; on default the financier is paid up to the principal drawn.");
     if (!cv) {
       w.paragraph(`No cover was accepted. ${view.openCoverOffers} ${view.openCoverOffers === 1 ? "offer was" : "offers were"} open when this record was made.`, { color: C.slate });
     } else {

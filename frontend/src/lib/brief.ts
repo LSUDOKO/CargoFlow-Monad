@@ -37,12 +37,12 @@ export function fallbackBrief(view: ShipmentView, latest?: EpochSummary | null):
   const nextAmount = view.milestones[next]?.allocatedUsdg;
   switch (status) {
     case "CREATED":
-      return { ...base, headline: "Financing agreed, waiting for the financier's deposit", causes: [`${formatUSDG(f.committed)} USDG will sit in escrow and be released milestone by milestone.`], nextSteps: [{ role: "financier", action: `Deposit ${formatUSDG(f.committed)} USDG into escrow.` }] };
+      return { ...base, headline: "Financing agreed, waiting for the financier's deposit", causes: [`${formatUSDG(f.committed)} USDC will sit in escrow and be released milestone by milestone.`], nextSteps: [{ role: "financier", action: `Deposit ${formatUSDG(f.committed)} USDC into escrow.` }] };
     case "FINANCED":
-      return { ...base, headline: "Funded and ready to sail", causes: [`${formatUSDG(f.committed)} USDG is in escrow.`, `The cargo must stay between ${band}.`], nextSteps: [{ role: "exporter", action: "Start transit when the goods leave, and connect the data logger travelling with them." }] };
+      return { ...base, headline: "Funded and ready to sail", causes: [`${formatUSDG(f.committed)} USDC is in escrow.`, `The cargo must stay between ${band}.`], nextSteps: [{ role: "exporter", action: "Start transit when the goods leave, and connect the data logger travelling with them." }] };
     case "ACTIVE":
       if (next >= f.milestoneCount) {
-        return { ...base, headline: "Every milestone is paid out; waiting for the goods to arrive", causes: [`${formatUSDG(f.drawn)} USDG has been released to the exporter.`], nextSteps: [{ role: "buyer", action: "Confirm delivery when the goods arrive." }] };
+        return { ...base, headline: "Every milestone is paid out; waiting for the goods to arrive", causes: [`${formatUSDG(f.drawn)} USDC has been released to the exporter.`], nextSteps: [{ role: "buyer", action: "Confirm delivery when the goods arrive." }] };
       }
       {
         // the latest evidence passed but came from outside the milestone's place: the milestone waits (not a failure)
@@ -56,7 +56,7 @@ export function fallbackBrief(view: ShipmentView, latest?: EpochSummary | null):
             headline: `In transit: milestone ${next + 1} waits until the cargo is within ${where}`,
             causes: [`The latest evidence scored ${latest.score} of 100 and passed the policy, but it was taken outside the milestone's place.`, "This is not a failure: the first passing evidence from inside the place releases the milestone."],
             nextSteps: [
-              { role: "exporter", action: `Keep the data logger reporting. Milestone ${next + 1}${nextAmount ? ` pays ${formatUSDG(nextAmount)} USDG` : ""} once evidence from within ${where} passes.` },
+              { role: "exporter", action: `Keep the data logger reporting. Milestone ${next + 1}${nextAmount ? ` pays ${formatUSDG(nextAmount)} USDC` : ""} once evidence from within ${where} passes.` },
               { role: "financier", action: "Nothing to do: releases follow the evidence." },
             ],
             hold: { milestoneIndex: next, placeLabel: m.placeLabel, latE6: m.latE6, lonE6: m.lonE6, radiusM: m.radiusM, distanceM: latest.heldDistanceM ?? 0, message },
@@ -71,7 +71,7 @@ export function fallbackBrief(view: ShipmentView, latest?: EpochSummary | null):
           `The cargo must stay between ${band}.`,
         ],
         nextSteps: [
-          { role: "exporter", action: `Keep the data logger reporting. Milestone ${next + 1}${nextAmount ? ` pays ${formatUSDG(nextAmount)} USDG` : ""} once its evidence passes.` },
+          { role: "exporter", action: `Keep the data logger reporting. Milestone ${next + 1}${nextAmount ? ` pays ${formatUSDG(nextAmount)} USDC` : ""} once its evidence passes.` },
           { role: "financier", action: "Nothing to do: releases follow the evidence." },
         ],
       };
@@ -85,7 +85,7 @@ export function fallbackBrief(view: ShipmentView, latest?: EpochSummary | null):
         causes: [
           ...(why.length ? [`The evidence failed because ${why.join(" and ")}.`] : []),
           ...(latest ? [`It scored ${latest.score} of 100, with ${formatBps(latest.conflictBps)} sensor conflict.`] : []),
-          `${formatUSDG(f.remaining)} USDG stays in escrow until the pause is lifted.`,
+          `${formatUSDG(f.remaining)} USDC stays in escrow until the pause is lifted.`,
         ],
         nextSteps: [
           physical
@@ -97,11 +97,11 @@ export function fallbackBrief(view: ShipmentView, latest?: EpochSummary | null):
       };
     }
     case "DISPUTED":
-      return { ...base, headline: "Disputed: releases are frozen until the arbiter decides", causes: [`${formatUSDG(f.remaining)} USDG stays in escrow.`], nextSteps: [{ role: "arbiter", action: "Resume the facility or declare a default." }] };
+      return { ...base, headline: "Disputed: releases are frozen until the arbiter decides", causes: [`${formatUSDG(f.remaining)} USDC stays in escrow.`], nextSteps: [{ role: "arbiter", action: "Resume the facility or declare a default." }] };
     case "DELIVERED":
-      return { ...base, headline: "Delivered: the buyer now pays the invoice", causes: [`The invoice is ${formatUSDG(s.invoiceValue)} USDG.`], nextSteps: [{ role: "buyer", action: `Pay the ${formatUSDG(s.invoiceValue)} USDG invoice; the contract splits it between the financier and the exporter.` }] };
+      return { ...base, headline: "Delivered: the buyer now pays the invoice", causes: [`The invoice is ${formatUSDG(s.invoiceValue)} USDC.`], nextSteps: [{ role: "buyer", action: `Pay the ${formatUSDG(s.invoiceValue)} USDC invoice; the contract splits it between the financier and the exporter.` }] };
     case "SETTLED":
-      return { ...base, headline: "Settled: the invoice is paid and the financing is closed", causes: [`${formatUSDG(f.drawn)} USDG was released against evidence before delivery.`], nextSteps: [{ role: "exporter", action: "Download the settlement certificate for your records." }] };
+      return { ...base, headline: "Settled: the invoice is paid and the financing is closed", causes: [`${formatUSDG(f.drawn)} USDC was released against evidence before delivery.`], nextSteps: [{ role: "exporter", action: "Download the settlement certificate for your records." }] };
     case "DEFAULTED":
       return { ...base, headline: "Defaulted: the facility is closed", causes: ["The undrawn capital went back to the financier and nothing more is released."], nextSteps: [] };
     case "CANCELLED":
@@ -109,7 +109,7 @@ export function fallbackBrief(view: ShipmentView, latest?: EpochSummary | null):
         ...base,
         headline: "Cancelled before transit: the facility is closed",
         causes: [
-          f.funded ? `The ${formatUSDG(f.committed)} USDG deposit went back to the financier in full.` : "Nothing had been deposited, so no money moved.",
+          f.funded ? `The ${formatUSDG(f.committed)} USDC deposit went back to the financier in full.` : "Nothing had been deposited, so no money moved.",
           "Nothing was released to the exporter. A bound bill of lading went back to the exporter.",
         ],
         nextSteps: [],

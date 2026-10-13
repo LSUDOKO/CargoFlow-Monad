@@ -1,6 +1,6 @@
 import { waterfall } from "./waterfall";
 
-/** What a wallet still needs before it can pay `required` USDG into the vault. */
+/** What a wallet still needs before it can pay `required` USDC into the vault. */
 export function fundingNeeds(balance: bigint | undefined, allowance: bigint | undefined, required: bigint) {
   const bal = balance ?? 0n;
   const allow = allowance ?? 0n;
