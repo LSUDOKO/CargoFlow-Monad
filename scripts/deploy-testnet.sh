@@ -15,6 +15,6 @@ done
 export WORKER_ADDRESS=$(addr "$WORKER_KEY") MONITOR_ADDRESS=$(addr "$MONITOR_KEY")
 export MANAGER_ADDRESS=$(addr "$MANAGER_KEY") ARBITER_ADDRESS=$(addr "$ARBITER_KEY")
 [ "$("$CAST" chain-id --rpc-url "$MONAD_RPC_URL")" = 10143 ] || { echo "RPC is not Monad Testnet (10143)" >&2; exit 1; }
-flags=(--rpc-url monad_testnet)
+flags=(--rpc-url monad_testnet --with-gas-price "${GAS_PRICE:-102gwei}" --priority-gas-price "${PRIORITY_GAS_PRICE:-2gwei}" --slow)
 if [ "${BROADCAST:-0}" = 1 ]; then flags+=(--broadcast); else echo "dry run (set BROADCAST=1 to send)"; fi
 cd contracts && "$FORGE" script script/Deploy.s.sol "${flags[@]}"
