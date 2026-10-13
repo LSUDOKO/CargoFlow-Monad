@@ -1,7 +1,7 @@
 // Cloudflare Workers deployment of the web app, built with OpenNext (`pnpm cf:deploy`).
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "cargoflow",
+  "name": "cargoflow-monad",
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-09-01",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
