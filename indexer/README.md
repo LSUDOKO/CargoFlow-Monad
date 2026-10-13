@@ -30,8 +30,8 @@ ENVIO_HASURA=false ENVIO_PG_HOST=127.0.0.1 ENVIO_PG_PORT=5434 ENVIO_PG_USER=... 
 ENVIO_RPC_INITIAL_BLOCK_INTERVAL=100 ENVIO_RPC_INTERVAL_CEILING=100 pnpm envio start
 ```
 
-Hosted: Envio Cloud, root directory `indexer/`, config `config.yaml`. The web app reads the endpoint from
-`NEXT_PUBLIC_ENVIO_GRAPHQL_URL`.
+Hosted on Envio Cloud (indexer `cargoflow-monad`, root directory `indexer/`, branch `envio`, auto-deploy):
+**https://indexer.dev.hyperindex.xyz/bc5a6d2/v1/graphql**. The web app reads it from `NEXT_PUBLIC_ENVIO_GRAPHQL_URL`.
 
 ```graphql
 query { OrderEvent(order_by: { blockNumber: desc }, limit: 25) { kind note_id account price mark txHash }
