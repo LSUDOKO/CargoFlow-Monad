@@ -203,6 +203,8 @@ contract CoverPool is Controlled, ReentrancyGuard, Pausable, ICoverPoolV3 {
         uint256 remainder = amount - payout;
 
         c.status = CoverStatus.CLAIMED;
+        // Monad: cover travels with the financier position (Cargo Notes), so pay its current holder
+        c.financier = CONTROLLER.getFacility(shipmentId).financier;
         c.financierPayout = payout;
         c.insurerReturn = remainder;
         totalActiveCover -= amount;
@@ -239,6 +241,7 @@ contract CoverPool is Controlled, ReentrancyGuard, Pausable, ICoverPoolV3 {
         uint256 remainder = left - salvage;
 
         c.status = CoverStatus.TRIGGERED;
+        c.financier = f.financier; // the position's current holder
         c.financierPayout = payout;
         c.insurerReturn = remainder;
         p.exporter = f.exporter;
