@@ -27,6 +27,7 @@ type Manifest struct {
 	// v3, optional: zero when absent, which turns the feature off
 	DeviceRegistry common.Address
 	EBLRegistry    common.Address
+	NoteMarket     common.Address // Monad, optional: the Cargo Note market
 }
 
 // Indexed maps every contract whose logs the indexer follows to its ABI name. Optional contracts (CoverPool, the v3
@@ -68,6 +69,7 @@ func LoadManifest(path string) (Manifest, error) {
 			CoverPool           string `json:"coverPool"`      // v2, optional
 			DeviceRegistry      string `json:"deviceRegistry"` // v3, optional
 			EBLRegistry         string `json:"eblRegistry"`    // v3, optional
+			NoteMarket          string `json:"noteMarket"`     // Monad, optional
 		} `json:"contracts"`
 	}
 	if err := json.Unmarshal(raw, &f); err != nil {
@@ -108,7 +110,7 @@ func LoadManifest(path string) (Manifest, error) {
 	for _, opt := range []struct {
 		name, raw string
 		dst       *common.Address
-	}{{"deviceRegistry", f.Contracts.DeviceRegistry, &m.DeviceRegistry}, {"eblRegistry", f.Contracts.EBLRegistry, &m.EBLRegistry}} {
+	}{{"deviceRegistry", f.Contracts.DeviceRegistry, &m.DeviceRegistry}, {"eblRegistry", f.Contracts.EBLRegistry, &m.EBLRegistry}, {"noteMarket", f.Contracts.NoteMarket, &m.NoteMarket}} {
 		if opt.raw == "" {
 			continue
 		}

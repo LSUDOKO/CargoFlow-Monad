@@ -28,7 +28,7 @@ type alertChannelsDTO struct {
 type configResponse struct {
 	ChainID      uint64            `json:"chainId"`
 	USDGDecimals int               `json:"usdgDecimals"`
-	Contracts    map[string]string `json:"contracts" doc:"usdg, access, shipmentRegistry, policyEngine, evidenceRegistry, receivableVault, financingController, groth16Verifier, (v2) coverPool, (v3) deviceRegistry and eblRegistry"`
+	Contracts    map[string]string `json:"contracts" doc:"usdg, access, shipmentRegistry, policyEngine, evidenceRegistry, receivableVault, financingController, groth16Verifier, (v2) coverPool, (v3) deviceRegistry and eblRegistry, (Monad) noteMarket"`
 	Alerts       alertChannelsDTO  `json:"alerts"`
 	GasDrip      bool              `json:"gasDrip"`
 	AIS          bool              `json:"ais"`

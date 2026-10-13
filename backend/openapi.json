@@ -446,7 +446,7 @@
             "additionalProperties": {
               "type": "string"
             },
-            "description": "usdg, access, shipmentRegistry, policyEngine, evidenceRegistry, receivableVault, financingController, groth16Verifier, (v2) coverPool, (v3) deviceRegistry and eblRegistry",
+            "description": "usdg, access, shipmentRegistry, policyEngine, evidenceRegistry, receivableVault, financingController, groth16Verifier, (v2) coverPool, (v3) deviceRegistry and eblRegistry, (Monad) noteMarket",
             "type": "object"
           },
           "gasDrip": {

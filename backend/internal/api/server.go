@@ -188,6 +188,9 @@ func (s *Server) config(w http.ResponseWriter, r *http.Request) error {
 	if s.c.Chain.HasEBL() {
 		contracts["eblRegistry"] = hexAddr(m.EBLRegistry)
 	}
+	if m.NoteMarket != ([20]byte{}) {
+		contracts["noteMarket"] = hexAddr(m.NoteMarket)
+	}
 	writeJSON(w, http.StatusOK, configResponse{
 		ChainID: m.ChainID, USDGDecimals: 6, Contracts: contracts,
 		Alerts:  alertChannelsDTO{Webhook: true, Telegram: s.c.Alerts.TelegramBot != "", Email: s.c.Alerts.Email, Slack: true, TelegramBot: s.c.Alerts.TelegramBot},
