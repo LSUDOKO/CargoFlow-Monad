@@ -168,7 +168,7 @@ type Executor = (
   request: {
     kind: "transaction";
     chainId: number;
-    transaction: { to: Address; data: Hex };
+    transaction: { to: Address; data: Hex; gas?: bigint; maxFeePerGas?: bigint; maxPriorityFeePerGas?: bigint };
     intent?: { summary: string; action: "call"; details?: Record<string, string | undefined> };
   },
   opts?: { waitForReceipt?: boolean; signal?: AbortSignal },
@@ -183,9 +183,10 @@ export class Submitter {
   private constructor(
     private readonly exec: Executor,
     private readonly io: CommandIO,
+    private readonly from: Address | undefined,
   ) {}
 
-  static async create(ctx: PluginCommandContext, io: CommandIO, commandId: string): Promise<Submitter> {
+  static async create(ctx: PluginCommandContext, io: CommandIO, commandId: string, from?: Address): Promise<Submitter> {
     let exec: Executor;
     try {
       exec = (await ctx.walletExecutor(io, commandId, { emitStepNotices: true })) as unknown as Executor;
@@ -197,12 +198,12 @@ export class Submitter {
         "Run `mm login` and `mm init`, and make sure the plugin was installed with the wallet-submit capability.",
       );
     }
-    return new Submitter(exec, io);
+    return new Submitter(exec, io, from);
   }
 
   async send(step: string, to: Address, data: Hex, summary: string, details: Record<string, string>): Promise<TxRecord> {
     const result = await this.exec(
-      { kind: "transaction", chainId: CHAIN_ID, transaction: { to, data }, intent: { summary, action: "call", details } },
+      { kind: "transaction", chainId: CHAIN_ID, transaction: { to, data, ...(await this.fees(to, data)) }, intent: { summary, action: "call", details } },
       { waitForReceipt: true, signal: this.io.signal },
     );
     const status = result.status ?? "UNKNOWN";
@@ -224,6 +225,30 @@ export class Submitter {
       );
     }
     return rec;
+  }
+
+  /**
+   * Gas and EIP-1559 fees read from Monad itself. MetaMask's hosted gas-fee service answers "Invalid chainId" for
+   * Monad testnet (10143); a transaction that already carries maxFeePerGas, maxPriorityFeePerGas and gas skips it.
+   * Monad charges the gas limit, not the gas used, so the limit is the estimate plus 25%, not a round ceiling.
+   */
+  private async fees(to: Address, data: Hex): Promise<{ gas?: bigint; maxFeePerGas: bigint; maxPriorityFeePerGas: bigint }> {
+    const { client } = await readClient(undefined, false);
+    const tip = 2_000_000_000n; // 2 gwei
+    const block = await client.getBlock();
+    const base = block.baseFeePerGas ?? 100_000_000_000n;
+    // bigints: the executor hex-encodes them itself (a 0x string would come out as 0x0x...)
+    const out: { gas?: bigint; maxFeePerGas: bigint; maxPriorityFeePerGas: bigint } = {
+      maxFeePerGas: base * 2n + tip,
+      maxPriorityFeePerGas: tip,
+    };
+    try {
+      const est = await client.estimateGas({ account: this.from, to, data });
+      out.gas = (est * 125n) / 100n;
+    } catch {
+      out.gas = 300_000n; // a safe ceiling for an approve or a market call
+    }
+    return out;
   }
 
   /** Approve exactly what the market needs to pull, unless the allowance already covers it. */

@@ -73,7 +73,7 @@ export default class CargoBuy extends PluginCommand<BuyResult> {
     };
     if (result.dryRun) return result;
 
-    const tx = await Submitter.create(this.ctx, io, this.pluginCommandId);
+    const tx = await Submitter.create(this.ctx, io, this.pluginCommandId, buyer);
     await tx.ensureAllowance(client, buyer, d.price, `buying note ${note.ref ?? id}`);
     // maxPrice = the ask we just checked, so a seller raising the ask in between makes the buy revert.
     await tx.send("buy", MARKET, tx.buyData(id, d.price), `Buy cargo note ${note.ref ?? id.slice(0, 10)} for ${formatUsdc(d.price)} USDC`, {

@@ -32,7 +32,7 @@ export default class CargoCancelBid extends PluginCommand<CancelResult> {
         throw new CommandError("CARGO_NO_BID", `Wallet ${bidder} has no open bid on ${id}.`, "Run `mm cargo quote <id>` to see the order book.");
       }
     }
-    const tx = await Submitter.create(this.ctx, io, this.pluginCommandId);
+    const tx = await Submitter.create(this.ctx, io, this.pluginCommandId, bidder);
     await tx.send(
       "cancelBid",
       MARKET,

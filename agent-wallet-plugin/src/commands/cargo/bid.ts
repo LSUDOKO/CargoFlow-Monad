@@ -62,7 +62,7 @@ export default class CargoBid extends PluginCommand<BidResult> {
     };
     if (result.dryRun) return result;
 
-    const tx = await Submitter.create(this.ctx, io, this.pluginCommandId);
+    const tx = await Submitter.create(this.ctx, io, this.pluginCommandId, bidder);
     // The market only pulls the increase over an earlier bid; without a known address approve the full price.
     if (delta > 0n || !bidder) await tx.ensureAllowance(client, bidder, bidder ? delta : price, `bidding on ${note.ref ?? id}`);
     await tx.send(

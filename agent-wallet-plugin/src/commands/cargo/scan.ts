@@ -84,7 +84,7 @@ export default class CargoScan extends PluginCommand<ScanResult> {
     if (!buyer) {
       throw new CommandError("CARGO_NO_WALLET", "No agent wallet found to buy with.", "Run `mm login` and `mm init`, then re-run with --execute.");
     }
-    const tx = await Submitter.create(this.ctx, io, this.pluginCommandId);
+    const tx = await Submitter.create(this.ctx, io, this.pluginCommandId, buyer);
     let spent = 0n;
     for (const c of plan.selected) {
       const id = c.note.shipmentId as `0x${string}`;
