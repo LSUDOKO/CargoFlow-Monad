@@ -49,8 +49,10 @@ type Config struct {
 	ChainID        uint64
 	DeploymentFile string
 	StartBlock     uint64
-	Confirmations  uint64
-	IndexerPoll    time.Duration
+	// IndexerMaxRange is the blocks per eth_getLogs call; Monad public RPCs allow at most 100
+	IndexerMaxRange uint64
+	Confirmations   uint64
+	IndexerPoll     time.Duration
 
 	// ReconcileInterval is how often failed chain actions are retried; zero disables the loop.
 	ReconcileInterval time.Duration
@@ -273,6 +275,7 @@ func Load(getenv func(string) string) (Config, error) {
 	}
 	c.ChainID = uintVal("CHAIN_ID", 0, true)
 	c.StartBlock = uintVal("START_BLOCK", 0, false)
+	c.IndexerMaxRange = uintVal("INDEXER_MAX_RANGE", 100, false)
 	c.Confirmations = uintVal("CONFIRMATIONS", 1, false)
 
 	c.IndexerPoll = 2 * time.Second

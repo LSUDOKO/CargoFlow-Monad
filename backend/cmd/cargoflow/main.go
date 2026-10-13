@@ -185,7 +185,7 @@ func serve(ctx context.Context, getenv func(string) string, out io.Writer) error
 	})
 
 	idx := &chain.Indexer{
-		C: client, Store: st, Name: "main", StartBlock: cfg.StartBlock, Confirmations: cfg.Confirmations,
+		C: client, Store: st, Name: "main", StartBlock: cfg.StartBlock, Confirmations: cfg.Confirmations, MaxRange: cfg.IndexerMaxRange,
 		Poll: cfg.IndexerPoll, Sink: svc.OnChainEvents, Log: log,
 	}
 	if cfg.RecoveryScanInterval > 0 {

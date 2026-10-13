@@ -130,7 +130,7 @@ func TestFailoverToleratesAnUnreachableFallbackAtStartup(t *testing.T) {
 func TestRedactHidesRPCCredentials(t *testing.T) {
 	for in, want := range map[string]string{
 		"https://example.quiknode.pro/abc123token/":  "https://example.quiknode.pro/…",
-		"https://testnet-rpc.monad.xyz":    "https://testnet-rpc.monad.xyz",
+		"https://testnet-rpc.monad.xyz":              "https://testnet-rpc.monad.xyz",
 		"https://user:pw@host.example/":              "https://host.example/…",
 		"https://host.example/?apikey=secret":        "https://host.example/…",
 		"wss://example.quiknode.pro/abc123token/x/y": "wss://example.quiknode.pro/…",
