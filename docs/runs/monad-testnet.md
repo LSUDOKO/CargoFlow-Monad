@@ -61,3 +61,20 @@ milestones released) was wrapped into a fungible note token and listed on Kuru's
 | Market buy with 1 USDC → 1.009090 cNOTE (10 bps taker fee) | trader | [0xade132a7…](https://testnet.monadvision.com/tx/0xade132a7524680c7e3b9270923ccbb61be845c026173d5e1f0cd13753bf4c01b) |
 
 After the buyer settles, every cNOTE-0516 holder redeems pro-rata for the USDC the note received (`redeem`).
+
+## An AI agent buys a Cargo Note: MetaMask Agent Wallet + the `cargo-notes` plugin
+
+The MetaMask Agent Wallet (server wallet `0x4124348e51653cfe155494cabd671b2977a09407`, Guard mode) bought the live note
+`CF-LIVE-1791912900798` (`0xb508ee58…39ff`) through the plugin in [`agent-wallet-plugin/`](../../agent-wallet-plugin):
+`mm cargo buy 0xb508… --max-price 3.01`. The plugin checked the note first (ACTIVE, evidence score 100 ≥ 75, ask
+3.00564 USDC ≤ max price and 1% under the on-chain mark of 3.036, upside 101 bps), then sent two transactions through
+the agent wallet; each was held for the owner's email approval (2FA) before MetaMask broadcast it.
+
+| Step | Transaction |
+|---|---|
+| Approve exactly 3.00564 USDC to CargoNoteMarket | [0x10c17841…](https://testnet.monadvision.com/tx/0x10c178413612c177dffba0e71e12ca3cb8941c53b61b515de30504c80060519c) |
+| Buy the note at its ask (max price = the checked ask, so a raised ask would revert) | [0x55a0bf98…](https://testnet.monadvision.com/tx/0x55a0bf9840c9d028848cd0136e8a8cf0218c96aee1732b4cd0554f01e2ae357c) |
+
+After the buy the controller's financier of record is the agent wallet; settlement, default payouts, the escrowed bill
+of lading and any cover now pay it. The same plugin refused `mm cargo buy` on the paused note (`CARGO_NOT_BUYABLE`:
+status PAUSED, score 48 below 75, ask above the mark) without signing anything.

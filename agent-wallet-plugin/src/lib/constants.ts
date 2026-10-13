@@ -12,7 +12,7 @@ export const USDC_DECIMALS = 6;
 export const RPC_URL = process.env.CARGOFLOW_RPC_URL ?? "https://testnet-rpc.monad.xyz";
 export const API_URL = (process.env.CARGOFLOW_API_URL ?? "https://cargoflow-monad-api.onrender.com").replace(/\/+$/, "");
 export const APP_URL = "https://cargoflow-monad.vercel.app";
-export const EXPLORER_TX = "https://testnet.monadexplorer.com/tx/";
+export const EXPLORER_TX = "https://testnet.monadvision.com/tx/";
 
 /** The API runs on a free tier that sleeps; a cold start takes up to about a minute. */
 export const API_TIMEOUT_MS = Number(process.env.CARGOFLOW_API_TIMEOUT_MS ?? 90_000);
