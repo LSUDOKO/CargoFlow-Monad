@@ -26,7 +26,7 @@ describe("passkey provider routing", () => {
     const p = createKernelProvider(d);
     expect(await p.request({ method: "eth_accounts" })).toEqual([ADDR]);
     expect(await p.request({ method: "eth_requestAccounts" })).toEqual([ADDR]);
-    expect(await p.request({ method: "eth_chainId" })).toBe("0xb626");
+    expect(await p.request({ method: "eth_chainId" })).toBe("0x279f");
     expect(d.rpc).not.toHaveBeenCalled();
   });
 
@@ -43,7 +43,7 @@ describe("passkey provider routing", () => {
     const d = deps({ rpc: vi.fn(async () => ({ status: "0x1", logs: [], transactionHash: HASH })) });
     const p = createKernelProvider(d);
     const approve = encodeFunctionData({ abi: erc20Abi, functionName: "approve", args: [OTHER, 5n] });
-    const out = (await p.request({ method: "wallet_sendCalls", params: [{ version: "2.0.0", from: ADDR, chainId: "0xb626", calls: [{ to: TOKEN, data: approve }, { to: OTHER, data: "0x1234", value: "0x5" }] }] })) as { id: Hex };
+    const out = (await p.request({ method: "wallet_sendCalls", params: [{ version: "2.0.0", from: ADDR, chainId: "0x279f", calls: [{ to: TOKEN, data: approve }, { to: OTHER, data: "0x1234", value: "0x5" }] }] })) as { id: Hex };
     expect(out.id).toBe(HASH);
     expect(d.sendCalls).toHaveBeenCalledWith([
       { to: TOKEN, data: approve, value: 0n },
@@ -89,7 +89,7 @@ describe("passkey provider routing", () => {
     const p = createKernelProvider(deps({ sendCalls: vi.fn(async () => Promise.reject(new PasskeyGasError())) }));
     await expect(p.request({ method: "eth_sendTransaction", params: [{ to: OTHER }] })).rejects.toBeInstanceOf(PasskeyGasError);
     await expect(p.request({ method: "wallet_switchEthereumChain", params: [{ chainId: "0x7a69" }] })).rejects.toMatchObject({ code: 4902 });
-    expect(await p.request({ method: "wallet_switchEthereumChain", params: [{ chainId: "0xb626" }] })).toBeNull();
+    expect(await p.request({ method: "wallet_switchEthereumChain", params: [{ chainId: "0x279f" }] })).toBeNull();
     await expect(p.request({ method: "eth_sendRawTransaction", params: ["0x"] })).rejects.toBeInstanceOf(ProviderRpcError);
     await expect(p.request({ method: "eth_sendTransaction", params: [{ data: "0x60" }] })).rejects.toMatchObject({ code: -32602 });
   });
