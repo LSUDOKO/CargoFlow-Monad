@@ -14,7 +14,7 @@ cargo committed. When the buyer pays, settlement goes to whoever holds the note.
 </p>
 
 <p align="center">
-  <a href="https://cargoflow-monad.adoranto737.workers.dev"><img alt="Live on Monad Testnet" src="https://img.shields.io/badge/live-Monad%20Testnet-836EF9?style=flat-square&labelColor=0B1B2B"></a>
+  <a href="https://cargoflow-monad.vercel.app"><img alt="Live on Monad Testnet" src="https://img.shields.io/badge/live-Monad%20Testnet-836EF9?style=flat-square&labelColor=0B1B2B"></a>
   <a href="#deployed-contracts-monad-testnet-10143"><img alt="11 contracts verified" src="https://img.shields.io/badge/contracts-11%20verified-836EF9?style=flat-square&labelColor=0B1B2B"></a>
   <a href="#tests"><img alt="Tests" src="https://img.shields.io/badge/tests-379%20contract%20%C2%B7%20300%20frontend-00C46A?style=flat-square&labelColor=0B1B2B"></a>
   <img alt="Settlement" src="https://img.shields.io/badge/settlement-USDC-C6F432?style=flat-square&labelColor=0B1B2B">
@@ -25,7 +25,7 @@ cargo committed. When the buyer pays, settlement goes to whoever holds the note.
 
 | What | Where |
 |---|---|
-| **Live app** | [cargoflow-monad.adoranto737.workers.dev](https://cargoflow-monad.adoranto737.workers.dev) · trading at [/notes](https://cargoflow-monad.adoranto737.workers.dev/notes) |
+| **Live app** | [cargoflow-monad.vercel.app](https://cargoflow-monad.vercel.app) · trading at [/notes](https://cargoflow-monad.vercel.app/notes) |
 | **API** | [cargoflow-monad-api.onrender.com/v1/health](https://cargoflow-monad-api.onrender.com/v1/health) (free tier: the first request after idle takes ~1 min to wake) |
 | **Live on-chain run** | [`docs/runs/monad-testnet.md`](docs/runs/monad-testnet.md): 22 linked transactions, including a ZK recovery and a Cargo Note trade |
 | **Contracts** | [MonadVision](https://testnet.monadvision.com/address/0x120142b2e5A90F2676F41d8d20bDCC94C66ec55d) (all 11 source-verified via Sourcify) · [manifest](contracts/deployments/monad-testnet.json) |
@@ -34,9 +34,9 @@ cargo committed. When the buyer pays, settlement goes to whoever holds the note.
 ### For judges: try it in two minutes
 
 1. Add Monad Testnet (chain 10143, RPC `https://testnet-rpc.monad.xyz`) to any EVM wallet; get MON from [faucet.monad.xyz](https://faucet.monad.xyz) and USDC from [faucet.circle.com](https://faucet.circle.com) (choose Monad Testnet).
-2. Open [/notes](https://cargoflow-monad.adoranto737.workers.dev/notes): every funded facility is listed with its evidence score, claim at settlement, on-chain mark, ask and best bid, re-read every second.
-3. Bid on a note (approve, then place bid: your USDC is escrowed by the market and can be withdrawn at any time), or open a shipment from the [fleet](https://cargoflow-monad.adoranto737.workers.dev/shipments) and follow its evidence, releases and pauses live.
-4. To create your own shipment end to end: [/exporter](https://cargoflow-monad.adoranto737.workers.dev/exporter) registers it, [/financier](https://cargoflow-monad.adoranto737.workers.dev/financier) funds it, [/buyer](https://cargoflow-monad.adoranto737.workers.dev/buyer) pays it. Each portal signs from the connected wallet; no test credentials are needed.
+2. Open [/notes](https://cargoflow-monad.vercel.app/notes): every funded facility is listed with its evidence score, claim at settlement, on-chain mark, ask and best bid, re-read every second.
+3. Bid on a note (approve, then place bid: your USDC is escrowed by the market and can be withdrawn at any time), or open a shipment from the [fleet](https://cargoflow-monad.vercel.app/shipments) and follow its evidence, releases and pauses live.
+4. To create your own shipment end to end: [/exporter](https://cargoflow-monad.vercel.app/exporter) registers it, [/financier](https://cargoflow-monad.vercel.app/financier) funds it, [/buyer](https://cargoflow-monad.vercel.app/buyer) pays it. Each portal signs from the connected wallet; no test credentials are needed.
 
 ## The problem
 
@@ -147,7 +147,7 @@ flowchart LR
         CP["CoverPool"] -.pays holder.-> FC
     end
     B -->|"worker / monitor / manager keys"| M
-    W["Web app (Next.js on Cloudflare)"] --> M
+    W["Web app (Next.js on Vercel)"] --> M
     W --> B
 ```
 
@@ -160,7 +160,7 @@ do) and trust boundaries.
 | Contracts | Solidity 0.8.28, Foundry, OpenZeppelin 5.4; immutable, no proxies |
 | ZK | Circom 2.2 + Groth16 (snarkjs), proof bound to the contract's own public signals |
 | Backend | Go: ingestion, Dempster-Shafer evidence engine, idempotent chain outbox, reorg-safe indexer, REST + WebSocket |
-| Frontend | Next.js 16 on Cloudflare Workers (OpenNext), wagmi/viem, passkeys via ZeroDev Kernel |
+| Frontend | Next.js 16 on Vercel, wagmi/viem, passkeys via ZeroDev Kernel |
 | Packages | `@cargoflow/sdk`, `@cargoflow/mcp` (Claude connector), `@cargoflow/gateway` (logger agent), Python SDK |
 
 ## Run it locally

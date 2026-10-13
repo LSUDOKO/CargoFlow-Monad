@@ -7,7 +7,7 @@ freight today; my buyer pays about two months later. With CargoFlow a financier 
 shipment, and it is released to me milestone by milestone as the cargo's own evidence passes. Every step below is a
 transaction I sign from my own wallet on [Monad Testnet](https://testnet.monadvision.com),
 or a message I sign without gas. The links are my real run, `CF-SG-VAX-0202`, recorded for the demo film on
-3 October 2026 ([dashboard](https://cargoflow-monad.adoranto737.workers.dev/track/0xc99131cb35886c991398b53530e1cfedb12fa1f7205a3f95f49b13cd1f7d761a)).
+3 October 2026 ([dashboard](https://cargoflow-monad.vercel.app/track/0xc99131cb35886c991398b53530e1cfedb12fa1f7205a3f95f49b13cd1f7d761a)).
 
 You need: a wallet on Monad Testnet with a little testnet ETH, your buyer's address and, if you already
 have one, your financier's address.
@@ -16,10 +16,10 @@ have one, your financier's address.
 
 <p align="center"><img src="../assets/v3/web-exporter.jpg" alt="Exporter wizard, cold-chain policy step: Pharma 2 to 8 °C selected, temperature limits, evidence score and conflict thresholds, humidity and shock." width="100%"></p>
 
-On [/exporter](https://cargoflow-monad.adoranto737.workers.dev/exporter) the wizard has four steps: **Shipment** (reference,
+On [/exporter](https://cargoflow-monad.vercel.app/exporter) the wizard has four steps: **Shipment** (reference,
 buyer, invoice value, route; the invoice PDF is fingerprinted in the browser, never uploaded), **Cold-chain policy**
 (the Pharma template fills 2 to 8 °C, humidity ≤ 85%, shock ≤ 3 g, score ≥ 75, conflict ≤ 30%), **Financing** (I have a
-financier, or ask the [market](https://cargoflow-monad.adoranto737.workers.dev/market); amount, milestones, fee) and **Sign**.
+financier, or ask the [market](https://cargoflow-monad.vercel.app/market); amount, milestones, fee) and **Sign**.
 
 | On chain | Contract | My run |
 |---|---|---|

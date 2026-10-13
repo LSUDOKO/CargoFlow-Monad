@@ -12,7 +12,7 @@ end to end; these pages go deeper.
 | [README](../README.md) | The problem, the cast, how it works in twelve beats, the live product, Claude, architecture, every contract and live run |
 | [Role guides](guides/README.md) | One per party, told by its character, with the exact contract calls: [exporter](guides/exporter.md) · [financier](guides/financier.md) · [buyer](guides/buyer.md) · [carrier](guides/carrier.md) · [arbiter](guides/arbiter.md) |
 | [All links](../README.md#all-links) | Every link in one table: website, app, API, contracts, pitch deck, film, MCP, packages, Telegram |
-| [Live app](https://cargoflow-monad.adoranto737.workers.dev) | Production build, live on Monad Testnet; connect a wallet or sign in with a passkey |
+| [Live app](https://cargoflow-monad.vercel.app) | Production build, live on Monad Testnet; connect a wallet or sign in with a passkey |
 | Pitch deck | [PDF](pitch/CargoFlow-pitch.pdf) · [PPTX](pitch/CargoFlow-pitch.pptx) · [HTML, animated](https://lsudoko.github.io/CargoFlow/pitch/) · [Google Drive](https://drive.google.com/drive/folders/1sW6rVx2dLyr5migHmV8UKXKU-88mCg8W?usp=sharing) |
 | [Use CargoFlow in Claude](../README.md#use-cargoflow-in-claude) | The remote MCP server: `https://cargoflow-monad-mcp.adoranto737.workers.dev/mcp` ([add it](https://claude.ai/new?modal=add-custom-connector)) |
 
@@ -31,7 +31,7 @@ end to end; these pages go deeper.
 
 | | |
 |---|---|
-| [API reference](https://cargoflow-monad.adoranto737.workers.dev/docs) | Interactive OpenAPI 3.1 reference with every wallet-signed message format ([raw spec](https://cargoflow-monad-api.onrender.com/v1/openapi.json)) |
+| [API reference](https://cargoflow-monad.vercel.app/docs) | Interactive OpenAPI 3.1 reference with every wallet-signed message format ([raw spec](https://cargoflow-monad-api.onrender.com/v1/openapi.json)) |
 | [`@cargoflow/sdk`](../packages/sdk/README.md) | Typed TypeScript client, ABIs, unsigned transaction builders, gateway signing, Merkle proof checks |
 | [`@cargoflow/mcp`](../packages/mcp/README.md) | The MCP server: hosted, stdio and Streamable HTTP; client configs for claude.ai, Claude Code, Claude Desktop and Cursor |
 | [`@cargoflow/gateway`](../packages/gateway/README.md) | The edge agent for data loggers: folder watch, USB, serial, offline queue |

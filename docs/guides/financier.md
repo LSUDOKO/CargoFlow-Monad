@@ -6,7 +6,7 @@ I run a credit fund. Before CargoFlow I got an invoice and a bill of lading, pap
 blind or not at all. Now my USDC sits in a shipment-specific escrow and leaves it only when the cargo's committed
 evidence passes the policy on chain. Everything I do is a transaction from my own wallet, or a message I sign
 without gas. The links are the real run `CF-SG-VAX-0202` from 3 October 2026
-([dashboard](https://cargoflow-monad.adoranto737.workers.dev/track/0xc99131cb35886c991398b53530e1cfedb12fa1f7205a3f95f49b13cd1f7d761a)).
+([dashboard](https://cargoflow-monad.vercel.app/track/0xc99131cb35886c991398b53530e1cfedb12fa1f7205a3f95f49b13cd1f7d761a)).
 
 You need: a wallet on Monad Testnet with testnet ETH and the USDC you commit
 ([`0x7E95…802F`](https://testnet.monadvision.com/address/0x534b2f3A21130d7a60830c2Df862319e593943A3)).
@@ -15,8 +15,8 @@ You need: a wallet on Monad Testnet with testnet ETH and the USDC you commit
 
 <p align="center"><img src="../assets/v3/web-market.jpg" alt="Market: an offer modal on an open financing request with the suggested fee band and its reasons." width="100%"></p>
 
-Facilities where an exporter named my wallet appear on [/financier](https://cargoflow-monad.adoranto737.workers.dev/financier).
-Shipments without a financier post requests on the [market](https://cargoflow-monad.adoranto737.workers.dev/market); there I
+Facilities where an exporter named my wallet appear on [/financier](https://cargoflow-monad.vercel.app/financier).
+Shipments without a financier post requests on the [market](https://cargoflow-monad.vercel.app/market); there I
 see the suggested fee band (low / mid / high, with the reasons: route, cargo band, the exporter's track record) and send
 an offer. An offer is a wallet *signature*, not a transaction; I choose the fee.
 

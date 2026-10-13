@@ -6,7 +6,7 @@ from its own wallet; the backend's worker, monitor and manager keys signed only 
 scale: a 4 USDC facility in five milestones of 0.8 USDC against a 7 USDC invoice, 3% fee, settled in Circle USDC.
 
 Shipment id `0x0353f55d82eb48314a58c34eab518cfe88999aaf6885e9cc41c9d10a042ac58e`
-([dashboard](https://cargoflow-monad.adoranto737.workers.dev/track/0x0353f55d82eb48314a58c34eab518cfe88999aaf6885e9cc41c9d10a042ac58e)).
+([dashboard](https://cargoflow-monad.vercel.app/track/0x0353f55d82eb48314a58c34eab518cfe88999aaf6885e9cc41c9d10a042ac58e)).
 
 | # | Step | Signed by | Transaction |
 |---|---|---|---|
