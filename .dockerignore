@@ -5,7 +5,7 @@
 **/broadcast
 contracts/lib
 contracts/deployments/*.json
-!contracts/deployments/robinhood-testnet.json
+!contracts/deployments/monad-testnet.json
 frontend
 docs
 .env
