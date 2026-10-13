@@ -2,16 +2,16 @@ import { createConfig, http, type CreateConnectorFn } from "wagmi";
 import { injected, mock, walletConnect } from "wagmi/connectors";
 import { defineChain, type Address, type EIP1193Provider } from "viem";
 import { anvil } from "viem/chains";
-import { ROBINHOOD_EXPLORER } from "@/lib/explorer";
+import { MONAD_EXPLORER } from "@/lib/explorer";
 import { passkeyConnector } from "@/lib/passkey/connector";
 import { PASSKEYS_ENABLED } from "@/lib/passkey/env";
 
-export const robinhoodTestnet = defineChain({
-  id: 46630,
-  name: "Robinhood Chain Testnet",
-  nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
-  rpcUrls: { default: { http: ["https://rpc.testnet.chain.robinhood.com"] } },
-  blockExplorers: { default: { name: "Robinhood Explorer", url: ROBINHOOD_EXPLORER } },
+export const monadTestnet = defineChain({
+  id: 10143,
+  name: "Monad Testnet",
+  nativeCurrency: { name: "Monad", symbol: "MON", decimals: 18 },
+  rpcUrls: { default: { http: ["https://testnet-rpc.monad.xyz"] } },
+  blockExplorers: { default: { name: "MonadVision", url: MONAD_EXPLORER } },
   testnet: true,
 });
 
@@ -19,7 +19,7 @@ export const robinhoodTestnet = defineChain({
 const localRpc = process.env.NEXT_PUBLIC_LOCAL_RPC_URL ?? "http://127.0.0.1:8545";
 export const localChain = defineChain({ ...anvil, rpcUrls: { default: { http: [localRpc] } } });
 
-export const supportedChains = [robinhoodTestnet, localChain] as const;
+export const supportedChains = [monadTestnet, localChain] as const;
 export type SupportedChainId = (typeof supportedChains)[number]["id"];
 
 const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID ?? "";
@@ -94,7 +94,7 @@ const create = () =>
   createConfig({
     chains: supportedChains,
     connectors,
-    transports: { [robinhoodTestnet.id]: http(), [localChain.id]: http(localRpc) },
+    transports: { [monadTestnet.id]: http(), [localChain.id]: http(localRpc) },
     ssr: true,
   });
 

@@ -8,7 +8,7 @@ const m = vi.hoisted(() => ({ switchChain: vi.fn(), writeContract: vi.fn(), wait
 vi.mock("wagmi", () => ({ useAccount: () => m.account }));
 vi.mock("wagmi/actions", () => ({ switchChain: m.switchChain, writeContract: m.writeContract, waitForTransactionReceipt: m.waitForTransactionReceipt }));
 vi.mock("./config", () => ({ wagmiConfig: {} }));
-vi.mock("./contracts", () => ({ useContracts: () => ({ chainId: 46630, contracts: undefined }) }));
+vi.mock("./contracts", () => ({ useContracts: () => ({ chainId: 10143, contracts: undefined }) }));
 vi.mock("@/components/ui/Toast", () => ({ useToast: () => ({ toast }) }));
 
 import { useTx } from "./useTx";
@@ -52,12 +52,12 @@ describe("useTx", () => {
     await act(async () => {
       expect(await result.current.send(req)).toBeUndefined();
     });
-    expect(toast).toHaveBeenCalledWith({ tone: "alert", title: "Switch your wallet to Robinhood Chain Testnet." });
+    expect(toast).toHaveBeenCalledWith({ tone: "alert", title: "Switch your wallet to Monad Testnet." });
     expect(m.writeContract).not.toHaveBeenCalled();
     expect(result.current.pending).toBe(false);
 
     // the next attempt is not blocked by a stale guard
-    m.account = { chainId: 46630, isConnected: true };
+    m.account = { chainId: 10143, isConnected: true };
     const { result: again } = renderHook(() => useTx(), { wrapper });
     await act(async () => {
       expect(await again.current.send(req)).toBe("0xhash");

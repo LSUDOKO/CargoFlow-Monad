@@ -16,7 +16,7 @@ import { accessAbi, controllerAbi, coverPoolAbi, deviceRegistryAbi, eblRegistryA
 import { useContracts } from "./contracts";
 import { CARRIER_ROLE } from "./roles";
 
-type ChainId = 46630 | 31337;
+type ChainId = 10143 | 31337;
 const isId = (id?: string): id is `0x${string}` => !!id && /^0x[0-9a-fA-F]{64}$/.test(id);
 const lower = (a?: string) => (a ?? "").toLowerCase();
 

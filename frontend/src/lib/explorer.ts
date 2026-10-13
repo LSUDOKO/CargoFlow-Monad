@@ -1,8 +1,8 @@
-export const ROBINHOOD_TESTNET_ID = 46630;
+export const MONAD_TESTNET_ID = 10143;
 export const LOCAL_CHAIN_ID = 31337;
-export const ROBINHOOD_EXPLORER = "https://explorer.testnet.chain.robinhood.com";
+export const MONAD_EXPLORER = "https://testnet.monadvision.com";
 
-const explorers: Record<number, string> = { [ROBINHOOD_TESTNET_ID]: ROBINHOOD_EXPLORER };
+const explorers: Record<number, string> = { [MONAD_TESTNET_ID]: MONAD_EXPLORER };
 
 /** Explorer URL for a transaction, or null on chains without an explorer (local anvil). */
 export function explorerTx(chainId: number | undefined, hash: string): string | null {
@@ -17,7 +17,7 @@ export function explorerAddress(chainId: number | undefined, address: string): s
 }
 
 export function chainName(chainId: number | undefined): string {
-  if (chainId === ROBINHOOD_TESTNET_ID) return "Robinhood Chain Testnet";
+  if (chainId === MONAD_TESTNET_ID) return "Monad Testnet";
   if (chainId === LOCAL_CHAIN_ID) return "Local chain";
   return chainId ? `Chain ${chainId}` : "Unknown chain";
 }

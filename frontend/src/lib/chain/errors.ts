@@ -3,8 +3,8 @@ import { chainName } from "@/lib/explorer";
 // Plain-language messages for the contracts' custom errors (contracts/src). Unknown errors fall back to the name.
 const messages: Record<string, string> = {
   AlreadyFunded: "This facility is already funded.",
-  ERC20InsufficientAllowance: "Approve the vault to move this much USDG first.",
-  ERC20InsufficientBalance: "This wallet does not hold enough USDG.",
+  ERC20InsufficientAllowance: "Approve the vault to move this much USDC first.",
+  ERC20InsufficientBalance: "This wallet does not hold enough USDC.",
   EpochAlreadyCommitted: "That evidence epoch is already on-chain.",
   EpochNotFound: "No committed evidence exists for that milestone yet.",
   EvidenceBelowThreshold: "The evidence score is below this milestone's threshold.",
@@ -31,8 +31,8 @@ const messages: Record<string, string> = {
   CoverAlreadyAccepted: "The financier has already accepted a cover for this shipment.",
   CoverNotActive: "There is no active cover to release or claim: it was already settled or paid out.",
   NothingToWithdraw: "There is nothing for this wallet to collect from the cover pool.",
-  UnsupportedToken: "The cover pool only accepts plain USDG transfers.",
-  SafeERC20FailedOperation: "The USDG transfer failed. Check the balance and the approval.",
+  UnsupportedToken: "The cover pool only accepts plain USDC transfers.",
+  SafeERC20FailedOperation: "The USDC transfer failed. Check the balance and the approval.",
   ReentrancyGuardReentrantCall: "The contract refused a nested call.",
   InvalidPolicy: "The policy values are out of range.",
   InvalidProof: "The zero-knowledge proof did not verify.",
