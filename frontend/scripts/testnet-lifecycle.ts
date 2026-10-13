@@ -157,7 +157,8 @@ async function main() {
   } else t += 32 * 5; // the earlier run already sent readings up to about now
   if (process.env.STOP === "active") {
     // leave the facility mid-voyage (two milestones released) with a two-sided book on its Cargo Note
-    if (c.noteMarket) {
+    // (NOTE_LIST=0 leaves it unlisted, e.g. to wrap it for Kuru with scripts/kuru-list-note.sh)
+    if (c.noteMarket && process.env.NOTE_LIST !== "0") {
       const trader = wallet(env.TRADER_KEY ? "TRADER_KEY" : "private_key");
       const mark = (await pub.readContract({ address: c.noteMarket, abi: noteMarketAbi, functionName: "markPrice", args: [id] })) as bigint;
       await tx("allow market as note operator (financier)", financier, c.financingController!, controllerAbi, "setPositionOperator", [id, c.noteMarket]);
