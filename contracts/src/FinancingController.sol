@@ -9,6 +9,7 @@ import {IEvidenceRegistry} from "./interfaces/IEvidenceRegistry.sol";
 import {IEBLRegistry} from "./interfaces/IEBLRegistry.sol";
 import {IFinancingController} from "./interfaces/IFinancingController.sol";
 import {IFinancingControllerV3} from "./interfaces/IFinancingControllerV3.sol";
+import {IPositionTransfer} from "./interfaces/IPositionTransfer.sol";
 import {IPolicyEngine} from "./interfaces/IPolicyEngine.sol";
 import {IReceivableVault} from "./interfaces/IReceivableVault.sol";
 import {IGroth16Verifier} from "./interfaces/IGroth16Verifier.sol";
@@ -23,7 +24,13 @@ import {Roles} from "./libraries/Roles.sol";
 ///         can move USDG: they can only commit evidence or request a pause.
 ///         v3 adds, without changing any v2 path: cancellation of a facility that never started, and
 ///         an optional electronic bill of lading escrowed under documents-against-payment.
-contract FinancingController is Controlled, ReentrancyGuard, Pausable, IFinancingControllerV3 {
+contract FinancingController is
+    Controlled,
+    ReentrancyGuard,
+    Pausable,
+    IFinancingControllerV3,
+    IPositionTransfer
+{
     uint8 public constant MAX_MILESTONES = 16;
     uint16 private constant MAX_SCORE = 100;
     uint32 public constant MIN_RADIUS_M = 1_000;
@@ -491,6 +498,40 @@ contract FinancingController is Controlled, ReentrancyGuard, Pausable, IFinancin
     /// @notice Guardian (PAUSER_ROLE) lifts the circuit breaker.
     function unpause() external onlyRole(Roles.PAUSER_ROLE) {
         _unpause();
+    }
+
+    // ------------------------------------------------------------------ positions (Monad)
+
+    /// @inheritdoc IPositionTransfer
+    mapping(bytes32 shipmentId => address) public positionOperator;
+
+    /// @inheritdoc IPositionTransfer
+    function setPositionOperator(bytes32 shipmentId, address operator) external {
+        FacilityState storage f = _load(shipmentId);
+        if (msg.sender != f.financier) revert NotPositionHolder();
+        positionOperator[shipmentId] = operator;
+        emit PositionOperatorSet(shipmentId, msg.sender, operator);
+    }
+
+    /// @inheritdoc IPositionTransfer
+    function transferPosition(bytes32 shipmentId, address to) external nonReentrant {
+        FacilityState storage f = _load(shipmentId);
+        address from = f.financier;
+        if (msg.sender != from && msg.sender != positionOperator[shipmentId]) {
+            revert NotPositionHolder();
+        }
+        Status st = f.status;
+        if (
+            st != Status.FINANCED && st != Status.ACTIVE && st != Status.PAUSED
+                && st != Status.DELIVERED
+        ) revert PositionNotTransferable();
+        if (to == address(0) || to == f.exporter || to == f.buyer || to == from) {
+            revert InvalidCounterparty();
+        }
+        f.financier = to;
+        delete positionOperator[shipmentId];
+        VAULT.transferFinancier(shipmentId, to);
+        emit PositionTransferred(shipmentId, from, to);
     }
 
     // ------------------------------------------------------------------ views
