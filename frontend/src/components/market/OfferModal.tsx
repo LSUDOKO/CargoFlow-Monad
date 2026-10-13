@@ -46,7 +46,7 @@ export function OfferModal({ request: r, open, onClose }: { request: MarketReque
   // modals render in place: reset the text colour in case the trigger sits on a navy surface
   return (
     <div className="surface-light text-ink">
-      <Modal open={open} onClose={close} title={sent !== null ? "Offer sent" : `Offer to fund ${r.externalRef}`} description={sent !== null ? undefined : `${formatUSDG(r.amount)} USDG in ${r.milestoneCount} evidence-gated tranche${r.milestoneCount > 1 ? "s" : ""}.`}>
+      <Modal open={open} onClose={close} title={sent !== null ? "Offer sent" : `Offer to fund ${r.externalRef}`} description={sent !== null ? undefined : `${formatUSDG(r.amount)} USDC in ${r.milestoneCount} evidence-gated tranche${r.milestoneCount > 1 ? "s" : ""}.`}>
         {sent !== null ? (
           <div className="flex flex-col gap-4">
             <Callout variant="success" live="polite" title={`Your offer of ${pct(sent)} is in front of the exporter`} className="animate-confirm">
@@ -87,7 +87,7 @@ export function OfferModal({ request: r, open, onClose }: { request: MarketReque
               suffix="%"
               data-autofocus
               error={touched || fee.trim() !== "" ? err : null}
-              hint={earn !== null ? `${formatUSDG(earn)} USDG if fully drawn, paid from the invoice at settlement.` : undefined}
+              hint={earn !== null ? `${formatUSDG(earn)} USDC if fully drawn, paid from the invoice at settlement.` : undefined}
             />
             {pricing && <FeeBand pricing={pricing} maxFeeBps={r.maxFeeBps} feeBps={bps} reasons />}
             {mine && <p className="text-small text-text-muted">You offered {pct(mine.feeBps)}. Sending a new fee replaces it.</p>}

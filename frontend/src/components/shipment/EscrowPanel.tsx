@@ -125,11 +125,11 @@ export function Waterfall({ view }: { view: ShipmentView }) {
       </div>
       <KeyValue
         items={[
-          { label: "Invoice paid by the buyer", value: `${formatUSDG(inv)} USDG`, numeric: true },
-          { label: "Principal back to the financier", value: `${formatUSDG(w.principal)} USDG`, numeric: true },
-          { label: `Fee to the financier (${f.feeBps / 100}%)`, value: `${formatUSDG(w.fee)} USDG`, numeric: true },
-          { label: <span className="font-semibold text-ink">To the exporter</span>, id: "exporter", value: <span className="font-semibold">{formatUSDG(w.residual)} USDG</span>, numeric: true },
-          ...(w.undrawn > 0n ? [{ label: "Undrawn capital, returned from escrow", value: `${formatUSDG(w.undrawn)} USDG`, numeric: true }] : []),
+          { label: "Invoice paid by the buyer", value: `${formatUSDG(inv)} USDC`, numeric: true },
+          { label: "Principal back to the financier", value: `${formatUSDG(w.principal)} USDC`, numeric: true },
+          { label: `Fee to the financier (${f.feeBps / 100}%)`, value: `${formatUSDG(w.fee)} USDC`, numeric: true },
+          { label: <span className="font-semibold text-ink">To the exporter</span>, id: "exporter", value: <span className="font-semibold">{formatUSDG(w.residual)} USDC</span>, numeric: true },
+          ...(w.undrawn > 0n ? [{ label: "Undrawn capital, returned from escrow", value: `${formatUSDG(w.undrawn)} USDC`, numeric: true }] : []),
         ]}
       />
     </div>

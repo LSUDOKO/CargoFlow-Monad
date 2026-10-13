@@ -87,7 +87,7 @@ function PickShipment({ address }: { address: string }) {
               <Link href={`/market/new?shipment=${s.id}`} className="flex flex-wrap items-center gap-x-6 gap-y-1 rounded-tile border border-border bg-surface px-4 py-3 shadow-1 transition-[border-color,box-shadow] duration-(--duration-fast) hover:border-border-strong hover:shadow-2">
                 <span className="font-display text-h4">{s.externalRef}</span>
                 <RouteLabel route={s.route} className="text-sm text-ink/75" />
-                <span className="num ml-auto text-sm font-semibold">{formatUSDG(s.invoiceValue)} <span className="text-text-muted">USDG invoice</span></span>
+                <span className="num ml-auto text-sm font-semibold">{formatUSDG(s.invoiceValue)} <span className="text-text-muted">USDC invoice</span></span>
               </Link>
             </li>
           ))}
@@ -106,7 +106,7 @@ function RequestFormFor({ id, address }: { id: string; address: string }) {
     abi: policiesAbi,
     functionName: "isSet",
     args: [id as `0x${string}`],
-    chainId: chainId as 46630 | 31337 | undefined,
+    chainId: chainId as 10143 | 31337 | undefined,
     query: { enabled: !!contracts },
   });
 
@@ -195,7 +195,7 @@ function RequestFormInner({ shipment: s }: { shipment: Shipment }) {
             </div>
           </div>
           <div className="grid gap-5 md:grid-cols-2">
-            <Field label="Amount to raise" value={f.amount} onChange={(e) => setF({ ...f, amount: e.target.value })} inputMode="decimal" suffix="USDG" error={err("amount")} hint={`Invoice ${formatUSDG(invoice)} USDG. Amount plus the maximum fee must fit inside it.`} />
+            <Field label="Amount to raise" value={f.amount} onChange={(e) => setF({ ...f, amount: e.target.value })} inputMode="decimal" suffix="USDC" error={err("amount")} hint={`Invoice ${formatUSDG(invoice)} USDC. Amount plus the maximum fee must fit inside it.`} />
             <Field label="Maximum fee" value={f.maxFeePct} onChange={(e) => setF({ ...f, maxFeePct: e.target.value })} inputMode="decimal" suffix="%" error={err("maxFeePct")} hint="Financiers can only offer at or below this." />
             <Field
               label="Milestones"
@@ -203,7 +203,7 @@ function RequestFormInner({ shipment: s }: { shipment: Shipment }) {
               onChange={(e) => setF({ ...f, milestones: e.target.value })}
               inputMode="numeric"
               error={err("milestones")}
-              hint={amt && Number.isInteger(n) && n >= 1 && n <= 8 ? `${n} tranche${n > 1 ? "s" : ""} of about ${formatUSDG(amt / BigInt(n))} USDG, each released on evidence` : "1 to 8 evidence-gated tranches"}
+              hint={amt && Number.isInteger(n) && n >= 1 && n <= 8 ? `${n} tranche${n > 1 ? "s" : ""} of about ${formatUSDG(amt / BigInt(n))} USDC, each released on evidence` : "1 to 8 evidence-gated tranches"}
             />
           </div>
           <Textarea
@@ -232,10 +232,10 @@ function RequestFormInner({ shipment: s }: { shipment: Shipment }) {
           <CardHeader title="At settlement, worst case" description="If fully drawn at your maximum fee, the buyer's invoice pays out:" as="h2" />
           <KeyValue
             items={[
-              { label: "Financier: principal", value: amt !== undefined ? `${formatUSDG(amt)} USDG` : "–", numeric: true },
-              { label: `Financier: fee${bps !== undefined ? ` at ${pct(bps)}` : ""}`, value: maxFee !== undefined ? `${formatUSDG(maxFee)} USDG` : "–", numeric: true },
-              { label: "You: residual", value: residual !== undefined && residual >= 0n ? `${formatUSDG(residual)} USDG` : "–", numeric: true },
-              { label: <span className="font-semibold text-ink">Invoice</span>, id: "invoice", value: <span className="text-base font-semibold">{formatUSDG(invoice)} USDG</span>, numeric: true },
+              { label: "Financier: principal", value: amt !== undefined ? `${formatUSDG(amt)} USDC` : "–", numeric: true },
+              { label: `Financier: fee${bps !== undefined ? ` at ${pct(bps)}` : ""}`, value: maxFee !== undefined ? `${formatUSDG(maxFee)} USDC` : "–", numeric: true },
+              { label: "You: residual", value: residual !== undefined && residual >= 0n ? `${formatUSDG(residual)} USDC` : "–", numeric: true },
+              { label: <span className="font-semibold text-ink">Invoice</span>, id: "invoice", value: <span className="text-base font-semibold">{formatUSDG(invoice)} USDC</span>, numeric: true },
             ]}
           />
           <p className="mt-4 text-small text-text-muted">You also receive every tranche of the principal during transit, as evidence clears. Offers usually land below the maximum.</p>

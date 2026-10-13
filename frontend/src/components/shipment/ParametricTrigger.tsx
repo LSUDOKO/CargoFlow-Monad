@@ -89,7 +89,7 @@ export function SplitTable({ financier, exporter, insurer, caption }: { financie
         {rows.map(([k, v, why]) => (
           <div key={k} className="flex items-baseline justify-between gap-3 py-1.5">
             <dt>{k} <span className="text-xs text-text-muted">· {why}</span></dt>
-            <dd className="font-mono font-semibold whitespace-nowrap tabular">{formatUSDG(v)} USDG</dd>
+            <dd className="font-mono font-semibold whitespace-nowrap tabular">{formatUSDG(v)} USDC</dd>
           </div>
         ))}
       </dl>

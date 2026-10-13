@@ -45,7 +45,7 @@ export function MarketView() {
   const mine = hydrated && address ? m.all.filter((r) => r.exporter.toLowerCase() === address.toLowerCase() && r.status !== "closed") : [];
   const shown = sortRequests(m.byStatus[tab], sort);
   const summary = open.length
-    ? `${open.length} open, seeking ${formatUSDG(sought, { compact: true })} USDG. ${offers} offer${offers === 1 ? "" : "s"} on the table${bestFees.length ? `, best fee ${pct(Math.min(...bestFees))}` : ""}.`
+    ? `${open.length} open, seeking ${formatUSDG(sought, { compact: true })} USDC. ${offers} offer${offers === 1 ? "" : "s"} on the table${bestFees.length ? `, best fee ${pct(Math.min(...bestFees))}` : ""}.`
     : undefined;
 
   return (
@@ -145,7 +145,7 @@ function MyRequests({ list }: { list: MarketRequest[] }) {
   const columns: Column<MarketRequest>[] = [
     { key: "ref", header: "Request", primary: true, cell: (r) => r.externalRef },
     { key: "status", header: "Status", cell: (r) => <RequestStatusPill status={r.status} /> },
-    { key: "amount", header: "Sought", numeric: true, cell: (r) => <>{formatUSDG(r.amount)} <span className="text-text-muted">USDG</span></> },
+    { key: "amount", header: "Sought", numeric: true, cell: (r) => <>{formatUSDG(r.amount)} <span className="text-text-muted">USDC</span></> },
     {
       key: "offer",
       header: "Fee",

@@ -224,9 +224,9 @@ function nextMilestone(view: ShipmentView): { value: React.ReactNode; foot?: Rea
   const f = view.facility;
   if (!f) return { value: "Not financed", foot: "No financing facility yet." };
   const n = f.nextMilestone, total = f.milestoneCount;
-  if (n >= total) return { value: <>All {total} released</>, foot: `${formatUSDG(f.drawn)} USDG paid to the exporter against evidence.` };
+  if (n >= total) return { value: <>All {total} released</>, foot: `${formatUSDG(f.drawn)} USDC paid to the exporter against evidence.` };
   const m = view.milestones[n];
-  const amount = m ? <span className="num"> · {formatUSDG(m.allocatedUsdg)} <span className="text-sm font-normal text-text-muted">USDG</span></span> : null;
+  const amount = m ? <span className="num"> · {formatUSDG(m.allocatedUsdg)} <span className="text-sm font-normal text-text-muted">USDC</span></span> : null;
   const foot = f.status === "PAUSED" ? "Blocked until the facility resumes." : `${n} of ${total} released · needs evidence score ${view.shipment.policy.minEvidenceScore}+`;
   return { value: <>Milestone {n + 1}{amount}</>, foot };
 }

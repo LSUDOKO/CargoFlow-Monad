@@ -64,7 +64,7 @@ export function CancelAction({ view }: { view: ShipmentView }) {
             <span aria-hidden="true" className="mt-0.5 font-display font-bold">1</span>
             <span>
               {state.refundsDeposit ? (
-                <>The whole <b className="font-mono">{formatUSDG(f.committed)} USDG</b> deposit returns to the financier. Nothing was released, so nothing else moves.</>
+                <>The whole <b className="font-mono">{formatUSDG(f.committed)} USDC</b> deposit returns to the financier. Nothing was released, so nothing else moves.</>
               ) : (
                 <>Nothing has been deposited yet, so no money moves.</>
               )}

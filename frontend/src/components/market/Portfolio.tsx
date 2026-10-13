@@ -59,14 +59,14 @@ export function Portfolio({ views, address }: { views: ShipmentView[]; address: 
     <Section title="Your portfolio" description="Every facility that names this wallet as its financier." actions={<LinkButton href="/market" variant="secondary" size="sm">Find shipments to fund</LinkButton>}>
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <Stat label="Facilities" value={p.facilities} hint={`${p.settled} settled, ${p.defaulted} defaulted`} />
-        <Stat label="Committed" value={formatUSDG(p.committed, { compact: true })} unit="USDG" hint={`${formatUSDG(p.drawn, { compact: true })} USDG drawn on evidence`} />
-        <Stat label="Still in escrow" value={formatUSDG(p.inEscrow, { compact: true })} unit="USDG" hint="Funded, not yet released" />
-        <Stat label="Fees earned" value={formatUSDG(fees, { compact: true })} unit="USDG" hint={`Pause rate ${pauseRate}%: ${p.pausedEver} of ${p.facilities} paused once`} />
+        <Stat label="Committed" value={formatUSDG(p.committed, { compact: true })} unit="USDC" hint={`${formatUSDG(p.drawn, { compact: true })} USDC drawn on evidence`} />
+        <Stat label="Still in escrow" value={formatUSDG(p.inEscrow, { compact: true })} unit="USDC" hint="Funded, not yet released" />
+        <Stat label="Fees earned" value={formatUSDG(fees, { compact: true })} unit="USDC" hint={`Pause rate ${pauseRate}%: ${p.pausedEver} of ${p.facilities} paused once`} />
       </div>
       {p.byStatus.length > 0 && (
         <Card padded="sm" className="mt-4">
           <p className="text-small font-medium text-text-muted">Exposure by status</p>
-          <div className="mt-2 flex h-2.5 w-full gap-0.5 overflow-hidden rounded-full" role="img" aria-label={p.byStatus.map((x) => `${statusLabel(x.status)} ${formatUSDG(x.amount, { compact: true })} USDG`).join(", ")}>
+          <div className="mt-2 flex h-2.5 w-full gap-0.5 overflow-hidden rounded-full" role="img" aria-label={p.byStatus.map((x) => `${statusLabel(x.status)} ${formatUSDG(x.amount, { compact: true })} USDC`).join(", ")}>
             {p.byStatus.map((x) => (
               <span key={x.status} className={cx("h-full", SWATCH[x.status] ?? "bg-slate")} style={{ width: `${total ? Number((x.amount * 1000n) / total) / 10 : 0}%` }} />
             ))}
@@ -76,7 +76,7 @@ export function Portfolio({ views, address }: { views: ShipmentView[]; address: 
               <li key={x.status} className="inline-flex items-center gap-1.5">
                 <span className={cx("h-2.5 w-2.5 rounded-sm", SWATCH[x.status] ?? "bg-slate")} />
                 <span className="font-semibold">{statusLabel(x.status)}</span>
-                <span className="num text-text-muted">{formatUSDG(x.amount, { compact: true })} USDG</span>
+                <span className="num text-text-muted">{formatUSDG(x.amount, { compact: true })} USDC</span>
               </li>
             ))}
           </ul>

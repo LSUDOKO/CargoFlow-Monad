@@ -82,10 +82,10 @@ export function RequestDetail({ id }: { id: string }) {
             columns={4}
             className="lg:grid-cols-5"
             items={[
-              { label: "Seeking", value: <span className="num text-lg font-semibold">{formatUSDG(r.amount)} <span className="text-sm text-text-muted">USDG</span></span> },
-              { label: "Invoice", value: <span className="num text-lg font-semibold">{formatUSDG(r.invoiceValue)} <span className="text-sm text-text-muted">USDG</span></span>, hint: "Paid by the buyer" },
+              { label: "Seeking", value: <span className="num text-lg font-semibold">{formatUSDG(r.amount)} <span className="text-sm text-text-muted">USDC</span></span> },
+              { label: "Invoice", value: <span className="num text-lg font-semibold">{formatUSDG(r.invoiceValue)} <span className="text-sm text-text-muted">USDC</span></span>, hint: "Paid by the buyer" },
               { label: "Advance", value: <span className="num text-lg font-semibold">{rate}%</span>, hint: "of the invoice" },
-              { label: "Max fee", value: <span className="num text-lg font-semibold">{pct(r.maxFeeBps)}</span>, hint: `${formatUSDG((BigInt(r.amount) * BigInt(r.maxFeeBps)) / 10_000n)} USDG at full draw` },
+              { label: "Max fee", value: <span className="num text-lg font-semibold">{pct(r.maxFeeBps)}</span>, hint: `${formatUSDG((BigInt(r.amount) * BigInt(r.maxFeeBps)) / 10_000n)} USDC at full draw` },
               { label: "Tranches", value: <span className="num text-lg font-semibold">{r.milestoneCount}</span>, hint: `Released at score ${threshold ?? "–"}+` },
             ]}
           />
@@ -174,7 +174,7 @@ function NextStep({ request: r, role, view }: { request: MarketRequest; role: Ro
       if (facility) {
         return (
           <StepCard eyebrow="Facility open" title="Waiting for the financier's deposit">
-            <p>The facility names <PartyLink address={facility.financier} /> at {pct(facility.feeBps)}. Once they deposit {formatUSDG(facility.committed)} USDG into escrow, start transit from the dashboard.</p>
+            <p>The facility names <PartyLink address={facility.financier} /> at {pct(facility.feeBps)}. Once they deposit {formatUSDG(facility.committed)} USDC into escrow, start transit from the dashboard.</p>
             <div className="mt-5 flex flex-wrap gap-2"><LinkButton href={`/track/${r.shipmentId}`} variant="secondary">Open the shipment dashboard</LinkButton></div>
           </StepCard>
         );
@@ -210,7 +210,7 @@ function NextStep({ request: r, role, view }: { request: MarketRequest; role: Ro
   if (r.status === "accepted") {
     return facility && facility.financier.toLowerCase() === address!.toLowerCase() ? (
       <StepCard eyebrow="Your offer was accepted" title="Deposit the capital" tone="ink">
-        <p>The exporter opened the facility naming your wallet at {pct(facility.feeBps)}. Approve and deposit {formatUSDG(facility.committed)} USDG from the financier portal; it stays in escrow until evidence releases it.</p>
+        <p>The exporter opened the facility naming your wallet at {pct(facility.feeBps)}. Approve and deposit {formatUSDG(facility.committed)} USDC from the financier portal; it stays in escrow until evidence releases it.</p>
         <div className="mt-5"><LinkButton href="/financier">Deposit in the financier portal</LinkButton></div>
       </StepCard>
     ) : (
@@ -277,9 +277,9 @@ function CreateFacility({ request: r, offer, view }: { request: MarketRequest; o
         className="mt-5 rounded-tile bg-surface-sunken p-4"
         items={[
           { label: "Financier", value: <PartyLink address={offer.financier} /> },
-          { label: "Facility", value: `${formatUSDG(r.amount)} USDG`, numeric: true },
-          { label: "Fee", value: `${pct(offer.feeBps)}, ${formatUSDG(fee)} USDG`, numeric: true },
-          { label: "Tranches", value: `${r.milestoneCount} of about ${formatUSDG(BigInt(r.amount) / BigInt(Math.max(1, r.milestoneCount)), { compact: true })} USDG`, numeric: true },
+          { label: "Facility", value: `${formatUSDG(r.amount)} USDC`, numeric: true },
+          { label: "Fee", value: `${pct(offer.feeBps)}, ${formatUSDG(fee)} USDC`, numeric: true },
+          { label: "Tranches", value: `${r.milestoneCount} of about ${formatUSDG(BigInt(r.amount) / BigInt(Math.max(1, r.milestoneCount)), { compact: true })} USDC`, numeric: true },
         ]}
       />
       <div className="mt-5">
@@ -322,7 +322,7 @@ function Offers({ request: r, role }: { request: MarketRequest; role: Role }) {
     { key: "rank", header: "Rank", width: "4rem", cell: (o) => <span className={o.rank === 1 ? "num grid h-7 w-7 place-items-center rounded-full bg-signal text-sm font-semibold text-ink" : "num grid h-7 w-7 place-items-center rounded-full bg-ink/6 text-sm font-semibold text-text-muted"}>{o.rank}</span> },
     { key: "financier", header: "Financier", primary: true, cell: (o) => <PartyLink address={o.financier} /> },
     { key: "fee", header: "Fee", numeric: true, cell: (o) => <span className="font-semibold text-ink">{pct(o.feeBps)}</span> },
-    { key: "full", header: "At full draw", numeric: true, cell: (o) => <>{formatUSDG(fee(o))} <span className="text-text-muted">USDG</span></> },
+    { key: "full", header: "At full draw", numeric: true, cell: (o) => <>{formatUSDG(fee(o))} <span className="text-text-muted">USDC</span></> },
     { key: "age", header: "Offered", cell: (o) => <time dateTime={o.createdAt} className="text-text-muted">{age(o.createdAt)}</time> },
     {
       key: "act",
@@ -375,8 +375,8 @@ function AcceptModal({ request: r, offer, onClose }: { request: MarketRequest; o
         className="rounded-tile bg-surface-sunken px-4 py-1"
         items={[
           { label: "Financier", value: <PartyLink address={offer.financier} /> },
-          { label: "Facility", value: `${formatUSDG(r.amount)} USDG in ${r.milestoneCount} tranches`, numeric: true },
-          { label: "Fee at full draw", value: `${formatUSDG(fee)} USDG`, numeric: true },
+          { label: "Facility", value: `${formatUSDG(r.amount)} USDC in ${r.milestoneCount} tranches`, numeric: true },
+          { label: "Fee at full draw", value: `${formatUSDG(fee)} USDC`, numeric: true },
         ]}
       />
       {error && <Callout variant="danger" live="assertive" className="mt-3">{error}</Callout>}

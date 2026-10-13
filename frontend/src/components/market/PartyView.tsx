@@ -24,7 +24,7 @@ function sinceLabel(since: Party["since"]): string | null {
 }
 
 type Role = { id: string; title: string; active: boolean; headline: string; headlineUnit: string; rows: [string, string | number][] };
-const usdg = (v: string) => `${formatUSDG(v, { compact: true })} USDG`;
+const usdg = (v: string) => `${formatUSDG(v, { compact: true })} USDC`;
 
 function roles(party: Party, insurer: boolean): Role[] {
   const out: Role[] = [
@@ -33,7 +33,7 @@ function roles(party: Party, insurer: boolean): Role[] {
       title: "As exporter",
       active: party.exporter.shipments > 0,
       headline: formatUSDG(party.exporter.volume, { compact: true }),
-      headlineUnit: "USDG invoiced",
+      headlineUnit: "USDC invoiced",
       rows: [
         ["Shipments", party.exporter.shipments],
         ["Settled", party.exporter.settled],
@@ -51,7 +51,7 @@ function roles(party: Party, insurer: boolean): Role[] {
       title: "As financier",
       active: party.financier.facilities > 0,
       headline: formatUSDG(party.financier.committed, { compact: true }),
-      headlineUnit: "USDG committed",
+      headlineUnit: "USDC committed",
       rows: [
         ["Facilities", party.financier.facilities],
         ["Drawn by exporters", usdg(party.financier.drawn)],
@@ -67,7 +67,7 @@ function roles(party: Party, insurer: boolean): Role[] {
       title: "As buyer",
       active: party.buyer.shipments > 0,
       headline: formatUSDG(party.buyer.paidVolume, { compact: true }),
-      headlineUnit: "USDG paid",
+      headlineUnit: "USDC paid",
       rows: [
         ["Shipments", party.buyer.shipments],
         ["Settled", party.buyer.settled],
@@ -80,7 +80,7 @@ function roles(party: Party, insurer: boolean): Role[] {
       title: "As insurer",
       active: party.insurer.offered > 0,
       headline: formatUSDG(party.insurer.coverWritten, { compact: true }),
-      headlineUnit: "USDG of default cover written",
+      headlineUnit: "USDC of default cover written",
       rows: [
         ["Facilities offered cover", party.insurer.offered],
         ["Active covers", party.insurer.active],
@@ -184,7 +184,7 @@ function RecentShipments({ address }: { address: string }) {
     { key: "ref", header: "Shipment", primary: true, cell: (s) => s.externalRef },
     { key: "role", header: "Role" },
     { key: "status", header: "Status", cell: (s) => <StatusPill status={s.status} /> },
-    { key: "invoice", header: "Invoice", numeric: true, cell: (s) => <>{formatUSDG(s.invoiceValue)} <span className="text-text-muted">USDG</span></> },
+    { key: "invoice", header: "Invoice", numeric: true, cell: (s) => <>{formatUSDG(s.invoiceValue)} <span className="text-text-muted">USDC</span></> },
     { key: "created", header: "Registered", hideOnCard: true, cell: (s) => <span className="num text-text-muted">{new Date(s.createdAt).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}</span> },
   ];
   return (

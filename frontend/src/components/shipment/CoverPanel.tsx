@@ -22,14 +22,14 @@ import { useHydrated } from "@/lib/useHydrated";
 import { ParametricTrigger, SplitTable } from "./ParametricTrigger";
 import { PausedBanner } from "./PausedBanner";
 
-type ChainId = 46630 | 31337;
+type ChainId = 10143 | 31337;
 
 /** True when the deployment has a CoverPool (contracts v2); every cover view is hidden otherwise. */
 export function useCoverEnabled() {
   return !!useContracts().contracts?.coverPool;
 }
 
-/** The connected wallet's USDG balance, its allowance to the cover pool and what the pool owes it. */
+/** The connected wallet's USDC balance, its allowance to the cover pool and what the pool owes it. */
 function useWallet() {
   const { address } = useAccount();
   const { contracts, chainId } = useContracts();
@@ -102,12 +102,12 @@ export function CoverPanel({ view }: { view: ShipmentView }) {
   const status = f?.status;
   const acts = coverActions({ status, financier: f?.financier, cover, offers, address: hydrated ? address : undefined });
   const approve = (amount: bigint, what: string) =>
-    send({ address: contracts.usdg, abi: usdgAbi, functionName: "approve", args: [pool as Address, amount], label: `Approve ${formatUSDG(amount)} USDG`, successTitle: `Cover pool approved for ${what}` });
+    send({ address: contracts.usdg, abi: usdgAbi, functionName: "approve", args: [pool as Address, amount], label: `Approve ${formatUSDG(amount)} USDC`, successTitle: `Cover pool approved for ${what}` });
 
   return (
     <div className="flex flex-col gap-5">
       <p className="text-sm text-text-muted">
-        Default cover protects the financier. An insurer escrows USDG in the cover pool; the financier buys the cover by paying the premium straight to the insurer.
+        Default cover protects the financier. An insurer escrows USDC in the cover pool; the financier buys the cover by paying the premium straight to the insurer.
         If the buyer pays, the cover goes back to the insurer. If the facility defaults, the financier is paid up to the principal already advanced to the exporter, and the rest goes back to the insurer.
       </p>
 
@@ -133,12 +133,12 @@ export function CoverPanel({ view }: { view: ShipmentView }) {
             if (paused.coverPool) return <span className="text-xs font-medium text-warning-fg">Acceptance is paused by the guardian</span>;
             const premium = premiumOf(o.amount, o.premiumBps);
             const needs = fundingNeeds(wallet.balance, wallet.allowance, premium);
-            if (wallet.balance !== undefined && needs.shortfall > 0n) return <span className="text-xs font-medium text-warning-fg">You need {formatUSDG(needs.shortfall)} more USDG for the premium</span>;
+            if (wallet.balance !== undefined && needs.shortfall > 0n) return <span className="text-xs font-medium text-warning-fg">You need {formatUSDG(needs.shortfall)} more USDC for the premium</span>;
             return (
               <div className="flex flex-wrap justify-end gap-2">
                 {premium > 0n && needs.needsApproval && (
                   <Button size="sm" variant="secondary" loading={pending} disabled={wallet.balance === undefined} onClick={() => approve(premium, "the premium")}>
-                    1. Approve {formatUSDG(premium)} USDG
+                    1. Approve {formatUSDG(premium)} USDC
                   </Button>
                 )}
                 <Button
@@ -166,7 +166,7 @@ export function CoverPanel({ view }: { view: ShipmentView }) {
               ? status === "CANCELLED"
                 ? "The facility was cancelled before transit, so the cover goes back to the insurer. Anyone can trigger this."
                 : "The invoice is paid, so the cover goes back to the insurer. Anyone can trigger this."
-              : `The facility defaulted. Paying out sends the financier ${formatUSDG(claimSplit(cover.amount, f.drawn).payout)} USDG and returns ${formatUSDG(claimSplit(cover.amount, f.drawn).remainder)} USDG to the insurer. Anyone can trigger this.`}
+              : `The facility defaulted. Paying out sends the financier ${formatUSDG(claimSplit(cover.amount, f.drawn).payout)} USDC and returns ${formatUSDG(claimSplit(cover.amount, f.drawn).remainder)} USDC to the insurer. Anyone can trigger this.`}
           </p>
           {acts.release ? (
             <Button size="sm" loading={pending} onClick={() => send({ address: pool, abi: coverPoolAbi, functionName: "release", args: [id], label: "Return the cover", successTitle: "Cover returned to the insurer" })}>
@@ -183,10 +183,10 @@ export function CoverPanel({ view }: { view: ShipmentView }) {
       {hydrated && wallet.claimable !== undefined && wallet.claimable > 0n && (
         <div className="flex flex-wrap items-center gap-3 rounded-tile bg-verified/12 px-4 py-3">
           <p className="min-w-0 flex-1 text-sm">
-            <span className="font-semibold">The cover pool holds {formatUSDG(wallet.claimable)} USDG for this wallet.</span> Payouts are collected rather than pushed, so nobody can block another party&apos;s payment.
+            <span className="font-semibold">The cover pool holds {formatUSDG(wallet.claimable)} USDC for this wallet.</span> Payouts are collected rather than pushed, so nobody can block another party&apos;s payment.
           </p>
-          <Button size="sm" loading={pending} onClick={() => send({ address: pool, abi: coverPoolAbi, functionName: "withdraw", args: [], label: "Collect cover payout", successTitle: `${formatUSDG(wallet.claimable!)} USDG collected` })}>
-            Collect {formatUSDG(wallet.claimable)} USDG
+          <Button size="sm" loading={pending} onClick={() => send({ address: pool, abi: coverPoolAbi, functionName: "withdraw", args: [], label: "Collect cover payout", successTitle: `${formatUSDG(wallet.claimable!)} USDC collected` })}>
+            Collect {formatUSDG(wallet.claimable)} USDC
           </Button>
         </div>
       )}
@@ -231,9 +231,9 @@ function Offers({ offers, premiumFor, action }: { offers: CoverOffer[]; premiumF
         {offers.map((o) => (
           <li key={o.insurer} className="flex flex-wrap items-center gap-x-4 gap-y-2 px-4 py-3">
             <div className="min-w-0 flex-1">
-              <p className="font-mono text-lg font-semibold">{formatUSDG(o.amount)} <span className="font-sans text-sm font-normal text-text-muted">USDG of cover</span></p>
+              <p className="font-mono text-lg font-semibold">{formatUSDG(o.amount)} <span className="font-sans text-sm font-normal text-text-muted">USDC of cover</span></p>
               <p className="mt-0.5 flex flex-wrap items-center gap-2 text-sm text-text-muted">
-                <span>Premium {formatBps(o.premiumBps)} ({formatUSDG(premiumFor(o))} USDG)</span>
+                <span>Premium {formatBps(o.premiumBps)} ({formatUSDG(premiumFor(o))} USDC)</span>
                 <span aria-hidden="true">·</span>
                 <HashBadge value={o.insurer} kind="address" label="insurer" compact />
               </p>
@@ -242,7 +242,7 @@ function Offers({ offers, premiumFor, action }: { offers: CoverOffer[]; premiumF
                   <Pill tone="ink">Parametric</Pill>
                   <span>
                     Pays out automatically after <b>{o.parametric.consecutiveFailedEpochs} failed evidence {o.parametric.consecutiveFailedEpochs === 1 ? "batch" : "batches"} in a row</b>
-                    {BigInt(o.parametric.salvageToExporter) > 0n ? <>, with up to <b className="font-mono">{formatUSDG(o.parametric.salvageToExporter)} USDG</b> salvage to the exporter</> : null}. Final once triggered.
+                    {BigInt(o.parametric.salvageToExporter) > 0n ? <>, with up to <b className="font-mono">{formatUSDG(o.parametric.salvageToExporter)} USDC</b> salvage to the exporter</> : null}. Final once triggered.
                   </span>
                 </p>
               )}
@@ -263,19 +263,19 @@ function AcceptedCover({ view, cover }: { view: ShipmentView; cover: NonNullable
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap items-baseline justify-between gap-3">
-        <p className="font-display text-4xl font-bold tabular">{formatUSDG(cover.amount)} <span className="font-sans text-base font-normal text-text-muted">USDG of cover</span></p>
+        <p className="font-display text-4xl font-bold tabular">{formatUSDG(cover.amount)} <span className="font-sans text-base font-normal text-text-muted">USDC of cover</span></p>
         <Pill tone={cover.status === "ACTIVE" ? "verified" : cover.status === "CLAIMED" || cover.status === "TRIGGERED" ? "alert" : "slate"} dot>{word}</Pill>
       </div>
       <dl className="grid grid-cols-2 gap-3 text-sm">
         <div><dt className="text-text-muted">Insurer</dt><dd><HashBadge value={cover.insurer} kind="address" compact /></dd></div>
-        <div><dt className="text-text-muted">Premium paid</dt><dd className="font-mono font-semibold">{formatUSDG(cover.premium)} USDG</dd></div>
+        <div><dt className="text-text-muted">Premium paid</dt><dd className="font-mono font-semibold">{formatUSDG(cover.premium)} USDC</dd></div>
         {p && (
-          <div className="col-span-2"><dt className="text-text-muted">Parametric trigger</dt><dd>{p.consecutiveFailedEpochs} failed evidence {p.consecutiveFailedEpochs === 1 ? "batch" : "batches"} in a row; salvage to the exporter up to <span className="font-mono font-semibold">{formatUSDG(p.salvageToExporter)} USDG</span>.</dd></div>
+          <div className="col-span-2"><dt className="text-text-muted">Parametric trigger</dt><dd>{p.consecutiveFailedEpochs} failed evidence {p.consecutiveFailedEpochs === 1 ? "batch" : "batches"} in a row; salvage to the exporter up to <span className="font-mono font-semibold">{formatUSDG(p.salvageToExporter)} USDC</span>.</dd></div>
         )}
         {cover.status === "ACTIVE" && (
-          <div className="col-span-2"><dt className="text-text-muted">If the facility defaulted now</dt><dd>The financier would receive <span className="font-mono font-semibold">{formatUSDG(split.payout)} USDG</span> (the principal drawn so far, up to the cover); <span className="font-mono">{formatUSDG(split.remainder)} USDG</span> would return to the insurer.</dd></div>
+          <div className="col-span-2"><dt className="text-text-muted">If the facility defaulted now</dt><dd>The financier would receive <span className="font-mono font-semibold">{formatUSDG(split.payout)} USDC</span> (the principal drawn so far, up to the cover); <span className="font-mono">{formatUSDG(split.remainder)} USDC</span> would return to the insurer.</dd></div>
         )}
-        {cover.status === "RELEASED" && <div className="col-span-2"><dt className="text-text-muted">Outcome</dt><dd>The invoice was paid, so the whole <span className="font-mono font-semibold">{formatUSDG(cover.insurerReturn)} USDG</span> went back to the insurer.</dd></div>}
+        {cover.status === "RELEASED" && <div className="col-span-2"><dt className="text-text-muted">Outcome</dt><dd>The invoice was paid, so the whole <span className="font-mono font-semibold">{formatUSDG(cover.insurerReturn)} USDC</span> went back to the insurer.</dd></div>}
         {cover.status === "TRIGGERED" && (
           <div className="col-span-2">
             <dt className="text-text-muted">Outcome</dt>
@@ -284,7 +284,7 @@ function AcceptedCover({ view, cover }: { view: ShipmentView; cover: NonNullable
           </div>
         )}
         {cover.status === "CLAIMED" && (
-          <div className="col-span-2"><dt className="text-text-muted">Outcome</dt><dd>The facility defaulted: the financier received <span className="font-mono font-semibold">{formatUSDG(cover.financierPayout)} USDG</span> and <span className="font-mono">{formatUSDG(cover.insurerReturn)} USDG</span> went back to the insurer.</dd></div>
+          <div className="col-span-2"><dt className="text-text-muted">Outcome</dt><dd>The facility defaulted: the financier received <span className="font-mono font-semibold">{formatUSDG(cover.financierPayout)} USDC</span> and <span className="font-mono">{formatUSDG(cover.insurerReturn)} USDC</span> went back to the insurer.</dd></div>
         )}
       </dl>
     </div>
@@ -319,8 +319,8 @@ function OfferFormView({ committed, wallet, pending, approve, offer }: { committ
         <p className="text-sm text-text-muted">You escrow the cover now and can withdraw it until the financier accepts. Offers close when transit starts.</p>
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Cover amount (USDG)" value={form.amount} onChange={(e) => setForm({ ...form, amount: e.target.value })} inputMode="decimal" placeholder={formatUSDG(committed).replace(/,/g, "")} suffix="USDG" hint={`Up to the facility's ${formatUSDG(committed)} USDG.`} error={err("amount")} />
-        <Field label="Premium" value={form.premiumPct} onChange={(e) => setForm({ ...form, premiumPct: e.target.value })} inputMode="decimal" suffix="%" hint={valid ? `The financier pays you ${formatUSDG(premiumOf(amount, v.premiumBps!))} USDG on accepting.` : "Up to 20% of the cover."} error={err("premiumPct")} />
+        <Field label="Cover amount (USDC)" value={form.amount} onChange={(e) => setForm({ ...form, amount: e.target.value })} inputMode="decimal" placeholder={formatUSDG(committed).replace(/,/g, "")} suffix="USDC" hint={`Up to the facility's ${formatUSDG(committed)} USDC.`} error={err("amount")} />
+        <Field label="Premium" value={form.premiumPct} onChange={(e) => setForm({ ...form, premiumPct: e.target.value })} inputMode="decimal" suffix="%" hint={valid ? `The financier pays you ${formatUSDG(premiumOf(amount, v.premiumBps!))} USDC on accepting.` : "Up to 20% of the cover."} error={err("premiumPct")} />
       </div>
       <div className="rounded-tile border border-line p-4">
         <label className="flex cursor-pointer items-start gap-3">
@@ -333,21 +333,21 @@ function OfferFormView({ committed, wallet, pending, approve, offer }: { committ
         {parametric && (
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             <Field label="Failed batches in a row" value={pf.epochs} onChange={(e) => setPf({ ...pf, epochs: e.target.value })} inputMode="numeric" hint={`From 1 to ${MAX_TRIGGER_EPOCHS}. Only batches after acceptance count.`} error={perr("epochs")} />
-            <Field label="Salvage to the exporter (USDG)" value={pf.salvage} onChange={(e) => setPf({ ...pf, salvage: e.target.value })} inputMode="decimal" suffix="USDG" hint="Paid from what is left after the financier, up to the cover." error={perr("salvage")} />
+            <Field label="Salvage to the exporter (USDC)" value={pf.salvage} onChange={(e) => setPf({ ...pf, salvage: e.target.value })} inputMode="decimal" suffix="USDC" hint="Paid from what is left after the financier, up to the cover." error={perr("salvage")} />
           </div>
         )}
       </div>
       {valid && wallet.balance !== undefined && needs.shortfall > 0n ? (
-        <p className="rounded-tile bg-alert/12 px-4 py-3 text-sm">This wallet holds {formatUSDG(wallet.balance)} USDG; the offer escrows {formatUSDG(amount)}.</p>
+        <p className="rounded-tile bg-alert/12 px-4 py-3 text-sm">This wallet holds {formatUSDG(wallet.balance)} USDC; the offer escrows {formatUSDG(amount)}.</p>
       ) : (
         <div className="flex flex-wrap gap-2">
           {valid && needs.needsApproval && (
             <Button variant="secondary" loading={pending} disabled={wallet.balance === undefined} onClick={() => approve(amount, "the cover")}>
-              1. Approve {formatUSDG(amount)} USDG
+              1. Approve {formatUSDG(amount)} USDC
             </Button>
           )}
           <Button type="submit" loading={pending} disabled={valid && !needs.ready}>
-            {valid && needs.needsApproval ? "2. " : ""}Offer {valid ? `${formatUSDG(amount)} USDG of ` : ""}{parametric ? "parametric " : ""}cover
+            {valid && needs.needsApproval ? "2. " : ""}Offer {valid ? `${formatUSDG(amount)} USDC of ` : ""}{parametric ? "parametric " : ""}cover
           </Button>
         </div>
       )}

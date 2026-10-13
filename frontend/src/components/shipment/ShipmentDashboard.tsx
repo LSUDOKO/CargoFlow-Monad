@@ -233,7 +233,7 @@ export function ShipmentDashboard({ id }: { id: string }) {
               <Card>
                 <CardHeader
                   title="Journey"
-                  description={f ? <>Each milestone releases its share of the <span className="num">{formatUSDG(f.committed)}</span> USDG once the evidence passes. <button type="button" className={linkCls} onClick={() => go("money")}>See the money</button></> : undefined}
+                  description={f ? <>Each milestone releases its share of the <span className="num">{formatUSDG(f.committed)}</span> USDC once the evidence passes. <button type="button" className={linkCls} onClick={() => go("money")}>See the money</button></> : undefined}
                 />
                 {v ? <JourneyTimeline milestones={v.milestones} facility={f} invoiceValue={v.shipment.invoiceValue} nextDistanceM={nextDistanceM} /> : <Skeleton className="h-96" />}
               </Card>
@@ -374,15 +374,15 @@ function HeaderStats({ view }: { view: ShipmentView | undefined }) {
   const pct = f && BigInt(f.committed) > 0n ? Number((BigInt(f.drawn) * 1000n) / BigInt(f.committed)) / 10 : 0;
   return (
     <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-border-ink pt-5 lg:grid-cols-4">
-      <Stat onDark tile={false} loading={loading} label="Invoice" value={view ? formatUSDG(view.shipment.invoiceValue) : ""} unit="USDG" hint={f?.status === "SETTLED" ? "Paid by the buyer" : "Paid by the buyer on delivery"} />
-      <Stat onDark tile={false} loading={loading} label="Financing" value={f ? formatUSDG(f.committed) : "None yet"} unit={f ? "USDG" : undefined} hint={f ? `${f.feeBps / 100}% fee on what is drawn` : "No facility opened"} />
+      <Stat onDark tile={false} loading={loading} label="Invoice" value={view ? formatUSDG(view.shipment.invoiceValue) : ""} unit="USDC" hint={f?.status === "SETTLED" ? "Paid by the buyer" : "Paid by the buyer on delivery"} />
+      <Stat onDark tile={false} loading={loading} label="Financing" value={f ? formatUSDG(f.committed) : "None yet"} unit={f ? "USDC" : undefined} hint={f ? `${f.feeBps / 100}% fee on what is drawn` : "No facility opened"} />
       <Stat
         onDark
         tile={false}
         loading={loading}
         label="Released to the exporter"
         value={f ? formatUSDG(f.drawn) : "–"}
-        unit={f ? "USDG" : undefined}
+        unit={f ? "USDC" : undefined}
         hint={
           f ? (
             <span className="flex flex-col gap-1.5">
@@ -405,9 +405,9 @@ function MoneyStats({ view }: { view: ShipmentView }) {
   if (!f) return null;
   return (
     <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-      <Stat label="Committed" value={formatUSDG(f.committed)} unit="USDG" hint={`For ${f.milestoneCount} milestones`} />
-      <Stat label="Released to the exporter" value={formatUSDG(f.drawn)} unit="USDG" hint={`${f.nextMilestone} of ${f.milestoneCount} milestones`} />
-      <Stat label="Still in escrow" value={formatUSDG(f.remaining)} unit="USDG" hint={f.status === "PAUSED" ? "Held by the pause" : f.status === "SETTLED" ? "Closed" : "Released on passing evidence"} />
+      <Stat label="Committed" value={formatUSDG(f.committed)} unit="USDC" hint={`For ${f.milestoneCount} milestones`} />
+      <Stat label="Released to the exporter" value={formatUSDG(f.drawn)} unit="USDC" hint={`${f.nextMilestone} of ${f.milestoneCount} milestones`} />
+      <Stat label="Still in escrow" value={formatUSDG(f.remaining)} unit="USDC" hint={f.status === "PAUSED" ? "Held by the pause" : f.status === "SETTLED" ? "Closed" : "Released on passing evidence"} />
       <Stat label="Financing fee" value={String(f.feeBps / 100)} unit="%" hint="Of what is drawn" />
     </div>
   );

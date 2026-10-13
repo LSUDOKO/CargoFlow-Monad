@@ -112,8 +112,8 @@ function BuyerStats({ views }: { views: ShipmentView[] }) {
     <section aria-label="Your purchases at a glance" className="grid grid-cols-2 gap-4 lg:grid-cols-4">
       <Stat label="Shipments" value={fs.length} hint="Naming this wallet as buyer" />
       <Stat label="Ready to confirm" value={toConfirm} hint="Every tranche released" />
-      <Stat label="Invoices due" value={formatUSDG(sum(due), { compact: true })} unit="USDG" hint={`${due.length} delivered, unpaid`} />
-      <Stat label="Paid" value={formatUSDG(sum(paid), { compact: true })} unit="USDG" hint={`${paid.length} settled`} />
+      <Stat label="Invoices due" value={formatUSDG(sum(due), { compact: true })} unit="USDC" hint={`${due.length} delivered, unpaid`} />
+      <Stat label="Paid" value={formatUSDG(sum(paid), { compact: true })} unit="USDC" hint={`${paid.length} settled`} />
     </section>
   );
 }
@@ -146,17 +146,17 @@ function FacilityRow({ view, role }: { view: ShipmentView; role: Role }) {
         </p>
       </div>
       <dl className="grid grid-cols-3 gap-3 text-sm lg:col-span-4">
-        <div className="min-w-0"><dt className="text-small text-text-muted">Committed</dt><dd className="num font-semibold">{formatUSDG(f.committed)}<span className="text-text-muted"> USDG</span></dd></div>
-        <div className="min-w-0"><dt className="text-small text-text-muted">Drawn</dt><dd className="num font-semibold">{formatUSDG(f.drawn)}<span className="text-text-muted"> USDG</span></dd></div>
+        <div className="min-w-0"><dt className="text-small text-text-muted">Committed</dt><dd className="num font-semibold">{formatUSDG(f.committed)}<span className="text-text-muted"> USDC</span></dd></div>
+        <div className="min-w-0"><dt className="text-small text-text-muted">Drawn</dt><dd className="num font-semibold">{formatUSDG(f.drawn)}<span className="text-text-muted"> USDC</span></dd></div>
         <div className="min-w-0"><dt className="text-small text-text-muted">Latest score</dt><dd className="num font-semibold">{view.latestEvidence ? <>{view.latestEvidence.score}<span className="font-normal text-text-muted"> · {formatBps(view.latestEvidence.riskBps)} risk</span></> : "–"}</dd></div>
       </dl>
       <div className="flex flex-col gap-3 lg:col-span-4 lg:items-end">
         <p className="text-small text-text-muted lg:text-right">
-          <span className="font-semibold text-ink">{heading}:</span> financier {verb} <span className="num font-semibold text-ink">{formatUSDG(preview.financier)}</span> USDG
-          {preview.undrawn > 0n && <> (incl. {formatUSDG(preview.undrawn)} never drawn)</>}, exporter {verb} <span className="num font-semibold text-ink">{formatUSDG(preview.residual)}</span> USDG.
+          <span className="font-semibold text-ink">{heading}:</span> financier {verb} <span className="num font-semibold text-ink">{formatUSDG(preview.financier)}</span> USDC
+          {preview.undrawn > 0n && <> (incl. {formatUSDG(preview.undrawn)} never drawn)</>}, exporter {verb} <span className="num font-semibold text-ink">{formatUSDG(preview.residual)}</span> USDC.
         </p>
         {role === "financier" && f.status === "CREATED" && (
-          <PayAction shipmentId={id} amount={BigInt(f.committed)} action="depositCapital" label={`Deposit ${formatUSDG(f.committed)} USDG`} successTitle="Facility funded" />
+          <PayAction shipmentId={id} amount={BigInt(f.committed)} action="depositCapital" label={`Deposit ${formatUSDG(f.committed)} USDC`} successTitle="Facility funded" />
         )}
         {role === "buyer" && f.status === "ACTIVE" && allReleased && contracts && (
           <Button loading={pending} onClick={() => send({ address: contracts.controller, abi: controllerAbi, functionName: "markDelivered", args: [id], label: "Confirm delivery", successTitle: "Delivery confirmed" })}>
@@ -164,7 +164,7 @@ function FacilityRow({ view, role }: { view: ShipmentView; role: Role }) {
           </Button>
         )}
         {role === "buyer" && f.status === "DELIVERED" && (
-          <PayAction shipmentId={id} amount={BigInt(view.shipment.invoiceValue)} action="settle" label={`Pay the ${formatUSDG(view.shipment.invoiceValue)} USDG invoice`} successTitle="Invoice paid and settled" />
+          <PayAction shipmentId={id} amount={BigInt(view.shipment.invoiceValue)} action="settle" label={`Pay the ${formatUSDG(view.shipment.invoiceValue)} USDC invoice`} successTitle="Invoice paid and settled" />
         )}
         {note && <p className="text-small font-medium text-ink/80 lg:text-right">{note}</p>}
       </div>

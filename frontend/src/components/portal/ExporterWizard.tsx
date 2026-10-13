@@ -86,7 +86,7 @@ export function ExporterWizard() {
   const detailErr = {
     ref: !d.ref.trim() ? "Give the shipment a reference, for example CF-2026-SG02." : d.ref.length > 64 ? "Keep it under 64 characters." : null,
     buyer: !isAddress(d.buyer) ? "Enter the buyer's wallet address (0x…)." : address && d.buyer.toLowerCase() === address.toLowerCase() ? "The buyer must be a different wallet from yours." : null,
-    invoice: !invoice || invoice <= 0n ? "Enter the invoice value in USDG." : null,
+    invoice: !invoice || invoice <= 0n ? "Enter the invoice value in USDC." : null,
     route:
       d.route.status === "ready" && d.route.points.length > 1
         ? null
@@ -107,7 +107,7 @@ export function ExporterWizard() {
       : [address, d.buyer].some((a) => a && a.toLowerCase() === f.financier.toLowerCase())
         ? "The financier must differ from you and from the buyer."
         : null,
-    total: !total || total <= 0n ? "Enter how much capital to raise." : invoice !== undefined && total + fee > invoice ? `The invoice (${formatUSDG(invoice)} USDG) must cover the facility plus its fee.` : null,
+    total: !total || total <= 0n ? "Enter how much capital to raise." : invoice !== undefined && total + fee > invoice ? `The invoice (${formatUSDG(invoice)} USDC) must cover the facility plus its fee.` : null,
     count: !Number.isInteger(count) || count < 1 || count > 8 ? "Use 1 to 8 milestones." : null,
     feePct: f.feePct.trim() === "" || !Number.isFinite(feeBps) || feeBps < 0 || feeBps > 1000 ? "Use a fee from 0% to 10%." : null,
     places: activePlaces.some((pl) => pl && Object.keys(placeErrors(pl)).length) ? "Check the milestone places: each needs a radius from 1 to 1,000 km and a plain name." : null,
@@ -266,7 +266,7 @@ export function ExporterWizard() {
                 <legend className={legend}>Shipment and buyer</legend>
                 <div className="grid gap-5 md:grid-cols-2">
                   <Field label="Shipment reference" value={d.ref} onChange={(e) => setD({ ...d, ref: e.target.value })} onBlur={leave("ref")} placeholder="CF-2026-SG02" hint="Your own reference. With your wallet it fixes the shipment's on-chain id." error={err(detailErr.ref, "ref")} autoComplete="off" />
-                  <Field label="Invoice value (USDG)" value={d.invoice} onChange={(e) => setD({ ...d, invoice: e.target.value })} onBlur={leave("invoice")} inputMode="decimal" placeholder="100000" suffix="USDG" hint="What the buyer pays at delivery." error={err(detailErr.invoice, "invoice")} />
+                  <Field label="Invoice value (USDC)" value={d.invoice} onChange={(e) => setD({ ...d, invoice: e.target.value })} onBlur={leave("invoice")} inputMode="decimal" placeholder="100000" suffix="USDC" hint="What the buyer pays at delivery." error={err(detailErr.invoice, "invoice")} />
                   <Field label="Buyer address" value={d.buyer} onChange={(e) => setD({ ...d, buyer: e.target.value })} onBlur={leave("buyer")} placeholder="0x…" hint="The buyer confirms delivery and pays the invoice." error={err(detailErr.buyer, "buyer")} className="md:col-span-2" inputClassName="font-mono" spellCheck={false} autoComplete="off" />
                 </div>
               </fieldset>
@@ -375,9 +375,9 @@ export function ExporterWizard() {
                   <legend className={legend}>Facility</legend>
                   <div className="grid gap-5 md:grid-cols-2">
                     <Field label="Financier address" value={f.financier} onChange={(e) => setF({ ...f, financier: e.target.value })} onBlur={leave("financier")} placeholder="0x…" hint="The financier deposits the capital into escrow." error={err(fe.financier, "financier")} className="md:col-span-2" inputClassName="font-mono" spellCheck={false} autoComplete="off" />
-                    <Field label="Total facility (USDG)" value={f.total} onChange={(e) => setF({ ...f, total: e.target.value })} onBlur={leave("total")} inputMode="decimal" placeholder="40000" suffix="USDG" error={err(fe.total, "total")} hint={invoice ? `Up to the invoice (${formatUSDG(invoice)} USDG) less the fee.` : undefined} />
-                    <Field label="Financing fee" value={f.feePct} onChange={(e) => setF({ ...f, feePct: e.target.value })} onBlur={leave("feePct")} inputMode="decimal" suffix="%" hint={total ? `${formatUSDG(fee)} USDG if fully drawn` : "0% to 10%"} error={err(fe.feePct, "feePct")} />
-                    <Field label="Milestones" value={f.count} onChange={(e) => setF({ ...f, count: e.target.value })} onBlur={leave("count")} inputMode="numeric" hint={total && Number.isInteger(count) && count > 0 ? `${count} tranches of about ${formatUSDG(total / BigInt(count))} USDG` : "1 to 8 evidence-gated tranches"} error={err(fe.count, "count")} />
+                    <Field label="Total facility (USDC)" value={f.total} onChange={(e) => setF({ ...f, total: e.target.value })} onBlur={leave("total")} inputMode="decimal" placeholder="40000" suffix="USDC" error={err(fe.total, "total")} hint={invoice ? `Up to the invoice (${formatUSDG(invoice)} USDC) less the fee.` : undefined} />
+                    <Field label="Financing fee" value={f.feePct} onChange={(e) => setF({ ...f, feePct: e.target.value })} onBlur={leave("feePct")} inputMode="decimal" suffix="%" hint={total ? `${formatUSDG(fee)} USDC if fully drawn` : "0% to 10%"} error={err(fe.feePct, "feePct")} />
+                    <Field label="Milestones" value={f.count} onChange={(e) => setF({ ...f, count: e.target.value })} onBlur={leave("count")} inputMode="numeric" hint={total && Number.isInteger(count) && count > 0 ? `${count} tranches of about ${formatUSDG(total / BigInt(count))} USDC` : "1 to 8 evidence-gated tranches"} error={err(fe.count, "count")} />
                   </div>
                   {Number.isInteger(count) && count >= 1 && count <= 8 && <MilestonePlaces count={count} route={d.route} places={places} onChange={setPlaces} showErrors={touched} />}
                   {err(fe.places) && <p className="mt-2 text-small font-medium text-danger-fg">{err(fe.places)}</p>}
@@ -394,8 +394,8 @@ export function ExporterWizard() {
                   columns={2}
                   items={[
                     { label: "Reference", value: <span className="break-all">{d.ref}</span> },
-                    { label: "Invoice", value: `${invoice ? formatUSDG(invoice) : "–"} USDG`, numeric: true },
-                    { label: "Facility", value: market ? "From the market" : `${total ? formatUSDG(total) : "–"} USDG in ${count} tranches`, numeric: true },
+                    { label: "Invoice", value: `${invoice ? formatUSDG(invoice) : "–"} USDC`, numeric: true },
+                    { label: "Facility", value: market ? "From the market" : `${total ? formatUSDG(total) : "–"} USDC in ${count} tranches`, numeric: true },
                     { label: "Temperature band", value: `${p.minTemp} to ${p.maxTemp} °C${template ? ` (${template.label.toLowerCase()})` : ""}` },
                     { label: "Route", value: routeNames, hint: `About ${formatKm(d.route.distanceKm)}, ${d.route.points.length} waypoints, ±${p.maxDeviationKm} km` },
                     { label: "Humidity and shock", value: limitsText(p) },
@@ -450,13 +450,13 @@ export function ExporterWizard() {
             dense
             items={[
               { label: "Reference", value: d.ref.trim() || "–" },
-              { label: "Invoice", value: invoice ? `${formatUSDG(invoice)} USDG` : "–", numeric: true },
+              { label: "Invoice", value: invoice ? `${formatUSDG(invoice)} USDC` : "–", numeric: true },
               { label: "Route", value: d.route.ports.length > 1 ? routeNames : "–" },
               { label: "Band", value: `${p.minTemp} to ${p.maxTemp} °C`, numeric: true },
               { label: "Min score", value: `${p.minScore} / 100`, numeric: true },
-              { label: "Financing", value: market ? "Market" : total ? `${formatUSDG(total)} USDG` : "–", numeric: true },
-              ...(!market && total ? [{ label: "Fee at full draw", value: `${formatUSDG(fee)} USDG`, numeric: true }] : []),
-              ...(!market && total && invoice ? [{ label: "Exporter keeps", value: invoice >= total + fee ? `${formatUSDG(invoice - total - fee)} USDG` : "–", hint: "after repaying principal and fee", numeric: true }] : []),
+              { label: "Financing", value: market ? "Market" : total ? `${formatUSDG(total)} USDC` : "–", numeric: true },
+              ...(!market && total ? [{ label: "Fee at full draw", value: `${formatUSDG(fee)} USDC`, numeric: true }] : []),
+              ...(!market && total && invoice ? [{ label: "Exporter keeps", value: invoice >= total + fee ? `${formatUSDG(invoice - total - fee)} USDC` : "–", hint: "after repaying principal and fee", numeric: true }] : []),
             ]}
           />
         </Card>
@@ -498,7 +498,7 @@ export function MyShipments({ list, loading }: { list: Mine[]; loading?: boolean
   const columns: Column<Mine>[] = [
     { key: "ref", header: "Shipment", primary: true, cell: (s) => s.externalRef },
     { key: "status", header: "Status", cell: (s) => <StatusPill status={s.status} /> },
-    { key: "invoice", header: "Invoice", numeric: true, cell: (s) => (s.invoiceValue ? <>{formatUSDG(s.invoiceValue)} <span className="text-text-muted">USDG</span></> : "–") },
+    { key: "invoice", header: "Invoice", numeric: true, cell: (s) => (s.invoiceValue ? <>{formatUSDG(s.invoiceValue)} <span className="text-text-muted">USDC</span></> : "–") },
     { key: "created", header: "Registered", hideOnCard: true, cell: (s) => <span className="num text-text-muted">{s.createdAt ? new Date(s.createdAt).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }) : "–"}</span> },
   ];
   return (

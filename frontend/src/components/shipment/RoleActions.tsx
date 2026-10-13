@@ -45,7 +45,7 @@ export function RoleActions({ view, epochs }: { view: ShipmentView; epochs: Epoc
   const next = f.nextMilestone;
   const evidence = epochs.filter((e) => e.milestoneIndex === next && e.commitTx).at(-1);
   if (roles.includes("financier") && f.status === "CREATED") {
-    actions.push(<PayAction key="fund" shipmentId={id} amount={BigInt(f.committed)} action="depositCapital" label={`Deposit ${formatUSDG(f.committed)} USDG`} successTitle="Facility funded" />);
+    actions.push(<PayAction key="fund" shipmentId={id} amount={BigInt(f.committed)} action="depositCapital" label={`Deposit ${formatUSDG(f.committed)} USDC`} successTitle="Facility funded" />);
   }
   if (roles.includes("exporter") && f.status === "FINANCED") {
     actions.push(
@@ -77,7 +77,7 @@ export function RoleActions({ view, epochs }: { view: ShipmentView; epochs: Epoc
     );
   }
   if (roles.includes("buyer") && f.status === "DELIVERED") {
-    actions.push(<PayAction key="settle" shipmentId={id} amount={BigInt(view.shipment.invoiceValue)} action="settle" label={`Pay the ${formatUSDG(view.shipment.invoiceValue)} USDG invoice`} successTitle="Invoice paid and settled" />);
+    actions.push(<PayAction key="settle" shipmentId={id} amount={BigInt(view.shipment.invoiceValue)} action="settle" label={`Pay the ${formatUSDG(view.shipment.invoiceValue)} USDC invoice`} successTitle="Invoice paid and settled" />);
   }
   if ((roles.includes("exporter") || roles.includes("financier")) && (f.status === "ACTIVE" || f.status === "PAUSED")) {
     actions.push(<DisputeAction key="dispute" shipmentId={id} controller={contracts.controller} />);

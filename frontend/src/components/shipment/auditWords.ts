@@ -73,7 +73,7 @@ function args(e: Entry): Record<string, unknown> {
   return d?.args ?? {};
 }
 
-/** The entry's headline and, when it helps, a short qualifier ("to Active", "4 USDG", "confirmed"). */
+/** The entry's headline and, when it helps, a short qualifier ("to Active", "4 USDC", "confirmed"). */
 export function auditTitle(e: Entry): { title: string; note?: string } {
   if (SPECIAL[e.title]) return { title: SPECIAL[e.title]! };
   if (e.kind === "epoch") {
@@ -87,8 +87,8 @@ export function auditTitle(e: Entry): { title: string; note?: string } {
     const ev = e.title.split(".").pop() ?? e.title;
     const a = args(e);
     if (ev === "StatusChanged" && typeof a.to === "number") return { title: `Status changed to ${STATUS[a.to] ?? a.to}` };
-    if (ev === "MilestoneAdvanceReleased" && typeof a.milestoneIndex === "number") return { title: `Milestone ${a.milestoneIndex + 1} released`, note: typeof a.amount === "string" ? `${formatUSDG(a.amount)} USDG` : undefined };
-    if ((ev === "AdvanceReleased" || ev === "CapitalDeposited") && typeof a.amount === "string") return { title: EVENTS[ev]!, note: `${formatUSDG(a.amount)} USDG` };
+    if (ev === "MilestoneAdvanceReleased" && typeof a.milestoneIndex === "number") return { title: `Milestone ${a.milestoneIndex + 1} released`, note: typeof a.amount === "string" ? `${formatUSDG(a.amount)} USDC` : undefined };
+    if ((ev === "AdvanceReleased" || ev === "CapitalDeposited") && typeof a.amount === "string") return { title: EVENTS[ev]!, note: `${formatUSDG(a.amount)} USDC` };
     if (ev === "FacilityPauseSet" && typeof a.paused === "boolean") return { title: a.paused ? "Escrow paused" : "Escrow unpaused" };
     return { title: EVENTS[ev] ?? words(ev) };
   }

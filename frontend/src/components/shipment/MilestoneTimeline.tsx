@@ -60,7 +60,7 @@ export function JourneyTimeline({ milestones, facility, invoiceValue, nextDistan
       title: (
         <span className="flex items-baseline justify-between gap-3">
           <span className="min-w-0">{m?.description || `Checkpoint ${i + 1}`}</span>
-          {m && <span className="num shrink-0 font-medium text-ink">{formatUSDG(m.allocatedUsdg)} <span className="text-caption font-normal text-text-muted">USDG</span></span>}
+          {m && <span className="num shrink-0 font-medium text-ink">{formatUSDG(m.allocatedUsdg)} <span className="text-caption font-normal text-text-muted">USDC</span></span>}
         </span>
       ),
       time: (
@@ -91,7 +91,7 @@ export function JourneyTimeline({ milestones, facility, invoiceValue, nextDistan
     title: (
       <span className="flex items-baseline justify-between gap-3">
         <span className="min-w-0">Buyer pays the invoice</span>
-        <span className="num shrink-0 font-medium text-ink">{formatUSDG(invoiceValue)} <span className="text-caption font-normal text-text-muted">USDG</span></span>
+        <span className="num shrink-0 font-medium text-ink">{formatUSDG(invoiceValue)} <span className="text-caption font-normal text-text-muted">USDC</span></span>
       </span>
     ),
     time: (
@@ -126,7 +126,7 @@ export function MilestoneTable({ milestones, facility, chainId, nextDistanceM = 
         );
       },
     },
-    { key: "amount", header: "Amount (USDG)", numeric: true, cell: (r) => (r.m ? formatUSDG(r.m.allocatedUsdg) : "–") },
+    { key: "amount", header: "Amount (USDC)", numeric: true, cell: (r) => (r.m ? formatUSDG(r.m.allocatedUsdg) : "–") },
     { key: "status", header: "Status", cell: (r) => <Badge variant={badge[r.st]} dot>{r.st === "next" ? "Awaiting evidence" : r.st === "blocked" ? "Blocked: facility paused" : r.st === "released" ? "Released" : "Pending"}</Badge> },
     { key: "when", header: "Released", cell: (r) => (r.m?.releasedAt ? <time className="num text-text-muted" dateTime={r.m.releasedAt}>{dateTime(r.m.releasedAt)}</time> : <span className="text-text-muted">–</span>) },
     { key: "tx", header: "Transaction", cell: (r) => (r.m?.releaseTxHash ? <CopyField value={r.m.releaseTxHash} kind="tx" chainId={chainId} size="sm" label="Tx" /> : <span className="text-text-muted">–</span>) },

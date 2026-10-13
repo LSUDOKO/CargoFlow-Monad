@@ -14,9 +14,9 @@ import { fundingNeeds } from "@/lib/portal";
 
 type Props = {
   shipmentId: `0x${string}`;
-  amount: bigint; // USDG base units the vault will pull
+  amount: bigint; // USDC base units the vault will pull
   action: "depositCapital" | "settle";
-  label: string; // e.g. "Deposit 40,000 USDG"
+  label: string; // e.g. "Deposit 40,000 USDC"
   successTitle: string;
 };
 
@@ -31,8 +31,8 @@ export function PayAction({ shipmentId, amount, action, label, successTitle }: P
   const reads = useReadContracts({
     contracts: contracts && address
       ? [
-          { address: contracts.usdg, abi: usdgAbi, functionName: "balanceOf", args: [address], chainId: chainId as 46630 | 31337 },
-          { address: contracts.usdg, abi: usdgAbi, functionName: "allowance", args: [address, contracts.vault], chainId: chainId as 46630 | 31337 },
+          { address: contracts.usdg, abi: usdgAbi, functionName: "balanceOf", args: [address], chainId: chainId as 10143 | 31337 },
+          { address: contracts.usdg, abi: usdgAbi, functionName: "allowance", args: [address, contracts.vault], chainId: chainId as 10143 | 31337 },
         ]
       : [],
     query: { enabled: !!contracts && !!address, refetchInterval: 10_000 },
@@ -54,10 +54,10 @@ export function PayAction({ shipmentId, amount, action, label, successTitle }: P
 
   if (balance !== undefined && needs.shortfall > 0n) {
     return (
-      <Callout variant="warning" title={`This wallet needs ${formatUSDG(needs.shortfall)} more USDG.`} className="w-full text-left">
+      <Callout variant="warning" title={`This wallet needs ${formatUSDG(needs.shortfall)} more USDC.`} className="w-full text-left">
         It holds {formatUSDG(balance)} of the {formatUSDG(amount)} required.{" "}
-        {chainId === 46630 ? (
-          <a href="https://faucet.paxos.com" target="_blank" rel="noreferrer" className="font-semibold underline">Get testnet USDG from the Paxos faucet</a>
+        {chainId === 10143 ? (
+          <a href="https://faucet.circle.com" target="_blank" rel="noreferrer" className="font-semibold underline">Get testnet USDC from the Circle faucet</a>
         ) : (
           "On the local chain the test token can be minted freely."
         )}
@@ -66,9 +66,9 @@ export function PayAction({ shipmentId, amount, action, label, successTitle }: P
             <Button
               size="sm"
               loading={pending}
-              onClick={() => send({ address: contracts.usdg, abi: usdgAbi, functionName: "mint", args: [address, needs.shortfall], label: "Mint test USDG", successTitle: `${formatUSDG(needs.shortfall)} test USDG minted` })}
+              onClick={() => send({ address: contracts.usdg, abi: usdgAbi, functionName: "mint", args: [address, needs.shortfall], label: "Mint test USDC", successTitle: `${formatUSDG(needs.shortfall)} test USDC minted` })}
             >
-              Mint {formatUSDG(needs.shortfall)} test USDG
+              Mint {formatUSDG(needs.shortfall)} test USDC
             </Button>
           </span>
         )}
@@ -83,10 +83,10 @@ export function PayAction({ shipmentId, amount, action, label, successTitle }: P
           loading={pending}
           disabled={balance === undefined}
           onClick={() =>
-            send({ address: contracts.usdg, abi: usdgAbi, functionName: "approve", args: [contracts.vault as Address, amount], label: `Approve ${formatUSDG(amount)} USDG`, successTitle: "Vault approved" })
+            send({ address: contracts.usdg, abi: usdgAbi, functionName: "approve", args: [contracts.vault as Address, amount], label: `Approve ${formatUSDG(amount)} USDC`, successTitle: "Vault approved" })
           }
         >
-          1. Approve {formatUSDG(amount)} USDG
+          1. Approve {formatUSDG(amount)} USDC
         </Button>
       )}
       <Button

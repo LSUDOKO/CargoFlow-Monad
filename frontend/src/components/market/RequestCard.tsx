@@ -40,7 +40,7 @@ export function RequestCard({ request: r }: { request: MarketRequest }) {
       </div>
 
       <dl className="grid grid-cols-3 gap-3 border-y border-border px-5 py-4">
-        <Term label="Seeking" sub="USDG">{formatUSDG(r.amount, { compact: true })}</Term>
+        <Term label="Seeking" sub="USDC">{formatUSDG(r.amount, { compact: true })}</Term>
         <Term label="Advance" sub={`of ${formatUSDG(r.invoiceValue, { compact: true })} invoice`}>{rate}%</Term>
         <Term label="Max fee" sub={`${r.milestoneCount} tranches`}>{pct(r.maxFeeBps)}</Term>
       </dl>
