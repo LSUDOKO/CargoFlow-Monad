@@ -43,7 +43,7 @@ The image compiles the circuit at build time and runs as a non-root user on a re
 | `DATABASE_URL` | yes | Postgres connection string |
 | `RPC_URL`, `CHAIN_ID`, `DEPLOYMENT_FILE` | yes | chain endpoint, expected chain id (verified at startup), deployment manifest. `RPC_URL` may carry a token in its path (QuickNode); it is never logged |
 | `RPC_FALLBACK_URL` | no | further RPC endpoints, comma-separated, tried in order ([failover](#rpc-failover)); all must be http(s) and on `CHAIN_ID` |
-| `ALCHEMY_RPC_URL` or `ALCHEMY_API_KEY` | no | the last failover tier: `ALCHEMY_RPC_URL`, or built from the key as `https://robinhood-testnet.g.alchemy.com/v2/<key>`; redacted in logs |
+| `ALCHEMY_RPC_URL` or `ALCHEMY_API_KEY` | no | the last failover tier: `ALCHEMY_RPC_URL`, or built from the key as `https://monad-testnet.g.alchemy.com/v2/<key>`; redacted in logs |
 | `ALCHEMY_WEBHOOK_SIGNING_KEYS` | no | signing keys of the [Alchemy webhook](#alchemy-webhook), comma-separated (two during a rotation); unset answers 503 |
 | `ZERODEV_WEBHOOK_SECRET`, `ZERODEV_PROJECT_ID` | no (both together) | turn on the [ZeroDev gas policy webhook](#zerodev-gas-policy); the secret (24+ characters) is the last path segment of the webhook URL |
 | `ZERODEV_SPONSOR_PER_DAY`, `ZERODEV_SPONSOR_GLOBAL_DAY`, `ZERODEV_SPONSOR_MAX_WEI` | no | sponsorships per sender and overall per rolling 24 hours (default 25 and 500), and the cap on one user operation's maximum gas cost (default 200000000000000 wei, 0.0002 ETH) |
@@ -81,7 +81,7 @@ Public reads need no credentials. Everything that writes is authenticated.
 |---|---|---|
 | `GET /v1/health` | none | database and chain reachability, head block, and `rpc`: `primary` or `fallback` |
 | `GET /v1/openapi.json` | none | the [OpenAPI 3.1 document](#openapi), generated from the route table |
-| `GET /v1/config` | none | chain id, USDG decimals, contract addresses (with `coverPool` on a v2 deployment), and which optional integrations are on: `alerts {webhook, telegram, email, telegramBot}`, `gasDrip`, `ais` |
+| `GET /v1/config` | none | chain id, USDC decimals, contract addresses (with `coverPool` on a v2 deployment), and which optional integrations are on: `alerts {webhook, telegram, email, telegramBot}`, `gasDrip`, `ais` |
 | `GET /v1/stats` | none | shipments by status, committed epochs, verified proofs |
 | `POST /v1/sources` | admin key | register an evidence source (Ed25519 public key, its sensors, reliability) |
 | `POST /v1/shipments` | admin key | mirror a shipment that already exists on chain |
@@ -205,7 +205,7 @@ close code 1013 and should refetch over REST and reconnect.
 
 A request is an exporter asking for capital against a shipment that is registered on chain, has its policy set,
 is mirrored here (`POST /v1/shipments/mirror` accepts a shipment without a facility), and has no facility yet.
-The amount (USDG base units, a string) may not exceed the invoice; `maxFeeBps` is at most 2000 (the vault's
+The amount (USDC base units, a string) may not exceed the invoice; `maxFeeBps` is at most 2000 (the vault's
 ceiling) and `milestoneCount` 1 to 16. One live (open or accepted) request per shipment. Financiers offer a fee
 up to the maximum; the exporter accepts one, then sends `createFacility` naming that financier, and the indexer
 marks the request `funded` when the facility's status reaches FINANCED. Nothing here moves money or binds anyone:
@@ -323,7 +323,7 @@ reason lists its contribution so the band can be audited.
 
 With `RPC_FALLBACK_URL` (a comma-separated list) or an Alchemy endpoint set, the chain client sends JSON-RPC through a
 transport that tries the tiers in order, primary → each `RPC_FALLBACK_URL` → Alchemy (`ALCHEMY_RPC_URL`, or
-`ALCHEMY_API_KEY` as `https://robinhood-testnet.g.alchemy.com/v2/<key>`), and moves on when an endpoint cannot be
+`ALCHEMY_API_KEY` as `https://monad-testnet.g.alchemy.com/v2/<key>`), and moves on when an endpoint cannot be
 reached or answers 5xx or 429; the failed endpoint is skipped for 30 seconds and then tried again, so traffic returns
 to the earlier tiers on their own. JSON-RPC errors (reverts) are answers, never a reason to fail over. Every endpoint
 must report `CHAIN_ID` (a fallback unreachable at startup is tolerated, one on another chain is refused).
@@ -350,7 +350,7 @@ about a second instead of on the `INDEXER_POLL` interval.
 
 `go run ./cmd/alchemy-webhook -deployment <manifest> -api https://<api host>` (with `ALCHEMY_AUTH_TOKEN`, the dashboard's
 Notify auth token) creates the Custom Webhook through the Notify API (`POST https://dashboard.alchemy.com/api/create-webhook`,
-`X-Alchemy-Token`, network `ROBINHOOD_TESTNET` for chain 46630, `webhook_type: GRAPHQL`) with a GraphQL log filter over every
+`X-Alchemy-Token`, network `MONAD_TESTNET` for chain 10143, `webhook_type: GRAPHQL`) with a GraphQL log filter over every
 indexed contract in the manifest:
 
 ```graphql
@@ -375,7 +375,7 @@ credential; a wrong or unset secret answers the same 404 as an unknown path. Eve
 - the callData is a Kernel v3 `execute(bytes32 mode, bytes executionCalldata)` with ERC-7579 call type single or batch
   (never delegatecall), or a Kernel v2 `execute(address,uint256,bytes,uint8)` with operation call or `executeBatch`;
 - every call has value 0 and targets a contract the indexer follows (controller, vault, cover pool, evidence, shipment
-  and policy registries, eBL and device registries), or is USDG `approve(spender, amount)` with such a spender;
+  and policy registries, eBL and device registries), or is USDC `approve(spender, amount)` with such a spender;
 - (callGasLimit + verificationGasLimit + preVerificationGas + any paymaster gas limits) × maxFeePerGas is at most
   `ZERODEV_SPONSOR_MAX_WEI`;
 - the sender has had fewer than `ZERODEV_SPONSOR_PER_DAY` and everyone fewer than `ZERODEV_SPONSOR_GLOBAL_DAY`
@@ -389,7 +389,7 @@ decision is logged with the sender and a reason, never the secret.
 
 With `DUNE_API_KEY` and `DUNE_NAMESPACE` the service pushes its indexed data to Dune every `DUNE_UPLOAD_INTERVAL`
 (default 15m) through the uploads API, so the queries in `analytics/dune` run on `dune.<namespace>.cargoflow_*` even
-though Dune does not decode Robinhood Chain Testnet. The tables and columns are exactly those of
+though Dune does not decode Monad Testnet. The tables and columns are exactly those of
 `analytics/dune/upload-schema.md`:
 
 | Table | Mode |
@@ -640,7 +640,7 @@ Runs are reproducible: the same `-seed` gives byte-identical output.
 Unit tests run anywhere. Integration tests start a **real anvil chain, deploy the real contracts, and use a
 real Postgres schema**; they skip (not fail) when Foundry or `TEST_DATABASE_URL` is missing. The capstone,
 `cmd/cargoflow/e2e_test.go`, launches the real `serve` command and drives the whole demo story over HTTP and
-WebSocket, from registration to settlement, asserting the 98,800 / 41,200 USDG outcome. Against the v2 deployment
+WebSocket, from registration to settlement, asserting the 98,800 / 41,200 USDC outcome. Against the v2 deployment
 it also runs default cover (offered and accepted before transit, released to the insurer after settlement) and a
 last milestone placed at Singapore with a 100 km radius, which is held while the cargo is at sea and released when it
 arrives. `make demo` does the same; set `INSURER_KEY` to include the cover.
