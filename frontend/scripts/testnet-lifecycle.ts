@@ -149,11 +149,27 @@ async function main() {
     console.log(`  ${label}: ${r.accepted} accepted, ${r.rejected.length} quarantined; epochs: ${r.epochs.map((e) => `#${e.sequence} M${e.milestoneIndex === 255 ? "-" : e.milestoneIndex + 1} ${e.skipped ? "skipped" : e.action}${e.releaseTx ? " released" : ""}${e.pauseTx ? " PAUSED" : ""}${e.error ? ` error=${e.error}` : ""}`).join("; ")}`);
     return r;
   };
-  if (!cont) {
+  if (!cont && process.env.STOP === "active") await send("leg 1, healthy", leg(16));
+  else if (!cont) {
     await send("leg 1, healthy", leg(16));
     await send("leg 2, reefer fails", leg(8, [5.2, 6.8, 8.9, 10.4, 11.7]));
     await send("leg 3, probe-2 still in range", leg(8));
   } else t += 32 * 5; // the earlier run already sent readings up to about now
+  if (process.env.STOP === "active") {
+    // leave the facility mid-voyage (two milestones released) with a two-sided book on its Cargo Note
+    if (c.noteMarket) {
+      const trader = wallet(env.TRADER_KEY ? "TRADER_KEY" : "private_key");
+      const mark = (await pub.readContract({ address: c.noteMarket, abi: noteMarketAbi, functionName: "markPrice", args: [id] })) as bigint;
+      await tx("allow market as note operator (financier)", financier, c.financingController!, controllerAbi, "setPositionOperator", [id, c.noteMarket]);
+      await tx("place ask (financier)", financier, c.noteMarket, noteMarketAbi, "placeAsk", [id, (mark * 1005n) / 1000n]);
+      const bid = (mark * 97n) / 100n;
+      await tx("approve market (bidder)", trader, c.usdg!, usdgAbi, "approve", [c.noteMarket, bid]);
+      await tx("place bid (bidder)", trader, c.noteMarket, noteMarketAbi, "placeBid", [id, bid]);
+      console.log(`  note listed: mark ${Number(mark) / 1e6}, ask ${Number((mark * 1005n) / 1000n) / 1e6}, bid ${Number(bid) / 1e6}`);
+    }
+    console.log(`  stopped mid-voyage: ${id}`);
+    return;
+  }
   if (process.env.STOP === "paused") {
     console.log(`  stopped while paused: ${id}`);
     return;
