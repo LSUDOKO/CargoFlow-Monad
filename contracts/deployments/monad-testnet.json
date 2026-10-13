@@ -1,5 +1,5 @@
 {
-  "chainId": 46630,
+  "chainId": 10143,
   "contracts": {
     "access": "0x6b334b4C73c27CB297470140c86311075408b050",
     "coverPool": "0x4e4f09Da01f466275b586b0cc32613a90b1B69e5",
@@ -13,6 +13,6 @@
     "shipmentRegistry": "0x2B9E2B70b6fF48DaD9847944bbEcE16c9f4396F3"
   },
   "deployer": "0xA6C05ec62A222b0fb65BD30B2d2f9B2fd378911b",
-  "network": "robinhood-testnet",
-  "usdg": "0x7E955252E15c84f5768B83c41a71F9eba181802F"
+  "network": "monad-testnet",
+  "usdg": "0x534b2f3A21130d7a60830c2Df862319e593943A3"
 }

@@ -6,7 +6,7 @@ import {Script} from "forge-std/Script.sol";
 /// @notice Shared helpers for deployment and demo scripts.
 abstract contract ScriptBase is Script {
     uint256 internal constant LOCAL_CHAIN_ID = 31337;
-    uint256 internal constant ROBINHOOD_TESTNET_CHAIN_ID = 46630;
+    uint256 internal constant MONAD_TESTNET_CHAIN_ID = 10143;
 
     /// @dev Well-known anvil dev accounts (public keys, never valid on a real network). They are
     ///      used only when `block.chainid == 31337`.
@@ -49,7 +49,7 @@ abstract contract ScriptBase is Script {
     }
 
     function _networkName() internal view returns (string memory) {
-        if (block.chainid == ROBINHOOD_TESTNET_CHAIN_ID) return "robinhood-testnet";
+        if (block.chainid == MONAD_TESTNET_CHAIN_ID) return "monad-testnet";
         if (_isLocal()) return "local";
         return vm.toString(block.chainid);
     }

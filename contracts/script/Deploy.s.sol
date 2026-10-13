@@ -20,7 +20,7 @@ import {ScriptBase} from "./ScriptBase.sol";
 ///         `contracts.coverPool`, v3 adds `contracts.deviceRegistry` and `contracts.eblRegistry`.
 ///
 ///   Local:    anvil &  then  forge script script/Deploy.s.sol --rpc-url local --broadcast
-///   Testnet:  forge script script/Deploy.s.sol --rpc-url robinhood_testnet --broadcast
+///   Testnet:  forge script script/Deploy.s.sol --rpc-url monad_testnet --broadcast
 ///
 /// Uses the real USDG from `USDG_ADDRESS` on public networks; deploys a 6-decimal MockUSDG only on
 /// the local chain. Operational role holders come from WORKER_ADDRESS / MONITOR_ADDRESS /
