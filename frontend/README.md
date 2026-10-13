@@ -18,7 +18,7 @@ pnpm dev                       # http://localhost:3000
 ```
 
 It needs a running backend (`make serve` at the repository root). Deployment addresses and the chain id come from
-the backend's `/v1/config`, so one build works against a local chain or Robinhood Chain Testnet. For the local
+the backend's `/v1/config`, so one build works against a local chain or Monad Testnet. For the local
 stack in `../.env.local.example`, set `NEXT_PUBLIC_API_URL=http://127.0.0.1:8787`.
 
 | Variable | Purpose |

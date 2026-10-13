@@ -4,7 +4,7 @@
 //
 //   node --experimental-strip-types scripts/testnet-lifecycle.ts https://cargoflow-api-….onrender.com
 //
-// It spends testnet gas from each party and a small amount of testnet USDG (facility 20, invoice 30).
+// It spends testnet gas from each party and a small amount of testnet USDC (facility 20, invoice 30).
 //
 // Partial runs for demo data: STOP=paused ends after the excursion (a live paused facility for the automatic
 // recovery worker), STOP=created ends once the facility exists and waits for the financier's deposit, MODE=request
@@ -30,7 +30,7 @@ const env = Object.fromEntries(
 ) as Record<string, string>;
 const key = (n: string) => privateKeyToAccount((env[n]!.startsWith("0x") ? env[n] : `0x${env[n]}`) as Hex);
 
-const chain = defineChain({ id: 46630, name: "Robinhood Chain Testnet", nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 }, rpcUrls: { default: { http: ["https://rpc.testnet.chain.robinhood.com"] } } });
+const chain = defineChain({ id: 10143, name: "Monad Testnet", nativeCurrency: { name: "Monad", symbol: "MON", decimals: 18 }, rpcUrls: { default: { http: ["https://testnet-rpc.monad.xyz"] } } });
 const pub = createPublicClient({ chain, transport: http() });
 const wallet = (n: string) => createWalletClient({ account: key(n), chain, transport: http() });
 const exporter = wallet("EXPORTER_KEY"), financier = wallet("FINANCIER_KEY"), buyer = wallet("BUYER_KEY");
@@ -58,7 +58,7 @@ async function main() {
   const ref = `CF-LIVE-${Date.now()}`;
   const route = ROUTES[0]!.points;
   const policy = buildPolicy(defaultPolicyForm);
-  const total = 20_000_000n, invoice = 30_000_000n; // 20 and 30 USDG
+  const total = 20_000_000n, invoice = 30_000_000n; // 20 and 30 USDC
   console.log(`shipment ${ref}`);
 
   // 1. the exporter registers the shipment, its policy and the facility (the wizard's three transactions)
@@ -166,7 +166,7 @@ async function main() {
   await tx("pay invoice", buyer, c.financingController!, controllerAbi, "settle", [id]);
 
   const view = await api<{ facility: { status: string; drawn: string } }>("GET", `/v1/shipments/${id}`);
-  console.log(`final status ${view.facility.status}, drawn ${Number(view.facility.drawn) / 1e6} USDG`);
+  console.log(`final status ${view.facility.status}, drawn ${Number(view.facility.drawn) / 1e6} USDC`);
   if (view.facility.status !== "SETTLED") process.exitCode = 1;
 }
 
