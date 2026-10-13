@@ -8,7 +8,7 @@
 --   3e  uploaded by tenor bucket
 --   3f  uploaded cover premiums vs payouts
 --
--- Definitions (USDG, 6 decimals):
+-- Definitions (USDC, 6 decimals):
 --   fee                 ReceivableVault.FacilitySettled.fee (paid by the buyer to the financier in the waterfall)
 --   tenor               first CapitalDeposited -> FacilitySettled (or FacilityDefaulted), in days
 --   yield on committed  fee / committed * 365 / tenor_days (the financier deposits the full commitment)
@@ -22,29 +22,29 @@
 WITH facilities AS (
     SELECT shipmentId AS shipment_id, financier, exporter, CAST(committed AS DOUBLE) / 1e6 AS committed,
         feeBps AS fee_bps, milestoneCount AS milestones, evt_block_time AS created_at
-    FROM cargoflow_robinhood.FinancingController_evt_FacilityCreated
+    FROM cargoflow_monad.FinancingController_evt_FacilityCreated
 ),
 deposits AS (
     SELECT shipmentId AS shipment_id, MIN(evt_block_time) AS deposited_at
-    FROM cargoflow_robinhood.ReceivableVault_evt_CapitalDeposited GROUP BY 1
+    FROM cargoflow_monad.ReceivableVault_evt_CapitalDeposited GROUP BY 1
 ),
 settled AS (
     SELECT shipmentId AS shipment_id, evt_block_time AS closed_at,
         CAST(principal AS DOUBLE) / 1e6 AS principal, CAST(fee AS DOUBLE) / 1e6 AS fee,
         CAST(residual AS DOUBLE) / 1e6 AS residual_to_exporter
-    FROM cargoflow_robinhood.ReceivableVault_evt_FacilitySettled
+    FROM cargoflow_monad.ReceivableVault_evt_FacilitySettled
 ),
 defaulted AS (
     SELECT shipmentId AS shipment_id, evt_block_time AS closed_at,
         CAST(outstandingPrincipal AS DOUBLE) / 1e6 AS outstanding
-    FROM cargoflow_robinhood.ReceivableVault_evt_FacilityDefaulted
+    FROM cargoflow_monad.ReceivableVault_evt_FacilityDefaulted
 ),
 cover AS (
     SELECT a.shipmentId AS shipment_id, CAST(a.premium AS DOUBLE) / 1e6 AS premium,
         COALESCE(CAST(c.payout AS DOUBLE), CAST(t.financierPayout AS DOUBLE), 0) / 1e6 AS payout
-    FROM cargoflow_robinhood.CoverPool_evt_CoverAccepted AS a
-    LEFT JOIN cargoflow_robinhood.CoverPool_evt_CoverClaimed AS c ON c.shipmentId = a.shipmentId
-    LEFT JOIN cargoflow_robinhood.CoverPool_evt_ParametricTriggered AS t -- v3
+    FROM cargoflow_monad.CoverPool_evt_CoverAccepted AS a
+    LEFT JOIN cargoflow_monad.CoverPool_evt_CoverClaimed AS c ON c.shipmentId = a.shipmentId
+    LEFT JOIN cargoflow_monad.CoverPool_evt_ParametricTriggered AS t -- v3
         ON t.shipmentId = a.shipmentId -- v3
 ),
 joined AS (
@@ -97,16 +97,16 @@ ORDER BY created_at DESC;
 -- ===================================================================================== 3b (decoded)
 WITH facilities AS (
     SELECT shipmentId AS shipment_id, CAST(committed AS DOUBLE) / 1e6 AS committed, feeBps AS fee_bps
-    FROM cargoflow_robinhood.FinancingController_evt_FacilityCreated
+    FROM cargoflow_monad.FinancingController_evt_FacilityCreated
 ),
 deposits AS (
     SELECT shipmentId AS shipment_id, MIN(evt_block_time) AS deposited_at
-    FROM cargoflow_robinhood.ReceivableVault_evt_CapitalDeposited GROUP BY 1
+    FROM cargoflow_monad.ReceivableVault_evt_CapitalDeposited GROUP BY 1
 ),
 settled AS (
     SELECT shipmentId AS shipment_id, evt_block_time AS closed_at,
         CAST(principal AS DOUBLE) / 1e6 AS principal, CAST(fee AS DOUBLE) / 1e6 AS fee
-    FROM cargoflow_robinhood.ReceivableVault_evt_FacilitySettled
+    FROM cargoflow_monad.ReceivableVault_evt_FacilitySettled
 ),
 per_facility AS (
     SELECT
@@ -154,19 +154,19 @@ ORDER BY MIN(tenor_days);
 WITH accepted AS (
     SELECT shipmentId AS shipment_id, insurer, financier,
         CAST(amount AS DOUBLE) / 1e6 AS cover_amount, CAST(premium AS DOUBLE) / 1e6 AS premium
-    FROM cargoflow_robinhood.CoverPool_evt_CoverAccepted
+    FROM cargoflow_monad.CoverPool_evt_CoverAccepted
 ),
 claims AS (
     SELECT shipmentId AS shipment_id, CAST(payout AS DOUBLE) / 1e6 AS paid_financier,
         CAST(0 AS DOUBLE) AS paid_exporter, CAST(loss AS DOUBLE) / 1e6 AS loss, 'default claim' AS kind
-    FROM cargoflow_robinhood.CoverPool_evt_CoverClaimed
+    FROM cargoflow_monad.CoverPool_evt_CoverClaimed
     UNION ALL
     SELECT shipmentId, CAST(financierPayout AS DOUBLE) / 1e6, CAST(exporterSalvage AS DOUBLE) / 1e6, -- v3
         CAST(NULL AS DOUBLE), 'parametric trigger' -- v3
-    FROM cargoflow_robinhood.CoverPool_evt_ParametricTriggered -- v3
+    FROM cargoflow_monad.CoverPool_evt_ParametricTriggered -- v3
 ),
 released AS (
-    SELECT shipmentId AS shipment_id FROM cargoflow_robinhood.CoverPool_evt_CoverReleased
+    SELECT shipmentId AS shipment_id FROM cargoflow_monad.CoverPool_evt_CoverReleased
 )
 SELECT
     a.insurer,

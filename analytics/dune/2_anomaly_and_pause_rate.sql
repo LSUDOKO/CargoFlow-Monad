@@ -28,16 +28,16 @@ WITH epochs AS (
         COUNT(*) FILTER (WHERE compliant) AS passed,
         COUNT(*) FILTER (WHERE NOT compliant) AS failed,
         AVG(CAST(score AS DOUBLE)) AS avg_score
-    FROM cargoflow_robinhood.EvidenceRegistry_evt_EvidenceEpochCommitted
+    FROM cargoflow_monad.EvidenceRegistry_evt_EvidenceEpochCommitted
     GROUP BY 1
 ),
 pr AS (
     SELECT shipmentId AS shipment_id, evt_block_time AS ts, evt_block_number AS bn, evt_index AS ix,
         evt_tx_hash AS tx, 'pause' AS kind, CAST(NULL AS VARBINARY) AS basis
-    FROM cargoflow_robinhood.FinancingController_evt_FinancingPaused
+    FROM cargoflow_monad.FinancingController_evt_FinancingPaused
     UNION ALL
     SELECT shipmentId, evt_block_time, evt_block_number, evt_index, evt_tx_hash, 'resume', basis
-    FROM cargoflow_robinhood.FinancingController_evt_FinancingResumed
+    FROM cargoflow_monad.FinancingController_evt_FinancingResumed
 ),
 seq AS (
     SELECT
@@ -50,7 +50,7 @@ seq AS (
 ),
 proofs AS (
     SELECT evt_tx_hash AS tx, epochId AS epoch_id
-    FROM cargoflow_robinhood.EvidenceRegistry_evt_EvidenceProofVerified
+    FROM cargoflow_monad.EvidenceRegistry_evt_EvidenceProofVerified
 ),
 recoveries AS (
     SELECT
@@ -77,8 +77,8 @@ rec AS (
 ),
 facilities AS (
     SELECT f.shipmentId AS shipment_id, f.financier, f.exporter, s.routeCommitment AS route_commitment
-    FROM cargoflow_robinhood.FinancingController_evt_FacilityCreated AS f
-    LEFT JOIN cargoflow_robinhood.ShipmentRegistry_evt_ShipmentRegistered AS s
+    FROM cargoflow_monad.FinancingController_evt_FacilityCreated AS f
+    LEFT JOIN cargoflow_monad.ShipmentRegistry_evt_ShipmentRegistered AS s
         ON s.shipmentId = f.shipmentId
 )
 SELECT
@@ -108,23 +108,23 @@ ORDER BY pauses DESC, epochs DESC;
 -- ===================================================================================== 2b (decoded)
 WITH routes AS (
     SELECT shipmentId AS shipment_id, routeCommitment AS route_commitment
-    FROM cargoflow_robinhood.ShipmentRegistry_evt_ShipmentRegistered
+    FROM cargoflow_monad.ShipmentRegistry_evt_ShipmentRegistered
 ),
 epochs AS (
     SELECT
         shipmentId AS shipment_id,
         COUNT(*) AS epochs,
         COUNT(*) FILTER (WHERE compliant) AS passed
-    FROM cargoflow_robinhood.EvidenceRegistry_evt_EvidenceEpochCommitted
+    FROM cargoflow_monad.EvidenceRegistry_evt_EvidenceEpochCommitted
     GROUP BY 1
 ),
 pr AS (
     SELECT shipmentId AS shipment_id, evt_block_time AS ts, evt_block_number AS bn, evt_index AS ix,
         evt_tx_hash AS tx, 'pause' AS kind, CAST(NULL AS VARBINARY) AS basis
-    FROM cargoflow_robinhood.FinancingController_evt_FinancingPaused
+    FROM cargoflow_monad.FinancingController_evt_FinancingPaused
     UNION ALL
     SELECT shipmentId, evt_block_time, evt_block_number, evt_index, evt_tx_hash, 'resume', basis
-    FROM cargoflow_robinhood.FinancingController_evt_FinancingResumed
+    FROM cargoflow_monad.FinancingController_evt_FinancingResumed
 ),
 seq AS (
     SELECT
@@ -141,7 +141,7 @@ recoveries AS (
         date_diff('second', s.ts, s.next_ts) / 3600.0 AS hours_to_recover,
         p.evt_tx_hash IS NOT NULL AS via_zk
     FROM seq AS s
-    LEFT JOIN cargoflow_robinhood.EvidenceRegistry_evt_EvidenceProofVerified AS p
+    LEFT JOIN cargoflow_monad.EvidenceRegistry_evt_EvidenceProofVerified AS p
         ON p.evt_tx_hash = s.next_tx AND p.epochId = s.next_basis
     WHERE s.kind = 'pause' AND s.next_kind = 'resume'
 ),
@@ -166,7 +166,7 @@ per_facility AS (
         COALESCE(rc.recoveries, 0) AS recoveries,
         COALESCE(rc.zk_recoveries, 0) AS zk_recoveries,
         rc.total_hours_to_recover
-    FROM cargoflow_robinhood.FinancingController_evt_FacilityCreated AS f
+    FROM cargoflow_monad.FinancingController_evt_FacilityCreated AS f
     LEFT JOIN routes AS r ON r.shipment_id = f.shipmentId
     LEFT JOIN epochs AS e ON e.shipment_id = f.shipmentId
     LEFT JOIN pauses AS p ON p.shipment_id = f.shipmentId

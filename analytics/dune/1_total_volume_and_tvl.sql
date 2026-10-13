@@ -1,16 +1,16 @@
--- CargoFlow on Dune: 1. Total volume and TVL (USDG)
+-- CargoFlow on Dune: 1. Total volume and TVL (USDC)
 --
 -- Four Dune queries, one per block (each block ends with a semicolon; paste one block per Dune query):
---   1a  decoded  daily USDG flows and running balances
+--   1a  decoded  daily USDC flows and running balances
 --   1b  decoded  current totals (one row)
---   1c  uploaded daily USDG flows and running balances
+--   1c  uploaded daily USDC flows and running balances
 --   1d  uploaded current totals (one row)
 --
--- Decoded form: Dune's decoded tables cargoflow_robinhood.<Contract>_evt_<Event>, available once the CargoFlow
--- contracts are submitted for decoding on Robinhood Chain. Uploaded form: the tables CargoFlow's indexer pushes
+-- Decoded form: Dune's decoded tables cargoflow_monad.<Contract>_evt_<Event>, available once the CargoFlow
+-- contracts are submitted for decoding on Monad. Uploaded form: the tables CargoFlow's indexer pushes
 -- through the Dune uploads API (see upload-schema.md); {{team}} is a Dune text parameter (your team or user handle).
 --
--- USDG has 6 decimals: every amount is divided by 1e6. Flows:
+-- USDC has 6 decimals: every amount is divided by 1e6. Flows:
 --   committed        FinancingController.FacilityCreated.committed
 --   deposited        ReceivableVault.CapitalDeposited.amount          (financier -> vault)
 --   drawn            ReceivableVault.AdvanceReleased.amount           (vault -> exporter)
@@ -25,38 +25,38 @@
 -- ===================================================================================== 1a (decoded)
 WITH flows AS (
     SELECT evt_block_time AS ts, 'committed' AS kind, CAST(committed AS DOUBLE) / 1e6 AS usdg
-    FROM cargoflow_robinhood.FinancingController_evt_FacilityCreated
+    FROM cargoflow_monad.FinancingController_evt_FacilityCreated
     UNION ALL
     SELECT evt_block_time, 'deposited', CAST(amount AS DOUBLE) / 1e6
-    FROM cargoflow_robinhood.ReceivableVault_evt_CapitalDeposited
+    FROM cargoflow_monad.ReceivableVault_evt_CapitalDeposited
     UNION ALL
     SELECT evt_block_time, 'drawn', CAST(amount AS DOUBLE) / 1e6
-    FROM cargoflow_robinhood.ReceivableVault_evt_AdvanceReleased
+    FROM cargoflow_monad.ReceivableVault_evt_AdvanceReleased
     UNION ALL
     SELECT evt_block_time, 'settled',
         (CAST(principal AS DOUBLE) + CAST(fee AS DOUBLE) + CAST(residual AS DOUBLE)) / 1e6
-    FROM cargoflow_robinhood.ReceivableVault_evt_FacilitySettled
+    FROM cargoflow_monad.ReceivableVault_evt_FacilitySettled
     UNION ALL
     SELECT evt_block_time, 'refunded', CAST(undrawnRefund AS DOUBLE) / 1e6
-    FROM cargoflow_robinhood.ReceivableVault_evt_FacilitySettled
+    FROM cargoflow_monad.ReceivableVault_evt_FacilitySettled
     UNION ALL
     SELECT evt_block_time, 'defaulted', CAST(outstandingPrincipal AS DOUBLE) / 1e6
-    FROM cargoflow_robinhood.ReceivableVault_evt_FacilityDefaulted
+    FROM cargoflow_monad.ReceivableVault_evt_FacilityDefaulted
     UNION ALL
     SELECT evt_block_time, 'refunded', CAST(undrawnRefund AS DOUBLE) / 1e6
-    FROM cargoflow_robinhood.ReceivableVault_evt_FacilityDefaulted
+    FROM cargoflow_monad.ReceivableVault_evt_FacilityDefaulted
     UNION ALL
     SELECT evt_block_time, 'refunded', CAST(amount AS DOUBLE) / 1e6 -- v3
-    FROM cargoflow_robinhood.ReceivableVault_evt_CapitalReturned -- v3
+    FROM cargoflow_monad.ReceivableVault_evt_CapitalReturned -- v3
     UNION ALL
     SELECT evt_block_time, 'cover_in', CAST(amount AS DOUBLE) / 1e6
-    FROM cargoflow_robinhood.CoverPool_evt_CoverOffered
+    FROM cargoflow_monad.CoverPool_evt_CoverOffered
     UNION ALL
     SELECT evt_block_time, 'cover_out', CAST(amount AS DOUBLE) / 1e6
-    FROM cargoflow_robinhood.CoverPool_evt_OfferWithdrawn
+    FROM cargoflow_monad.CoverPool_evt_OfferWithdrawn
     UNION ALL
     SELECT evt_block_time, 'cover_out', CAST(amount AS DOUBLE) / 1e6
-    FROM cargoflow_robinhood.CoverPool_evt_Withdrawn
+    FROM cargoflow_monad.CoverPool_evt_Withdrawn
 ),
 daily AS (
     SELECT
@@ -94,7 +94,7 @@ ORDER BY day;
 -- ===================================================================================== 1b (decoded)
 WITH facilities AS (
     SELECT shipmentId AS shipment_id, CAST(committed AS DOUBLE) / 1e6 AS committed
-    FROM cargoflow_robinhood.FinancingController_evt_FacilityCreated
+    FROM cargoflow_monad.FinancingController_evt_FacilityCreated
 ),
 last_status AS (
     SELECT shipment_id, status
@@ -105,32 +105,32 @@ last_status AS (
             ROW_NUMBER() OVER (
                 PARTITION BY shipmentId ORDER BY evt_block_number DESC, evt_index DESC
             ) AS rn
-        FROM cargoflow_robinhood.FinancingController_evt_StatusChanged
+        FROM cargoflow_monad.FinancingController_evt_StatusChanged
     ) AS s
     WHERE rn = 1
 ),
 vault AS (
     SELECT
         (SELECT COALESCE(SUM(CAST(amount AS DOUBLE)), 0)
-            FROM cargoflow_robinhood.ReceivableVault_evt_CapitalDeposited) / 1e6 AS deposited,
+            FROM cargoflow_monad.ReceivableVault_evt_CapitalDeposited) / 1e6 AS deposited,
         (SELECT COALESCE(SUM(CAST(amount AS DOUBLE)), 0)
-            FROM cargoflow_robinhood.ReceivableVault_evt_AdvanceReleased) / 1e6 AS drawn,
+            FROM cargoflow_monad.ReceivableVault_evt_AdvanceReleased) / 1e6 AS drawn,
         (SELECT COALESCE(SUM(CAST(principal AS DOUBLE) + CAST(fee AS DOUBLE) + CAST(residual AS DOUBLE)), 0)
-            FROM cargoflow_robinhood.ReceivableVault_evt_FacilitySettled) / 1e6 AS settled,
+            FROM cargoflow_monad.ReceivableVault_evt_FacilitySettled) / 1e6 AS settled,
         (SELECT COALESCE(SUM(CAST(outstandingPrincipal AS DOUBLE)), 0)
-            FROM cargoflow_robinhood.ReceivableVault_evt_FacilityDefaulted) / 1e6 AS defaulted,
+            FROM cargoflow_monad.ReceivableVault_evt_FacilityDefaulted) / 1e6 AS defaulted,
         (
             (SELECT COALESCE(SUM(CAST(undrawnRefund AS DOUBLE)), 0)
-                FROM cargoflow_robinhood.ReceivableVault_evt_FacilitySettled)
+                FROM cargoflow_monad.ReceivableVault_evt_FacilitySettled)
             + (SELECT COALESCE(SUM(CAST(undrawnRefund AS DOUBLE)), 0)
-                FROM cargoflow_robinhood.ReceivableVault_evt_FacilityDefaulted)
+                FROM cargoflow_monad.ReceivableVault_evt_FacilityDefaulted)
             + (SELECT COALESCE(SUM(CAST(amount AS DOUBLE)), 0) -- v3
-                FROM cargoflow_robinhood.ReceivableVault_evt_CapitalReturned) -- v3
+                FROM cargoflow_monad.ReceivableVault_evt_CapitalReturned) -- v3
         ) / 1e6 AS refunded,
         (
-            (SELECT COALESCE(SUM(CAST(amount AS DOUBLE)), 0) FROM cargoflow_robinhood.CoverPool_evt_CoverOffered)
-            - (SELECT COALESCE(SUM(CAST(amount AS DOUBLE)), 0) FROM cargoflow_robinhood.CoverPool_evt_OfferWithdrawn)
-            - (SELECT COALESCE(SUM(CAST(amount AS DOUBLE)), 0) FROM cargoflow_robinhood.CoverPool_evt_Withdrawn)
+            (SELECT COALESCE(SUM(CAST(amount AS DOUBLE)), 0) FROM cargoflow_monad.CoverPool_evt_CoverOffered)
+            - (SELECT COALESCE(SUM(CAST(amount AS DOUBLE)), 0) FROM cargoflow_monad.CoverPool_evt_OfferWithdrawn)
+            - (SELECT COALESCE(SUM(CAST(amount AS DOUBLE)), 0) FROM cargoflow_monad.CoverPool_evt_Withdrawn)
         ) / 1e6 AS cover_pool
 )
 SELECT

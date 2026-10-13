@@ -1,7 +1,7 @@
 # Dune upload schema (spec for the pusher)
 
 What CargoFlow's backend pushes to Dune so the "uploaded" form of the queries in this folder works when Dune does not
-decode Robinhood Chain Testnet logs. This is a spec only; the pusher is not written yet (the backend agent or the
+decode Monad Testnet logs. This is a spec only; the pusher is not written yet (the backend agent or the
 lead implements it in Go, e.g. `backend/cmd/dune-push` or a worker in the service).
 
 ## API
@@ -123,7 +123,7 @@ One row per committed evidence epoch, from `telemetry_epochs` (fully refreshed).
 
 ```json
 {"namespace":"<team>","table_name":"cargoflow_chain_events","is_private":false,
- "description":"CargoFlow contract events on Robinhood Chain Testnet (46630), pushed by the CargoFlow indexer",
+ "description":"CargoFlow contract events on Monad Testnet (10143), pushed by the CargoFlow indexer",
  "schema":[{"name":"tx_hash","type":"varchar","nullable":false},{"name":"log_index","type":"integer","nullable":false},
   {"name":"block_number","type":"bigint","nullable":false},{"name":"block_time","type":"timestamp","nullable":false},
   {"name":"block_hash","type":"varchar","nullable":false},{"name":"contract","type":"varchar","nullable":false},
