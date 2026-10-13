@@ -17,6 +17,8 @@ export type Contracts = {
   deviceRegistry?: Address;
   /** contracts v3: the electronic bill of lading registry; undefined hides every bill of lading feature */
   eblRegistry?: Address;
+  /** Monad: the Cargo Note market; undefined hides note trading */
+  noteMarket?: Address;
 };
 
 /** A configured, non-zero address, or undefined. */
@@ -41,6 +43,7 @@ export function useContracts(): { contracts: Contracts | undefined; chainId: num
       coverPool: optionalAddress(c.coverPool),
       deviceRegistry: optionalAddress(c.deviceRegistry),
       eblRegistry: optionalAddress(c.eblRegistry ?? c.eblregistry),
+      noteMarket: optionalAddress(c.noteMarket),
     },
   };
 }
