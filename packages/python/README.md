@@ -53,8 +53,8 @@ exponential backoff (the hosted API can take a few seconds to wake). Errors rais
 | `portfolio(ids=None, status=, party=, include_track=True, include_cover=False)` | all of the above per shipment | `analytics.Portfolio` |
 | `get(path, params)` | any GET | decoded JSON |
 
-Models are pydantic v2 with snake_case fields (camelCase on the wire). Amounts are USDG **base units** as `int`
-(the API sends decimal strings, so no precision is lost; `cargoflow.usdg(x)` converts to USDG). Temperatures are
+Models are pydantic v2 with snake_case fields (camelCase on the wire). Amounts are USDC **base units** as `int`
+(the API sends decimal strings, so no precision is lost; `cargoflow.usdg(x)` converts to USDC). Temperatures are
 hundredths of °C (`*_x100`), positions micro-degrees (`*_e6`), shares basis points (`*_bps`). Unknown fields are
 kept, so newer API versions do not break older clients.
 
@@ -63,7 +63,7 @@ Every list result is a `ModelList` with `.to_frame(backend="pandas" | "polars")`
 
 ## Analytics (`cargoflow.analytics`)
 
-All functions take a `Portfolio` and return a DataFrame (pass `backend="polars"` for polars). Amounts in USDG.
+All functions take a `Portfolio` and return a DataFrame (pass `backend="polars"` for polars). Amounts in USDC.
 
 | Function | What it measures |
 | --- | --- |

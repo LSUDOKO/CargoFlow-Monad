@@ -17,10 +17,10 @@ def cf():
 @respx.mock
 def test_stats_health_and_errors(cf):
     respx.get(f"{API}/v1/stats").respond(json={"shipments": {"ACTIVE": 2, "PAUSED": 1}, "total": 3, "epochsCommitted": 9, "proofsVerified": 1})
-    respx.get(f"{API}/v1/health").respond(json={"chainId": 46630, "database": "ok", "headBlock": 1, "status": "ok"})
+    respx.get(f"{API}/v1/health").respond(json={"chainId": 10143, "database": "ok", "headBlock": 1, "status": "ok"})
     s = cf.stats()
     assert s.total == 3 and s.shipments["PAUSED"] == 1 and s.epochs_committed == 9
-    assert cf.health().chain_id == 46630
+    assert cf.health().chain_id == 10143
     respx.get(f"{API}/v1/shipments/0xnope").respond(404, json={"error": {"code": "not_found", "message": "no shipment with this id"}})
     with pytest.raises(NotFoundError) as e:
         cf.shipment("0xnope")

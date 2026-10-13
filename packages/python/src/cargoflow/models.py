@@ -1,7 +1,7 @@
 """Typed models of the CargoFlow API's read endpoints.
 
 Field names are snake_case in Python and camelCase on the wire (``external_ref`` <-> ``externalRef``). Amounts are
-USDG base units (6 decimals) as ``int``; the API sends them as decimal strings so no precision is lost. Temperatures
+USDC base units (6 decimals) as ``int``; the API sends them as decimal strings so no precision is lost. Temperatures
 are hundredths of a degree Celsius (``*_x100``), positions micro-degrees (``*_e6``), shares basis points
 (``*_bps``). Unknown fields are kept (``model_extra``) so newer API versions never break older clients.
 """
@@ -26,11 +26,11 @@ def _to_int(v: Any) -> int:
 
 
 BaseUnits = Annotated[int, BeforeValidator(_to_int)]
-"""USDG base units (1 USDG = 10**6)."""
+"""USDC base units (1 USDC = 10**6)."""
 
 
 def usdg(amount: int, decimals: int = USDG_DECIMALS) -> float:
-    """Base units -> USDG as a float (for analysis; keep ints for accounting)."""
+    """Base units -> USDC as a float (for analysis; keep ints for accounting)."""
     return amount / 10**decimals
 
 

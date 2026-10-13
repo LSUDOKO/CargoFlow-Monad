@@ -43,7 +43,7 @@ show(ships[["external_ref", "status", "route", "cargo", "invoice_value", "commit
 
 # %% [markdown]
 # ## Exposure
-# USDG. `in_escrow` is funded in the vault but not yet drawn on open facilities; `uncovered_drawn` is what the
+# USDC. `in_escrow` is funded in the vault but not yet drawn on open facilities; `uncovered_drawn` is what the
 # financier would lose if every open facility defaulted and nothing were recovered beyond accepted cover.
 
 # %%
@@ -118,7 +118,7 @@ try:
     fig, ax = plt.subplots(figsize=(7, 3.2))
     ax.hist(mc.portfolio_losses, bins=40, color="#2f6db5")
     ax.axvline(mc.var(0.99), color="#c0392b", linestyle="--", label=f"VaR 99% = {mc.var(0.99):,.2f}")
-    ax.set_xlabel("portfolio loss (USDG)")
+    ax.set_xlabel("portfolio loss (USDC)")
     ax.set_ylabel("scenarios")
     ax.set_title("Simulated loss distribution")
     ax.legend()

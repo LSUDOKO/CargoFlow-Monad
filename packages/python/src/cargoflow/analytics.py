@@ -1,7 +1,7 @@
 """Portfolio analytics over CargoFlow shipments.
 
 Everything here works on a :class:`Portfolio` (fetched with ``CargoFlow().portfolio()``) and returns pandas
-DataFrames (``backend="polars"`` for polars). Amounts are converted to USDG (floats) for analysis.
+DataFrames (``backend="polars"`` for polars). Amounts are converted to USDC (floats) for analysis.
 
 Functions
 ---------
@@ -62,7 +62,7 @@ class Portfolio:
     # -- frames
 
     def shipments_frame(self, backend: Backend | str = "pandas"):
-        """One row per shipment: parties, route, cargo band, policy, facility amounts (USDG), cover, latest evidence."""
+        """One row per shipment: parties, route, cargo band, policy, facility amounts (USDC), cover, latest evidence."""
         rows = []
         for v in self.views:
             s, f = v.shipment, v.facility
@@ -177,7 +177,7 @@ class Portfolio:
 def exposure(portfolio: Portfolio, by: str = "status", backend: Backend | str = "pandas"):
     """Portfolio exposure by ``status`` (or any shipments_frame column, e.g. ``"financier"``, ``"route"``).
 
-    Columns (USDG): ``invoice_value``; ``committed`` (facility size); ``drawn`` (advanced to the exporter);
+    Columns (USDC): ``invoice_value``; ``committed`` (facility size); ``drawn`` (advanced to the exporter);
     ``in_escrow`` (funded in the vault, not yet drawn, on open facilities); ``undrawn`` (committed - drawn);
     ``covered`` (accepted default cover still ACTIVE); ``uncovered_drawn`` (drawn not backed by active cover, the
     loss if every open facility defaulted with nothing recovered); ``share_of_drawn``. A ``TOTAL`` row is appended.
@@ -471,9 +471,9 @@ class MonteCarloResult:
     seed: Optional[int]
     rates: EpochRates
     defaults: np.ndarray  # (S, N) bool
-    ead: np.ndarray  # (S, N) exposure at default, USDG (0 where no default)
-    losses: np.ndarray  # (S, N) loss after cover and salvage, USDG
-    exposure_now: np.ndarray  # (N,) drawn today, USDG
+    ead: np.ndarray  # (S, N) exposure at default, USDC (0 where no default)
+    losses: np.ndarray  # (S, N) loss after cover and salvage, USDC
+    exposure_now: np.ndarray  # (N,) drawn today, USDC
     params: dict[str, Any] = field(default_factory=dict)
 
     @property
@@ -573,7 +573,7 @@ def simulate_default_recovery(
     loss distribution instead of hiding behind a point estimate; without it the posterior means are used.
 
     Simplifications (stated so they can be challenged): milestones are independent given the rates; one pause per
-    milestone; settlement risk after delivery, disputes and fees are not modelled; amounts are USDG.
+    milestone; settlement risk after delivery, disputes and fees are not modelled; amounts are USDC.
 
     Everything is vectorised over a ``(n_sims, shipments, milestones)`` array and seeded with
     ``numpy.random.default_rng(seed)``, so a run is reproducible.
