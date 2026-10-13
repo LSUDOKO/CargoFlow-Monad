@@ -7,6 +7,7 @@ import {PolicyEngine} from "../src/PolicyEngine.sol";
 import {EvidenceRegistry} from "../src/EvidenceRegistry.sol";
 import {ReceivableVault} from "../src/ReceivableVault.sol";
 import {FinancingController} from "../src/FinancingController.sol";
+import {CargoNoteMarket} from "../src/CargoNoteMarket.sol";
 import {CoverPool} from "../src/CoverPool.sol";
 import {EBLRegistry} from "../src/EBLRegistry.sol";
 import {DeviceRegistry} from "../src/DeviceRegistry.sol";
@@ -41,6 +42,7 @@ contract Deploy is ScriptBase {
         address coverPool;
         address deviceRegistry;
         address eblRegistry;
+        address noteMarket;
     }
 
     function run() external returns (Deployed memory d) {
@@ -75,6 +77,8 @@ contract Deploy is ScriptBase {
 
         // Default cover reads facility state from the controller; it is granted no role at all.
         d.coverPool = address(new CoverPool(d.access, d.controller));
+        // Monad: the Cargo Note market (no role: it moves positions only as their approved operator)
+        d.noteMarket = address(new CargoNoteMarket(d.controller));
         // v3: audit registry of evidence devices (holds no funds and no role)
         d.deviceRegistry = address(new DeviceRegistry(d.access));
 
@@ -148,6 +152,7 @@ contract Deploy is ScriptBase {
         vm.serializeAddress(c, "coverPool", d.coverPool);
         vm.serializeAddress(c, "deviceRegistry", d.deviceRegistry);
         vm.serializeAddress(c, "eblRegistry", d.eblRegistry);
+        vm.serializeAddress(c, "noteMarket", d.noteMarket);
         string memory contractsJson = vm.serializeAddress(c, "financingController", d.controller);
 
         string memory root = "manifest";
