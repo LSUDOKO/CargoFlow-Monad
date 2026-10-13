@@ -50,7 +50,7 @@ export default function DeploymentsPage() {
   const current = ORDER.filter((k) => cur.contracts?.[k]).map((k) => ({ key: k, ...ROLES[k]!, address: cur.contracts![k]! }));
   if (cur.usdg) current.push({ key: "usdg", name: "USDC (Circle)", role: "The settlement token: Circle's USDC on Monad Testnet, 6 decimals", address: cur.usdg });
   const services = [
-    { name: "Website", href: PUBLIC_SITE_URL, note: "This app on Cloudflare Workers" },
+    { name: "Website", href: PUBLIC_SITE_URL, note: "This app on Vercel" },
     { name: "API", href: DOCS_API_URL, note: "Go backend", extra: [{ label: "/v1/health", href: `${DOCS_API_URL}/v1/health` }, { label: "/v1/openapi.json", href: `${DOCS_API_URL}/v1/openapi.json` }] },
     { name: "API reference", href: "/docs", note: "Interactive, with request recipes" },
     { name: "MCP server", href: MCP_URL, note: "Remote, Streamable HTTP; add it to Claude as a custom connector" },

@@ -5,7 +5,7 @@ import { API_URL } from "@/lib/api/client";
 export const MCP_URL = (process.env.NEXT_PUBLIC_MCP_URL || "https://cargoflow-monad-mcp.adoranto737.workers.dev/mcp").replace(/\/+$/, "");
 
 export const PUBLIC_API_URL = "https://cargoflow-monad-api.onrender.com";
-export const PUBLIC_SITE_URL = "https://cargoflow-monad.adoranto737.workers.dev";
+export const PUBLIC_SITE_URL = "https://cargoflow-monad.vercel.app";
 export const GITHUB_URL = "https://github.com/LSUDOKO/CargoFlow-Monad";
 
 /** The API base shown in docs: the one this build talks to, unless that is a local default. */
