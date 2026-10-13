@@ -24,7 +24,7 @@ interface WaitUntil {
 export const DEFAULTS = {
   apiUrl: "https://cargoflow-api-75ul.onrender.com",
   appUrl: "https://cargoflow.adoranto737.workers.dev",
-  rpcUrl: "https://rpc.testnet.chain.robinhood.com",
+  rpcUrl: "https://testnet-rpc.monad.xyz",
 } as const;
 
 /** Render's free tier sleeps when idle; 25 s leaves room inside Claude's tool-call budget for a friendly retry message. */

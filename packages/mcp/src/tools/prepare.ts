@@ -21,7 +21,7 @@ function render(ctx: Ctx, o: { action: string; shipment: ShipmentView["shipment"
   const chainId = o.steps[0]!.tx.chainId;
   const lines = [
     `${o.action} for ${o.shipment.externalRef} (${o.shipment.id})`,
-    `Sign with the ${o.signer.role}'s wallet${o.signer.address ? ` (${o.signer.address})` : ""} on chain ${chainId}${chainId === 46630 ? " (Robinhood Chain Testnet)" : ""}.`,
+    `Sign with the ${o.signer.role}'s wallet${o.signer.address ? ` (${o.signer.address})` : ""} on chain ${chainId}${chainId === 10143 ? " (Monad Testnet)" : ""}.`,
     `Send ${o.steps.length === 1 ? "this transaction" : `these ${o.steps.length} transactions in order`}:`,
     ...o.steps.map((s, i) => `${i + 1}. ${s.label} → ${s.tx.to}`),
     ...(o.notes ?? []),
@@ -49,7 +49,7 @@ export function registerPrepareTools(server: McpServer, ctx: Ctx) {
     {
       title: "Prepare: fund a facility",
       description:
-        "Prepare the financier's deposit into a newly created facility: a USDG approval of the committed amount to the ReceivableVault, then FinancingController.depositCapital. Only valid while the facility is CREATED. Returns unsigned transactions and a link to sign in CargoFlow.",
+        "Prepare the financier's deposit into a newly created facility: a USDC approval of the committed amount to the ReceivableVault, then FinancingController.depositCapital. Only valid while the facility is CREATED. Returns unsigned transactions and a link to sign in CargoFlow.",
       inputSchema: { shipmentId },
       annotations: PREPARE,
     },
@@ -63,7 +63,7 @@ export function registerPrepareTools(server: McpServer, ctx: Ctx) {
         shipment: v.shipment,
         signer: { role: "financier", address: f.financier },
         steps: [
-          { label: `Approve the ReceivableVault to pull ${usdg(committed)} (USDG.approve)`, tx: approve! },
+          { label: `Approve the ReceivableVault to pull ${usdg(committed)} (USDC.approve)`, tx: approve! },
           { label: "Deposit the committed capital (FinancingController.depositCapital)", tx: deposit! },
         ],
         notes: [`The financier's wallet must hold at least ${usdg(committed)}. After this the exporter starts transit.`],
@@ -199,7 +199,7 @@ export function registerPrepareTools(server: McpServer, ctx: Ctx) {
     "prepare_settle",
     {
       title: "Prepare: settle the invoice",
-      description: "Prepare the buyer's settlement of a DELIVERED facility: a USDG approval of the full invoice value to the ReceivableVault, then FinancingController.settle. The vault repays the financier (principal + fee + undrawn) and pays the exporter the rest.",
+      description: "Prepare the buyer's settlement of a DELIVERED facility: a USDC approval of the full invoice value to the ReceivableVault, then FinancingController.settle. The vault repays the financier (principal + fee + undrawn) and pays the exporter the rest.",
       inputSchema: { shipmentId },
       annotations: PREPARE,
     },
@@ -215,7 +215,7 @@ export function registerPrepareTools(server: McpServer, ctx: Ctx) {
         shipment: v.shipment,
         signer: { role: "buyer", address: f.buyer },
         steps: [
-          { label: `Approve the ReceivableVault to pull ${usdg(invoice)} (USDG.approve)`, tx: approve! },
+          { label: `Approve the ReceivableVault to pull ${usdg(invoice)} (USDC.approve)`, tx: approve! },
           { label: "Settle (FinancingController.settle)", tx: settle! },
         ],
         notes: [`Expected split: about ${usdg(drawn + fee + BigInt(f.remaining))} to the financier (drawn ${usdg(drawn)} + fee ${usdg(fee)} + undrawn ${usdg(f.remaining)}), the rest to the exporter.`],
@@ -251,10 +251,10 @@ export function registerPrepareTools(server: McpServer, ctx: Ctx) {
     "prepare_offer_cover",
     {
       title: "Prepare: offer default cover",
-      description: "Prepare an insurer's default-cover offer on a shipment (contracts v2 CoverPool): a USDG approval of the cover amount to the pool, then CoverPool.offerCover. The amount is escrowed until the offer is withdrawn, accepted and later released or claimed.",
+      description: "Prepare an insurer's default-cover offer on a shipment (contracts v2 CoverPool): a USDC approval of the cover amount to the pool, then CoverPool.offerCover. The amount is escrowed until the offer is withdrawn, accepted and later released or claimed.",
       inputSchema: {
         shipmentId,
-        amountUsdg: z.string().regex(/^\d[\d,]*(\.\d{1,6})?$/).describe("Cover amount in USDG, e.g. \"10000\" or \"2500.50\"."),
+        amountUsdg: z.string().regex(/^\d[\d,]*(\.\d{1,6})?$/).describe("Cover amount in USDC, e.g. \"10000\" or \"2500.50\"."),
         premiumBps: z.number().int().min(0).max(10_000).describe("Premium the financier pays on acceptance, in basis points of the amount (150 = 1.5%)."),
         insurer: address.optional().describe("The insurer's wallet, for the summary."),
       },
@@ -264,7 +264,7 @@ export function registerPrepareTools(server: McpServer, ctx: Ctx) {
       const { v, addrs, sid } = await load(ctx, id);
       if (!addrs.coverPool) throw new Refusal("This CargoFlow deployment runs contracts v1, which has no CoverPool; default cover is available after the v2 deployment.");
       const amount = parseUsdg(amountUsdg);
-      if (!amount || amount <= 0n) throw new Refusal("Enter a positive USDG amount with at most 6 decimals.");
+      if (!amount || amount <= 0n) throw new Refusal("Enter a positive USDC amount with at most 6 decimals.");
       const f = v.facility;
       if (f && ["SETTLED", "DEFAULTED"].includes(f.status)) throw new Refusal(`${v.shipment.externalRef} is ${f.status}; there is nothing left to cover.`);
       const [approve, offer] = contracts.prepareOfferCoverWithApproval(addrs, { shipmentId: sid, coverAmount: amount, premiumBps });
@@ -273,7 +273,7 @@ export function registerPrepareTools(server: McpServer, ctx: Ctx) {
         shipment: v.shipment,
         signer: { role: "insurer", address: insurer },
         steps: [
-          { label: `Approve the CoverPool to escrow ${usdg(amount)} (USDG.approve)`, tx: approve! },
+          { label: `Approve the CoverPool to escrow ${usdg(amount)} (USDC.approve)`, tx: approve! },
           { label: "Offer cover (CoverPool.offerCover)", tx: offer! },
         ],
         notes: [`If accepted, the financier pays a premium of ${usdg(contracts.coverPremium(amount, premiumBps))}.`],
@@ -286,7 +286,7 @@ export function registerPrepareTools(server: McpServer, ctx: Ctx) {
     "prepare_accept_cover",
     {
       title: "Prepare: accept a cover offer",
-      description: "Prepare the financier's acceptance of an insurer's open cover offer (contracts v2): a USDG approval of the premium to the CoverPool (when the premium is not zero), then CoverPool.acceptCover.",
+      description: "Prepare the financier's acceptance of an insurer's open cover offer (contracts v2): a USDC approval of the premium to the CoverPool (when the premium is not zero), then CoverPool.acceptCover.",
       inputSchema: { shipmentId, insurer: address.describe("The insurer whose open offer to accept (from get_cover).") },
       annotations: PREPARE,
     },
@@ -303,7 +303,7 @@ export function registerPrepareTools(server: McpServer, ctx: Ctx) {
       const steps: Step[] =
         txs.length === 2
           ? [
-              { label: `Approve the CoverPool to pull the ${usdg(premium)} premium (USDG.approve)`, tx: txs[0]! },
+              { label: `Approve the CoverPool to pull the ${usdg(premium)} premium (USDC.approve)`, tx: txs[0]! },
               { label: `Accept ${usdg(offer.amount)} of cover from ${insurer} (CoverPool.acceptCover)`, tx: txs[1]! },
             ]
           : [{ label: `Accept ${usdg(offer.amount)} of cover from ${insurer} (CoverPool.acceptCover)`, tx: txs[0]! }];

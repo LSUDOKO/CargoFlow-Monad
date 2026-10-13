@@ -164,8 +164,8 @@ addresses, contracts version).
 
 > **You:** Fund the facility for CF-MEERA-0412.
 >
-> **Claude:** *(calls `prepare_deposit`)* Two transactions to send from the financier's wallet on Robinhood Chain
-> Testnet: 1. approve the ReceivableVault for 20 USDG, 2. depositCapital. Nothing has been sent. Open
+> **Claude:** *(calls `prepare_deposit`)* Two transactions to send from the financier's wallet on Monad
+> Testnet: 1. approve the ReceivableVault for 20 USDC, 2. depositCapital. Nothing has been sent. Open
 > https://cargoflow.adoranto737.workers.dev/track/0x… to sign them there, or send the JSON below from your wallet.
 
 ## Deploy your own (Cloudflare Workers)

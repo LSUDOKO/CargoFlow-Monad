@@ -12,13 +12,13 @@ const ID = "0x" + "ab".repeat(32);
 const EXPORTER = "0x8e6877a28d51a6c2b1699154cc17f3ebf682102f";
 const FINANCIER = "0x2198ab4e7755510a6a94ee298cf70f44e0f86414";
 const BUYER = "0x6248101b50364011f12174cdb9d5305faf671d4a";
-const invoiceBytes = new TextEncoder().encode("INVOICE CF-TEST-1: 30,000 USDG");
+const invoiceBytes = new TextEncoder().encode("INVOICE CF-TEST-1: 30,000 USDC");
 const invoiceHash = hashDocument(invoiceBytes).keccak256;
 
 const configV1 = {
-  chainId: 46630, usdgDecimals: 6,
+  chainId: 10143, usdgDecimals: 6,
   contracts: {
-    usdg: "0x7e955252e15c84f5768b83c41a71f9eba181802f", access: "0x5ed4f105e3c3c0a67f916c0fc339b261e3de81d7", evidenceRegistry: "0x4ad47799586b4793b7952ba849013f5d0ec2e66a",
+    usdg: "0x534b2f3A21130d7a60830c2Df862319e593943A3", access: "0x5ed4f105e3c3c0a67f916c0fc339b261e3de81d7", evidenceRegistry: "0x4ad47799586b4793b7952ba849013f5d0ec2e66a",
     financingController: "0xa2e708376cddf0eb8fa746c43089611b4d49e210", policyEngine: "0x93f2cd67f404f62ff34f729aad1118ea9e1582d0", receivableVault: "0x5298dcdbdf6ec799475b09c2ecd0f089bd4d6902",
     shipmentRegistry: "0x2f7cac603654ec106da242cd0b16044b31f7608d",
   },
@@ -90,10 +90,10 @@ describe("tools", () => {
   it("list_shipments and get_shipment answer in plain text with ids and a dashboard link", async () => {
     const { call } = await connect({ fetch: api(), appUrl: "https://app.example" });
     const l = await call("list_shipments", { status: ["active"] });
-    expect(l.text).toContain("CF-TEST-1 · ACTIVE · invoice 30 USDG");
+    expect(l.text).toContain("CF-TEST-1 · ACTIVE · invoice 30 USDC");
     expect(l.text).toContain(`id ${ID}`);
     const g = await call("get_shipment", { shipmentId: ID });
-    expect(g.text).toContain("Facility: committed 20 USDG, drawn 8 USDG");
+    expect(g.text).toContain("Facility: committed 20 USDC, drawn 8 USDC");
     expect(g.text).toContain(`Dashboard: https://app.example/track/${ID}`);
   });
 
@@ -136,7 +136,7 @@ describe("prepare tools", () => {
     const [approve, deposit] = txsOf(r.text);
     expect(approve!.to.toLowerCase()).toBe(configV1.contracts.usdg);
     expect(decodeFunctionData({ abi: erc20Abi, data: approve!.data }).args).toEqual([expect.stringMatching(/^0x5298/i), 20_000_000n]);
-    expect(deposit).toMatchObject({ value: "0x0", chainId: 46630 });
+    expect(deposit).toMatchObject({ value: "0x0", chainId: 10143 });
     expect(decodeFunctionData({ abi: contracts.financingControllerAbi, data: deposit!.data }).functionName).toBe("depositCapital");
   });
 
@@ -176,7 +176,7 @@ describe("prepare tools", () => {
     const [approve, offer] = txsOf(r.text);
     expect(decodeFunctionData({ abi: erc20Abi, data: approve!.data }).args?.[1]).toBe(2_500_500_000n);
     expect(decodeFunctionData({ abi: contracts.coverPoolAbi, data: offer!.data }).args).toEqual([ID, 2_500_500_000n, 150]);
-    expect(r.text).toContain("premium of 37.5075 USDG");
+    expect(r.text).toContain("premium of 37.5075 USDC");
   });
 
   it("prepare_resume_with_proof without a signature only explains, with the exact message to sign", async () => {
@@ -225,7 +225,7 @@ describe("resources and prompts", () => {
   it("serves the config resource and both prompts", async () => {
     const { client } = await connect({ fetch: api() });
     const res = await client.readResource({ uri: "cargoflow://config" });
-    expect(JSON.parse((res.contents[0] as { text: string }).text)).toMatchObject({ chainId: 46630, contractsVersion: "v1" });
+    expect(JSON.parse((res.contents[0] as { text: string }).text)).toMatchObject({ chainId: 10143, contractsVersion: "v1" });
     const sh = await client.readResource({ uri: `cargoflow://shipment/${ID}` });
     expect(JSON.parse((sh.contents[0] as { text: string }).text).shipment.externalRef).toBe("CF-TEST-1");
     const prompts = (await client.listPrompts()).prompts.map((p) => p.name).sort();

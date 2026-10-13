@@ -8,7 +8,7 @@ import worker from "../src/worker.js";
 const ID = "0x" + "cd".repeat(32);
 const EXPORTER = "0x8e6877a28d51a6c2b1699154cc17f3ebf682102f";
 const BUYER = "0x6248101b50364011f12174cdb9d5305faf671d4a";
-const invoiceBytes = new TextEncoder().encode("INVOICE CF-W-1: 12,000 USDG");
+const invoiceBytes = new TextEncoder().encode("INVOICE CF-W-1: 12,000 USDC");
 const inv = hashDocument(invoiceBytes);
 const policy = { minTempX100: 200, maxTempX100: 800, maxGapSec: 1800, maxRouteDeviationM: 25000, minEvidenceScore: 75, maxConflictBps: 3000, maxRiskBps: 3500, requiresZk: false, minSensors: 2 };
 const shipment = {
@@ -16,9 +16,9 @@ const shipment = {
   invoiceValue: "12000000", policy, route: [{ latE6: 18950000, lonE6: 72950000 }], status: "ACTIVE", createdAt: "2026-10-02T10:29:21Z", updatedAt: "2026-10-02T10:30:36Z",
 };
 const config = {
-  chainId: 46630, usdgDecimals: 6,
+  chainId: 10143, usdgDecimals: 6,
   contracts: {
-    usdg: "0x7e955252e15c84f5768b83c41a71f9eba181802f", access: "0x5ed4f105e3c3c0a67f916c0fc339b261e3de81d7", evidenceRegistry: "0x4ad47799586b4793b7952ba849013f5d0ec2e66a",
+    usdg: "0x534b2f3A21130d7a60830c2Df862319e593943A3", access: "0x5ed4f105e3c3c0a67f916c0fc339b261e3de81d7", evidenceRegistry: "0x4ad47799586b4793b7952ba849013f5d0ec2e66a",
     financingController: "0xa2e708376cddf0eb8fa746c43089611b4d49e210", policyEngine: "0x93f2cd67f404f62ff34f729aad1118ea9e1582d0", receivableVault: "0x5298dcdbdf6ec799475b09c2ecd0f089bd4d6902",
     shipmentRegistry: "0x2f7cac603654ec106da242cd0b16044b31f7608d",
   },

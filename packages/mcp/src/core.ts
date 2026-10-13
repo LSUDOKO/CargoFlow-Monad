@@ -14,7 +14,7 @@ const INSTRUCTIONS = `CargoFlow finances temperature-controlled cargo in milesto
 releases, pauses and settlement follow it. Use the read tools to look things up (list_shipments, get_shipment,
 explain_shipment, get_evidence, get_pricing, get_epcis, get_ebl, fleet_risk_summary, ...). The prepare_* tools never sign or send anything: they check the
 shipment's state and return unsigned transactions plus a CargoFlow link, which the person signs with their own wallet.
-Amounts are USDG (6 decimals); temperatures are °C.`;
+Amounts are USDC (6 decimals); temperatures are °C.`;
 
 export interface CoreExtras {
   /** local file access for verify_document's path mode (ignored when hosted) */

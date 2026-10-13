@@ -1,9 +1,9 @@
-// Plain-language formatting for tool output: amounts in USDG, temperatures in °C, times in UTC.
+// Plain-language formatting for tool output: amounts in USDC, temperatures in °C, times in UTC.
 import { CargoFlowApiError } from "@cargoflow/sdk";
 
 export const USDG_DECIMALS = 6;
 
-/** "20000000" (base units) -> "20 USDG"; "1234567" -> "1.234567 USDG". */
+/** "20000000" (base units) -> "20 USDC"; "1234567" -> "1.234567 USDC". */
 export function usdg(base: string | bigint | number | undefined | null): string {
   if (base === undefined || base === null || base === "") return "–";
   let v: bigint;
@@ -16,10 +16,10 @@ export function usdg(base: string | bigint | number | undefined | null): string 
   if (neg) v = -v;
   const whole = v / 10n ** BigInt(USDG_DECIMALS);
   const frac = (v % 10n ** BigInt(USDG_DECIMALS)).toString().padStart(USDG_DECIMALS, "0").replace(/0+$/, "");
-  return `${neg ? "-" : ""}${whole.toLocaleString("en-US")}${frac ? `.${frac}` : ""} USDG`;
+  return `${neg ? "-" : ""}${whole.toLocaleString("en-US")}${frac ? `.${frac}` : ""} USDC`;
 }
 
-/** A decimal USDG amount ("40,000.5") in base units, or undefined when it is not a valid amount. */
+/** A decimal USDC amount ("40,000.5") in base units, or undefined when it is not a valid amount. */
 export function parseUsdg(v: string): bigint | undefined {
   const t = v.trim().replace(/,/g, "");
   const m = t.match(/^(\d+)(?:\.(\d{1,6}))?$/);
