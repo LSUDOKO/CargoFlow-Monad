@@ -60,8 +60,8 @@ function useNotes(shipments: Shipment[]) {
             ] as const;
           })
         : [],
-    // Monad finalises in under a second, so the book re-reads about once a block
-    query: { enabled: !!market && shipments.length > 0, refetchInterval: 1_000 },
+    // one multicall per refresh; Monad finalises in under a second, so two seconds is a handful of blocks
+    query: { enabled: !!market && shipments.length > 0, refetchInterval: 2_000 },
   });
   const notes = useMemo<NoteState[]>(() => {
     if (!reads.data) return [];
@@ -159,7 +159,7 @@ export function NotesView() {
                       className={`cursor-pointer border-b border-border last:border-0 hover:bg-surface-2 ${current?.shipment.id === n.shipment.id ? "bg-surface-2" : ""}`}
                     >
                       <td className="px-4 py-3 font-semibold">
-                        <Link href={`/shipments/${n.shipment.id}`} className="underline decoration-ink/25 underline-offset-4" onClick={(e) => e.stopPropagation()}>
+                        <Link href={`/track/${n.shipment.id}`} className="underline decoration-ink/25 underline-offset-4" onClick={(e) => e.stopPropagation()}>
                           {n.shipment.externalRef || short(n.shipment.id)}
                         </Link>
                       </td>
@@ -169,7 +169,7 @@ export function NotesView() {
                       <td className="num px-4 py-3 text-right font-semibold">{formatUSDG(n.mark)}</td>
                       <td className="num px-4 py-3 text-right">{n.ask ? formatUSDG(n.ask.price) : "–"}</td>
                       <td className="num px-4 py-3 text-right">{n.bestBid ? formatUSDG(n.bestBid.price) : "–"}</td>
-                      <td className="num px-4 py-3 text-right">{bpsLabel(upsideBps(n.claim, n.ask?.price))}</td>
+                      <td className="num px-4 py-3 text-right">{n.claim > 0n ? bpsLabel(upsideBps(n.claim, n.ask?.price)) : "–"}</td>
                     </tr>
                   ))}
                 </tbody>
