@@ -63,7 +63,7 @@ const Lower: React.FC<{ title: string; sub?: string; at: number }> = ({ title, s
 // ---------------------------------------------------------------- explainer clips
 
 const ClipScene: React.FC<{ s: Scene }> = ({ s }) => {
-  const clipFrames = (s.clip === "S00" ? 315 : s.clip === "S02" ? 810 : s.clip === "S04" ? 360 : s.clip === "S05a" ? 450 : s.clip === "S05c" ? 360 : s.clip === "S05e" ? 510 : 570) - 1;
+  const clipFrames = (s.clip === "S00" ? 315 : s.clip === "S02" ? 810 : s.clip === "S04" ? 360 : s.clip === "S05a" ? 450 : s.clip === "S05c" ? 360 : s.clip === "S05e" ? 510 : 570) - 4;
   const f = useCurrentFrame();
   // hold the last frame if the narration outlasts the clip at its minimum speed
   const hold = f * s.speed >= clipFrames;
@@ -199,7 +199,7 @@ const DemoScene: React.FC<{ s: Scene }> = ({ s }) => {
     { at: c(1), url: "cargoflow-monad.vercel.app/shipments", title: "The fleet", sub: "every financed shipment, live", node: (d) => <Shot src="fleet.png" dur={d} /> },
     { at: c(1) + 55, url: "cargoflow-monad.vercel.app/track/0x0353f55d…c58e", title: "A settled shipment", sub: "evidence · releases · pause · proof", node: (d) => <Shot src="track-evidence.png" dur={d} /> },
     { at: c(1) + 110, url: "cargoflow-monad.vercel.app/track/0x0353f55d…c58e", title: "Audit trail", sub: "82 events, each linked to its transaction", node: (d) => <Shot src="track-audit.png" dur={d} /> },
-    { at: c(2), url: "cargoflow-monad.vercel.app/notes", title: "Cargo Notes", sub: "re-read every block · on-chain evidence mark", node: () => <OffthreadVideo src={staticFile("live/rec/notes.webm")} muted startFrom={360} style={{ width: 1600, height: 900 }} /> },
+    { at: c(2), url: "cargoflow-monad.vercel.app/notes", title: "Cargo Notes", sub: "re-read every block · on-chain evidence mark", node: () => <OffthreadVideo src={staticFile("live/rec/notes.mp4")} muted startFrom={360} style={{ width: 1600, height: 900 }} /> },
     { at: c(4), url: "testnet.monadvision.com/tx/0x0c2afd1c…3e62", title: "ResumeWithProof · Success", sub: "the Groth16 proof that resumed the facility", node: (d) => <Shot src="tx-recovery-mv.png" dur={d} /> },
     { at: c(4) + 75, url: "testnet.monadvision.com/tx/0xbd203765…1458c27", title: "Settle · Success", sub: "7 USDC in → 4.12 to the note holder · 2.88 to the exporter", node: (d) => <Shot src="tx-settle-mv.png" dur={d} /> },
   ];
