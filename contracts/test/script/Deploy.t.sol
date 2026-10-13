@@ -1,0 +1,158 @@
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.28;
+
+import {Test} from "forge-std/Test.sol";
+import {Deploy} from "../../script/Deploy.s.sol";
+import {CargoFlowAccess} from "../../src/access/CargoFlowAccess.sol";
+import {FinancingController} from "../../src/FinancingController.sol";
+import {CoverPool} from "../../src/CoverPool.sol";
+import {DeviceRegistry} from "../../src/DeviceRegistry.sol";
+import {EBLRegistry} from "../../src/EBLRegistry.sol";
+import {ReceivableVault} from "../../src/ReceivableVault.sol";
+import {MockUSDG} from "../../src/mocks/MockUSDG.sol";
+import {Groth16Verifier} from "../../generated/Groth16Verifier.sol";
+import {Roles} from "../../src/libraries/Roles.sol";
+
+contract DeployScriptTest is Test {
+    // anvil account 0: a public, well-known dev key (never funded on a real network)
+    string internal constant ANVIL_KEY =
+        "ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80";
+    string internal constant FILE = "deployments/test-deploy.json";
+
+    Deploy internal deployScript;
+    Deploy.Deployed internal d;
+    address internal deployer;
+
+    function setUp() public {
+        // accepts the lowercase, un-prefixed form used in the repo's .env
+        vm.setEnv("private_key", ANVIL_KEY);
+        vm.setEnv("DEPLOYMENT_FILE", FILE);
+        deployer = vm.addr(vm.parseUint(string.concat("0x", ANVIL_KEY)));
+        deployScript = new Deploy();
+        d = deployScript.run();
+    }
+
+    function tearDown() public {
+        if (vm.exists(FILE)) vm.removeFile(FILE);
+    }
+
+    function test_controllerHoldsVaultAndProofRoles() public view {
+        CargoFlowAccess access = CargoFlowAccess(d.access);
+        assertTrue(access.hasRole(Roles.CONTROLLER_ROLE, d.controller));
+        assertTrue(access.hasRole(Roles.PROOF_VERIFIER_ROLE, d.controller));
+    }
+
+    function test_deployerIsAdminButNotController() public view {
+        CargoFlowAccess access = CargoFlowAccess(d.access);
+        assertEq(access.defaultAdmin(), deployer);
+        assertFalse(access.hasRole(Roles.CONTROLLER_ROLE, deployer), "admin must not custody");
+        assertFalse(access.hasRole(Roles.PROOF_VERIFIER_ROLE, deployer));
+    }
+
+    function test_contractsAreWiredTogether() public view {
+        assertEq(address(ReceivableVault(d.vault).USDG()), d.usdg);
+        FinancingController c = FinancingController(d.controller);
+        assertEq(address(c.VAULT()), d.vault);
+        assertEq(address(c.EVIDENCE()), d.evidence);
+        assertEq(address(c.REGISTRY()), d.registry);
+        assertEq(address(c.POLICIES()), d.policies);
+        assertEq(address(c.VERIFIER()), d.verifier);
+    }
+
+    function test_deploysTheRealGeneratedGroth16Verifier() public view {
+        assertTrue(d.verifier.code.length > 0);
+        // a verifier for the wrong circuit or an all-zero proof must not verify
+        uint256[2] memory a;
+        uint256[2][2] memory b;
+        uint256[2] memory c;
+        uint256[4] memory signals;
+        assertFalse(Groth16Verifier(d.verifier).verifyProof(a, b, c, signals));
+    }
+
+    function test_localChainDeploysAMockUsdgWith6Decimals() public view {
+        assertEq(MockUSDG(d.usdg).decimals(), 6);
+    }
+
+    function test_operationalRolesAreGranted() public view {
+        CargoFlowAccess access = CargoFlowAccess(d.access);
+        assertTrue(access.hasRole(Roles.EVIDENCE_VERIFIER_ROLE, deployScript.workerFor(deployer)));
+        assertTrue(access.hasRole(Roles.MONITOR_ROLE, deployScript.monitorFor(deployer)));
+        assertTrue(access.hasRole(Roles.DISPUTE_ROLE, deployScript.arbiterFor(deployer)));
+        assertTrue(access.hasRole(Roles.FACILITY_MANAGER_ROLE, deployScript.managerFor(deployer)));
+    }
+
+    function test_writesManifestWithAddresses() public view {
+        string memory json = vm.readFile(FILE);
+        assertEq(vm.parseJsonAddress(json, ".contracts.financingController"), d.controller);
+        assertEq(vm.parseJsonAddress(json, ".contracts.receivableVault"), d.vault);
+        assertEq(vm.parseJsonAddress(json, ".contracts.groth16Verifier"), d.verifier);
+        assertEq(vm.parseJsonAddress(json, ".contracts.coverPool"), d.coverPool);
+        assertEq(vm.parseJsonAddress(json, ".usdg"), d.usdg);
+        assertEq(vm.parseJsonUint(json, ".chainId"), block.chainid);
+    }
+
+    function test_coverPoolIsWiredAndHoldsNoRole() public view {
+        CoverPool pool = CoverPool(d.coverPool);
+        assertEq(address(pool.CONTROLLER()), d.controller);
+        assertEq(address(pool.VAULT()), d.vault);
+        assertEq(address(pool.USDG()), d.usdg);
+        assertEq(address(pool.ACCESS()), d.access);
+        CargoFlowAccess access = CargoFlowAccess(d.access);
+        assertFalse(
+            access.hasRole(Roles.CONTROLLER_ROLE, d.coverPool), "pool must not drive the vault"
+        );
+        assertFalse(access.hasRole(Roles.PROOF_VERIFIER_ROLE, d.coverPool));
+        assertFalse(access.hasRole(Roles.DISPUTE_ROLE, d.coverPool));
+    }
+
+    /// The Go backend's manifest loader reads these keys; v2 only adds coverPool.
+    function test_manifestKeepsEveryV1Key() public view {
+        string memory json = vm.readFile(FILE);
+        string[7] memory keys = [
+            ".contracts.access",
+            ".contracts.shipmentRegistry",
+            ".contracts.policyEngine",
+            ".contracts.evidenceRegistry",
+            ".contracts.receivableVault",
+            ".contracts.groth16Verifier",
+            ".contracts.financingController"
+        ];
+        for (uint256 i; i < keys.length; ++i) {
+            assertTrue(vm.parseJsonAddress(json, keys[i]) != address(0), keys[i]);
+        }
+        assertEq(vm.parseJsonString(json, ".network"), "local");
+    }
+
+    // ------------------------------------------------------------------ v3
+
+    function test_v3ManifestKeys() public view {
+        string memory json = vm.readFile(FILE);
+        assertEq(vm.parseJsonAddress(json, ".contracts.deviceRegistry"), d.deviceRegistry);
+        assertEq(vm.parseJsonAddress(json, ".contracts.eblRegistry"), d.eblRegistry);
+        assertEq(vm.parseJsonAddress(json, ".contracts.coverPool"), d.coverPool);
+        assertFalse(vm.keyExistsJson(json, ".contracts.paymaster"));
+        assertFalse(vm.keyExistsJson(json, ".contracts.accountFactory"));
+    }
+
+    function test_v3ContractsAreWired() public view {
+        assertEq(address(FinancingController(d.controller).EBL()), d.eblRegistry);
+        assertEq(address(EBLRegistry(d.eblRegistry).ACCESS()), d.access);
+        assertEq(address(DeviceRegistry(d.deviceRegistry).ACCESS()), d.access);
+        assertEq(address(CoverPool(d.coverPool).EVIDENCE()), d.evidence);
+    }
+
+    function test_v3RolesAreGrantedAndHoldNoCustody() public view {
+        CargoFlowAccess access = CargoFlowAccess(d.access);
+        address attestor = deployScript.attestorFor(deployer);
+        address carrier = deployScript.carrierFor(deployer);
+        address pauser = deployScript.pauserFor(deployer);
+        assertTrue(access.hasRole(Roles.ATTESTOR_ROLE, attestor));
+        assertTrue(access.hasRole(Roles.CARRIER_ROLE, carrier));
+        assertTrue(access.hasRole(Roles.PAUSER_ROLE, pauser));
+        assertEq(attestor, deployScript.workerFor(deployer));
+        address[5] memory noCustody = [attestor, carrier, pauser, d.deviceRegistry, d.eblRegistry];
+        for (uint256 i; i < noCustody.length; ++i) {
+            assertFalse(access.hasRole(Roles.CONTROLLER_ROLE, noCustody[i]));
+        }
+    }
+}
