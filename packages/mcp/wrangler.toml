@@ -1,4 +1,4 @@
-# CargoFlow public remote MCP server: https://cargoflow-mcp.adoranto737.workers.dev/mcp
+# CargoFlow public remote MCP server: https://cargoflow-monad-mcp.adoranto737.workers.dev/mcp
 # Deploy: pnpm deploy:worker (wrangler deploy). Local: pnpm dev:worker -> http://127.0.0.1:8787/mcp
 name = "cargoflow-mcp"
 main = "src/worker.ts"
@@ -9,6 +9,6 @@ workers_dev = true
 enabled = true
 
 [vars]
-CARGOFLOW_API_URL = "https://cargoflow-api-75ul.onrender.com"
-CARGOFLOW_APP_URL = "https://cargoflow.adoranto737.workers.dev"
+CARGOFLOW_API_URL = "https://cargoflow-monad-api.onrender.com"
+CARGOFLOW_APP_URL = "https://cargoflow-monad.adoranto737.workers.dev"
 CARGOFLOW_RPC_URL = "https://testnet-rpc.monad.xyz"

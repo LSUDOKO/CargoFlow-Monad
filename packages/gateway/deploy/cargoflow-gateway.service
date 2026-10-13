@@ -10,7 +10,7 @@
 # (`command -v cargoflow-gateway`; /usr/local/bin with npm's default prefix, /usr/bin with some Node packages).
 [Unit]
 Description=CargoFlow evidence gateway
-Documentation=https://github.com/LSUDOKO/CargoFlow/tree/main/packages/gateway
+Documentation=https://github.com/LSUDOKO/CargoFlow-Monad/tree/main/packages/gateway
 # Signatures carry a timestamp the API checks; a Raspberry Pi has no RTC, so wait for NTP before sending.
 After=network-online.target time-sync.target
 Wants=network-online.target time-sync.target
@@ -21,7 +21,7 @@ User=cargoflow
 Group=cargoflow
 Environment=CARGOFLOW_GATEWAY_HOME=/var/lib/cargoflow-gateway
 Environment=NODE_ENV=production
-# Environment=CARGOFLOW_API_URL=https://cargoflow-api-75ul.onrender.com
+# Environment=CARGOFLOW_API_URL=https://cargoflow-monad-api.onrender.com
 ExecStart=/usr/local/bin/cargoflow-gateway --log-format json watch /srv/cargoflow/exports
 # ExecStart=/usr/local/bin/cargoflow-gateway --log-format json --position 1.264,103.84 mount --watch
 # ExecStart=/usr/local/bin/cargoflow-gateway --log-format json serial /dev/ttyUSB0 --baud 115200

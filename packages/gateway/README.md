@@ -95,7 +95,7 @@ Global options (before or after the command):
 | --- | --- |
 | `--home <dir>` | Data directory: key, state, queue. Default `$CARGOFLOW_GATEWAY_HOME` or `~/.cargoflow-gateway`. |
 | `--key <file>` | Use this key file instead of `<home>/key.json` (with `init`: the file to import). |
-| `--api <url>` | API base URL. Default `$CARGOFLOW_API_URL` or `https://cargoflow-api-75ul.onrender.com`. |
+| `--api <url>` | API base URL. Default `$CARGOFLOW_API_URL` or `https://cargoflow-monad-api.onrender.com`. |
 | `--preset <id>` | `auto` (default), `generic`, `temptale`, `elitech`, `elpro`. |
 | `--tz <zone>` | Time zone for timestamps written without one: IANA name (`Asia/Kolkata`), `UTC` or an offset (`+05:30`). Default: the zone named in the export's preamble, else UTC. |
 | `--fahrenheit` / `--celsius` | Force the temperature unit (default: detected from the header or preamble). |

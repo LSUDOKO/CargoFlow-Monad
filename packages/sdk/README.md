@@ -1,6 +1,6 @@
 # @cargoflow/sdk
 
-TypeScript SDK for [CargoFlow](https://cargoflow.adoranto737.workers.dev): milestone trade finance for
+TypeScript SDK for [CargoFlow](https://cargoflow-monad.adoranto737.workers.dev): milestone trade finance for
 temperature-controlled cargo, where sensor evidence is scored, committed on chain, and releases, pauses and
 settlement follow it.
 

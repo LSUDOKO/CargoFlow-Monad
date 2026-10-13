@@ -1,6 +1,6 @@
 # cargoflow (Python SDK)
 
-Analytics-first Python access to [CargoFlow](https://github.com/LSUDOKO/CargoFlow): typed models of the public read
+Analytics-first Python access to [CargoFlow](https://github.com/LSUDOKO/CargoFlow-Monad): typed models of the public read
 API, pandas (or polars) data frames, portfolio risk analytics with a seeded Monte Carlo of default and recovery,
 and the gateway request signer. Read-only: the SDK never submits transactions.
 
@@ -18,7 +18,7 @@ Python 3.10+. Dependencies: httpx, pydantic v2, pandas, numpy, cryptography.
 from cargoflow import CargoFlow
 from cargoflow import analytics as cfa
 
-cf = CargoFlow()                                   # https://cargoflow-api-75ul.onrender.com by default
+cf = CargoFlow()                                   # https://cargoflow-monad-api.onrender.com by default
 cf.stats()                                         # Stats(shipments={'ACTIVE': 2, ...}, total=4, ...)
 cf.shipments(status=["PAUSED", "DISPUTED"]).to_frame()
 

@@ -7,7 +7,7 @@ import pytest
 from cargoflow import CargoFlow, NotFoundError
 from cargoflow import analytics as cfa
 
-API = os.environ.get("CARGOFLOW_API_URL", "https://cargoflow-api-75ul.onrender.com")
+API = os.environ.get("CARGOFLOW_API_URL", "https://cargoflow-monad-api.onrender.com")
 
 
 @pytest.mark.live

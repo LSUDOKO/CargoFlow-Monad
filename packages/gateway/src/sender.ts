@@ -6,7 +6,7 @@ import type { Logger } from "./log.js";
 import { backoffDelay, DEFAULT_BACKOFF, DiskQueue, type BackoffPolicy, type Batch } from "./queue.js";
 import type { GatewayState } from "./state.js";
 
-export const DEFAULT_API_URL = "https://cargoflow-api-75ul.onrender.com";
+export const DEFAULT_API_URL = "https://cargoflow-monad-api.onrender.com";
 export const USER_AGENT = "cargoflow-gateway/0.1.0";
 
 export type FetchLike = (url: string, init: { method: string; headers: Record<string, string>; body: string; signal?: AbortSignal }) => Promise<{

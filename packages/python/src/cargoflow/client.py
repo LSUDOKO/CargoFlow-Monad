@@ -25,7 +25,7 @@ from .models import (
     TrackPoint,
 )
 
-DEFAULT_API_URL = "https://cargoflow-api-75ul.onrender.com"
+DEFAULT_API_URL = "https://cargoflow-monad-api.onrender.com"
 MAX_PAGE = 200  # the API's list limit
 USER_AGENT = "cargoflow-python/0.1.0"
 

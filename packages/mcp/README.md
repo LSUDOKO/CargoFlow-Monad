@@ -1,7 +1,7 @@
 # @cargoflow/mcp
 
 A [Model Context Protocol](https://modelcontextprotocol.io) server for
-[CargoFlow](https://cargoflow.adoranto737.workers.dev). With it, an assistant such as Claude or Cursor can read
+[CargoFlow](https://cargoflow-monad.adoranto737.workers.dev). With it, an assistant such as Claude or Cursor can read
 shipments, evidence, cover and track records, verify a trade document on your computer, and prepare transactions for
 **your own wallet** to sign.
 
@@ -16,7 +16,7 @@ shipments, evidence, cover and track records, verify a trade document on your co
 A public, read-and-prepare instance runs at:
 
 ```
-https://cargoflow-mcp.adoranto737.workers.dev/mcp
+https://cargoflow-monad-mcp.adoranto737.workers.dev/mcp
 ```
 
 It needs no account or authentication, holds no keys, and cannot sign anything. It has every read and prepare tool.
@@ -27,7 +27,7 @@ the bare URL in a browser for a short page that describes it.
 
 1. Open **Settings → Connectors**.
 2. Click **Add custom connector**.
-3. Name it `CargoFlow`, paste `https://cargoflow-mcp.adoranto737.workers.dev/mcp` as the URL, and leave the auth
+3. Name it `CargoFlow`, paste `https://cargoflow-monad-mcp.adoranto737.workers.dev/mcp` as the URL, and leave the auth
    settings empty.
 4. In a chat, turn CargoFlow on from the tools menu, then ask something like "Give me a CargoFlow fleet risk summary"
    or "Why is shipment CF-LIVE-1790936827464 paused?".
@@ -38,7 +38,7 @@ the mobile apps once it has been added.
 **Claude Code**
 
 ```bash
-claude mcp add --transport http cargoflow https://cargoflow-mcp.adoranto737.workers.dev/mcp
+claude mcp add --transport http cargoflow https://cargoflow-monad-mcp.adoranto737.workers.dev/mcp
 ```
 
 **Cursor**: add this to `~/.cursor/mcp.json` (or `.cursor/mcp.json` in a project):
@@ -46,7 +46,7 @@ claude mcp add --transport http cargoflow https://cargoflow-mcp.adoranto737.work
 ```json
 {
   "mcpServers": {
-    "cargoflow": { "url": "https://cargoflow-mcp.adoranto737.workers.dev/mcp" }
+    "cargoflow": { "url": "https://cargoflow-monad-mcp.adoranto737.workers.dev/mcp" }
   }
 }
 ```
@@ -74,7 +74,7 @@ claude mcp add cargoflow -- npx -y @cargoflow/mcp
       "command": "npx",
       "args": ["-y", "@cargoflow/mcp"],
       "env": {
-        "CARGOFLOW_API_URL": "https://cargoflow-api-75ul.onrender.com"
+        "CARGOFLOW_API_URL": "https://cargoflow-monad-api.onrender.com"
       }
     }
   }
@@ -101,8 +101,8 @@ npx -y @cargoflow/mcp --http 8787   # POST http://127.0.0.1:8787/mcp
 
 | Variable | Flag | Default | Purpose |
 |---|---|---|---|
-| `CARGOFLOW_API_URL` | `--api-url` | `https://cargoflow-api-75ul.onrender.com` | The CargoFlow API |
-| `CARGOFLOW_APP_URL` | `--app-url` | `https://cargoflow.adoranto737.workers.dev` | The web app that the "open to sign" links point to |
+| `CARGOFLOW_API_URL` | `--api-url` | `https://cargoflow-monad-api.onrender.com` | The CargoFlow API |
+| `CARGOFLOW_APP_URL` | `--app-url` | `https://cargoflow-monad.adoranto737.workers.dev` | The web app that the "open to sign" links point to |
 | `CARGOFLOW_GATEWAY_KEY_FILE` | `--gateway-key-file` | unset | Path to a gateway key file (downloaded from the web app); enables `submit_readings_csv` |
 | `CARGOFLOW_RPC_URL` | `--rpc-url` | the chain's public RPC | On-chain reads (the invoice hash in `verify_document`) |
 
@@ -166,7 +166,7 @@ addresses, contracts version).
 >
 > **Claude:** *(calls `prepare_deposit`)* Two transactions to send from the financier's wallet on Monad
 > Testnet: 1. approve the ReceivableVault for 20 USDC, 2. depositCapital. Nothing has been sent. Open
-> https://cargoflow.adoranto737.workers.dev/track/0x… to sign them there, or send the JSON below from your wallet.
+> https://cargoflow-monad.adoranto737.workers.dev/track/0x… to sign them there, or send the JSON below from your wallet.
 
 ## Deploy your own (Cloudflare Workers)
 

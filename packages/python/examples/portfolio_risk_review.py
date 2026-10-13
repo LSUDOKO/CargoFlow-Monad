@@ -27,7 +27,7 @@ pd.set_option("display.width", 160)
 pd.set_option("display.max_columns", 20)
 pd.set_option("display.float_format", lambda x: f"{x:,.2f}")
 
-API = os.environ.get("CARGOFLOW_API_URL", "https://cargoflow-api-75ul.onrender.com")
+API = os.environ.get("CARGOFLOW_API_URL", "https://cargoflow-monad-api.onrender.com")
 cf = CargoFlow(API, timeout=90, retries=4, backoff=2)
 print(cf.health())
 print(cf.stats())

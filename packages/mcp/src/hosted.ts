@@ -22,8 +22,8 @@ interface WaitUntil {
 }
 
 export const DEFAULTS = {
-  apiUrl: "https://cargoflow-api-75ul.onrender.com",
-  appUrl: "https://cargoflow.adoranto737.workers.dev",
+  apiUrl: "https://cargoflow-monad-api.onrender.com",
+  appUrl: "https://cargoflow-monad.adoranto737.workers.dev",
   rpcUrl: "https://testnet-rpc.monad.xyz",
 } as const;
 
@@ -77,7 +77,7 @@ function info(origin: string, env: Env) {
       "Claude Code": `claude mcp add --transport http cargoflow ${origin}/mcp`,
       Cursor: { mcpServers: { cargoflow: { url: `${origin}/mcp` } } },
     },
-    source: "https://github.com/LSUDOKO/CargoFlow/tree/main/packages/mcp",
+    source: "https://github.com/LSUDOKO/CargoFlow-Monad/tree/main/packages/mcp",
   };
 }
 

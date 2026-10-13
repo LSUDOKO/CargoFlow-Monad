@@ -155,7 +155,7 @@ describe("worker routes", () => {
     expect(h.headers.get("content-type")).toContain("text/html");
     const page = await h.text();
     expect(page).toContain(`${ORIGIN}/mcp`);
-    expect(page).toContain("https://cargoflow-api-75ul.onrender.com"); // default API when no var is set
+    expect(page).toContain("https://cargoflow-monad-api.onrender.com"); // default API when no var is set
 
     const health = await handle(new Request(`${ORIGIN}/health`), env);
     expect(await health.json()).toMatchObject({ ok: true, name: "cargoflow-mcp" });

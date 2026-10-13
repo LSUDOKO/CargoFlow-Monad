@@ -36,14 +36,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LSUDOKO/CargoFlow.git",
+    "url": "git+https://github.com/LSUDOKO/CargoFlow-Monad.git",
     "directory": "packages/mcp"
   },
-  "homepage": "https://github.com/LSUDOKO/CargoFlow/tree/main/packages/mcp#readme",
+  "homepage": "https://github.com/LSUDOKO/CargoFlow-Monad/tree/main/packages/mcp#readme",
   "bugs": {
-    "url": "https://github.com/LSUDOKO/CargoFlow/issues"
+    "url": "https://github.com/LSUDOKO/CargoFlow-Monad/issues"
   },
-  "author": "CargoFlow (https://cargoflow.adoranto737.workers.dev)",
+  "author": "CargoFlow (https://cargoflow-monad.adoranto737.workers.dev)",
   "scripts": {
     "build": "tsup",
     "test": "vitest run",
