@@ -1,0 +1,457 @@
+// Command cargoflow is the CargoFlow backend: one binary that runs the API, the chain indexer and the
+// evidence pipeline.
+//
+//	cargoflow serve     run the service (migrates the database first)
+//	cargoflow migrate   apply database migrations and exit
+//	cargoflow keygen    generate an Ed25519 key pair for an evidence source
+//	cargoflow demo      run the hero scenario against a running backend
+package main
+
+import (
+	"context"
+	"crypto/ed25519"
+	"crypto/rand"
+	"encoding/base64"
+	"encoding/json"
+	"errors"
+	"fmt"
+	"io"
+	"log/slog"
+	"math/big"
+	"net"
+	"net/http"
+	"os"
+	"os/exec"
+	"os/signal"
+	"path/filepath"
+	"strings"
+	"syscall"
+	"time"
+
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/jackc/pgx/v5/pgxpool"
+
+	"github.com/LSUDOKO/CargoFlow/backend/internal/ai"
+	"github.com/LSUDOKO/CargoFlow/backend/internal/ais"
+	"github.com/LSUDOKO/CargoFlow/backend/internal/alerts"
+	"github.com/LSUDOKO/CargoFlow/backend/internal/api"
+	"github.com/LSUDOKO/CargoFlow/backend/internal/auth"
+	"github.com/LSUDOKO/CargoFlow/backend/internal/chain"
+	"github.com/LSUDOKO/CargoFlow/backend/internal/config"
+	"github.com/LSUDOKO/CargoFlow/backend/internal/devicetrust"
+	"github.com/LSUDOKO/CargoFlow/backend/internal/dune"
+	"github.com/LSUDOKO/CargoFlow/backend/internal/proof"
+	"github.com/LSUDOKO/CargoFlow/backend/internal/service"
+	"github.com/LSUDOKO/CargoFlow/backend/internal/sponsor"
+	"github.com/LSUDOKO/CargoFlow/backend/internal/store"
+	"github.com/LSUDOKO/CargoFlow/backend/internal/ws"
+)
+
+func main() {
+	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
+	defer stop()
+	if err := run(ctx, os.Args[1:], os.Getenv, os.Stdout); err != nil {
+		fmt.Fprintln(os.Stderr, "cargoflow:", err)
+		os.Exit(1)
+	}
+}
+
+const usage = `usage: cargoflow <command>
+
+  serve     run the API, chain indexer and evidence pipeline
+  migrate   apply database migrations and exit
+  keygen    generate an Ed25519 key pair for an evidence source
+  demo      run the hero scenario against a running backend (flags: -mint, -divisor 2000, -pace 3s)
+`
+
+func run(ctx context.Context, args []string, getenv func(string) string, out io.Writer) error {
+	if len(args) == 0 {
+		fmt.Fprint(out, usage)
+		return errors.New("no command given")
+	}
+	switch args[0] {
+	case "serve":
+		return serve(ctx, getenv, out)
+	case "migrate":
+		return migrate(ctx, getenv, out)
+	case "keygen":
+		return keygen(out)
+	case "demo":
+		return demo(ctx, args[1:], getenv, out)
+	default:
+		fmt.Fprint(out, usage)
+		return fmt.Errorf("unknown command %q", args[0])
+	}
+}
+
+func keygen(out io.Writer) error {
+	pub, priv, err := ed25519.GenerateKey(rand.Reader)
+	if err != nil {
+		return err
+	}
+	enc := json.NewEncoder(out)
+	enc.SetIndent("", "  ")
+	return enc.Encode(map[string]string{
+		"publicKey":  base64.RawURLEncoding.EncodeToString(pub),
+		"privateKey": base64.RawURLEncoding.EncodeToString(priv),
+		"note":       "register publicKey via POST /v1/sources; keep privateKey with the sensor gateway and never share it",
+	})
+}
+
+func migrate(ctx context.Context, getenv func(string) string, out io.Writer) error {
+	url := strings.TrimSpace(getenv("DATABASE_URL"))
+	if url == "" {
+		return errors.New("DATABASE_URL: is required")
+	}
+	pool, err := pgxpool.New(ctx, url)
+	if err != nil {
+		return fmt.Errorf("connect to database: %w", err)
+	}
+	defer pool.Close()
+	if err := store.Migrate(ctx, pool, store.Migrations()); err != nil {
+		return err
+	}
+	fmt.Fprintln(out, "migrations applied")
+	return nil
+}
+
+func logger(level string) *slog.Logger {
+	var l slog.Level
+	_ = l.UnmarshalText([]byte(level))
+	return slog.New(slog.NewJSONHandler(os.Stderr, &slog.HandlerOptions{Level: l}))
+}
+
+func serve(ctx context.Context, getenv func(string) string, out io.Writer) error {
+	cfg, err := config.Load(getenv)
+	if err != nil {
+		return fmt.Errorf("invalid configuration:\n%w", err)
+	}
+	log := logger(cfg.LogLevel)
+	log.Info("starting", "config", cfg.String())
+
+	pool, err := pgxpool.New(ctx, cfg.DatabaseURL.Reveal())
+	if err != nil {
+		return fmt.Errorf("connect to database: %w", err)
+	}
+	defer pool.Close()
+	if err := pool.Ping(ctx); err != nil {
+		return fmt.Errorf("database is unreachable: %w", err)
+	}
+	if err := store.Migrate(ctx, pool, store.Migrations()); err != nil {
+		return err
+	}
+	st := store.New(pool)
+
+	manifest, err := chain.LoadManifest(cfg.DeploymentFile)
+	if err != nil {
+		return err
+	}
+	if manifest.ChainID != cfg.ChainID {
+		return fmt.Errorf("CHAIN_ID is %d but the deployment manifest is for chain %d", cfg.ChainID, manifest.ChainID)
+	}
+	client, err := chain.DialFailover(ctx, cfg.RPCURL, cfg.RPCFallbacks(), manifest)
+	if err != nil {
+		return err
+	}
+	defer client.Close()
+	client.Confirmations = cfg.Confirmations
+	if err := client.CheckDeployed(ctx); err != nil {
+		return err
+	}
+
+	worker, monitor, manager, err := signers(cfg)
+	if err != nil {
+		return err
+	}
+	if err := verifyRoles(ctx, client, worker, monitor, manager); err != nil {
+		return err
+	}
+
+	drip, err := gasDrip(cfg, client, log)
+	if err != nil {
+		return err
+	}
+	dispatcher, channels := alerting(ctx, cfg, st, log)
+	go func() { _ = dispatcher.Run(ctx) }()
+	tracker := aisTracker(cfg, st, log)
+	go func() { _ = tracker.Run(ctx) }()
+
+	hub := ws.NewHub(256)
+	svc := service.New(service.Options{
+		Store: st, Chain: client, Hub: hub, Prover: prover(cfg, log), AI: aiMonitor(cfg, log), Wording: wording(cfg), WordingTimeout: cfg.AITimeout,
+		Worker: worker, Monitor: monitor, Manager: manager, SaltSecret: []byte(cfg.SaltSecret.Reveal()), Log: log,
+		Alerts: dispatcher, AppURL: cfg.AppURL,
+	})
+
+	idx := &chain.Indexer{
+		C: client, Store: st, Name: "main", StartBlock: cfg.StartBlock, Confirmations: cfg.Confirmations,
+		Poll: cfg.IndexerPoll, Sink: svc.OnChainEvents, Log: log,
+	}
+	if cfg.RecoveryScanInterval > 0 {
+		go svc.RunRecoveryWorker(ctx, cfg.RecoveryScanInterval)
+	}
+	roots, err := devicetrust.LoadRoots(cfg.DeviceRootsDir)
+	if err != nil {
+		return err
+	}
+	if !roots.Empty() {
+		log.Info("device attestation roots loaded", "roots", roots.Names)
+	}
+	origins := devicetrust.Origins(cfg.WebAuthnOrigins)
+	if len(origins) == 0 {
+		origins = cfg.CORSOrigins
+	}
+	if cfg.ReconcileInterval > 0 {
+		go svc.RunReconciler(ctx, cfg.ReconcileInterval)
+	} else {
+		log.Warn("reconciler disabled: failed chain actions will not be retried automatically")
+	}
+	indexerDone := make(chan error, 1)
+	go func() { indexerDone <- idx.Run(ctx) }()
+
+	if cfg.DuneEnabled() {
+		go duneUploader(cfg, st, client, log).Run(ctx, cfg.DuneUploadInterval)
+		log.Info("Dune upload enabled", "namespace", cfg.DuneNamespace, "interval", cfg.DuneUploadInterval.String())
+	}
+	var signingKeys []string
+	for _, k := range cfg.AlchemyWebhookSigningKeys {
+		signingKeys = append(signingKeys, k.Reveal())
+	}
+	if len(signingKeys) > 0 {
+		log.Info("Alchemy webhook enabled", "keys", len(signingKeys))
+	}
+	server := api.NewServer(api.Config{
+		Service: svc, Store: st, Chain: client, Hub: hub, AdminKey: cfg.AdminAPIKey.Reveal(), CORSOrigins: cfg.CORSOrigins, Log: log,
+		Verifier: &auth.Verifier{Lookup: st.GetSource, Now: time.Now, MaxSkew: 5 * time.Minute, Origins: origins, SignCount: st.AdvanceSignCount},
+		Alerts:   channels, AIS: tracker, Gas: drip, DeviceRoots: roots, WebAuthnOrigins: origins,
+		AlchemySigningKeys: signingKeys, Indexer: idx, ZeroDev: zerodevSponsor(cfg, manifest, log),
+	})
+	ln, err := net.Listen("tcp", cfg.HTTPAddr)
+	if err != nil {
+		return err
+	}
+	httpServer := &http.Server{
+		Handler: server.Handler(), ReadHeaderTimeout: 10 * time.Second, ReadTimeout: 30 * time.Second,
+		WriteTimeout: 3 * time.Minute, // a ZK recovery request can take tens of seconds
+		IdleTimeout:  2 * time.Minute, MaxHeaderBytes: 1 << 16,
+	}
+	fmt.Fprintf(out, "listening on %s\n", ln.Addr())
+	log.Info("listening", "addr", ln.Addr().String())
+
+	serveErr := make(chan error, 1)
+	go func() { serveErr <- httpServer.Serve(ln) }()
+	select {
+	case <-ctx.Done():
+	case err := <-serveErr:
+		return err
+	case err := <-indexerDone:
+		if ctx.Err() == nil {
+			return fmt.Errorf("indexer stopped: %w", err)
+		}
+	}
+	shutdown, cancel := context.WithTimeout(context.Background(), 15*time.Second)
+	defer cancel()
+	log.Info("shutting down")
+	if err := httpServer.Shutdown(shutdown); err != nil {
+		return err
+	}
+	<-indexerDone
+	return nil
+}
+
+// duneUploader pushes the indexed data to Dune's uploads API (DUNE_API_KEY and DUNE_NAMESPACE set).
+func duneUploader(cfg config.Config, st *store.Store, client *chain.Client, log *slog.Logger) *dune.Uploader {
+	return &dune.Uploader{
+		Client: &dune.Client{APIKey: cfg.DuneAPIKey.Reveal(), Namespace: cfg.DuneNamespace},
+		Source: st, Confirmations: cfg.Confirmations, Log: log,
+		Head: client.Eth.BlockNumber,
+		BlockTime: func(ctx context.Context, block uint64) (time.Time, error) {
+			hdr, err := client.Eth.HeaderByNumber(ctx, new(big.Int).SetUint64(block))
+			if err != nil {
+				return time.Time{}, err
+			}
+			return time.Unix(int64(hdr.Time), 0).UTC(), nil
+		},
+	}
+}
+
+// zerodevSponsor configures the ZeroDev gas policy webhook, or nil (404) when ZERODEV_WEBHOOK_SECRET or
+// ZERODEV_PROJECT_ID is unset. Sponsored calls may target the deployment's contracts, and USDG only for approvals
+// to them.
+func zerodevSponsor(cfg config.Config, m chain.Manifest, log *slog.Logger) *api.ZeroDevSponsor {
+	if !cfg.ZeroDevWebhookEnabled() {
+		return nil
+	}
+	contracts := map[common.Address]bool{}
+	for addr := range m.Indexed() {
+		contracts[addr] = true
+	}
+	log.Info("ZeroDev gas policy webhook enabled", "perSender", cfg.SponsorPerDay, "global", cfg.SponsorGlobalDay, "maxWei", cfg.SponsorMaxWei)
+	return &api.ZeroDevSponsor{
+		Secret: cfg.ZeroDevWebhookSecret.Reveal(), ProjectID: cfg.ZeroDevProjectID, ChainID: cfg.ChainID,
+		PerSender: cfg.SponsorPerDay, Global: cfg.SponsorGlobalDay,
+		Policy: sponsor.Policy{Contracts: contracts, USDG: m.USDG, MaxWei: new(big.Int).SetUint64(cfg.SponsorMaxWei)},
+	}
+}
+
+// devChainID is anvil's chain: there, webhooks may target local addresses.
+const devChainID = 31337
+
+// alerting builds the alert dispatcher and says which channels deliver. Webhooks always do. Telegram needs the bot's
+// username for its links, so a token the Bot API refuses leaves Telegram off instead of failing the start; once on,
+// a long poll links chats to subscriptions. Email needs a Resend key and a sender.
+func alerting(ctx context.Context, cfg config.Config, st *store.Store, log *slog.Logger) (*alerts.Dispatcher, api.AlertChannels) {
+	d := &alerts.Dispatcher{Store: st, Log: log, Senders: map[string]alerts.Sender{
+		"webhook": alerts.NewWebhook(cfg.ChainID == devChainID), "slack": alerts.NewSlack(cfg.ChainID == devChainID)}}
+	ch := api.AlertChannels{AllowPrivateWebhooks: cfg.ChainID == devChainID}
+	if cfg.TelegramEnabled() {
+		tg := alerts.NewTelegram(cfg.TelegramBotToken, "")
+		tg.Log = log
+		mctx, cancel := context.WithTimeout(ctx, 10*time.Second)
+		name, err := tg.BotUsername(mctx)
+		cancel()
+		if err != nil {
+			log.Warn("Telegram alerts disabled: the Bot API refused the token", "err", err)
+		} else {
+			d.Senders["telegram"], ch.TelegramBot = tg, name
+			go func() { _ = tg.Listen(ctx, alerts.LinkTelegram(st)) }()
+			log.Info("Telegram alerts enabled", "bot", name)
+		}
+	}
+	if cfg.EmailEnabled() {
+		d.Senders["email"], ch.Email = alerts.NewEmail(cfg.ResendAPIKey, cfg.AlertEmailFrom, ""), true
+		log.Info("email alerts enabled", "from", cfg.AlertEmailFrom)
+	}
+	return d, ch
+}
+
+// aisTracker follows registered vessels through aisstream.io when AISSTREAM_API_KEY is set; otherwise it is a
+// tracker without a stream, and vessels are shown without live positions.
+func aisTracker(cfg config.Config, st *store.Store, log *slog.Logger) *ais.Tracker {
+	t := &ais.Tracker{Store: st, Log: log}
+	if cfg.AISEnabled() {
+		c := ais.NewClient(cfg.AISStreamAPIKey, "")
+		c.Log = log
+		t.Stream = c
+		log.Info("AIS vessel tracking enabled")
+	}
+	return t
+}
+
+// gasDrip returns the gas drip when GAS_DRIP_KEY is set. The key must be dedicated: sharing a role key would race
+// that role's transaction nonces.
+func gasDrip(cfg config.Config, client *chain.Client, log *slog.Logger) (*api.GasDrip, error) {
+	if !cfg.GasDripEnabled() {
+		return nil, nil
+	}
+	for _, role := range []config.Key{cfg.WorkerKey, cfg.MonitorKey, cfg.ManagerKey} {
+		if string(role) == string(cfg.GasDripKey) {
+			return nil, errors.New("GAS_DRIP_KEY must be a dedicated key, not one of the role keys")
+		}
+	}
+	key, err := crypto.ToECDSA(cfg.GasDripKey)
+	if err != nil {
+		return nil, errors.New("GAS_DRIP_KEY is not a valid secp256k1 private key")
+	}
+	d := &api.GasDrip{Chain: client, Signer: chain.NewSigner(key), AmountWei: new(big.Int).SetUint64(cfg.GasDripWei), Daily: cfg.GasDripDaily}
+	log.Info("gas drip enabled", "address", d.Signer.Address().Hex(), "wei", cfg.GasDripWei, "daily", cfg.GasDripDaily)
+	return d, nil
+}
+
+// wording returns the model that may rephrase shipment explanations, or nil without a Groq key.
+func wording(cfg config.Config) ai.Rewriter {
+	if !cfg.AIEnabled() {
+		return nil
+	}
+	return ai.NewGroq(ai.GroqConfig{APIKey: cfg.GroqAPIKey, Model: cfg.GroqModel})
+}
+
+func signers(cfg config.Config) (worker, monitor, manager *chain.Signer, err error) {
+	mk := func(name string, k config.Key) (*chain.Signer, error) {
+		key, err := crypto.ToECDSA(k)
+		if err != nil {
+			return nil, fmt.Errorf("%s is not a valid secp256k1 private key", name)
+		}
+		return chain.NewSigner(key), nil
+	}
+	if worker, err = mk("WORKER_KEY", cfg.WorkerKey); err != nil {
+		return
+	}
+	if monitor, err = mk("MONITOR_KEY", cfg.MonitorKey); err != nil {
+		return
+	}
+	manager, err = mk("MANAGER_KEY", cfg.ManagerKey)
+	return
+}
+
+// verifyRoles fails fast if a key holds the wrong authority. The monitor key is the one an AI model acts
+// through, so besides holding MONITOR_ROLE it must hold nothing that could move money or resume a facility.
+func verifyRoles(ctx context.Context, c *chain.Client, worker, monitor, manager *chain.Signer) error {
+	must := []struct {
+		role, label string
+		who         *chain.Signer
+	}{
+		{"EVIDENCE_VERIFIER_ROLE", "WORKER_KEY", worker},
+		{"MONITOR_ROLE", "MONITOR_KEY", monitor},
+		{"FACILITY_MANAGER_ROLE", "MANAGER_KEY", manager},
+	}
+	for _, m := range must {
+		ok, err := c.HasRole(ctx, m.role, m.who.Address())
+		if err != nil {
+			return fmt.Errorf("check %s: %w", m.role, err)
+		}
+		if !ok {
+			return fmt.Errorf("%s (%s) does not hold %s on this deployment", m.label, m.who.Address().Hex(), m.role)
+		}
+	}
+	for _, forbidden := range []string{"CONTROLLER_ROLE", "DISPUTE_ROLE", "EVIDENCE_VERIFIER_ROLE", "FACILITY_MANAGER_ROLE", "DEFAULT_ADMIN_ROLE",
+		"ATTESTOR_ROLE", "CARRIER_ROLE", "PAUSER_ROLE"} {
+		role := forbidden
+		ok, err := c.HasRole(ctx, role, monitor.Address())
+		if err != nil {
+			return fmt.Errorf("check %s: %w", role, err)
+		}
+		if ok {
+			return fmt.Errorf("MONITOR_KEY (%s) holds %s: the monitor must be able to request a pause and nothing else", monitor.Address().Hex(), role)
+		}
+	}
+	if c.HasDeviceRegistry() {
+		if ok, err := c.HasRole(ctx, "ATTESTOR_ROLE", worker.Address()); err == nil && !ok {
+			slog.Default().Warn("WORKER_KEY does not hold ATTESTOR_ROLE: devices will not be recorded in the DeviceRegistry", "worker", worker.Address().Hex())
+		}
+	}
+	return nil
+}
+
+// prover returns a snarkjs-backed prover when Node and the built circuit keys are available, and nil
+// otherwise (recovery endpoints then answer 503 rather than the service failing to start).
+func prover(cfg config.Config, log *slog.Logger) proof.Prover {
+	dir, err := filepath.Abs(cfg.CircuitsDir)
+	if err != nil {
+		return nil
+	}
+	if _, err := exec.LookPath("node"); err != nil {
+		log.Warn("ZK recovery disabled: node is not installed")
+		return nil
+	}
+	for _, need := range []string{"keys/telemetry_epoch_final.zkey", "node_modules"} {
+		if _, err := os.Stat(filepath.Join(dir, need)); err != nil {
+			log.Warn("ZK recovery disabled: circuits are not ready", "missing", need, "dir", dir)
+			return nil
+		}
+	}
+	return &proof.SnarkjsProver{CircuitsDir: dir}
+}
+
+// aiMonitor returns the model-backed monitor when a Groq key is configured and nil otherwise, in which
+// case the deterministic policy gate decides alone.
+func aiMonitor(cfg config.Config, log *slog.Logger) *ai.Monitor {
+	if !cfg.AIEnabled() {
+		log.Info("AI monitor disabled: GROQ_API_KEY is not set; the deterministic policy gate decides alone")
+		return nil
+	}
+	provider := ai.NewGroq(ai.GroqConfig{APIKey: cfg.GroqAPIKey, Model: cfg.GroqModel})
+	log.Info("AI monitor enabled", "provider", provider.Name(), "timeout", cfg.AITimeout, "minConfidence", cfg.AIMinConfidence)
+	return ai.NewMonitor(provider, ai.MonitorOptions{MinConfidence: cfg.AIMinConfidence, Timeout: cfg.AITimeout})
+}
