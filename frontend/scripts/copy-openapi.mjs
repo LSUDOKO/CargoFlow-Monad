@@ -2,7 +2,7 @@
 // to fall back on when the live API (NEXT_PUBLIC_API_URL/v1/openapi.json) is asleep or unreachable. Run by `pnpm abi`
 // and before every build (prebuild). A missing source (a frontend-only checkout) keeps the existing copy.
 //
-// It also copies the public deployment manifests (contracts/deployments/robinhood-testnet*.json, arbitrum-sepolia.json)
+// It also copies the public deployment manifests (contracts/deployments/monad-testnet.json)
 // into src/data/deployments/ for the /deployments page: Turbopack's root is this folder, so the page cannot import
 // files above it directly.
 import { copyFileSync, existsSync, mkdirSync, writeFileSync } from "node:fs";
@@ -21,7 +21,7 @@ if (existsSync(src)) {
 const deployments = fileURLToPath(new URL("../../contracts/deployments/", import.meta.url));
 const dataDir = fileURLToPath(new URL("../src/data/deployments/", import.meta.url));
 mkdirSync(dataDir, { recursive: true });
-for (const name of ["robinhood-testnet.json", "robinhood-testnet-v1.json", "arbitrum-sepolia.json"]) {
+for (const name of ["monad-testnet.json"]) {
   if (existsSync(deployments + name)) copyFileSync(deployments + name, dataDir + name);
   else if (!existsSync(dataDir + name)) writeFileSync(dataDir + name, "{}\n"); // optional manifest: an empty one means "not deployed yet"
 }
