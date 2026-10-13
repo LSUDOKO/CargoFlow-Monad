@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { controllerAbi, coverPoolAbi, deviceRegistryAbi, eblRegistryAbi } from "./abis";
+import { controllerAbi, coverPoolAbi, deviceRegistryAbi, eblRegistryAbi, noteMarketAbi } from "./abis";
 import { chainRejectedText, decodeRevert, txGuard } from "./errors";
 
 describe("decodeRevert", () => {
@@ -34,7 +34,7 @@ describe("contracts v3 errors", () => {
   it("explain every v3 error, including ones with arguments, in words", () => {
     const v3 = ["EnforcedPause", "CancelNotAllowed", "TitleBindingDisabled", "TitleAlreadyBound", "InvalidTitle", "TitleNotTransferable", "NotHolder", "NotIssuer", "DocumentAlreadyIssued", "InvalidTrigger", "NotParametric", "TriggerNotMet", "AttestationRequired"];
     for (const n of v3) expect(decodeRevert({ data: { errorName: n } }), n).not.toMatch(/refused the transaction/);
-    for (const abi of [controllerAbi, coverPoolAbi, deviceRegistryAbi, eblRegistryAbi]) {
+    for (const abi of [controllerAbi, coverPoolAbi, deviceRegistryAbi, eblRegistryAbi, noteMarketAbi]) {
       for (const n of abi.filter((x) => x.type === "error").map((x) => (x as { name: string }).name)) expect(decodeRevert({ data: { errorName: n } }), n).not.toMatch(/refused the transaction/);
     }
     expect(decodeRevert({ shortMessage: "reverted.\n\nError: TitleNotTransferable(uint8 status)\n (2)" })).toMatch(/surrendered or void/);
