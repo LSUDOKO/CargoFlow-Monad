@@ -1,0 +1,636 @@
+{
+  "commands": {
+    "cargo:bid": {
+      "aliases": [],
+      "args": {
+        "shipment-id": {
+          "description": "Shipment id of the cargo note to bid on",
+          "name": "shipment-id",
+          "required": true
+        }
+      },
+      "description": "Place (or replace) an escrowed USDC bid on a cargo note; refuses unhealthy shipments, low evidence scores and bids above the note's claim.",
+      "examples": [
+        "<%= config.bin %> cargo bid 0xb508…39ff --price 2.95 --min-score 90"
+      ],
+      "flags": {
+        "format": {
+          "char": "f",
+          "description": "Output format: text | json | toon (defaults to text in TTY, json when piped)",
+          "name": "format",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "text",
+            "json",
+            "toon"
+          ],
+          "type": "option"
+        },
+        "json": {
+          "description": "Shorthand for --format=json",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "toon": {
+          "description": "Shorthand for --format=toon",
+          "name": "toon",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "verbose": {
+          "char": "v",
+          "description": "Show debug logs on stderr. Use this for troubleshooting",
+          "name": "verbose",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "shipment-id": {
+          "description": "Shipment id of the cargo note to bid on",
+          "name": "shipment-id",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "price": {
+          "description": "Bid in USDC, escrowed in the market until filled or cancelled",
+          "name": "price",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "min-score": {
+          "description": "Minimum evidence score 0-100 (default 75)",
+          "name": "min-score",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "dry-run": {
+          "description": "Check the rules and show the plan without submitting",
+          "name": "dry-run",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "cargo:bid",
+      "pluginAlias": "mm-plugin-cargo-notes",
+      "pluginName": "mm-plugin-cargo-notes",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "requiresAuth": true,
+      "requiresInit": true,
+      "requiresFees": false,
+      "byokPasswordFlags": {
+        "password": {
+          "description": "Password to unlock the BYOK mnemonic (BYOK mode only)",
+          "env": "MM_PASSWORD",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "walletTimeoutFlags": {
+        "wallet-timeout": {
+          "description": "Seconds to wait per wallet job (MFA/signing), max 600; overrides config walletTimeoutSeconds",
+          "min": 1,
+          "max": 600,
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "STRUCTURED_FORMATS": {},
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "commands",
+        "cargo",
+        "bid.js"
+      ]
+    },
+    "cargo:buy": {
+      "aliases": [],
+      "args": {
+        "shipment-id": {
+          "description": "Shipment id of the cargo note to buy",
+          "name": "shipment-id",
+          "required": true
+        }
+      },
+      "description": "Buy a cargo note at its ask, only if the shipment is healthy (FINANCED/ACTIVE/DELIVERED), its evidence score clears --min-score, and the ask is within --max-price and the evidence mark.",
+      "examples": [
+        "<%= config.bin %> cargo buy 0xb508…39ff --max-price 3.01 --dry-run",
+        "<%= config.bin %> cargo buy 0xb508…39ff --max-price 3.01 --min-score 90 --json"
+      ],
+      "flags": {
+        "format": {
+          "char": "f",
+          "description": "Output format: text | json | toon (defaults to text in TTY, json when piped)",
+          "name": "format",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "text",
+            "json",
+            "toon"
+          ],
+          "type": "option"
+        },
+        "json": {
+          "description": "Shorthand for --format=json",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "toon": {
+          "description": "Shorthand for --format=toon",
+          "name": "toon",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "verbose": {
+          "char": "v",
+          "description": "Show debug logs on stderr. Use this for troubleshooting",
+          "name": "verbose",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "shipment-id": {
+          "description": "Shipment id of the cargo note to buy",
+          "name": "shipment-id",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "max-price": {
+          "description": "Most you will pay for the note, in USDC (e.g. 3.01)",
+          "name": "max-price",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "min-score": {
+          "description": "Minimum evidence score 0-100 (default 75)",
+          "name": "min-score",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "max-premium-to-mark-bps": {
+          "description": "Largest premium of the ask over the evidence mark, in bps (default 0: never pay above mark)",
+          "name": "max-premium-to-mark-bps",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "dry-run": {
+          "description": "Check every rule and show the plan without submitting",
+          "name": "dry-run",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "cargo:buy",
+      "pluginAlias": "mm-plugin-cargo-notes",
+      "pluginName": "mm-plugin-cargo-notes",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "requiresAuth": true,
+      "requiresInit": true,
+      "requiresFees": false,
+      "byokPasswordFlags": {
+        "password": {
+          "description": "Password to unlock the BYOK mnemonic (BYOK mode only)",
+          "env": "MM_PASSWORD",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "walletTimeoutFlags": {
+        "wallet-timeout": {
+          "description": "Seconds to wait per wallet job (MFA/signing), max 600; overrides config walletTimeoutSeconds",
+          "min": 1,
+          "max": 600,
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "STRUCTURED_FORMATS": {},
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "commands",
+        "cargo",
+        "buy.js"
+      ]
+    },
+    "cargo:cancel-bid": {
+      "aliases": [],
+      "args": {
+        "shipment-id": {
+          "description": "Shipment id of the cargo note",
+          "name": "shipment-id",
+          "required": true
+        }
+      },
+      "description": "Cancel your escrowed bid on a cargo note and get the USDC back (always allowed).",
+      "examples": [
+        "<%= config.bin %> cargo cancel-bid 0xb508…39ff"
+      ],
+      "flags": {
+        "format": {
+          "char": "f",
+          "description": "Output format: text | json | toon (defaults to text in TTY, json when piped)",
+          "name": "format",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "text",
+            "json",
+            "toon"
+          ],
+          "type": "option"
+        },
+        "json": {
+          "description": "Shorthand for --format=json",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "toon": {
+          "description": "Shorthand for --format=toon",
+          "name": "toon",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "verbose": {
+          "char": "v",
+          "description": "Show debug logs on stderr. Use this for troubleshooting",
+          "name": "verbose",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "shipment-id": {
+          "description": "Shipment id of the cargo note",
+          "name": "shipment-id",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "cargo:cancel-bid",
+      "pluginAlias": "mm-plugin-cargo-notes",
+      "pluginName": "mm-plugin-cargo-notes",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "requiresAuth": true,
+      "requiresInit": true,
+      "requiresFees": false,
+      "byokPasswordFlags": {
+        "password": {
+          "description": "Password to unlock the BYOK mnemonic (BYOK mode only)",
+          "env": "MM_PASSWORD",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "walletTimeoutFlags": {
+        "wallet-timeout": {
+          "description": "Seconds to wait per wallet job (MFA/signing), max 600; overrides config walletTimeoutSeconds",
+          "min": 1,
+          "max": 600,
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "STRUCTURED_FORMATS": {},
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "commands",
+        "cargo",
+        "cancel-bid.js"
+      ]
+    },
+    "cargo:list": {
+      "aliases": [],
+      "args": {},
+      "description": "List live CargoFlow cargo notes on Monad testnet: status, evidence score, claim, mark, ask, best bid and upside at the ask.",
+      "examples": [
+        "<%= config.bin %> cargo list",
+        "<%= config.bin %> cargo list --json",
+        "<%= config.bin %> cargo list --ids 0xb508…39ff"
+      ],
+      "flags": {
+        "format": {
+          "char": "f",
+          "description": "Output format: text | json | toon (defaults to text in TTY, json when piped)",
+          "name": "format",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "text",
+            "json",
+            "toon"
+          ],
+          "type": "option"
+        },
+        "json": {
+          "description": "Shorthand for --format=json",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "toon": {
+          "description": "Shorthand for --format=toon",
+          "name": "toon",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "verbose": {
+          "char": "v",
+          "description": "Show debug logs on stderr. Use this for troubleshooting",
+          "name": "verbose",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "ids": {
+          "description": "Comma-separated shipment ids to read straight from chain (skips the CargoFlow API)",
+          "name": "ids",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "cargo:list",
+      "pluginAlias": "mm-plugin-cargo-notes",
+      "pluginName": "mm-plugin-cargo-notes",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "requiresAuth": false,
+      "requiresInit": false,
+      "requiresFees": false,
+      "byokPasswordFlags": {
+        "password": {
+          "description": "Password to unlock the BYOK mnemonic (BYOK mode only)",
+          "env": "MM_PASSWORD",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "walletTimeoutFlags": {
+        "wallet-timeout": {
+          "description": "Seconds to wait per wallet job (MFA/signing), max 600; overrides config walletTimeoutSeconds",
+          "min": 1,
+          "max": 600,
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "STRUCTURED_FORMATS": {},
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "commands",
+        "cargo",
+        "list.js"
+      ]
+    },
+    "cargo:quote": {
+      "aliases": [],
+      "args": {
+        "shipment-id": {
+          "description": "Shipment id (0x + 64 hex) of the cargo note",
+          "name": "shipment-id",
+          "required": true
+        }
+      },
+      "description": "Quote one cargo note and explain its mark: undrawn capital at par plus the drawn leg haircut 0.5% per evidence point below 100 (x0.7 while paused).",
+      "examples": [
+        "<%= config.bin %> cargo quote 0xb508ee5803f1531f5ef62d9df7e7760c091555550471dd98643f7114021239ff --json"
+      ],
+      "flags": {
+        "format": {
+          "char": "f",
+          "description": "Output format: text | json | toon (defaults to text in TTY, json when piped)",
+          "name": "format",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "text",
+            "json",
+            "toon"
+          ],
+          "type": "option"
+        },
+        "json": {
+          "description": "Shorthand for --format=json",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "toon": {
+          "description": "Shorthand for --format=toon",
+          "name": "toon",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "verbose": {
+          "char": "v",
+          "description": "Show debug logs on stderr. Use this for troubleshooting",
+          "name": "verbose",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "shipment-id": {
+          "description": "Shipment id (0x + 64 hex) of the cargo note",
+          "name": "shipment-id",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "cargo:quote",
+      "pluginAlias": "mm-plugin-cargo-notes",
+      "pluginName": "mm-plugin-cargo-notes",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "requiresAuth": false,
+      "requiresInit": false,
+      "requiresFees": false,
+      "byokPasswordFlags": {
+        "password": {
+          "description": "Password to unlock the BYOK mnemonic (BYOK mode only)",
+          "env": "MM_PASSWORD",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "walletTimeoutFlags": {
+        "wallet-timeout": {
+          "description": "Seconds to wait per wallet job (MFA/signing), max 600; overrides config walletTimeoutSeconds",
+          "min": 1,
+          "max": 600,
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "STRUCTURED_FORMATS": {},
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "commands",
+        "cargo",
+        "quote.js"
+      ]
+    },
+    "cargo:scan": {
+      "aliases": [],
+      "args": {},
+      "description": "Scan every live cargo note, keep the ones whose sensor evidence, mark and upside clear your rules, and fill a USDC budget best-upside first. Dry run unless --execute.",
+      "examples": [
+        "<%= config.bin %> cargo scan --budget 10 --min-score 90 --min-upside-bps 50",
+        "<%= config.bin %> cargo scan --budget 10 --min-score 90 --min-upside-bps 50 --execute --json"
+      ],
+      "flags": {
+        "format": {
+          "char": "f",
+          "description": "Output format: text | json | toon (defaults to text in TTY, json when piped)",
+          "name": "format",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "options": [
+            "text",
+            "json",
+            "toon"
+          ],
+          "type": "option"
+        },
+        "json": {
+          "description": "Shorthand for --format=json",
+          "name": "json",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "toon": {
+          "description": "Shorthand for --format=toon",
+          "name": "toon",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "verbose": {
+          "char": "v",
+          "description": "Show debug logs on stderr. Use this for troubleshooting",
+          "name": "verbose",
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "budget": {
+          "description": "Total USDC the scan may spend",
+          "name": "budget",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "min-score": {
+          "description": "Minimum evidence score 0-100 (default 90)",
+          "name": "min-score",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "min-upside-bps": {
+          "description": "Minimum return to claim at the ask, in bps (default 50)",
+          "name": "min-upside-bps",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "max-premium-to-mark-bps": {
+          "description": "Largest premium of an ask over its evidence mark, in bps (default 0)",
+          "name": "max-premium-to-mark-bps",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "ids": {
+          "description": "Comma-separated shipment ids to scan instead of asking the API",
+          "name": "ids",
+          "hasDynamicHelp": false,
+          "multiple": false,
+          "type": "option"
+        },
+        "execute": {
+          "description": "Buy the selected notes (default: dry run)",
+          "name": "execute",
+          "allowNo": false,
+          "type": "boolean"
+        }
+      },
+      "hasDynamicHelp": false,
+      "hiddenAliases": [],
+      "id": "cargo:scan",
+      "pluginAlias": "mm-plugin-cargo-notes",
+      "pluginName": "mm-plugin-cargo-notes",
+      "pluginType": "core",
+      "strict": true,
+      "enableJsonFlag": false,
+      "requiresAuth": false,
+      "requiresInit": false,
+      "requiresFees": false,
+      "byokPasswordFlags": {
+        "password": {
+          "description": "Password to unlock the BYOK mnemonic (BYOK mode only)",
+          "env": "MM_PASSWORD",
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "walletTimeoutFlags": {
+        "wallet-timeout": {
+          "description": "Seconds to wait per wallet job (MFA/signing), max 600; overrides config walletTimeoutSeconds",
+          "min": 1,
+          "max": 600,
+          "input": [],
+          "multiple": false,
+          "type": "option"
+        }
+      },
+      "STRUCTURED_FORMATS": {},
+      "isESM": true,
+      "relativePath": [
+        "dist",
+        "commands",
+        "cargo",
+        "scan.js"
+      ]
+    }
+  },
+  "version": "0.1.0"
+}
