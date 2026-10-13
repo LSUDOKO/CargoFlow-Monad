@@ -44,7 +44,7 @@ type Config struct {
 	// ones before them are unhealthy. Like RPCURL they may carry credentials: print them only through RedactURL.
 	RPCFallbackURLs []string
 	// AlchemyRPCURL is an optional last tier after the fallbacks: ALCHEMY_RPC_URL, or built from ALCHEMY_API_KEY as
-	// https://robinhood-testnet.g.alchemy.com/v2/<key>. It carries the key in its path.
+	// https://monad-testnet.g.alchemy.com/v2/<key>. It carries the key in its path.
 	AlchemyRPCURL  string
 	ChainID        uint64
 	DeploymentFile string
@@ -244,7 +244,7 @@ func Load(getenv func(string) string) (Config, error) {
 			if strings.ContainsAny(k, "/?#@ ") {
 				fail("ALCHEMY_API_KEY", "must be the bare Alchemy API key")
 			} else {
-				c.AlchemyRPCURL = "https://robinhood-testnet.g.alchemy.com/v2/" + k
+				c.AlchemyRPCURL = "https://monad-testnet.g.alchemy.com/v2/" + k
 			}
 		}
 	}

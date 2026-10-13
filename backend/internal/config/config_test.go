@@ -260,12 +260,12 @@ func TestOptionalIntegrationsAreValidated(t *testing.T) {
 func TestRPCFallbackAndRedaction(t *testing.T) {
 	e := valid()
 	e["RPC_URL"] = "https://example.quiknode.pro/0123456789abcdef/"
-	e["RPC_FALLBACK_URL"] = "https://rpc.testnet.chain.robinhood.com"
+	e["RPC_FALLBACK_URL"] = "https://testnet-rpc.monad.xyz"
 	c, err := config.Load(func(k string) string { return e[k] })
 	if err != nil {
 		t.Fatal(err)
 	}
-	if fb := c.RPCFallbacks(); len(fb) != 1 || fb[0] != "https://rpc.testnet.chain.robinhood.com" {
+	if fb := c.RPCFallbacks(); len(fb) != 1 || fb[0] != "https://testnet-rpc.monad.xyz" {
 		t.Fatalf("fallback = %q", fb)
 	}
 	if s := c.String(); strings.Contains(s, "0123456789abcdef") || !strings.Contains(s, "example.quiknode.pro") {
@@ -286,11 +286,11 @@ func TestRPCTiersWithAlchemy(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	want := []string{"https://a.example.org", "https://b.example.org", "https://robinhood-testnet.g.alchemy.com/v2/alchemysecretkey123"}
+	want := []string{"https://a.example.org", "https://b.example.org", "https://monad-testnet.g.alchemy.com/v2/alchemysecretkey123"}
 	if got := c.RPCFallbacks(); strings.Join(got, " ") != strings.Join(want, " ") {
 		t.Fatalf("tiers = %q", got)
 	}
-	if s := c.String(); strings.Contains(s, "alchemysecretkey123") || !strings.Contains(s, "robinhood-testnet.g.alchemy.com") {
+	if s := c.String(); strings.Contains(s, "alchemysecretkey123") || !strings.Contains(s, "monad-testnet.g.alchemy.com") {
 		t.Fatalf("the Alchemy key must never be printed: %s", s)
 	}
 	e["ALCHEMY_RPC_URL"] = "https://custom.g.alchemy.com/v2/x"

@@ -12,7 +12,7 @@ import (
 	"testing"
 )
 
-const manifest = `{"chainId":46630,"usdg":"0x7E955252E15c84f5768B83c41a71F9eba181802F","contracts":{
+const manifest = `{"chainId":10143,"usdg":"0x534b2f3A21130d7a60830c2Df862319e593943A3","contracts":{
  "access":"0x0000000000000000000000000000000000000001","shipmentRegistry":"0x0000000000000000000000000000000000000002",
  "policyEngine":"0x0000000000000000000000000000000000000003","evidenceRegistry":"0x0000000000000000000000000000000000000004",
  "receivableVault":"0x0000000000000000000000000000000000000005","groth16Verifier":"0x0000000000000000000000000000000000000006",
@@ -36,7 +36,7 @@ func TestDryRunPrintsTheRequest(t *testing.T) {
 		t.Fatal(err)
 	}
 	s := out.String()
-	for _, want := range []string{"ROBINHOOD_TESTNET", `"GRAPHQL"`, "https://api.example.com/v1/webhooks/alchemy", "0x0000000000000000000000000000000000000007",
+	for _, want := range []string{"MONAD_TESTNET", `"GRAPHQL"`, "https://api.example.com/v1/webhooks/alchemy", "0x0000000000000000000000000000000000000007",
 		"0x00000000000000000000000000000000000000ab", "logs(filter: {addresses:"} {
 		if !strings.Contains(s, want) {
 			t.Fatalf("missing %q in\n%s", want, s)
@@ -58,7 +58,7 @@ func TestCreatesThenReplacesThePreviousWebhook(t *testing.T) {
 		calls = append(calls, r.Method+" "+r.URL.RequestURI())
 		switch r.URL.Path {
 		case "/api/team-webhooks":
-			_, _ = w.Write([]byte(`{"data":[{"id":"wh_old","network":"ROBINHOOD_TESTNET","webhook_type":"GRAPHQL","webhook_url":"https://api.example.com/v1/webhooks/alchemy"},
+			_, _ = w.Write([]byte(`{"data":[{"id":"wh_old","network":"MONAD_TESTNET","webhook_type":"GRAPHQL","webhook_url":"https://api.example.com/v1/webhooks/alchemy"},
 				{"id":"wh_keep","network":"ETH_MAINNET","webhook_type":"GRAPHQL","webhook_url":"https://api.example.com/v1/webhooks/alchemy"}]}`))
 		case "/api/create-webhook":
 			_ = json.NewDecoder(r.Body).Decode(&created)
@@ -81,7 +81,7 @@ func TestCreatesThenReplacesThePreviousWebhook(t *testing.T) {
 	if strings.Join(calls, "|") != strings.Join(want, "|") {
 		t.Fatalf("calls %v", calls)
 	}
-	if created["network"] != "ROBINHOOD_TESTNET" || created["webhook_type"] != "GRAPHQL" {
+	if created["network"] != "MONAD_TESTNET" || created["webhook_type"] != "GRAPHQL" {
 		t.Fatalf("body %v", created)
 	}
 	if err := run(context.Background(), []string{"-deployment", writeManifest(t), "-api", "https://api.example.com"}, env(nil), &out, &errOut, nil); err == nil ||

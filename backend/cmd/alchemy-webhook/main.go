@@ -4,7 +4,7 @@
 // Alchemy's Notify API (https://www.alchemy.com/docs/data/webhooks/webhooks-api-endpoints/notify-api-endpoints/create-webhook):
 //
 //	POST https://dashboard.alchemy.com/api/create-webhook   X-Alchemy-Token: $ALCHEMY_AUTH_TOKEN
-//	{"network":"ROBINHOOD_TESTNET","webhook_type":"GRAPHQL","webhook_url":"<api>/v1/webhooks/alchemy","name":"...",
+//	{"network":"MONAD_TESTNET","webhook_type":"GRAPHQL","webhook_url":"<api>/v1/webhooks/alchemy","name":"...",
 //	 "graphql_query":{"query":"{ block { number hash logs(filter: {addresses: [...], topics: []}) { ... } } }","skip_empty_messages":true}}
 //
 // Custom Webhooks cannot change their query, so when a webhook for the same URL and network exists the command creates
@@ -12,7 +12,7 @@
 // The new signing key is printed once on stdout; add it to ALCHEMY_WEBHOOK_SIGNING_KEYS (comma-separated, so the old
 // and new keys can overlap during the switch).
 //
-//	ALCHEMY_AUTH_TOKEN=... go run ./cmd/alchemy-webhook -deployment ../contracts/deployments/46630.json -api https://api.example.com
+//	ALCHEMY_AUTH_TOKEN=... go run ./cmd/alchemy-webhook -deployment ../contracts/deployments/10143.json -api https://api.example.com
 package main
 
 import (
@@ -36,7 +36,7 @@ import (
 const DefaultNotifyURL = "https://dashboard.alchemy.com/api"
 
 // networks maps chain ids to Alchemy's network enum (from the create-webhook reference).
-var networks = map[uint64]string{46630: "ROBINHOOD_TESTNET", 421614: "ARB_SEPOLIA", 11155111: "ETH_SEPOLIA"}
+var networks = map[uint64]string{10143: "MONAD_TESTNET", 421614: "ARB_SEPOLIA", 11155111: "ETH_SEPOLIA"}
 
 func main() {
 	if err := run(context.Background(), os.Args[1:], os.Getenv, os.Stdout, os.Stderr, http.DefaultClient); err != nil {
@@ -56,7 +56,7 @@ func run(ctx context.Context, args []string, getenv func(string) string, out, er
 	var o options
 	fs.StringVar(&o.deployment, "deployment", getenv("DEPLOYMENT_FILE"), "deployment manifest (default $DEPLOYMENT_FILE)")
 	fs.StringVar(&o.api, "api", getenv("API_URL"), "public base URL of the CargoFlow API (default $API_URL), e.g. https://api.example.com")
-	fs.StringVar(&o.network, "network", "", "Alchemy network enum (default: from the manifest's chain id; 46630 is ROBINHOOD_TESTNET)")
+	fs.StringVar(&o.network, "network", "", "Alchemy network enum (default: from the manifest's chain id; 10143 is MONAD_TESTNET)")
 	fs.StringVar(&o.name, "name", "CargoFlow indexer wake-up", "webhook name")
 	fs.StringVar(&o.notifyURL, "notify-url", DefaultNotifyURL, "Notify API root")
 	fs.BoolVar(&o.dryRun, "dry-run", false, "print the request instead of sending it")
