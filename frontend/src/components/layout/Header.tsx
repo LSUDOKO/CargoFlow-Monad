@@ -15,6 +15,7 @@ import { NotificationBell } from "./NotificationBell";
 export const primaryNav = [
   { href: "/shipments", label: "Fleet" },
   { href: "/market", label: "Market" },
+  { href: "/notes", label: "Notes" },
 ];
 
 type NavItem = { href: string; label: string; blurb: string; icon: string };
