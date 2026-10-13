@@ -1,0 +1,348 @@
+package config_test
+
+import (
+	"fmt"
+	"strings"
+	"testing"
+	"time"
+
+	"github.com/LSUDOKO/CargoFlow/backend/internal/config"
+)
+
+const key1 = "ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"
+const key2 = "0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d"
+const key3 = "5de4111afa1a4b94908f83103eb1f1706367c2e68ca870fc3fb9a804cdab365a"
+
+func env(m map[string]string) func(string) string { return func(k string) string { return m[k] } }
+
+func valid() map[string]string {
+	return map[string]string{
+		"DATABASE_URL":    "postgres://u:p@localhost/db",
+		"ADMIN_API_KEY":   "0123456789abcdef0123",
+		"SALT_SECRET":     "operator-secret-at-least-16-bytes",
+		"RPC_URL":         "http://127.0.0.1:8545",
+		"CHAIN_ID":        "31337",
+		"DEPLOYMENT_FILE": "../contracts/deployments/local.json",
+		"WORKER_KEY":      key1,
+		"MONITOR_KEY":     key2,
+		"MANAGER_KEY":     key3,
+	}
+}
+
+func TestLoadAppliesDefaults(t *testing.T) {
+	c, err := config.Load(env(valid()))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if c.HTTPAddr != ":8080" || c.Confirmations != 1 || c.IndexerPoll != 2*time.Second || c.LogLevel != "info" {
+		t.Fatalf("defaults wrong: %+v", c)
+	}
+	if c.CircuitsDir != "../circuits" || c.ChainID != 31337 || c.StartBlock != 0 {
+		t.Fatalf("defaults wrong: %+v", c)
+	}
+}
+
+func TestLoadParsesKeysWithOrWithoutPrefix(t *testing.T) {
+	c, err := config.Load(env(valid()))
+	if err != nil {
+		t.Fatal(err)
+	}
+	for name, k := range map[string][]byte{"worker": c.WorkerKey, "monitor": c.MonitorKey, "manager": c.ManagerKey} {
+		if len(k) != 32 {
+			t.Fatalf("%s key has %d bytes", name, len(k))
+		}
+	}
+}
+
+func TestLoadReportsEveryMissingRequiredSettingAtOnce(t *testing.T) {
+	_, err := config.Load(env(map[string]string{}))
+	if err == nil {
+		t.Fatal("empty environment accepted")
+	}
+	for _, want := range []string{"DATABASE_URL", "ADMIN_API_KEY", "SALT_SECRET", "RPC_URL", "CHAIN_ID", "DEPLOYMENT_FILE", "WORKER_KEY", "MONITOR_KEY", "MANAGER_KEY"} {
+		if !strings.Contains(err.Error(), want) {
+			t.Errorf("error does not mention %s: %v", want, err)
+		}
+	}
+}
+
+func TestWeakSecretsAreRejected(t *testing.T) {
+	e := valid()
+	e["ADMIN_API_KEY"] = "short"
+	if _, err := config.Load(env(e)); err == nil || !strings.Contains(err.Error(), "ADMIN_API_KEY") {
+		t.Fatalf("short admin key accepted: %v", err)
+	}
+	e = valid()
+	e["SALT_SECRET"] = "tooshort"
+	if _, err := config.Load(env(e)); err == nil || !strings.Contains(err.Error(), "SALT_SECRET") {
+		t.Fatalf("short salt secret accepted: %v", err)
+	}
+}
+
+func TestMalformedValuesAreRejected(t *testing.T) {
+	cases := map[string]string{
+		"WORKER_KEY":    "not-hex",
+		"MONITOR_KEY":   key1[:60], // too short
+		"CHAIN_ID":      "abc",
+		"CONFIRMATIONS": "-1",
+		"INDEXER_POLL":  "soon",
+		"START_BLOCK":   "x",
+	}
+	for k, v := range cases {
+		e := valid()
+		e[k] = v
+		if _, err := config.Load(env(e)); err == nil || !strings.Contains(err.Error(), k) {
+			t.Errorf("%s=%q accepted: %v", k, v, err)
+		}
+	}
+}
+
+func TestOverridesAreHonoured(t *testing.T) {
+	e := valid()
+	e["HTTP_ADDR"] = ":9999"
+	e["CONFIRMATIONS"] = "3"
+	e["INDEXER_POLL"] = "500ms"
+	e["START_BLOCK"] = "1200"
+	e["CORS_ORIGINS"] = "http://localhost:3000, https://app.example"
+	e["LOG_LEVEL"] = "debug"
+	c, err := config.Load(env(e))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if c.HTTPAddr != ":9999" || c.Confirmations != 3 || c.IndexerPoll != 500*time.Millisecond || c.StartBlock != 1200 || c.LogLevel != "debug" {
+		t.Fatalf("overrides ignored: %+v", c)
+	}
+	if len(c.CORSOrigins) != 2 || c.CORSOrigins[1] != "https://app.example" {
+		t.Fatalf("cors origins = %v", c.CORSOrigins)
+	}
+}
+
+func TestStringNeverRevealsSecrets(t *testing.T) {
+	c, _ := config.Load(env(valid()))
+	for _, rendered := range []string{c.String(), strings.TrimSpace(fmtSprint(c))} {
+		for _, secret := range []string{key1, key3, "operator-secret-at-least-16-bytes", "0123456789abcdef0123", "postgres://u:p@"} {
+			if strings.Contains(rendered, secret) {
+				t.Fatalf("config rendering leaks %q: %s", secret, rendered)
+			}
+		}
+	}
+}
+
+func TestTheAIMonitorIsOffByDefault(t *testing.T) {
+	c, err := config.Load(env(valid()))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if c.AIEnabled() || c.AITimeout != 10*time.Second || c.AIMinConfidence != 0.9 || c.GroqModel != "" {
+		t.Fatalf("%+v", c)
+	}
+}
+
+func TestGroqSettingsAreParsedAndTheKeyNeverPrints(t *testing.T) {
+	e := valid()
+	e["GROQ_API_KEY"] = "gsk_super_secret_value_123"
+	e["GROQ_MODEL"] = "openai/gpt-oss-120b"
+	e["AI_TIMEOUT"] = "3s"
+	e["AI_MIN_CONFIDENCE"] = "0.75"
+	c, err := config.Load(env(e))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !c.AIEnabled() || c.GroqAPIKey.Reveal() != "gsk_super_secret_value_123" || c.GroqModel != "openai/gpt-oss-120b" ||
+		c.AITimeout != 3*time.Second || c.AIMinConfidence != 0.75 {
+		t.Fatalf("%+v", c)
+	}
+	if out := fmtSprint(c) + c.String(); strings.Contains(out, "super_secret") {
+		t.Fatalf("the Groq key was printed: %s", out)
+	}
+}
+
+func TestInvalidAISettingsAreRejected(t *testing.T) {
+	for name, kv := range map[string][2]string{
+		"timeout not a duration":  {"AI_TIMEOUT", "soon"},
+		"timeout not positive":    {"AI_TIMEOUT", "0s"},
+		"confidence not a number": {"AI_MIN_CONFIDENCE", "high"},
+		"confidence zero":         {"AI_MIN_CONFIDENCE", "0"},
+		"confidence above one":    {"AI_MIN_CONFIDENCE", "1.5"},
+		"confidence NaN":          {"AI_MIN_CONFIDENCE", "NaN"},
+	} {
+		t.Run(name, func(t *testing.T) {
+			e := valid()
+			e[kv[0]] = kv[1]
+			if _, err := config.Load(env(e)); err == nil || !strings.Contains(err.Error(), kv[0]) {
+				t.Fatalf("accepted %s=%s: %v", kv[0], kv[1], err)
+			}
+		})
+	}
+}
+
+func TestReconcileIntervalDefaultsParsesAndCanBeDisabled(t *testing.T) {
+	c, err := config.Load(env(valid()))
+	if err != nil || c.ReconcileInterval != 30*time.Second {
+		t.Fatalf("default: %+v %v", c.ReconcileInterval, err)
+	}
+	e := valid()
+	e["RECONCILE_INTERVAL"] = "5s"
+	if c, err = config.Load(env(e)); err != nil || c.ReconcileInterval != 5*time.Second {
+		t.Fatalf("%v %v", c.ReconcileInterval, err)
+	}
+	e["RECONCILE_INTERVAL"] = "0s"
+	if c, err = config.Load(env(e)); err != nil || c.ReconcileInterval != 0 {
+		t.Fatalf("0s must disable the loop: %v %v", c.ReconcileInterval, err)
+	}
+	for _, bad := range []string{"soon", "-5s"} {
+		e["RECONCILE_INTERVAL"] = bad
+		if _, err := config.Load(env(e)); err == nil || !strings.Contains(err.Error(), "RECONCILE_INTERVAL") {
+			t.Fatalf("accepted %q: %v", bad, err)
+		}
+	}
+}
+
+func TestOptionalIntegrationsAreOffByDefault(t *testing.T) {
+	c, err := config.Load(env(valid()))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if c.TelegramEnabled() || c.EmailEnabled() || c.AISEnabled() || c.GasDripEnabled() {
+		t.Fatalf("an integration is on without credentials: %+v", c)
+	}
+	if c.GasDripWei != 50_000_000_000_000 || c.GasDripDaily != 200 {
+		t.Fatalf("gas drip defaults = %d wei, %d a day", c.GasDripWei, c.GasDripDaily)
+	}
+}
+
+func TestOptionalIntegrationsParseAndStayUnprintable(t *testing.T) {
+	e := valid()
+	e["TELEGRAM_BOT_TOKEN"] = "123456:telegram-token-value"
+	e["RESEND_API_KEY"] = "re_resend_key_value"
+	e["ALERT_EMAIL_FROM"] = "CargoFlow <alerts@cargoflow.dev>"
+	e["AISSTREAM_API_KEY"] = "ais-key-value"
+	e["GAS_DRIP_KEY"] = key1
+	e["GAS_DRIP_WEI"] = "1000"
+	e["GAS_DRIP_DAILY"] = "5"
+	c, err := config.Load(env(e))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !c.TelegramEnabled() || !c.EmailEnabled() || !c.AISEnabled() || !c.GasDripEnabled() || c.GasDripWei != 1000 || c.GasDripDaily != 5 ||
+		c.AlertEmailFrom != "CargoFlow <alerts@cargoflow.dev>" || len(c.GasDripKey) != 32 {
+		t.Fatalf("integrations = %+v", c)
+	}
+	printed := strings.Join([]string{c.String(), fmt.Sprintf("%v %+v %#v", c, c, c)}, " ")
+	for _, secret := range []string{"telegram-token-value", "re_resend_key_value", "ais-key-value", key1[:16]} {
+		if strings.Contains(printed, secret) {
+			t.Fatalf("a secret is printable: %q", secret)
+		}
+	}
+}
+
+func TestOptionalIntegrationsAreValidated(t *testing.T) {
+	for name, tc := range map[string]struct {
+		set  map[string]string
+		want string
+	}{
+		"email without a sender":      {map[string]string{"RESEND_API_KEY": "re_x"}, "ALERT_EMAIL_FROM"},
+		"a sender that is no address": {map[string]string{"RESEND_API_KEY": "re_x", "ALERT_EMAIL_FROM": "nobody"}, "ALERT_EMAIL_FROM"},
+		"a bad drip key":              {map[string]string{"GAS_DRIP_KEY": "0x1234"}, "GAS_DRIP_KEY"},
+		"a zero drip":                 {map[string]string{"GAS_DRIP_WEI": "0"}, "GAS_DRIP_WEI"},
+		"a zero daily cap":            {map[string]string{"GAS_DRIP_DAILY": "0"}, "GAS_DRIP_DAILY"},
+	} {
+		e := valid()
+		for k, v := range tc.set {
+			e[k] = v
+		}
+		if _, err := config.Load(env(e)); err == nil || !strings.Contains(err.Error(), tc.want) {
+			t.Errorf("%s: err = %v, want a mention of %s", name, err, tc.want)
+		}
+	}
+}
+
+func TestRPCFallbackAndRedaction(t *testing.T) {
+	e := valid()
+	e["RPC_URL"] = "https://example.quiknode.pro/0123456789abcdef/"
+	e["RPC_FALLBACK_URL"] = "https://rpc.testnet.chain.robinhood.com"
+	c, err := config.Load(func(k string) string { return e[k] })
+	if err != nil {
+		t.Fatal(err)
+	}
+	if fb := c.RPCFallbacks(); len(fb) != 1 || fb[0] != "https://rpc.testnet.chain.robinhood.com" {
+		t.Fatalf("fallback = %q", fb)
+	}
+	if s := c.String(); strings.Contains(s, "0123456789abcdef") || !strings.Contains(s, "example.quiknode.pro") {
+		t.Fatalf("the RPC token must never be printed: %s", s)
+	}
+	e["RPC_FALLBACK_URL"] = "wss://example.org/ws"
+	if _, err := config.Load(func(k string) string { return e[k] }); err == nil || !strings.Contains(err.Error(), "RPC_FALLBACK_URL") {
+		t.Fatalf("failover over websockets must be refused, got %v", err)
+	}
+}
+
+func TestRPCTiersWithAlchemy(t *testing.T) {
+	e := valid()
+	e["RPC_URL"] = "https://example.quiknode.pro/0123456789abcdef/"
+	e["RPC_FALLBACK_URL"] = "https://a.example.org, https://b.example.org"
+	e["ALCHEMY_API_KEY"] = "alchemysecretkey123"
+	c, err := config.Load(func(k string) string { return e[k] })
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := []string{"https://a.example.org", "https://b.example.org", "https://robinhood-testnet.g.alchemy.com/v2/alchemysecretkey123"}
+	if got := c.RPCFallbacks(); strings.Join(got, " ") != strings.Join(want, " ") {
+		t.Fatalf("tiers = %q", got)
+	}
+	if s := c.String(); strings.Contains(s, "alchemysecretkey123") || !strings.Contains(s, "robinhood-testnet.g.alchemy.com") {
+		t.Fatalf("the Alchemy key must never be printed: %s", s)
+	}
+	e["ALCHEMY_RPC_URL"] = "https://custom.g.alchemy.com/v2/x"
+	c, err = config.Load(func(k string) string { return e[k] })
+	if err != nil || c.AlchemyRPCURL != "https://custom.g.alchemy.com/v2/x" {
+		t.Fatalf("ALCHEMY_RPC_URL wins over the key: %q %v", c.AlchemyRPCURL, err)
+	}
+}
+
+func TestWebhookAndDuneSettings(t *testing.T) {
+	e := valid()
+	c, err := config.Load(func(k string) string { return e[k] })
+	if err != nil || c.AlchemyWebhookEnabled() || c.DuneEnabled() || c.DuneUploadInterval != 15*time.Minute {
+		t.Fatalf("both off by default: %+v %v", c, err)
+	}
+	e["ALCHEMY_WEBHOOK_SIGNING_KEYS"] = "whsec_aaaaaaaaaaaaaaaa, whsec_bbbbbbbbbbbbbbbb"
+	e["DUNE_API_KEY"] = "dunekey"
+	e["DUNE_NAMESPACE"] = "cargoflow_team"
+	e["DUNE_UPLOAD_INTERVAL"] = "5m"
+	c, err = config.Load(func(k string) string { return e[k] })
+	if err != nil || len(c.AlchemyWebhookSigningKeys) != 2 || !c.DuneEnabled() || c.DuneUploadInterval != 5*time.Minute {
+		t.Fatalf("%+v %v", c, err)
+	}
+	if s := fmt.Sprintf("%v %+v", c.AlchemyWebhookSigningKeys, c); strings.Contains(s, "whsec_aaaa") || strings.Contains(s, "dunekey") {
+		t.Fatal("signing keys and the Dune key must be unprintable")
+	}
+	e["DUNE_NAMESPACE"] = "bad namespace"
+	e["DUNE_UPLOAD_INTERVAL"] = "10s"
+	e["ALCHEMY_WEBHOOK_SIGNING_KEYS"] = "short"
+	_, err = config.Load(func(k string) string { return e[k] })
+	for _, name := range []string{"DUNE_NAMESPACE", "DUNE_UPLOAD_INTERVAL", "ALCHEMY_WEBHOOK_SIGNING_KEYS"} {
+		if err == nil || !strings.Contains(err.Error(), name) {
+			t.Fatalf("%s must be validated, got %v", name, err)
+		}
+	}
+}
+
+func TestPlatformSettings(t *testing.T) {
+	e := valid()
+	e["APP_URL"] = "https://app.example.com/"
+	e["RECOVERY_SCAN_INTERVAL"] = "0s"
+	e["DEVICE_ROOTS_DIR"] = "/etc/cargoflow/roots"
+	e["WEBAUTHN_ORIGINS"] = "https://app.example.com, http://localhost:3000"
+	c, err := config.Load(func(k string) string { return e[k] })
+	if err != nil {
+		t.Fatal(err)
+	}
+	if c.AppURL != "https://app.example.com" || c.RecoveryScanInterval != 0 || c.DeviceRootsDir != "/etc/cargoflow/roots" || len(c.WebAuthnOrigins) != 2 {
+		t.Fatalf("%+v", c)
+	}
+	e["APP_URL"] = "javascript:alert(1)"
+	if _, err := config.Load(func(k string) string { return e[k] }); err == nil {
+		t.Fatal("a non-http APP_URL must be refused")
+	}
+}
