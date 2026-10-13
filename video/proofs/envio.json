@@ -1,0 +1,31 @@
+{
+    "data": {
+        "MarketStats": [
+            {
+                "trades": 2,
+                "volume": "7012447",
+                "asks": 4,
+                "bids": 2
+            }
+        ],
+        "Trade": [
+            {
+                "buyer": "0x4124348e51653cfe155494cabd671b2977a09407",
+                "price": "3005640",
+                "mark": "3036000",
+                "txHash": "0x55a0bf9840c9d028848cd0136e8a8cf0218c96aee1732b4cd0554f01e2ae357c"
+            },
+            {
+                "buyer": "0xa6c05ec62a222b0fb65bd30b2d2f9b2fd378911b",
+                "price": "4006807",
+                "mark": "4047280",
+                "txHash": "0x8525c279e19eec78ffffaf4f4bb62efa7f7169ba7a25f4d8032b91b10596a187"
+            }
+        ],
+        "chain_metadata": [
+            {
+                "latest_processed_block": 70771027
+            }
+        ]
+    }
+}

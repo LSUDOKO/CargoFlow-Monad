@@ -1,0 +1,51 @@
+chainId: 10143
+market:  0x120142b2e5A90F2676F41d8d20bDCC94C66ec55d
+source:  api
+count:   3
+notes:
+  - shipmentId: 0xdfce8f865ac7e5f2f4d97e0d4cf3a5067a5b007a08415cee3eda23d4e5f6fa84
+    ref: CF-LIVE-1791917840516
+    status: ACTIVE
+    evidenceScore: 100
+    claimUsdc: 3.036
+    markUsdc: 3.036
+    askUsdc: null
+    askSeller: null
+    bestBidUsdc: null
+    bestBidder: null
+    holder: 0x427c9617808445509e2E1877655251A5CE4c6D1e
+    upsideAtAskBps: null
+    askVsMarkBps: null
+  - shipmentId: 0xb508ee5803f1531f5ef62d9df7e7760c091555550471dd98643f7114021239ff
+    ref: CF-LIVE-1791912900798
+    status: ACTIVE
+    evidenceScore: 100
+    claimUsdc: 3.036
+    markUsdc: 3.036
+    askUsdc: null
+    askSeller: null
+    bestBidUsdc: 2.94492
+    bestBidder: 0xA6C05ec62A222b0fb65BD30B2d2f9B2fd378911b
+    holder: 0x4124348E51653CfE155494CAbD671B2977A09407
+    upsideAtAskBps: null
+    askVsMarkBps: null
+  - shipmentId: 0xe27855155eae78aeb39aca53e5f50a861f503e0e7cd87730add2bf093f27e7dc
+    ref: CF-LIVE-1791912775389
+    status: PAUSED
+    evidenceScore: 48
+    claimUsdc: 3.036
+    markUsdc: 2.440248
+    askUsdc: 2.452449
+    askSeller: 0x2198AB4E7755510A6A94EE298cf70f44e0f86414
+    bestBidUsdc: 2.36704
+    bestBidder: 0xA6C05ec62A222b0fb65BD30B2d2f9B2fd378911b
+    holder: 0x2198AB4E7755510A6A94EE298cf70f44e0f86414
+    upsideAtAskBps: 2379
+    askVsMarkBps: 49
+errors:
+  []
+
+Hint: 3 cargo note(s) (USDC):
+CF-LIVE-1791917840516  ACTIVE    score 100  claim 3.036  mark 3.036  ask -  bid -  upside -
+CF-LIVE-1791912900798  ACTIVE    score 100  claim 3.036  mark 3.036  ask -  bid 2.94492  upside -
+CF-LIVE-1791912775389  PAUSED    score  48  claim 3.036  mark 2.440248  ask 2.452449  bid 2.36704  upside 2379 bps
