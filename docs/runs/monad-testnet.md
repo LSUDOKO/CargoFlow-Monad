@@ -43,3 +43,21 @@ Shipment id `0x0353f55d82eb48314a58c34eab518cfe88999aaf6885e9cc41c9d10a042ac58e`
 | Buyer | -7 | Paid the invoice once; the vault split it |
 
 Reproduce: `NOTE_TRADE=1 FACILITY_USDC=4 INVOICE_USDC=7 npx tsx frontend/scripts/testnet-lifecycle.ts <api url>`.
+
+## Cargo Notes on Kuru: CF-LIVE-1791917840516
+
+A second shipment (id `0xdfce8f865ac7e5f2f4d97e0d4cf3a5067a5b007a08415cee3eda23d4e5f6fa84`, 3 USDC facility, two
+milestones released) was wrapped into a fungible note token and listed on Kuru's spot order book with
+[`scripts/kuru-list-note.sh`](../../scripts/kuru-list-note.sh).
+
+| Step | Signed by | Transaction |
+|---|---|---|
+| Deploy `CargoNoteWrapper` ([0xD176E4e0…](https://testnet.monadvision.com/address/0xD176E4e02f97F12462e68014F92B2A13A664552e), verified) | deployer | in the wrapper's creation tx |
+| Allow the wrapper as the note's operator | financier | [0x6e68ed34…](https://testnet.monadvision.com/tx/0x6e68ed343ca07d6000d8743ffb031f7e79da7b7b990997b831cac8da9460c4f7) |
+| Wrap: the note moves to `CargoNoteToken` cNOTE-0516 ([0x427c9617…](https://testnet.monadvision.com/address/0x427c9617808445509e2E1877655251A5CE4c6D1e), verified), 3.036 tokens minted = the note's claim | financier | [0xf130430c…](https://testnet.monadvision.com/tx/0xf130430ceadd960f220de6267dfb9fe8af68a11df3de2e2221a089c4b6f82e1c) |
+| Create the cNOTE-0516/USDC market on Kuru's Router (`deployProxy`) → market [0x13f02ef0…](https://testnet.monadvision.com/address/0x13f02ef0c5CF7357267C52947709acfE52021520) | financier | [0x02a329a4…](https://testnet.monadvision.com/tx/0x02a329a4dfae4be2e5e8717493f7a892f1d05096fc9c3c459cc02451e0a6a18b) |
+| Deposit 3 cNOTE into Kuru's MarginAccount | financier | [0x89c425ca…](https://testnet.monadvision.com/tx/0x89c425ca947690d789431de80eea34e5108e0153d3fe9287a729ed8814f3c63a) |
+| Limit sell 3 cNOTE @ 0.99 USDC | financier | [0xbf442758…](https://testnet.monadvision.com/tx/0xbf4427583479344ec35e0709d3b996325cf4bc5a071c766fc17d31df9605d9b3) |
+| Market buy with 1 USDC → 1.009090 cNOTE (10 bps taker fee) | trader | [0xade132a7…](https://testnet.monadvision.com/tx/0xade132a7524680c7e3b9270923ccbb61be845c026173d5e1f0cd13753bf4c01b) |
+
+After the buyer settles, every cNOTE-0516 holder redeems pro-rata for the USDC the note received (`redeem`).
