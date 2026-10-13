@@ -10,5 +10,5 @@ enabled = true
 
 [vars]
 CARGOFLOW_API_URL = "https://cargoflow-monad-api.onrender.com"
-CARGOFLOW_APP_URL = "https://cargoflow-monad.adoranto737.workers.dev"
+CARGOFLOW_APP_URL = "https://cargoflow-monad.vercel.app"
 CARGOFLOW_RPC_URL = "https://testnet-rpc.monad.xyz"

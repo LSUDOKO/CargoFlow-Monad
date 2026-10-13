@@ -43,13 +43,13 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://cargoflow-monad.adoranto737.workers.dev"
+Homepage = "https://cargoflow-monad.vercel.app"
 Documentation = "https://github.com/LSUDOKO/CargoFlow-Monad/tree/main/packages/python#readme"
 Repository = "https://github.com/LSUDOKO/CargoFlow-Monad"
 Source = "https://github.com/LSUDOKO/CargoFlow-Monad/tree/main/packages/python"
 Issues = "https://github.com/LSUDOKO/CargoFlow-Monad/issues"
 Changelog = "https://github.com/LSUDOKO/CargoFlow-Monad/blob/main/CHANGELOG.md"
-"API reference" = "https://cargoflow-monad.adoranto737.workers.dev/docs"
+"API reference" = "https://cargoflow-monad.vercel.app/docs"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/cargoflow"]

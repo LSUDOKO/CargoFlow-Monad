@@ -1,7 +1,7 @@
 # @cargoflow/mcp
 
 A [Model Context Protocol](https://modelcontextprotocol.io) server for
-[CargoFlow](https://cargoflow-monad.adoranto737.workers.dev). With it, an assistant such as Claude or Cursor can read
+[CargoFlow](https://cargoflow-monad.vercel.app). With it, an assistant such as Claude or Cursor can read
 shipments, evidence, cover and track records, verify a trade document on your computer, and prepare transactions for
 **your own wallet** to sign.
 
@@ -102,7 +102,7 @@ npx -y @cargoflow/mcp --http 8787   # POST http://127.0.0.1:8787/mcp
 | Variable | Flag | Default | Purpose |
 |---|---|---|---|
 | `CARGOFLOW_API_URL` | `--api-url` | `https://cargoflow-monad-api.onrender.com` | The CargoFlow API |
-| `CARGOFLOW_APP_URL` | `--app-url` | `https://cargoflow-monad.adoranto737.workers.dev` | The web app that the "open to sign" links point to |
+| `CARGOFLOW_APP_URL` | `--app-url` | `https://cargoflow-monad.vercel.app` | The web app that the "open to sign" links point to |
 | `CARGOFLOW_GATEWAY_KEY_FILE` | `--gateway-key-file` | unset | Path to a gateway key file (downloaded from the web app); enables `submit_readings_csv` |
 | `CARGOFLOW_RPC_URL` | `--rpc-url` | the chain's public RPC | On-chain reads (the invoice hash in `verify_document`) |
 
@@ -166,7 +166,7 @@ addresses, contracts version).
 >
 > **Claude:** *(calls `prepare_deposit`)* Two transactions to send from the financier's wallet on Monad
 > Testnet: 1. approve the ReceivableVault for 20 USDC, 2. depositCapital. Nothing has been sent. Open
-> https://cargoflow-monad.adoranto737.workers.dev/track/0x… to sign them there, or send the JSON below from your wallet.
+> https://cargoflow-monad.vercel.app/track/0x… to sign them there, or send the JSON below from your wallet.
 
 ## Deploy your own (Cloudflare Workers)
 

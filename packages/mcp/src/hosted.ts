@@ -23,7 +23,7 @@ interface WaitUntil {
 
 export const DEFAULTS = {
   apiUrl: "https://cargoflow-monad-api.onrender.com",
-  appUrl: "https://cargoflow-monad.adoranto737.workers.dev",
+  appUrl: "https://cargoflow-monad.vercel.app",
   rpcUrl: "https://testnet-rpc.monad.xyz",
 } as const;
 

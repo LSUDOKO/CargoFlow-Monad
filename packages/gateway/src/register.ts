@@ -3,7 +3,7 @@
 import { DEFAULT_API_URL, USER_AGENT } from "./sender.js";
 import { sourceAuthorizationMessage, type KeyFile } from "./signing.js";
 
-export const DEFAULT_SITE_URL = "https://cargoflow-monad.adoranto737.workers.dev";
+export const DEFAULT_SITE_URL = "https://cargoflow-monad.vercel.app";
 
 export interface RegisteredSource {
   id: string;

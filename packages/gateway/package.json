@@ -70,7 +70,7 @@
   "bugs": {
     "url": "https://github.com/LSUDOKO/CargoFlow-Monad/issues"
   },
-  "author": "CargoFlow (https://cargoflow-monad.adoranto737.workers.dev)",
+  "author": "CargoFlow (https://cargoflow-monad.vercel.app)",
   "publishConfig": {
     "access": "public"
   },

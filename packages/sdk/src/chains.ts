@@ -15,7 +15,7 @@ export const monadTestnet = defineChain({
 
 /** The live CargoFlow API and web app. */
 export const DEFAULT_API_URL = "https://cargoflow-monad-api.onrender.com";
-export const DEFAULT_APP_URL = "https://cargoflow-monad.adoranto737.workers.dev";
+export const DEFAULT_APP_URL = "https://cargoflow-monad.vercel.app";
 
 /** Explorer links, or null on chains without a known explorer (a local anvil). */
 export function explorerTx(chainId: number, hash: string): string | null {
