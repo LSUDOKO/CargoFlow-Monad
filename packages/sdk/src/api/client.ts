@@ -4,7 +4,7 @@
 // The SDK builds the exact message (see ../messages.ts), asks for the signature and sends both; it never sees a key.
 import { createPublicClient, http, type Chain, type Hex, type PublicClient } from "viem";
 import type { z } from "zod";
-import { DEFAULT_API_URL, robinhoodTestnet } from "../chains.js";
+import { DEFAULT_API_URL, monadTestnet } from "../chains.js";
 import { nowSec as defaultNow } from "../encoding.js";
 import { CargoFlowApiError } from "../errors.js";
 import {
@@ -19,7 +19,7 @@ export type SignMessage = (message: string) => Promise<Hex>;
 export interface ClientOptions {
   /** API base URL; default the live deployment */
   apiUrl?: string;
-  /** chain for on-chain reads; default Robinhood Chain Testnet */
+  /** chain for on-chain reads; default Monad Testnet */
   chain?: Chain;
   /** RPC URL for on-chain reads; default the chain's public RPC */
   rpcUrl?: string;
@@ -94,7 +94,7 @@ export function createClient(opts: ClientOptions = {}) {
   const doFetch = opts.fetch ?? ((...a: Parameters<typeof fetch>) => globalThis.fetch(...a));
   const timeoutMs = opts.timeoutMs ?? 30_000;
   const now = opts.now ?? defaultNow;
-  const chain = opts.chain ?? robinhoodTestnet;
+  const chain = opts.chain ?? monadTestnet;
   let publicClient: PublicClient | undefined;
 
   async function request<T extends z.ZodTypeAny>(method: string, path: string, schema: T, ro: RequestOptions = {}): Promise<z.infer<T>> {
@@ -261,7 +261,7 @@ export function createClient(opts: ClientOptions = {}) {
   const market = {
     list: (f: { status?: S.RequestStatus; exporter?: string } = {}) => get("/v1/requests", S.RequestList, { status: f.status, exporter: f.exporter?.toLowerCase() }),
 
-    /** The exporter posts a financing request (amount in USDG base units). */
+    /** The exporter posts a financing request (amount in USDC base units). */
     createRequest: async (
       r: { shipmentId: string; amount: bigint | string; maxFeeBps: number; milestoneCount: number; note?: string },
       signMessage: SignMessage,

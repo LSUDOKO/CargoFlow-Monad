@@ -20,5 +20,5 @@ export const {
   eblRegistryAbi,
 } = v3;
 
-/** The ERC-20 surface CargoFlow uses on USDG (approve, allowance, balanceOf, transfer). */
+/** The ERC-20 surface CargoFlow uses on USDC (approve, allowance, balanceOf, transfer). */
 export { erc20Abi } from "viem";

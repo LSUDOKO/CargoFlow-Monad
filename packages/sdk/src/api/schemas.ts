@@ -1,7 +1,7 @@
 // zod schemas for the CargoFlow API's JSON (backend/internal/{store,service,api}). They are deliberately tolerant:
 // Go encodes nil slices and maps as null (normalised to [] / {}), fields added by newer deployments are kept
 // (loose objects), and fields that only contracts v2 deployments send (places, humidity and shock, cover) are optional.
-// USDG amounts are base units (6 decimals) as decimal strings.
+// USDC amounts are base units (6 decimals) as decimal strings.
 import { z } from "zod";
 
 export const list = <T extends z.ZodTypeAny>(item: T) =>

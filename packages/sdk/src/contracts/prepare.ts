@@ -1,6 +1,6 @@
 // Unsigned transaction requests for every CargoFlow action a party takes. Each returns `{ to, data, value, chainId }`
 // for any wallet to send (viem `sendTransaction`, wagmi, ethers, a Safe, a hardware wallet); nothing here signs or
-// sends. Token-moving actions need a USDG approval first; the `*WithApproval` helpers return both, approval first.
+// sends. Token-moving actions need a USDC approval first; the `*WithApproval` helpers return both, approval first.
 import {
   encodeFunctionData, erc20Abi, type Address, type ContractFunctionArgs, type ContractFunctionName, type Hex, type Abi,
 } from "viem";
@@ -58,7 +58,7 @@ function ebl(ctx: Ctx): Address {
 
 const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000" as Address;
 
-/** ERC-20 approve on USDG. */
+/** ERC-20 approve on USDC. */
 export const prepareApprove = (ctx: Ctx, a: { spender: Address; amount: bigint }): TxRequest =>
   tx(ctx, ctx.usdg, encodeFunctionData({ abi: erc20Abi, functionName: "approve", args: [a.spender, a.amount] }));
 
@@ -97,7 +97,7 @@ export const prepareCreateFacility = (ctx: Ctx, a: { shipmentId: Hex; financier:
     })),
   ]);
 
-/** Financier: fund the facility. The vault pulls `committed` USDG, so approve the vault first. */
+/** Financier: fund the facility. The vault pulls `committed` USDC, so approve the vault first. */
 export const prepareDepositCapital = (ctx: Ctx, a: { shipmentId: Hex }): TxRequest => controller(ctx, "depositCapital", [a.shipmentId]);
 
 /** Financier: approve the vault for `committed`, then deposit. */
@@ -148,7 +148,7 @@ export const prepareSettleWithApproval = (ctx: Ctx, a: { shipmentId: Hex; invoic
 /** Exporter or financier: open a dispute on an active or paused facility. `reason` is a bytes32 (commitments.textHash). */
 export const prepareOpenDispute = (ctx: Ctx, a: { shipmentId: Hex; reason: Hex }): TxRequest => controller(ctx, "openDispute", [a.shipmentId, a.reason]);
 
-/** Insurer: offer default cover (escrows `coverAmount` USDG in the pool, so approve the pool first). */
+/** Insurer: offer default cover (escrows `coverAmount` USDC in the pool, so approve the pool first). */
 export const prepareOfferCover = (ctx: Ctx, a: { shipmentId: Hex; coverAmount: bigint; premiumBps: number }): TxRequest =>
   tx(ctx, pool(ctx), encodeFunctionData({ abi: coverPoolAbi, functionName: "offerCover", args: [a.shipmentId, a.coverAmount, a.premiumBps] }));
 
@@ -209,7 +209,7 @@ export const prepareBindTitleWithApproval = (ctx: Ctx, a: { shipmentId: Hex; tok
 /**
  * Insurer: offer parametric cover: it pays out without a default once `consecutiveFailedEpochs` (1..the pool's
  * maximum) committed epochs in a row failed, with `salvageToExporter` (at most `coverAmount`) going to the exporter.
- * Escrows `coverAmount` USDG, so approve the pool first.
+ * Escrows `coverAmount` USDC, so approve the pool first.
  */
 export const prepareOfferParametricCover = (
   ctx: Ctx,

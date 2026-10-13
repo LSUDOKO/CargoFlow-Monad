@@ -1,15 +1,15 @@
 import { defineChain } from "viem";
 
-export const ROBINHOOD_TESTNET_ID = 46630;
-export const ROBINHOOD_EXPLORER = "https://explorer.testnet.chain.robinhood.com";
+export const MONAD_TESTNET_ID = 10143;
+export const MONAD_EXPLORER = "https://testnet.monadvision.com";
 
-/** Robinhood Chain Testnet, where CargoFlow is deployed. */
-export const robinhoodTestnet = defineChain({
-  id: ROBINHOOD_TESTNET_ID,
-  name: "Robinhood Chain Testnet",
-  nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
-  rpcUrls: { default: { http: ["https://rpc.testnet.chain.robinhood.com"] } },
-  blockExplorers: { default: { name: "Robinhood Explorer", url: ROBINHOOD_EXPLORER } },
+/** Monad Testnet, where CargoFlow is deployed. */
+export const monadTestnet = defineChain({
+  id: MONAD_TESTNET_ID,
+  name: "Monad Testnet",
+  nativeCurrency: { name: "Monad", symbol: "MON", decimals: 18 },
+  rpcUrls: { default: { http: ["https://testnet-rpc.monad.xyz"] } },
+  blockExplorers: { default: { name: "MonadVision", url: MONAD_EXPLORER } },
   testnet: true,
 });
 
@@ -19,8 +19,8 @@ export const DEFAULT_APP_URL = "https://cargoflow.adoranto737.workers.dev";
 
 /** Explorer links, or null on chains without a known explorer (a local anvil). */
 export function explorerTx(chainId: number, hash: string): string | null {
-  return chainId === ROBINHOOD_TESTNET_ID ? `${ROBINHOOD_EXPLORER}/tx/${hash}` : null;
+  return chainId === MONAD_TESTNET_ID ? `${MONAD_EXPLORER}/tx/${hash}` : null;
 }
 export function explorerAddress(chainId: number, address: string): string | null {
-  return chainId === ROBINHOOD_TESTNET_ID ? `${ROBINHOOD_EXPLORER}/address/${address}` : null;
+  return chainId === MONAD_TESTNET_ID ? `${MONAD_EXPLORER}/address/${address}` : null;
 }

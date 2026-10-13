@@ -82,7 +82,7 @@ messages.recoveryMessage(shipmentId, "probe-2", exporter, Math.floor(Date.now() 
 `prepare*` helpers return `{ to, data, value, chainId }` for any wallet to send. The SDK never signs or sends.
 
 ```ts
-import { addresses, contracts, createClient, robinhoodTestnet } from "@cargoflow/sdk";
+import { addresses, contracts, createClient, monadTestnet } from "@cargoflow/sdk";
 
 const cf = createClient();
 const addrs = addresses(await cf.config());
@@ -90,7 +90,7 @@ const view = await cf.shipments.get(shipmentId);
 
 // financier: approve the vault for the committed amount, then deposit
 const txs = contracts.prepareDepositWithApproval(addrs, { shipmentId, committed: BigInt(view.facility!.committed) });
-for (const tx of txs) await wallet.sendTransaction({ account, chain: robinhoodTestnet, to: tx.to, data: tx.data, value: tx.value });
+for (const tx of txs) await wallet.sendTransaction({ account, chain: monadTestnet, to: tx.to, data: tx.data, value: tx.value });
 ```
 
 The builders are `prepareRegisterShipment`, `prepareSetPolicy`, `prepareCreateFacility` (v2 milestone places),

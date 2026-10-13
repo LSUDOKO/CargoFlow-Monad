@@ -58,7 +58,7 @@ export const alertsOffMessage = (subscriptionId: string, issued: number): string
 export const vesselMessage = (shipmentId: string, mmsi: string, issued: number): string =>
   `CargoFlow vessel\nshipment: ${lower(shipmentId)}\nmmsi: ${mmsi}\nissued: ${issued}`;
 
-/** The exporter posts a financing request; `amount` in USDG base units. */
+/** The exporter posts a financing request; `amount` in USDC base units. */
 export const requestMessage = (shipmentId: string, amount: bigint | string, maxFeeBps: number, milestones: number, issued: number): string =>
   `CargoFlow financing request\nshipment: ${lower(shipmentId)}\namount: ${String(amount)}\nmax fee bps: ${maxFeeBps}\nmilestones: ${milestones}\nissued: ${issued}`;
 

@@ -11,5 +11,5 @@ export * as merkle from "./merkle.js";
 export { addresses, type CargoFlowAddresses, type TxRequest, type TxRequestJson, toJsonTx, routeCommitment, hashPolicy } from "./contracts/index.js";
 export { hashDocument, verifyDocument } from "./documents.js";
 export { parseReadingsCsv, type Reading } from "./csv.js";
-export { DEFAULT_API_URL, DEFAULT_APP_URL, ROBINHOOD_TESTNET_ID, robinhoodTestnet, explorerAddress, explorerTx } from "./chains.js";
+export { DEFAULT_API_URL, DEFAULT_APP_URL, MONAD_TESTNET_ID, monadTestnet, explorerAddress, explorerTx } from "./chains.js";
 export { toBase64Url, fromBase64Url, nowSec } from "./encoding.js";

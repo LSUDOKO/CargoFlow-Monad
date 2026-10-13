@@ -5,9 +5,9 @@ import { addresses } from "../src/contracts/addresses";
 import * as p from "../src/contracts/prepare";
 
 const config = {
-  chainId: 46630,
+  chainId: 10143,
   contracts: {
-    usdg: "0x7e955252e15c84f5768b83c41a71f9eba181802f",
+    usdg: "0x534b2f3A21130d7a60830c2Df862319e593943A3",
     access: "0x5ed4f105e3c3c0a67f916c0fc339b261e3de81d7",
     evidenceRegistry: "0x4ad47799586b4793b7952ba849013f5d0ec2e66a",
     financingController: "0xa2e708376cddf0eb8fa746c43089611b4d49e210",
@@ -38,7 +38,7 @@ describe("addresses", () => {
 describe("prepare helpers return plain unsigned requests", () => {
   it("deposit: approve the vault for the committed amount, then depositCapital", () => {
     const [approve, deposit] = p.prepareDepositWithApproval(v1, { shipmentId: ID, committed: 20_000_000n });
-    expect(approve).toMatchObject({ to: v1.usdg, value: 0n, chainId: 46630 });
+    expect(approve).toMatchObject({ to: v1.usdg, value: 0n, chainId: 10143 });
     expect(decodeFunctionData({ abi: erc20Abi, data: approve!.data })).toEqual({ functionName: "approve", args: [v1.receivableVault, 20_000_000n] });
     expect(deposit!.to).toBe(v1.financingController);
     expect(ctrl(deposit!.data)).toEqual({ functionName: "depositCapital", args: [ID] });
@@ -102,7 +102,7 @@ describe("prepare helpers return plain unsigned requests", () => {
   });
 
   it("toJsonTx gives eth_sendTransaction-ready values", () => {
-    expect(p.toJsonTx({ to: v1.usdg, data: "0x", value: 255n, chainId: 46630 })).toEqual({ to: v1.usdg, data: "0x", value: "0xff", chainId: 46630 });
+    expect(p.toJsonTx({ to: v1.usdg, data: "0x", value: 255n, chainId: 10143 })).toEqual({ to: v1.usdg, data: "0x", value: "0xff", chainId: 10143 });
   });
 });
 
