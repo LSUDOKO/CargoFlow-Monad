@@ -589,6 +589,25 @@
   },
   {
     "type": "function",
+    "name": "positionOperator",
+    "inputs": [
+      {
+        "name": "shipmentId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "proofContext",
     "inputs": [
       {
@@ -697,6 +716,24 @@
   },
   {
     "type": "function",
+    "name": "setPositionOperator",
+    "inputs": [
+      {
+        "name": "shipmentId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "operator",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "settle",
     "inputs": [
       {
@@ -744,6 +781,24 @@
       }
     ],
     "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "transferPosition",
+    "inputs": [
+      {
+        "name": "shipmentId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "to",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
   },
   {
     "type": "function",
@@ -1022,6 +1077,56 @@
   },
   {
     "type": "event",
+    "name": "PositionOperatorSet",
+    "inputs": [
+      {
+        "name": "shipmentId",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "financier",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "operator",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "PositionTransferred",
+    "inputs": [
+      {
+        "name": "shipmentId",
+        "type": "bytes32",
+        "indexed": true,
+        "internalType": "bytes32"
+      },
+      {
+        "name": "from",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "name": "to",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
     "name": "StatusChanged",
     "inputs": [
       {
@@ -1256,7 +1361,17 @@
   },
   {
     "type": "error",
+    "name": "NotPositionHolder",
+    "inputs": []
+  },
+  {
+    "type": "error",
     "name": "OutsideMilestonePlace",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "PositionNotTransferable",
     "inputs": []
   },
   {
