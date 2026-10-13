@@ -46,26 +46,26 @@ export function SceneRegister() {
   );
 }
 
-/* 2 · Daniel funds the facility: five USDG bars drop into the vault's drawers. */
+/* 2 · Daniel funds the facility: five USDC bars drop into the vault's drawers. */
 export function SceneFund() {
   return (
-    <Frame label="Daniel, holding his phone, beside an escrow vault whose five drawers each fill with an 8,000 USDG bar">
+    <Frame label="Daniel, holding his phone, beside an escrow vault whose five drawers each fill with an 8,000 USDC bar">
       <Arrow d="M150 240 C220 200 260 190 322 196" anim={a("draw", 0, 0.22)} />
       <Vault x={330} y={14} scale={0.8} drawers={["filled", "filled", "filled", "filled", "filled"]} barAnim={(i) => a("drop", 0.14 + i * 0.12, 0.16)} />
       <g transform="translate(474 400)">
         <rect x={-122} y={-22} width={244} height={44} rx={22} fill={P.ink} />
         <text x={-14} y={7} textAnchor="end" fontFamily={FONT.body} fontSize={19} fontWeight={700} fill={P.signal} {...a("count", 0.14, 0.7, { from: 0 })}>40,000</text>
-        <text x={-6} y={7} fontFamily={FONT.body} fontSize={15} fontWeight={600} fill={P.white}>USDG in escrow</text>
+        <text x={-6} y={7} fontFamily={FONT.body} fontSize={15} fontWeight={600} fill={P.white}>USDC in escrow</text>
       </g>
       <Character who="daniel" prop="phone" expression="confident" look="right" size={380} x={-30} y={60} />
     </Frame>
   );
 }
 
-/* 3 · Readings tick on the logger, the evidence passes, drawer M1 opens and 8,000 USDG slides to Meera. */
+/* 3 · Readings tick on the logger, the evidence passes, drawer M1 opens and 8,000 USDC slides to Meera. */
 export function SceneRelease() {
   return (
-    <Frame label="A data logger reading 4.8 °C, signed; the evidence passes and the vault's first drawer releases an 8,000 USDG bar to Meera">
+    <Frame label="A data logger reading 4.8 °C, signed; the evidence passes and the vault's first drawer releases an 8,000 USDC bar to Meera">
       <Logger x={20} y={58} scale={0.7} value="4.8" valueAnim={a("count", 0, 0.42, { from: 4.6, dec: 1 })} sigAnim={a("pop", 0.3, 0.12)} />
       <Arrow d="M196 172 L338 172" anim={a("draw", 0.36, 0.14)} />
       <Chip x={267} y={140} text="in range ✓" tone="emerald" anchor="middle" anim={a("pop", 0.42, 0.12)} />
@@ -120,14 +120,14 @@ export function SceneSettle() {
   const fee = 10;
   const g = 8;
   return (
-    <Frame label="Wei Lin holding the paid invoice; the 100,000 USDG payment splits into 58,800 for Meera and 41,200 for Daniel, principal plus fee">
+    <Frame label="Wei Lin holding the paid invoice; the 100,000 USDC payment splits into 58,800 for Meera and 41,200 for Daniel, principal plus fee">
       <defs>
         <linearGradient id="story-wf" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0" stopColor={P.signal} />
           <stop offset="1" stopColor={P.verified} />
         </linearGradient>
       </defs>
-      <text x={x0 + width / 2} y={66} textAnchor="middle" fontFamily={FONT.mono} fontSize={16} fontWeight={700} fill={P.ink} {...a("fade", 0, 0.12)}>100,000 USDG invoice, paid</text>
+      <text x={x0 + width / 2} y={66} textAnchor="middle" fontFamily={FONT.mono} fontSize={16} fontWeight={700} fill={P.ink} {...a("fade", 0, 0.12)}>100,000 USDC invoice, paid</text>
       <g {...a("slide", 0.16, 0.2, { x: 6 })}>
         <rect x={x0} y={92} width={residual} height={48} rx={12} fill={P.signalShade} transform="translate(0 4)" />
         <rect x={x0} y={92} width={residual} height={48} rx={12} fill="url(#story-wf)" />
@@ -146,9 +146,9 @@ export function SceneSettle() {
       <Avatar who="meera" expression="happy" x={300} y={318} r={46} id="story-av-6a" anim={a("pop", 0.5, 0.12)} />
       <Avatar who="daniel" expression="happy" x={546} y={318} r={46} id="story-av-6b" anim={a("pop", 0.56, 0.12)} />
       <text x={300} y={398} textAnchor="middle" fontFamily={FONT.body} fontSize={18} fontWeight={700} fill={P.ink} {...a("count", 0.56, 0.3, { from: 0 })}>58,800</text>
-      <text x={300} y={420} textAnchor="middle" fontFamily={FONT.body} fontSize={13} fill={P.slate}>USDG to Meera</text>
+      <text x={300} y={420} textAnchor="middle" fontFamily={FONT.body} fontSize={13} fill={P.slate}>USDC to Meera</text>
       <text x={546} y={398} textAnchor="middle" fontFamily={FONT.body} fontSize={18} fontWeight={700} fill={P.ink} {...a("count", 0.6, 0.3, { from: 0 })}>41,200</text>
-      <text x={546} y={420} textAnchor="middle" fontFamily={FONT.body} fontSize={13} fill={P.slate}>USDG to Daniel</text>
+      <text x={546} y={420} textAnchor="middle" fontFamily={FONT.body} fontSize={13} fill={P.slate}>USDC to Daniel</text>
       <Character who="weilin" prop="invoice" expression="happy" look="right" size={380} x={-34} y={60} />
     </Frame>
   );

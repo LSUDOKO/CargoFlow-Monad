@@ -43,7 +43,7 @@ export function ContainerDrawer({ id, onClose }: { id: string | null; onClose: (
               <StatusPill status={v.facility?.status ?? v.shipment.status} />
               {v.facility && (
                 <span className="num text-sm text-text-muted">
-                  <span className="font-semibold text-ink">{formatUSDG(v.facility.drawn)}</span> of {formatUSDG(v.facility.committed)} USDG drawn
+                  <span className="font-semibold text-ink">{formatUSDG(v.facility.drawn)}</span> of {formatUSDG(v.facility.committed)} USDC drawn
                 </span>
               )}
             </div>

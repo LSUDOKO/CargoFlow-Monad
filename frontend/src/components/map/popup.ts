@@ -1,7 +1,7 @@
 // HTML for the map's tooltips (MapLibre popups take an HTML string). Every value that comes from the API is
 // escaped; the markup is styled by map.css under .cf-pop.
 
-import { explorerTx, ROBINHOOD_TESTNET_ID } from "@/lib/explorer";
+import { explorerTx, MONAD_TESTNET_ID } from "@/lib/explorer";
 import { formatKm, formatLatLon } from "@/lib/geo/route";
 import type { SceneTrackPoint, SceneVessel } from "@/lib/geo/scene";
 import { compass, type Band, type MilestoneMark, type TempClass } from "@/lib/geo/voyage";
@@ -15,8 +15,8 @@ const deg = (x100: number) => (x100 / 100).toFixed(1);
 
 export const CLASS_LABEL: Record<TempClass, string> = { in: "In band", near: "Near limit", out: "Out of band" };
 
-/** The explorer link for a transaction; the Robinhood testnet explorer when the chain is not known yet. */
-export const txHref = (chainId: number | undefined, hash: string) => explorerTx(chainId ?? ROBINHOOD_TESTNET_ID, hash);
+/** The explorer link for a transaction; the Monad testnet explorer when the chain is not known yet. */
+export const txHref = (chainId: number | undefined, hash: string) => explorerTx(chainId ?? MONAD_TESTNET_ID, hash);
 
 const row = (k: string, v: string) => `<div class="cf-pop__row"><dt>${k}</dt><dd>${v}</dd></div>`;
 
@@ -52,7 +52,7 @@ export function milestonePopup(m: MilestoneMark, amount: string | undefined, rel
   return `<div class="cf-pop">
   <div class="cf-pop__head"><span class="cf-pop__title">Milestone ${m.index + 1}</span><span class="cf-chip cf-chip--ms-${m.state}">${MS_LABEL[m.state]}</span></div>
   <dl>
-    ${amount ? row("Releases", `<b>${esc(amount)} USDG</b>`) : ""}
+    ${amount ? row("Releases", `<b>${esc(amount)} USDC</b>`) : ""}
     ${row("Where", m.planned ? `about km ${Math.round(m.alongKm).toLocaleString("en-US")} <span class="cf-pop__muted">(no evidence yet)</span>` : `km ${Math.round(m.alongKm).toLocaleString("en-US")} of the route`)}
     ${m.time ? row("Evidence", when(m.time)) : ""}
   </dl>
@@ -111,7 +111,7 @@ export function placePopup(index: number, state: keyof typeof PLACE_CHIP, phrase
   <div class="cf-pop__head"><span class="cf-pop__title">Milestone ${index + 1} place</span><span class="cf-chip cf-chip--${chip}">${word}</span></div>
   <p class="cf-pop__body">Releases only on evidence taken ${esc(phrase)}.</p>
   <dl>
-    ${amount ? row("Releases", `<b>${esc(amount)} USDG</b>`) : ""}
+    ${amount ? row("Releases", `<b>${esc(amount)} USDC</b>`) : ""}
     ${status ? row("Now", esc(status)) : ""}
   </dl>
 </div>`;

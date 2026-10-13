@@ -66,15 +66,15 @@ export const STEPS: StepCopy[] = [
     short: "Fund",
     eyebrow: "Daniel, financier",
     title: "Daniel funds it, into a locked vault",
-    body: "Daniel puts up 40,000 USDG. It does not go to Meera yet: it waits in an escrow vault with one drawer per milestone, and nobody, not even CargoFlow, can send it anywhere else.",
-    hood: "A shipment-specific escrow vault holds the USDG; only the release rules can move it.",
+    body: "Daniel puts up 40,000 USDC. It does not go to Meera yet: it waits in an escrow vault with one drawer per milestone, and nobody, not even CargoFlow, can send it anywhere else.",
+    hood: "A shipment-specific escrow vault holds the USDC; only the release rules can move it.",
   },
   {
     id: "release",
     short: "Release",
     eyebrow: "The data logger",
     title: "The cargo vouches for itself",
-    body: "Probes inside the container sign every temperature reading. The readings are in range, so the first drawer opens and 8,000 USDG goes straight to Meera, while the ship is still at sea.",
+    body: "Probes inside the container sign every temperature reading. The readings are in range, so the first drawer opens and 8,000 USDC goes straight to Meera, while the ship is still at sea.",
     hood: "Every 8 signed readings become one Merkle root on chain; score, sensor conflict and freshness are checked before a release.",
   },
   {
@@ -98,7 +98,7 @@ export const STEPS: StepCopy[] = [
     short: "Settle",
     eyebrow: "Wei Lin, buyer",
     title: "Wei Lin pays once, everyone is settled",
-    body: "The vaccines arrive and Wei Lin pays the 100,000 USDG invoice. In the same moment the vault repays Daniel his 40,000 plus a 1,200 fee and sends Meera the remaining 58,800.",
+    body: "The vaccines arrive and Wei Lin pays the 100,000 USDC invoice. In the same moment the vault repays Daniel his 40,000 plus a 1,200 fee and sends Meera the remaining 58,800.",
     hood: "One settle transaction runs a fixed waterfall: principal, fee, then the exporter's residual.",
   },
 ];

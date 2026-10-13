@@ -11,7 +11,7 @@ import { EXCURSION, LABELS, LAND_D, MAP, MILESTONES, PORTS, ROUTE_D } from "./ge
 
 type Anim = Record<`data-${string}`, string | number | undefined>;
 
-/* ── USDG bar (money never spins: it slides, stacks and splits) ─────────────────────────────────────────── */
+/* ── USDC bar (money never spins: it slides, stacks and splits) ─────────────────────────────────────────── */
 export function Usdg({ x = 0, y = 0, w = 150, amount = "8,000", fill = "lime", anim }: { x?: number; y?: number; w?: number; amount?: string; fill?: "lime" | "emerald" | "ghost"; anim?: Anim }) {
   const h = w * 0.267;
   const base = fill === "emerald" ? P.verified : fill === "ghost" ? P.mist : P.signal;
@@ -22,7 +22,7 @@ export function Usdg({ x = 0, y = 0, w = 150, amount = "8,000", fill = "lime", a
       <g {...anim}>
         <rect x={0} y={h * 0.1} width={w} height={h} rx={h * 0.28} fill={shade} />
         <rect x={0} y={0} width={w} height={h} rx={h * 0.28} fill={base} />
-        <text x={w * 0.08} y={h * 0.64} fontFamily={FONT.mono} fontSize={h * 0.32} fontWeight={700} fill={ink} opacity={0.7}>USDG</text>
+        <text x={w * 0.08} y={h * 0.64} fontFamily={FONT.mono} fontSize={h * 0.32} fontWeight={700} fill={ink} opacity={0.7}>USDC</text>
         <text x={w * 0.92} y={h * 0.66} textAnchor="end" fontFamily={FONT.mono} fontSize={h * 0.4} fontWeight={700} fill={ink}>{amount}</text>
       </g>
     </g>

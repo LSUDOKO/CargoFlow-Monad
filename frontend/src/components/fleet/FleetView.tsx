@@ -97,7 +97,7 @@ export function FleetView() {
         r.committed !== "0" ? (
           <span>
             <span className="font-semibold text-ink">{formatUSDG(r.drawn)}</span>
-            <span className="text-text-muted"> / {formatUSDG(r.committed)} USDG</span>
+            <span className="text-text-muted"> / {formatUSDG(r.committed)} USDC</span>
           </span>
         ) : (
           <span className="text-text-muted">No facility</span>
@@ -141,7 +141,7 @@ export function FleetView() {
           <section aria-label="Fleet summary" className="grid grid-cols-2 gap-4 lg:grid-cols-4">
             <Stat label="In transit" value={counts.active} loading={isPending} hint="Facilities releasing on evidence" />
             <Stat label="Paused or disputed" value={counts.paused} loading={isPending} hint={counts.paused ? "Waiting on proof or the arbiter" : "Nothing held right now"} />
-            <Stat label="Capital drawn" value={formatUSDG(totals.drawn, { compact: true })} unit="USDG" loading={isPending || viewsLoading} hint={`of ${formatUSDG(totals.committed, { compact: true })} USDG committed`} />
+            <Stat label="Capital drawn" value={formatUSDG(totals.drawn, { compact: true })} unit="USDC" loading={isPending || viewsLoading} hint={`of ${formatUSDG(totals.committed, { compact: true })} USDC committed`} />
             <Stat label="Average evidence" value={avg === null ? "–" : avg.toFixed(0)} unit={avg === null ? undefined : "/ 100"} loading={isPending || viewsLoading} hint={scores.length ? `Latest batch, ${scores.length} shipment${scores.length === 1 ? "" : "s"}` : "No batches scored yet"} />
           </section>
         )}
