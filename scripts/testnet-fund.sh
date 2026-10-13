@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# Tops every role and demo wallet in .env up to a small ETH balance from the deployer, for gas only.
+# Tops every role and demo wallet in .env up to a small MON balance from the deployer, for gas only.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 CAST="${CAST:-cast}"
 set -a; . ./.env; set +a
 RPC="${MONAD_RPC_URL:-https://testnet-rpc.monad.xyz}"
-TARGET_WEI="${TARGET_WEI:-500000000000000}" # 0.0005 ETH
+TARGET_WEI="${TARGET_WEI:-300000000000000000}" # 0.3 MON
 DEPLOYER_KEY="0x${private_key#0x}"
 for name in WORKER MONITOR MANAGER ARBITER EXPORTER FINANCIER BUYER; do
   var="${name}_KEY"; key="${!var:-}"
@@ -19,4 +19,4 @@ for name in WORKER MONITOR MANAGER ARBITER EXPORTER FINANCIER BUYER; do
     echo "ok     $name $addr"
   fi
 done
-echo "deployer ETH: $("$CAST" balance "$("$CAST" wallet address --private-key "$DEPLOYER_KEY")" --rpc-url "$RPC" --ether)"
+echo "deployer MON: $("$CAST" balance "$("$CAST" wallet address --private-key "$DEPLOYER_KEY")" --rpc-url "$RPC" --ether)"
