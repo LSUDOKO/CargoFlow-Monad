@@ -32,11 +32,13 @@ export function Hero() {
             </h1>
             <p className="mt-5 max-w-[32rem] text-body-lg text-paper/75 md:text-lg md:leading-relaxed">
               USDC working capital for physical trade. Each tranche is released only when the shipment&apos;s own sensor evidence,
-              committed on Monad, says the cargo is fine.
+              committed on Monad, says the cargo is fine. Each financier position is a Cargo Note you can trade mid-voyage, marked on chain to
+              that evidence.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <LinkButton href="/exporter" size="lg" iconEnd={<Arrow />}>Start as an exporter</LinkButton>
               <LinkButton href="/financier" size="lg" variant="inverse">Fund a facility</LinkButton>
+              <LinkButton href="/notes" size="lg" variant="inverse">Trade Cargo Notes</LinkButton>
             </div>
           </div>
           {/* the scene in its own frame: a hairline, the sheet-in-sheet radius and a faint inner light */}

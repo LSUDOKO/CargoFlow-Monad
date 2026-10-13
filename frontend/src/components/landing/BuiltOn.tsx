@@ -1,20 +1,18 @@
 /** The chain, the money and the cryptography, each with the one fact that matters. */
 const core = [
-  { name: "Monad", note: "Arbitrum Orbit L2, chain 10143" },
-  { name: "Circle USDC", note: "Global Dollar stablecoin, 6 decimals" },
+  { name: "Monad", note: "400 ms blocks, 800 ms finality, chain 10143" },
+  { name: "Circle USDC", note: "Settlement stablecoin, 6 decimals" },
   { name: "Groth16 · Circom", note: "13,494-constraint recovery circuit" },
-  { name: "Arbitrum Stylus", note: "Rust evidence engine, 19x cheaper at scale" },
+  { name: "Cargo Notes", note: "Tradeable positions, marked to evidence on chain" },
 ];
 
 /** Partner integrations, as plain wordmarks (set in our type, never imitating their logos). */
 const partners = [
   { name: "ZeroDev", what: "Passkey smart accounts and sponsored gas" },
   { name: "Alchemy", what: "RPC failover and indexer webhooks" },
-  { name: "QuickNode", what: "Primary RPC" },
   { name: "OpenZeppelin", what: "Contract libraries v5.4" },
   { name: "Dune", what: "Volume, escrow and recovery analytics" },
-  { name: "Fhenix", what: "Encrypted invoice terms (FHE)" },
-  { name: "GMX", what: "Optional financier price hedge" },
+  { name: "MonadVision", what: "Source-verified contracts (Sourcify)" },
 ];
 
 export function BuiltOn() {
