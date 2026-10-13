@@ -7,7 +7,7 @@ import { KERNEL_V3_1, getEntryPoint } from "@zerodev/sdk/constants";
 import { PasskeyValidatorContractVersion, toPasskeyValidator } from "@zerodev/passkey-validator";
 import { b64ToBytes, findQuoteIndices, hexStringToUint8Array, parseAndNormalizeSig, uint8ArrayToHexString, type WebAuthnKey } from "@zerodev/webauthn-key";
 import { createPublicClient, encodeAbiParameters, http, keccak256, type Address, type Hex, type SignableMessage } from "viem";
-import { robinhoodTestnet } from "@/lib/chain/config";
+import { monadTestnet } from "@/lib/chain/config";
 
 import { BUNDLER_URL, PASSKEY_CHAIN_ID, PASSKEY_SERVER_URL, PAYMASTER_URL } from "./env";
 import { PasskeyGasError, isPaymasterRefusal, isPrefundError, type Call, type KernelDeps } from "./provider";
@@ -74,7 +74,7 @@ export async function obtainPasskey(mode: "register" | "login", name: string): P
 }
 
 /**
- * Signs with the passkey for the WebAuthn validator. Robinhood Chain Testnet has the RIP-7212 P-256 precompile but
+ * Signs with the passkey for the WebAuthn validator. Monad Testnet has the RIP-7212 P-256 precompile but
  * is not in the SDK's list of precompile chains, so this sets usePrecompiled (3,450 gas instead of ~330k); the rest
  * mirrors @zerodev/passkey-validator's signMessageUsingWebAuthn, with clientDataJSON decoded as base64url.
  */
@@ -101,7 +101,7 @@ export type KernelSession = { address: Address; deps: KernelDeps; checkSponsorsh
 /** Builds the Kernel account for a passkey and the provider dependencies behind it. No prompt happens here. */
 export async function openSession(stored: StoredPasskey): Promise<KernelSession> {
   if (!BUNDLER_URL) throw new Error("Passkeys are not configured on this deployment.");
-  const publicClient = createPublicClient({ chain: robinhoodTestnet, transport: http() });
+  const publicClient = createPublicClient({ chain: monadTestnet, transport: http() });
   const webAuthnKey: WebAuthnKey = {
     pubX: BigInt(stored.pubX),
     pubY: BigInt(stored.pubY),
@@ -117,17 +117,17 @@ export async function openSession(stored: StoredPasskey): Promise<KernelSession>
     validatorContractVersion: PasskeyValidatorContractVersion.V0_0_3_PATCHED,
   });
   const account = await createKernelAccount(publicClient, { plugins: { sudo: validator }, entryPoint, kernelVersion });
-  const paymaster = PAYMASTER_URL ? createZeroDevPaymasterClient({ chain: robinhoodTestnet, transport: http(PAYMASTER_URL) }) : null;
+  const paymaster = PAYMASTER_URL ? createZeroDevPaymasterClient({ chain: monadTestnet, transport: http(PAYMASTER_URL) }) : null;
   const sponsored = paymaster
     ? createKernelAccountClient({
         account,
-        chain: robinhoodTestnet,
+        chain: monadTestnet,
         bundlerTransport: http(BUNDLER_URL),
         client: publicClient,
         paymaster: { getPaymasterData: (userOperation) => paymaster.sponsorUserOperation({ userOperation }) },
       })
     : null;
-  const selfPaid = createKernelAccountClient({ account, chain: robinhoodTestnet, bundlerTransport: http(BUNDLER_URL), client: publicClient });
+  const selfPaid = createKernelAccountClient({ account, chain: monadTestnet, bundlerTransport: http(BUNDLER_URL), client: publicClient });
   let sponsorshipOff = !sponsored;
   if (!sponsored) setPasskeyState({ sponsorship: "off" });
 

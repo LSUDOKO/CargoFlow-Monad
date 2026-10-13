@@ -115,7 +115,7 @@ export function createKernelProvider(deps: KernelDeps): KernelProvider {
       case "wallet_switchEthereumChain": {
         const want = Number((p[0] as { chainId?: Hex } | undefined)?.chainId ?? NaN);
         if (want === deps.chainId) return null;
-        throw new ProviderRpcError(4902, "Passkey accounts run on Robinhood Chain Testnet only.");
+        throw new ProviderRpcError(4902, "Passkey accounts run on Monad Testnet only.");
       }
       case "eth_sendTransaction":
       case "wallet_sendTransaction": {
@@ -127,7 +127,7 @@ export function createKernelProvider(deps: KernelDeps): KernelProvider {
         const req = p[0] as { calls?: TxParams[]; from?: Address; chainId?: Hex } | undefined;
         if (!req?.calls?.length) throw new ProviderRpcError(-32602, "wallet_sendCalls needs at least one call.");
         own(req.from);
-        if (req.chainId !== undefined && Number(req.chainId) !== deps.chainId) throw new ProviderRpcError(4902, "Passkey accounts run on Robinhood Chain Testnet only.");
+        if (req.chainId !== undefined && Number(req.chainId) !== deps.chainId) throw new ProviderRpcError(4902, "Passkey accounts run on Monad Testnet only.");
         const hash = await guard(() => deps.sendCalls(req.calls!.map(toCall)));
         // the batch id is the transaction hash: the user operation has already been included when it resolves
         return { id: hash };

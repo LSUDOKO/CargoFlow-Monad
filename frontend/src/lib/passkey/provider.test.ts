@@ -4,13 +4,13 @@ import { createKernelProvider, isPasskeyCancel, isPaymasterRefusal, isPrefundErr
 
 const ADDR = "0x1111111111111111111111111111111111111111" as const;
 const OTHER = "0x2222222222222222222222222222222222222222" as const;
-const TOKEN = "0x7E955252E15c84f5768B83c41a71F9eba181802F" as const;
+const TOKEN = "0x534b2f3A21130d7a60830c2Df862319e593943A3" as const;
 const HASH = `0x${"ab".repeat(32)}` as Hex;
 
 function deps(over: Partial<KernelDeps> = {}) {
   const d = {
     address: ADDR,
-    chainId: 46630,
+    chainId: 10143,
     sendCalls: vi.fn(async () => HASH),
     signMessage: vi.fn(async () => "0xsig" as Hex),
     signTypedData: vi.fn(async () => "0xtyped" as Hex),

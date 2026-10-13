@@ -38,7 +38,7 @@ export function passkeyConnector() {
     type: "passkey",
     async connect({ chainId, withCapabilities } = {}) {
       if (chainId !== undefined && chainId !== PASSKEY_CHAIN_ID) {
-        throw new ProviderRpcError(4902, "Passkey accounts run on Robinhood Chain Testnet only.");
+        throw new ProviderRpcError(4902, "Passkey accounts run on Monad Testnet only.");
       }
       await open();
       const accounts = [getAddress(address!)];
@@ -76,7 +76,7 @@ export function passkeyConnector() {
     },
     async switchChain({ chainId }) {
       const chain = config.chains.find((c) => c.id === chainId);
-      if (!chain || chainId !== PASSKEY_CHAIN_ID) throw new ProviderRpcError(4902, "Passkey accounts run on Robinhood Chain Testnet only.");
+      if (!chain || chainId !== PASSKEY_CHAIN_ID) throw new ProviderRpcError(4902, "Passkey accounts run on Monad Testnet only.");
       return chain;
     },
     onAccountsChanged(accounts) {

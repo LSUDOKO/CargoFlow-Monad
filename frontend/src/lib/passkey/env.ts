@@ -1,7 +1,7 @@
 // Configuration for passkey smart accounts (ZeroDev Kernel v3.1 + the WebAuthn validator, ERC-4337 EntryPoint v0.7)
-// on Robinhood Chain Testnet. Everything here is read at build time; with no project id the feature does not exist.
+// on Monad Testnet. Everything here is read at build time; with no project id the feature does not exist.
 //
-// Verified on chain 46630: EntryPoint v0.7 0x0000000071727De22E5E9d8BAf0edAc6f37da032, Kernel v3.1 meta factory
+// Verified on chain 10143: EntryPoint v0.7 0x0000000071727De22E5E9d8BAf0edAc6f37da032, Kernel v3.1 meta factory
 // 0xd703aaE79538628d27099B8c4f621bE4CCd142d5 (factory 0xaac5D4240AF87249B3f71BC8E4A2cae074A3E419), Kernel v3.1
 // implementation 0xbAC849bB641841b44E965fB01A4Bf5F074f84b4D, WebAuthn validator 0.0.3
 // 0x7ab16Ff354AcB328452F1D445b3Ddee9a91e9e69, and the RIP-7212 P-256 precompile at 0x100.
@@ -9,7 +9,7 @@
 export const ZERODEV_PROJECT_ID = process.env.NEXT_PUBLIC_ZERODEV_PROJECT_ID ?? "";
 
 /** The only chain passkey accounts run on. */
-export const PASSKEY_CHAIN_ID = 46630;
+export const PASSKEY_CHAIN_ID = 10143;
 
 export const PASSKEY_CONNECTOR_ID = "cargoflow-passkey";
 
