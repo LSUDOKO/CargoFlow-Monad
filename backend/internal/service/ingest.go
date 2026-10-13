@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"sort"
 	"strings"
 
 	"github.com/ethereum/go-ethereum/common"
@@ -124,10 +125,16 @@ func (s *Service) stateFor(ctx context.Context, sh store.Shipment) (*shipmentSta
 	var seen []telemetry.Point
 	for _, e := range epochs {
 		for _, p := range e.Points {
+			// a recovery epoch re-commits readings an earlier epoch already holds: prime each reading once
+			if inEpoch[key(p)] {
+				continue
+			}
 			inEpoch[key(p)] = true
 			seen = append(seen, p)
 		}
 	}
+	// epochs are stored in commit order, which a recovery epoch breaks; replay detection needs time order
+	sort.SliceStable(seen, func(i, j int) bool { return seen[i].Timestamp < seen[j].Timestamp })
 	all, err := s.o.Store.LoadPoints(ctx, sh.ID)
 	if err != nil {
 		return nil, err
