@@ -37,3 +37,45 @@ undrawn capital at par, plus the drawn leg × (1 − 0.5% per point below 100), 
 6. **`CARGO_API_UNAVAILABLE`:** the free-tier API is waking up. Retry after about 60s, or pass
    `--ids 0x…` to read notes straight from chain.
 7. `AUTH_FAILED`: ask the user to run `mm login` (needs their phone or email), then `mm init`.
+
+## Setup (once, by the human)
+
+```bash
+npm i -g @metamask/agent-wallet@latest
+mm login && mm init --mode guard          # server wallet, Guard mode (2FA on every transaction)
+git clone https://github.com/LSUDOKO/CargoFlow-Monad && cd CargoFlow-Monad/agent-wallet-plugin
+npm i && npm run build                     # postinstall links the host's @metamask/agent-wallet
+mm config set experimentalPlugins true
+mm config set experimentalAllowUnverifiedInstalls true
+mm plugins install "file:$PWD" --accept-permissions
+mm cargo list --json                       # should list the live notes
+```
+
+Fund the agent wallet (`mm wallet address`) on Monad Testnet (10143) with a little MON for gas and USDC
+(`0x534b2f3A21130d7a60830c2Df862319e593943A3`). In Guard mode, allowlist the CargoNoteMarket
+`0x120142b2e5A90F2676F41d8d20bDCC94C66ec55d` and USDC.
+
+**Monad Testnet and the Agent Wallet.** MetaMask's hosted RPC and gas-fee services don't serve chain 10143
+yet. The plugin reads gas and EIP-1559 fees from Monad and sends `gas`, `maxFeePerGas` and
+`maxPriorityFeePerGas` with every transaction, so `mm` skips its fee service. Add Monad Testnet with its own
+RPC to `~/.metamask/wallets.json` → `data.customEvmChains` (back the file up first):
+
+```json
+{ "key": "0x279f", "caip2": "eip155:10143", "chainId": 10143, "name": "Monad Testnet",
+  "rpcTarget": "https://testnet-rpc.monad.xyz" }
+```
+
+## Example: what an agent should do
+
+User: *"Put up to 4 USDC into cargo notes with evidence 90 or better, only below their mark."*
+
+1. `mm cargo scan --budget 4 --min-score 90 --min-upside-bps 50 --json`: show the picks (ref, price,
+   mark, upside) and the rejected notes with their reasons.
+2. After the user confirms, run `mm cargo scan --budget 4 --min-score 90 --min-upside-bps 50 --execute --json`.
+3. If an AWAITING_MFA notice appears, tell the user to approve the email, then re-run. Afterwards,
+   report the explorer links from `data.transactions` and the new holder from `mm cargo list`.
+
+Live proof: on 14 October 2026 this plugin refused a PAUSED note (score 48) without signing anything,
+then bought note `0xb508ee58…39ff` for 3.00564 USDC after the owner's 2FA. Approve tx
+`0x10c178413612c177dffba0e71e12ca3cb8941c53b61b515de30504c80060519c`, buy tx
+`0x55a0bf9840c9d028848cd0136e8a8cf0218c96aee1732b4cd0554f01e2ae357c` (Monad Testnet).
