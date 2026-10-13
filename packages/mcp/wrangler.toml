@@ -1,6 +1,6 @@
 # CargoFlow public remote MCP server: https://cargoflow-monad-mcp.adoranto737.workers.dev/mcp
 # Deploy: pnpm deploy:worker (wrangler deploy). Local: pnpm dev:worker -> http://127.0.0.1:8787/mcp
-name = "cargoflow-mcp"
+name = "cargoflow-monad-mcp"
 main = "src/worker.ts"
 compatibility_date = "2026-10-01"
 workers_dev = true
