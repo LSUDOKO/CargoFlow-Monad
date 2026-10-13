@@ -418,3 +418,49 @@ export const MonadFilm: React.FC<{ captions: boolean; music: number }> = ({ capt
     <Audio src={staticFile("audio/music.wav")} volume={(fr) => music * interpolate(fr, [0, 30, MONAD_FILM_FRAMES - 90, MONAD_FILM_FRAMES], [0, 1, 1, 0], clamp)} />
   </AbsoluteFill>
 );
+
+// ---------------------------------------------------------------- README stills of the sponsor proofs
+
+const PROOF_CARDS: Record<string, { title: string; sub: string; terms: { title: string; lines: Line[]; fontSize?: number }[] }> = {
+  metamask: {
+    title: "MetaMask Agent Wallet · cargo-notes plugin",
+    sub: "the agent refuses a paused note, then buys an active one after the owner's email approval (2FA)",
+    terms: [
+      { title: "mm · agent wallet 0x4124…9407 · Monad Testnet", lines: MM_REFUSE },
+      { title: "mm · agent wallet 0x4124…9407 · Monad Testnet", lines: MM_BUY, fontSize: 21 },
+    ],
+  },
+  kuru: {
+    title: "Kuru · a Cargo Note on a spot order book",
+    sub: "note → CargoNoteToken (ERC-20) → cNOTE-0516/USDC market via Kuru's Router · limit sell + market buy",
+    terms: [{ title: "scripts/kuru-list-note.sh · Monad Testnet", lines: KURU }],
+  },
+  envio: {
+    title: "Envio · HyperIndex on Envio Cloud",
+    sub: "every ask, bid, trade and transfer, synced to the chain head · feeds /notes",
+    terms: [{ title: "GraphQL · indexer.dev.hyperindex.xyz/bc5a6d2", lines: ENVIO }],
+  },
+  alchemy: {
+    title: "Alchemy · primary Monad RPC of the API",
+    sub: "every read, indexer log window and role-key transaction; public RPC as fallback",
+    terms: [{ title: "CargoFlow API · Monad Testnet", lines: ALCHEMY }],
+  },
+};
+
+/** One sponsor proof as a still for the README: the film's terminal cards, fully typed, no captions. */
+export const ProofStill: React.FC<{ which: string }> = ({ which }) => {
+  const card = PROOF_CARDS[which] ?? PROOF_CARDS.metamask!;
+  let y = 190;
+  return (
+    <Paper tone="paper">
+      <div style={{ position: "absolute", left: 220, top: 64, fontFamily: F.display, fontWeight: 700, fontSize: 52, color: P.ink, letterSpacing: -1 }}>{card.title}</div>
+      <div style={{ position: "absolute", left: 222, top: 132, fontFamily: F.body, fontSize: 26, color: P.slate }}>{card.sub}</div>
+      {card.terms.map((t, i) => {
+        const fs = t.fontSize ?? 23;
+        const top = y;
+        y += 46 + 40 + t.lines.length * fs * 1.45 + 40;
+        return <Terminal key={i} title={t.title} lines={t.lines} at={-100000} y={top} fontSize={fs} />;
+      })}
+    </Paper>
+  );
+};

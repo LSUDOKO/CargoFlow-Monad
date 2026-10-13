@@ -14,7 +14,7 @@ import { LibraryCompositions } from "./Library";
 import { ReadmeCompositions } from "./readme";
 import { FULL_V2_FRAMES, FullV2, SceneV2, fullV2Schema } from "./FullV2";
 import { SCENES } from "./scenes-v2/timing";
-import { MONAD_FILM_FRAMES, MonadFilm } from "./monad/MonadFilm";
+import { MONAD_FILM_FRAMES, MonadFilm, ProofStill } from "./monad/MonadFilm";
 
 const demoMetadata: CalculateMetadataFunction<DemoProps> = ({ props }) => {
   const resolved = withAutoMedia(props);
@@ -23,6 +23,9 @@ const demoMetadata: CalculateMetadataFunction<DemoProps> = ({ props }) => {
 
 export const RemotionRoot: React.FC = () => (
   <>
+    {(["metamask", "kuru", "envio", "alchemy"] as const).map((w) => (
+      <Composition key={w} id={`Proof-${w}`} component={ProofStill} durationInFrames={1} fps={30} width={1920} height={w === "metamask" ? 900 : w === "kuru" ? 760 : w === "envio" ? 560 : 460} defaultProps={{ which: w }} />
+    ))}
     <Composition id="MonadFilm" component={MonadFilm} durationInFrames={MONAD_FILM_FRAMES} fps={30} width={1920} height={1080} defaultProps={{ captions: true, music: 0.13 }} />
     <Composition
       id="Full"
