@@ -1,0 +1,101 @@
+{
+  "generatedAt": "2026-10-03T18:42:04.887Z",
+  "files": {
+    "D1-landing.mp4": {
+      "bytes": 750494,
+      "durationSec": 5,
+      "width": 1920,
+      "height": 1080
+    },
+    "D10-market.mp4": {
+      "bytes": 312671,
+      "durationSec": 6.2,
+      "width": 1920,
+      "height": 1080
+    },
+    "D2-exporter-wizard.mp4": {
+      "bytes": 640597,
+      "durationSec": 10.033,
+      "width": 1920,
+      "height": 1080
+    },
+    "D3-financier-funds.mp4": {
+      "bytes": 292736,
+      "durationSec": 6,
+      "width": 1920,
+      "height": 1080
+    },
+    "D4-carrier-ebl.mp4": {
+      "bytes": 594009,
+      "durationSec": 8.067,
+      "width": 1920,
+      "height": 1080
+    },
+    "D5-transit-releases.mp4": {
+      "bytes": 625252,
+      "durationSec": 8,
+      "width": 1920,
+      "height": 1080
+    },
+    "D6-excursion-pause.mp4": {
+      "bytes": 629009,
+      "durationSec": 8.033,
+      "width": 1920,
+      "height": 1080
+    },
+    "D7-recovery.mp4": {
+      "bytes": 901518,
+      "durationSec": 8,
+      "width": 1920,
+      "height": 1080
+    },
+    "D8-buyer-passkey-settled.mp4": {
+      "bytes": 521151,
+      "durationSec": 9.3,
+      "width": 1920,
+      "height": 1080
+    },
+    "D8-passkey-signin.mp4": {
+      "bytes": 314055,
+      "durationSec": 6,
+      "width": 1920,
+      "height": 1080
+    },
+    "D9-certificate.mp4": {
+      "bytes": 1406075,
+      "durationSec": 4.533,
+      "width": 1920,
+      "height": 1080
+    },
+    "M1-developers-copy-url.mp4": {
+      "bytes": 168781,
+      "durationSec": 3.833,
+      "width": 1920,
+      "height": 1080
+    },
+    "R3-docs-reference.mp4": {
+      "bytes": 739839,
+      "durationSec": 10.5,
+      "width": 1920,
+      "height": 1080
+    },
+    "R4a-explorer-tx.mp4": {
+      "bytes": 123451,
+      "durationSec": 2.2,
+      "width": 1920,
+      "height": 1080
+    },
+    "R4a-track-settled.mp4": {
+      "bytes": 452711,
+      "durationSec": 5.7,
+      "width": 1920,
+      "height": 1080
+    },
+    "R4b-deployments.mp4": {
+      "bytes": 819138,
+      "durationSec": 5.133,
+      "width": 1920,
+      "height": 1080
+    }
+  }
+}
