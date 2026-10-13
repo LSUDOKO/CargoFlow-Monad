@@ -5,11 +5,11 @@ import { CopyField } from "@/components/ui/CopyField";
 import { Badge } from "@/components/ui/Pill";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { useConfig } from "@/lib/api/hooks";
-import { chainName, ROBINHOOD_TESTNET_ID } from "@/lib/explorer";
+import { chainName, MONAD_TESTNET_ID } from "@/lib/explorer";
 
 const roles: [string, string, string][] = [
   ["financingController", "Financing controller", "The state machine: release, pause, resume, settle"],
-  ["receivableVault", "Receivable vault", "The only contract that ever holds USDG"],
+  ["receivableVault", "Receivable vault", "The only contract that ever holds USDC"],
   ["evidenceRegistry", "Evidence registry", "Merkle roots, scores and proof status per epoch"],
   ["groth16Verifier", "Groth16 verifier", "Checks recovery proofs on-chain"],
   ["shipmentRegistry", "Shipment registry", "Parties, invoice and route commitments"],
@@ -19,7 +19,7 @@ const roles: [string, string, string][] = [
 /** "Read the chain": the six core contracts as one list, each address copyable and one click from the explorer. */
 export function Verified() {
   const { data, isPending } = useConfig();
-  const testnet = data?.chainId === ROBINHOOD_TESTNET_ID;
+  const testnet = data?.chainId === MONAD_TESTNET_ID;
   return (
     <section aria-labelledby="verified-title" className="container-page mt-24 md:mt-32">
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">

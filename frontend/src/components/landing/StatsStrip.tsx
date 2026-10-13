@@ -31,7 +31,7 @@ export function StatsStrip() {
           {isError ? <Badge variant="warning" dot>Backend offline</Badge> : <Badge variant="success" dot pulse={!isPending}>Live</Badge>}
         </div>
         <p className="text-small text-text-muted">
-          Source: the CargoFlow API, indexed from Robinhood Chain Testnet.{" "}
+          Source: the CargoFlow API, indexed from Monad Testnet.{" "}
           <Link href="/deployments" className="font-semibold text-ink underline decoration-ink/30 underline-offset-4 hover:decoration-ink">Check the contracts</Link>
         </p>
       </div>

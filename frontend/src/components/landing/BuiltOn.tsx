@@ -1,7 +1,7 @@
 /** The chain, the money and the cryptography, each with the one fact that matters. */
 const core = [
-  { name: "Robinhood Chain", note: "Arbitrum Orbit L2, chain 46630" },
-  { name: "Paxos USDG", note: "Global Dollar stablecoin, 6 decimals" },
+  { name: "Monad", note: "Arbitrum Orbit L2, chain 10143" },
+  { name: "Circle USDC", note: "Global Dollar stablecoin, 6 decimals" },
   { name: "Groth16 · Circom", note: "13,494-constraint recovery circuit" },
   { name: "Arbitrum Stylus", note: "Rust evidence engine, 19x cheaper at scale" },
 ];

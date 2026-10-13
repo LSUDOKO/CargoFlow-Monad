@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Pill } from "@/components/ui/Pill";
 import { cx } from "@/components/ui/cx";
 
-// The reference run from the payout section: 40,000 USDG over five milestones.
+// The reference run from the payout section: 40,000 USDC over five milestones.
 const TRANCHE = "8,000";
 const MILESTONES = 5;
 const READINGS_PER_EPOCH = 8;
@@ -67,7 +67,7 @@ export function HeroConsole() {
     <div ref={ref} className="relative">
       <p className="sr-only">
         Illustration: a refrigerated container&apos;s two temperature probes report every 15 seconds; each eight readings form an
-        evidence epoch that is committed on-chain, and a committed epoch inside the agreed band releases the next milestone&apos;s USDG.
+        evidence epoch that is committed on-chain, and a committed epoch inside the agreed band releases the next milestone&apos;s USDC.
       </p>
       <div aria-hidden="true" className="rounded-[1.5rem] border border-paper/10 bg-ink-2 p-4 shadow-[0_24px_60px_-24px_rgb(0_0_0/0.6)] sm:p-6">
         <div className="flex items-start justify-between gap-4">
@@ -119,7 +119,7 @@ export function HeroConsole() {
           <div className="flex items-center justify-between gap-3 py-2.5">
             <dt className="min-w-0">
               <span className="font-semibold text-paper">Milestone {milestone} of {MILESTONES}</span>
-              <span className="ml-2 font-mono text-xs text-paper/80 tabular">{TRANCHE} USDG</span>
+              <span className="ml-2 font-mono text-xs text-paper/80 tabular">{TRANCHE} USDC</span>
             </dt>
             <dd>{released ? <Pill tone="ink" onDark>Released</Pill> : <Pill tone="slate" onDark>In escrow</Pill>}</dd>
           </div>

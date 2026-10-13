@@ -25,14 +25,14 @@ export function Hero() {
           <div className="max-w-[36rem]">
             <p className="inline-flex items-center gap-2 rounded-full bg-paper/8 py-1 pr-3 pl-2 text-caption font-semibold text-paper/85 ring-1 ring-paper/15 ring-inset">
               <span className="h-1.5 w-1.5 rounded-full bg-signal" aria-hidden="true" />
-              Live on Robinhood Chain Testnet
+              Live on Monad Testnet
             </p>
             <h1 id="hero-title" className="mt-5 font-display text-display">
               Capital that <Highlight>moves</Highlight> with your cargo
             </h1>
             <p className="mt-5 max-w-[32rem] text-body-lg text-paper/75 md:text-lg md:leading-relaxed">
-              USDG working capital for physical trade. Each tranche is released only when the shipment&apos;s own sensor evidence,
-              committed on Robinhood Chain, says the cargo is fine.
+              USDC working capital for physical trade. Each tranche is released only when the shipment&apos;s own sensor evidence,
+              committed on Monad, says the cargo is fine.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <LinkButton href="/exporter" size="lg" iconEnd={<Arrow />}>Start as an exporter</LinkButton>

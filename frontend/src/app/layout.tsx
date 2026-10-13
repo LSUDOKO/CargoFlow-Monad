@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: { default: "CargoFlow — Capital that moves with your cargo", template: "%s · CargoFlow" },
   description:
-    "Evidence-gated working capital for physical trade. USDG escrow that releases only on verified shipment evidence, with zero-knowledge recovery, on Robinhood Chain.",
+    "Evidence-gated working capital for physical trade. USDC escrow that releases only on verified shipment evidence, with zero-knowledge recovery, on Monad.",
   applicationName: "CargoFlow",
 };
 

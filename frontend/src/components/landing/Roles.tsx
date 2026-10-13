@@ -10,13 +10,13 @@ const roles: Role[] = [
   {
     href: "/exporter", who: "Exporters", person: "meera", expression: "happy", prop: "tablet", title: "Get paid while the cargo is still at sea",
     body: "Register the shipment and its cold-chain policy, name your financier, and receive each tranche the moment its evidence is committed.",
-    story: "Meera draws 8,000 USDG at each of five milestones instead of waiting for the buyer.",
+    story: "Meera draws 8,000 USDC at each of five milestones instead of waiting for the buyer.",
     cta: "Start as an exporter", points: ["Gateway for your data logger", "Tranches per milestone", "Residual at settlement"],
   },
   {
     href: "/financier", who: "Financiers", person: "daniel", expression: "confident", prop: "phone", title: "Lend against evidence, not paperwork",
     body: "Fund a facility from your own wallet. Escrow releases only on committed, in-policy evidence, and an excursion pauses it until a proof clears.",
-    story: "Daniel's 40,000 USDG never leaves the vault unless the readings pass.",
+    story: "Daniel's 40,000 USDC never leaves the vault unless the readings pass.",
     cta: "Fund a facility", points: ["Principal and fee first in the waterfall", "Optional default cover", "Portfolio view"],
   },
   {
@@ -54,7 +54,7 @@ export function Roles() {
           <p className="eyebrow">Portals</p>
           <h2 id="roles-title" className="h-section mt-3 max-w-2xl">One facility, a portal for every party</h2>
         </div>
-        <p className="lede max-w-md text-text-muted">Each party signs with its own wallet or passkey. Nobody, including CargoFlow, can move escrowed USDG anywhere else.</p>
+        <p className="lede max-w-md text-text-muted">Each party signs with its own wallet or passkey. Nobody, including CargoFlow, can move escrowed USDC anywhere else.</p>
       </div>
       <Carousel label="Portals for every party" itemLabel="portal" className="mt-8">
         {roles.map((r, i) => (

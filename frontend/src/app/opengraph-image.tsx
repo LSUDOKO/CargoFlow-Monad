@@ -22,7 +22,7 @@ export default function OpenGraphImage() {
             <span style={{ marginLeft: 20 }}>with your cargo.</span>
           </div>
         </div>
-        <div style={{ display: "flex", fontSize: 28, color: "#9FB3C4" }}>USDG escrow released on verified shipment evidence · Robinhood Chain</div>
+        <div style={{ display: "flex", fontSize: 28, color: "#9FB3C4" }}>USDC escrow released on verified shipment evidence · Monad</div>
       </div>
     ),
     size,
