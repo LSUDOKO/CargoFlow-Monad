@@ -1,7 +1,7 @@
 "use client";
 
 import { useHealth } from "@/lib/api/hooks";
-import { chainName, ROBINHOOD_TESTNET_ID } from "@/lib/explorer";
+import { chainName, MONAD_TESTNET_ID } from "@/lib/explorer";
 import { cx } from "@/components/ui/cx";
 
 /**
@@ -27,7 +27,7 @@ export function HealthPill({ onDark, short }: { onDark?: boolean; short?: boolea
   }
   const tone = isError ? "bg-danger" : ok ? "bg-success" : "bg-warning";
   const full = isError ? "Offline" : ok ? chainName(data?.chainId) : "Degraded";
-  const label = short && ok && data?.chainId === ROBINHOOD_TESTNET_ID ? "Testnet" : full;
+  const label = short && ok && data?.chainId === MONAD_TESTNET_ID ? "Testnet" : full;
   const block = data?.headBlock !== undefined ? `Block ${data.headBlock.toLocaleString()}` : undefined;
   return (
     <span className={cx(shell, "animate-fade")} title={block ? `${full} · ${block}` : full}>

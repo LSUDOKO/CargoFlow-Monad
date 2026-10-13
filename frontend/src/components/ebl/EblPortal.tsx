@@ -128,7 +128,7 @@ function NotCarrier() {
 function IssueCard({ unknownRole }: { unknownRole: boolean }) {
   const { address } = useAccount();
   const { contracts, chainId } = useContracts();
-  const client = usePublicClient({ chainId: chainId as 46630 | 31337 });
+  const client = usePublicClient({ chainId: chainId as 10143 | 31337 });
   const { send, pending } = useTx();
   const [form, setForm] = useState<IssueForm>({ shipper: "", consignee: "", toOrder: false, documentHash: "" });
   const [touched, setTouched] = useState(false);

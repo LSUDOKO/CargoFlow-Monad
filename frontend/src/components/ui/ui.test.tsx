@@ -40,8 +40,8 @@ describe("status and explorer helpers", () => {
     expect(statusTone("WHATEVER")).toBe("slate");
   });
   it("links testnet hashes to the explorer and leaves local ones unlinked", () => {
-    expect(explorerTx(46630, "0xab")).toBe("https://explorer.testnet.chain.robinhood.com/tx/0xab");
-    expect(explorerAddress(46630, "0xcd")).toBe("https://explorer.testnet.chain.robinhood.com/address/0xcd");
+    expect(explorerTx(10143, "0xab")).toBe("https://testnet.monadvision.com/tx/0xab");
+    expect(explorerAddress(10143, "0xcd")).toBe("https://testnet.monadvision.com/address/0xcd");
     expect(explorerTx(31337, "0xab")).toBeNull();
   });
 });
@@ -49,7 +49,7 @@ describe("status and explorer helpers", () => {
 describe("HashBadge", () => {
   it("shortens, links on testnet and offers copy", () => {
     const h = "0x20e25734defd7372261a73ff6e78fff990047bb6545d7eebe768fcfca1a84487";
-    render(<HashBadge value={h} chainId={46630} kind="tx" />);
+    render(<HashBadge value={h} chainId={10143} kind="tx" />);
     expect(screen.getByText("0x20e257…4487")).toBeTruthy();
     expect(screen.getByRole("link").getAttribute("href")).toContain(h);
     expect(screen.getByRole("button", { name: /copy/i })).toBeTruthy();
@@ -182,10 +182,10 @@ describe("Modal v2 and Sheet", () => {
 describe("Field, Select and Textarea", () => {
   it("wires help and error to the control", async () => {
     const { Field, Select, Textarea } = await import("./Field");
-    const { rerender } = render(<Field label="Invoice value (USDG)" help="Whole USDG" suffix="USDG" />);
-    const input = screen.getByLabelText("Invoice value (USDG)");
-    expect(document.getElementById(input.getAttribute("aria-describedby")!)?.textContent).toBe("Whole USDG");
-    rerender(<Field label="Invoice value (USDG)" help="Whole USDG" error="Enter an amount" />);
+    const { rerender } = render(<Field label="Invoice value (USDC)" help="Whole USDC" suffix="USDC" />);
+    const input = screen.getByLabelText("Invoice value (USDC)");
+    expect(document.getElementById(input.getAttribute("aria-describedby")!)?.textContent).toBe("Whole USDC");
+    rerender(<Field label="Invoice value (USDC)" help="Whole USDC" error="Enter an amount" />);
     expect(input.getAttribute("aria-invalid")).toBe("true");
     expect(document.getElementById(input.getAttribute("aria-describedby")!)?.textContent).toContain("Enter an amount");
     render(<><Select label="Sort"><option>Newest first</option></Select><Textarea label="What went wrong" optional /></>);
@@ -232,7 +232,7 @@ describe("Stat, Sparkline and KeyValue", () => {
   it("gives the delta direction to screen readers", async () => {
     const { Stat } = await import("./Stat");
     const { Sparkline } = await import("./Sparkline");
-    render(<Stat label="Capital drawn" value="40,000" unit="USDG" delta={{ value: "+4.2%", direction: "up", context: "since last week" }} chart={<Sparkline values={[1, 3, 2]} label="Drawn over 3 days" />} />);
+    render(<Stat label="Capital drawn" value="40,000" unit="USDC" delta={{ value: "+4.2%", direction: "up", context: "since last week" }} chart={<Sparkline values={[1, 3, 2]} label="Drawn over 3 days" />} />);
     expect(screen.getByText("Capital drawn")).toBeTruthy();
     expect(screen.getByText(/up since last week/)).toBeTruthy();
     expect(screen.getByRole("img", { name: "Drawn over 3 days" })).toBeTruthy();
@@ -291,7 +291,7 @@ describe("CopyField", () => {
     const writeText = vi.fn().mockResolvedValue(undefined);
     Object.assign(navigator, { clipboard: { writeText } });
     const a = "0x8e6877a28d51a6c2b1699154cc17f3ebf682102f";
-    render(<CopyField label="Exporter" value={a} chainId={46630} />);
+    render(<CopyField label="Exporter" value={a} chainId={10143} />);
     expect(screen.getByRole("link", { name: /explorer/ }).getAttribute("href")).toContain(a);
     await act(async () => fireEvent.click(screen.getByRole("button", { name: /Copy Exporter/ })));
     expect(writeText).toHaveBeenCalledWith(a);
@@ -344,7 +344,7 @@ describe("CardHeader and EmptyState", () => {
 describe("Stat value type", () => {
   it("sets amounts in Inter with tabular numerals, not the display face", async () => {
     const { Stat } = await import("./Stat");
-    render(<Stat label="Released" value="17,111" unit="USDG" />);
+    render(<Stat label="Released" value="17,111" unit="USDC" />);
     const p = screen.getByText("17,111").parentElement!;
     expect(p.className).toContain("num");
     expect(p.className).toContain("font-sans");
@@ -429,7 +429,7 @@ describe("CopyField explorers", () => {
   });
   it("uses an explicit href over everything else", async () => {
     const { CopyField } = await import("./CopyField");
-    render(<CopyField value={a} kind="tx" chainId={46630} href="https://example.org/tx/1" />);
+    render(<CopyField value={a} kind="tx" chainId={10143} href="https://example.org/tx/1" />);
     expect(screen.getByRole("link").getAttribute("href")).toBe("https://example.org/tx/1");
   });
 });

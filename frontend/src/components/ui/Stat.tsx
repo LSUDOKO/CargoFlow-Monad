@@ -17,7 +17,7 @@ export type StatDelta = {
 type Props = {
   label: string;
   value: React.ReactNode;
-  /** Unit after the value, set smaller: "USDG", "%", "°C". */
+  /** Unit after the value, set smaller: "USDC", "%", "°C". */
   unit?: string;
   delta?: StatDelta;
   /** One line under the value: a limit, a comparison, a source. */

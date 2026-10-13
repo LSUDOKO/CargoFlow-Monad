@@ -168,14 +168,14 @@ const fmt = (n: number) => n.toLocaleString("en-US");
 const COLUMNS: Column<Shipment>[] = [
   { key: "ref", header: "Shipment", primary: true, cell: (r) => r.ref },
   { key: "status", header: "Status", cell: (r) => <StatusPill status={r.status} /> },
-  { key: "drawn", header: "Drawn (USDG)", numeric: true, sortable: true, cell: (r) => <>{fmt(r.drawn)}<span className="text-text-muted"> / {fmt(r.facility)}</span></> },
+  { key: "drawn", header: "Drawn (USDC)", numeric: true, sortable: true, cell: (r) => <>{fmt(r.drawn)}<span className="text-text-muted"> / {fmt(r.facility)}</span></> },
   { key: "score", header: "Evidence", numeric: true, sortable: true, cell: (r) => <span className="inline-flex items-center gap-2"><Sparkline values={r.trend} width={56} height={18} tone={r.score < 75 ? "warning" : "ink"} />{r.score}</span> },
   { key: "updated", header: "Updated", hideOnCard: true, cell: (r) => <span className="text-text-muted">{r.updated}</span> },
 ];
 
 const JOURNEY: TimelineItem[] = [
-  { id: "m1", eyebrow: "Milestone 1", title: "Checkpoint 1", state: "done", time: "3 Oct", meta: <span className="num text-small">4 USDG</span> },
-  { id: "m2", eyebrow: "Milestone 2", title: "Checkpoint 2", state: "done", time: "3 Oct", meta: <span className="num text-small">4 USDG</span> },
+  { id: "m1", eyebrow: "Milestone 1", title: "Checkpoint 1", state: "done", time: "3 Oct", meta: <span className="num text-small">4 USDC</span> },
+  { id: "m2", eyebrow: "Milestone 2", title: "Checkpoint 2", state: "done", time: "3 Oct", meta: <span className="num text-small">4 USDC</span> },
   { id: "m3", eyebrow: "Milestone 3", title: "Checkpoint 3", state: "held", time: "Paused, awaiting proof", description: "One batch left the 2–8 °C band." },
   { id: "m4", eyebrow: "Milestone 4", title: "Checkpoint 4", state: "active", time: "In transit" },
   { id: "m5", eyebrow: "Delivery", title: "Buyer confirms arrival", state: "pending" },
@@ -371,7 +371,7 @@ export function Showcase() {
             </Surface>
             <Surface>
               <Label>Update · animate-update</Label>
-              <Stat tile={false} label="Capital drawn" value={fmt(value)} unit="USDG" />
+              <Stat tile={false} label="Capital drawn" value={fmt(value)} unit="USDC" />
               <Button size="sm" variant="secondary" className="mt-4" onClick={() => setValue((v) => v + 4_000)}>Release 4,000</Button>
             </Surface>
             <Surface>
@@ -428,7 +428,7 @@ export function Showcase() {
               <Button size="md">Medium</Button>
               <Button size="lg" iconEnd={<ArrowIcon />}>Large</Button>
               <Button variant="secondary" icon={<DownloadIcon />}>Download certificate</Button>
-              <Button loading>Deposit 40,000 USDG</Button>
+              <Button loading>Deposit 40,000 USDC</Button>
               <Button variant="secondary" loading loadingText="Signing…">Sign and submit</Button>
               <Button disabled>Disabled</Button>
               <IconButton label="Download" variant="secondary"><DownloadIcon /></IconButton>
@@ -474,8 +474,8 @@ export function Showcase() {
           <Surface>
             <div className="grid gap-5 md:grid-cols-2">
               <Field label="Shipment reference" placeholder="CF-2026-SG01-…" help="Your own reference; it is shown to every party." />
-              <Field label="Invoice value (USDG)" inputMode="decimal" defaultValue="100000" suffix="USDG" />
-              <Field label="Total facility (USDG)" defaultValue="140000" suffix="USDG" error="The facility must not exceed the invoice value." />
+              <Field label="Invoice value (USDC)" inputMode="decimal" defaultValue="100000" suffix="USDC" />
+              <Field label="Total facility (USDC)" defaultValue="140000" suffix="USDC" error="The facility must not exceed the invoice value." />
               <Field label="Buyer address" placeholder="0x…" inputClassName="font-mono" spellCheck={false} help="inputClassName=&quot;font-mono&quot;: the address is mono, the label is not." />
               <Field label="Financier address" placeholder="0x…" inputClassName="font-mono" disabled help="Disabled until a wallet is connected." />
               <Select label="Sort" defaultValue="new">
@@ -517,14 +517,14 @@ export function Showcase() {
         {/* ── DATA DISPLAY ───────────────────────────────────────── */}
         <Block id="data" title="Data display" description="Stat for one headline number, KeyValue for one record's fields, CopyField for anything people copy or check on the explorer.">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <Stat label="Capital drawn" value="24,000" unit="USDG" hint="of 40,000 facility" chart={<Sparkline values={[4, 8, 12, 16, 20, 24]} label="Drawn per milestone, 4,000 to 24,000" area />} />
+            <Stat label="Capital drawn" value="24,000" unit="USDC" hint="of 40,000 facility" chart={<Sparkline values={[4, 8, 12, 16, 20, 24]} label="Drawn per milestone, 4,000 to 24,000" area />} />
             <Stat label="Evidence score" value="94" delta={{ value: "+3", direction: "up", context: "since the last batch" }} hint="needs 75+" />
             <Stat label="Sensor conflict" value="1.7" unit="%" delta={{ value: "+0.4 pt", direction: "up", good: false, context: "since the last batch" }} hint="limit 30%" />
             <Stat label="Open requests" value="0" loading />
           </div>
           <Surface ink className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-            <Stat onDark label="Invoice" value="30" unit="USDG" />
-            <Stat onDark label="Financing" value="20" unit="USDG" delta={{ value: "0", direction: "flat" }} hint="fully drawn" />
+            <Stat onDark label="Invoice" value="30" unit="USDC" />
+            <Stat onDark label="Financing" value="20" unit="USDC" delta={{ value: "0", direction: "flat" }} hint="fully drawn" />
             <Stat onDark label="Risk" value="4.3" unit="%" chart={<Sparkline values={[6, 5.5, 5, 4.8, 4.3]} tone="paper" />} />
           </Surface>
           <div className="grid gap-4 lg:grid-cols-2">
@@ -537,19 +537,19 @@ export function Showcase() {
                 { label: "Readings", value: "At least every 30 min, from 2+ probes" },
                 { label: "To release money", value: "Evidence score 75+" },
                 { label: "Financing fee", value: "3%", numeric: true },
-                { label: "Principal back to the financier", value: "20 USDG", numeric: true, hint: "repaid on settlement" },
+                { label: "Principal back to the financier", value: "20 USDC", numeric: true, hint: "repaid on settlement" },
               ]} />
             </Card>
             <Card>
               <CardHeader title="Parties" />
               <KeyValue layout="grid" columns={2} items={[
-                { label: "Exporter", value: <CopyField size="sm" value="0x8e6877a28d51a6c2b1699154cc17f3ebf682102f" chainId={46630} /> },
-                { label: "Financier", value: <CopyField size="sm" value="0x2198ab4e7755510a6a94ee298cf70f44e0f86414" chainId={46630} /> },
-                { label: "Buyer", value: <CopyField size="sm" value="0x6248101b50364011f12174cdb9d5305faf671d4a" chainId={46630} /> },
+                { label: "Exporter", value: <CopyField size="sm" value="0x8e6877a28d51a6c2b1699154cc17f3ebf682102f" chainId={10143} /> },
+                { label: "Financier", value: <CopyField size="sm" value="0x2198ab4e7755510a6a94ee298cf70f44e0f86414" chainId={10143} /> },
+                { label: "Buyer", value: <CopyField size="sm" value="0x6248101b50364011f12174cdb9d5305faf671d4a" chainId={10143} /> },
                 { label: "Created", value: "3 Oct 2026, 12:07 UTC" },
               ]} />
               <div className="mt-5 flex flex-col gap-3">
-                <CopyField label="Deployer" value="0xA6C05ec62A222b0fb65BD30B2d2f9B2fd378911b" chainId={46630} display="full" />
+                <CopyField label="Deployer" value="0xA6C05ec62A222b0fb65BD30B2d2f9B2fd378911b" chainId={10143} display="full" />
                 <CopyField label="MCP URL" kind="text" value="https://cargoflow-mcp.adoranto737.workers.dev/mcp" />
                 <CopyField label="Hedge vault" value="0x5FbDB2315678afecb367f032d93F642f64180aa3" explorerBase="https://sepolia.arbiscan.io" />
               </div>
@@ -558,11 +558,11 @@ export function Showcase() {
           <Card tone="ink">
             <CardHeader title="On ink" />
             <div className="flex flex-wrap gap-3">
-              <CopyField onDark label="exporter" size="sm" value="0x8e6877a28d51a6c2b1699154cc17f3ebf682102f" chainId={46630} />
+              <CopyField onDark label="exporter" size="sm" value="0x8e6877a28d51a6c2b1699154cc17f3ebf682102f" chainId={10143} />
               <CopyField onDark label="root" size="sm" kind="hash" value="0x1fc4cf00000000000000000000000000000000000000000000000000000c26d" />
             </div>
             <div className="mt-5">
-              <KeyValue onDark layout="grid" columns={4} items={[{ label: "Invoice", value: "30 USDG", numeric: true }, { label: "Financing", value: "20 USDG", numeric: true }, { label: "Fee", value: "3%", numeric: true }, { label: "Status", value: <StatusPill status="SETTLED" onDark /> }]} />
+              <KeyValue onDark layout="grid" columns={4} items={[{ label: "Invoice", value: "30 USDC", numeric: true }, { label: "Financing", value: "20 USDC", numeric: true }, { label: "Fee", value: "3%", numeric: true }, { label: "Status", value: <StatusPill status="SETTLED" onDark /> }]} />
             </div>
           </Card>
           <div className="grid gap-4 md:grid-cols-2">
@@ -652,7 +652,7 @@ export function Showcase() {
           {banner && (
             <div className="-mx-(--gutter) md:mx-0 md:overflow-hidden md:rounded-tile">
               <Banner variant="warning" live="polite" title="Wrong network" action={<Button size="sm" variant="secondary">Switch network</Button>} onDismiss={() => setBanner(false)}>
-                Your wallet is on another chain. Switch to Robinhood Chain Testnet to sign.
+                Your wallet is on another chain. Switch to Monad Testnet to sign.
               </Banner>
             </div>
           )}
@@ -669,7 +669,7 @@ export function Showcase() {
             <Callout variant="danger" onDark title="Defaulted">The undrawn capital went back to the financier.</Callout>
           </Surface>
           <div className="flex flex-wrap gap-3">
-            <Button variant="secondary" size="sm" onClick={() => toast({ tone: "verified", title: "Milestone 3 released", body: "4 USDG reached the exporter.", href: "https://explorer.testnet.chain.robinhood.com" })}>Success toast</Button>
+            <Button variant="secondary" size="sm" onClick={() => toast({ tone: "verified", title: "Milestone 3 released", body: "4 USDC reached the exporter.", href: "https://testnet.monadvision.com" })}>Success toast</Button>
             <Button variant="secondary" size="sm" onClick={() => toast({ tone: "alert", title: "Facility paused", body: "A batch left the agreed band.", action: { label: "View evidence", onClick: () => {} } })}>Warning toast</Button>
             <Button variant="secondary" size="sm" onClick={() => toast({ tone: "danger", title: "The PDF could not be created", body: "Try again in a moment." })}>Danger toast</Button>
             <Button variant="secondary" size="sm" onClick={() => toast({ tone: "info", title: "Copied the shipment link" })}>Info toast</Button>
@@ -706,7 +706,7 @@ export function Showcase() {
             <Callout variant="warning">This cannot be undone.</Callout>
           </Modal>
           <Drawer open={drawer} onClose={() => setDrawer(false)} title="CF-2026-SG01-0142" description="In transit · milestone 4 of 5" footer={<Button onClick={() => setDrawer(false)}>Open dashboard</Button>}>
-            <KeyValue items={[{ label: "Drawn", value: "24,000 USDG", numeric: true }, { label: "Evidence score", value: "94", numeric: true }, { label: "Next to act", value: "Monitor" }]} />
+            <KeyValue items={[{ label: "Drawn", value: "24,000 USDC", numeric: true }, { label: "Evidence score", value: "94", numeric: true }, { label: "Next to act", value: "Monitor" }]} />
             <div className="mt-6"><Timeline label="Journey" items={JOURNEY.slice(0, 4)} showState /></div>
           </Drawer>
           <Sheet open={sheet} onClose={() => setSheet(false)} title="Choose a wallet">
@@ -747,7 +747,7 @@ export function Showcase() {
               <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
                 <Stat label="In transit" value="3" />
                 <Stat label="Paused" value="1" />
-                <Stat label="Capital drawn" value="44,750" unit="USDG" />
+                <Stat label="Capital drawn" value="44,750" unit="USDC" />
                 <Stat label="Average evidence" value="81.8" />
               </div>
             </Section>

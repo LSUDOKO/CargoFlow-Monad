@@ -55,7 +55,7 @@ type FieldProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "prefix"> & 
   hint?: React.ReactNode;
   help?: React.ReactNode;
   error?: string | null;
-  /** Unit after the value, e.g. "USDG" or "°C". */
+  /** Unit after the value, e.g. "USDC" or "°C". */
   suffix?: string;
   /** Text or icon before the value, e.g. a search glyph. */
   prefix?: React.ReactNode;

@@ -3,7 +3,7 @@
 import { CopyField } from "@/components/ui/CopyField";
 import { DataTable, type Column } from "@/components/ui/DataTable";
 import { Badge } from "@/components/ui/Pill";
-import { ROBINHOOD_TESTNET_ID } from "@/lib/explorer";
+import { MONAD_TESTNET_ID } from "@/lib/explorer";
 
 export type ContractRow = { key: string; name: string; role: string; address?: string; verified?: boolean };
 
@@ -12,7 +12,7 @@ export type ContractRow = { key: string; name: string; role: string; address?: s
  * single "Verified" badge. `explorer` is the explorer root for chains the app's explorer map does not know
  * (Arbitrum Sepolia: https://sepolia.arbiscan.io); the field's explorer action then links there.
  */
-export function ContractTable({ rows, caption, explorer, chainId = ROBINHOOD_TESTNET_ID, showVerified = true }: {
+export function ContractTable({ rows, caption, explorer, chainId = MONAD_TESTNET_ID, showVerified = true }: {
   rows: ContractRow[];
   caption: string;
   explorer?: string;

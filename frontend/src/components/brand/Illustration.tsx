@@ -6,7 +6,7 @@ const art = {
   merkle: { src: "/brand/illustrations/merkle.svg", w: 240, h: 240, alt: "Readings hashed into a Merkle tree" },
   zk: { src: "/brand/illustrations/zk.svg", w: 240, h: 240, alt: "A shield over a sealed proof" },
   ai: { src: "/brand/illustrations/ai.svg", w: 240, h: 240, alt: "A monitor watching a telemetry chart" },
-  vault: { src: "/brand/illustrations/vault.svg", w: 240, h: 240, alt: "An escrow vault holding USDG" },
+  vault: { src: "/brand/illustrations/vault.svg", w: 240, h: 240, alt: "An escrow vault holding USDC" },
   settle: { src: "/brand/illustrations/settle.svg", w: 240, h: 240, alt: "An invoice settling into two payouts" },
 } as const;
 

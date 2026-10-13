@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
 import { GITHUB_URL } from "@/lib/developer";
-import { ROBINHOOD_EXPLORER } from "@/lib/explorer";
+import { MONAD_EXPLORER } from "@/lib/explorer";
 
 type Group = { title: string; links: [href: string, label: string][] };
 
@@ -23,7 +23,7 @@ const groups: Group[] = [
     title: "Verify",
     links: [
       ["/deployments", "Contracts and services"],
-      [ROBINHOOD_EXPLORER, "Testnet explorer"],
+      [MONAD_EXPLORER, "Testnet explorer"],
       [GITHUB_URL, "Source code"],
       [`${GITHUB_URL}/blob/main/docs/runbooks/testnet.md`, "Testnet run, step by step"],
     ],
@@ -64,8 +64,8 @@ export function Footer() {
       </div>
       <div className="border-t border-border-ink">
         <div className="container-page flex flex-col gap-2 py-5 text-caption text-paper/70 md:flex-row md:items-center md:justify-between md:gap-6">
-          <p>Production build, live on Robinhood Chain Testnet. Ready for use; mainnet release is next.</p>
-          <p className="shrink-0">© 2026 CargoFlow · Robinhood Chain Testnet</p>
+          <p>Production build, live on Monad Testnet. Ready for use; mainnet release is next.</p>
+          <p className="shrink-0">© 2026 CargoFlow · Monad Testnet</p>
         </div>
       </div>
     </footer>
