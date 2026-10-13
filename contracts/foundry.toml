@@ -41,6 +41,5 @@ fuzz = { runs = 2048 }
 invariant = { runs = 512, depth = 128 }
 
 [rpc_endpoints]
-robinhood_testnet = "${ROBINHOOD_RPC_URL}"
-arbitrum_sepolia = "${ARBITRUM_SEPOLIA_RPC_URL}"
+monad_testnet = "${MONAD_RPC_URL}"
 local = "http://127.0.0.1:8545"

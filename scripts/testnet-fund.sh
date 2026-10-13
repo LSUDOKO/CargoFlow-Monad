@@ -4,7 +4,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 CAST="${CAST:-cast}"
 set -a; . ./.env; set +a
-RPC="${ROBINHOOD_RPC_URL:-https://rpc.testnet.chain.robinhood.com}"
+RPC="${MONAD_RPC_URL:-https://testnet-rpc.monad.xyz}"
 TARGET_WEI="${TARGET_WEI:-500000000000000}" # 0.0005 ETH
 DEPLOYER_KEY="0x${private_key#0x}"
 for name in WORKER MONITOR MANAGER ARBITER EXPORTER FINANCIER BUYER; do
