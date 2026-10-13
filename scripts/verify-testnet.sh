@@ -5,7 +5,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 CAST="${CAST:-cast}"; FORGE="${FORGE:-forge}"
 M=contracts/deployments/monad-testnet.json
-URL="${VERIFIER_URL:-https://sourcify-api-monad.blockvision.org}"
+URL="${VERIFIER_URL:-https://sourcify-api-monad.blockvision.org/}"
 get() { python3 -c "import json,sys; d=json.load(open('$M')); print(d['contracts'].get('$1') or d.get('$1'))"; }
 ACCESS=$(get access); REG=$(get shipmentRegistry); POL=$(get policyEngine); EV=$(get evidenceRegistry)
 VAULT=$(get receivableVault); CTRL=$(get financingController); VER=$(get groth16Verifier); USDC=$(get usdg); DEPLOYER=$(get deployer)
@@ -32,4 +32,8 @@ if [ -n "$DEVICES" ] && [ "$DEVICES" != None ]; then
 fi
 if [ "$EBL_ARG" != 0x0000000000000000000000000000000000000000 ]; then
   verify EBLRegistry "$EBL" src/EBLRegistry.sol:EBLRegistry "$("$CAST" abi-encode 'c(address)' "$ACCESS")"
+fi
+MARKET=$(get noteMarket)
+if [ -n "$MARKET" ] && [ "$MARKET" != None ]; then
+  verify CargoNoteMarket "$MARKET" src/CargoNoteMarket.sol:CargoNoteMarket "$("$CAST" abi-encode 'c(address)' "$CTRL")"
 fi
