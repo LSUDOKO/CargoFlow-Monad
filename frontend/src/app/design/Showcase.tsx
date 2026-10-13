@@ -550,7 +550,7 @@ export function Showcase() {
               ]} />
               <div className="mt-5 flex flex-col gap-3">
                 <CopyField label="Deployer" value="0xA6C05ec62A222b0fb65BD30B2d2f9B2fd378911b" chainId={10143} display="full" />
-                <CopyField label="MCP URL" kind="text" value="https://cargoflow-mcp.adoranto737.workers.dev/mcp" />
+                <CopyField label="MCP URL" kind="text" value="https://cargoflow-monad-mcp.adoranto737.workers.dev/mcp" />
                 <CopyField label="Hedge vault" value="0x5FbDB2315678afecb367f032d93F642f64180aa3" explorerBase="https://sepolia.arbiscan.io" />
               </div>
             </Card>
@@ -580,7 +580,7 @@ export function Showcase() {
             </Surface>
             <Surface>
               <Label>Code</Label>
-              <CodeBlock label="Claude Code · remote" code="claude mcp add --transport http cargoflow https://cargoflow-mcp.adoranto737.workers.dev/mcp" />
+              <CodeBlock label="Claude Code · remote" code="claude mcp add --transport http cargoflow https://cargoflow-monad-mcp.adoranto737.workers.dev/mcp" />
             </Surface>
           </div>
         </Block>
