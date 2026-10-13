@@ -4,7 +4,10 @@
 //
 //   node --experimental-strip-types scripts/testnet-lifecycle.ts https://cargoflow-api-….onrender.com
 //
-// It spends testnet gas from each party and a small amount of testnet USDC (facility 20, invoice 30).
+// It spends testnet gas from each party and a small amount of testnet USDC (facility 20, invoice 30; override with
+// FACILITY_USDC and INVOICE_USDC). NOTE_TRADE=1 adds a Cargo Note trade mid-voyage: the financier lists its position
+// on the CargoNoteMarket and the trader (TRADER_KEY, default the deployer's private_key) buys it, so settlement pays
+// the trader.
 //
 // Partial runs for demo data: STOP=paused ends after the excursion (a live paused facility for the automatic
 // recovery worker), STOP=created ends once the facility exists and waits for the financier's deposit, MODE=request
@@ -13,7 +16,7 @@
 import { readFileSync } from "node:fs";
 import { createPublicClient, createWalletClient, defineChain, http, keccak256, toBytes, type Address, type Hex } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
-import { controllerAbi, policiesAbi, registryAbi, usdgAbi } from "../src/lib/chain/abis.ts";
+import { controllerAbi, noteMarketAbi, policiesAbi, registryAbi, usdgAbi } from "../src/lib/chain/abis.ts";
 import { buildMilestones, buildPolicy, defaultPolicyForm, routeCommitment, ROUTES } from "../src/lib/exporter.ts";
 import { requestMessage } from "../src/lib/api/market.ts";
 import { alertsMessage } from "../src/lib/api/extras.ts";
@@ -58,50 +61,56 @@ async function main() {
   const ref = `CF-LIVE-${Date.now()}`;
   const route = ROUTES[0]!.points;
   const policy = buildPolicy(defaultPolicyForm);
-  const total = 20_000_000n, invoice = 30_000_000n; // 20 and 30 USDC
+  const usdc = (v: string | undefined, d: number) => BigInt(Math.round(Number(v ?? d) * 1e6));
+  const total = usdc(process.env.FACILITY_USDC, 20), invoice = usdc(process.env.INVOICE_USDC, 30);
   console.log(`shipment ${ref}`);
 
-  // 1. the exporter registers the shipment, its policy and the facility (the wizard's three transactions)
-  const refHash = keccak256(toBytes(ref));
-  const id = (await pub.readContract({ address: c.shipmentRegistry!, abi: registryAbi, functionName: "shipmentIdFor", args: [exporter.account!.address, refHash] })) as Hex;
-  const commitment = (await pub.readContract({ address: c.policyEngine!, abi: policiesAbi, functionName: "hashPolicy", args: [policy] })) as Hex;
-  await tx("register shipment", exporter, c.shipmentRegistry!, registryAbi, "registerShipment", [refHash, buyer.account!.address, keccak256(toBytes(`invoice:${ref}:${invoice}`)), routeCommitment(route), commitment, invoice]);
-  await tx("set policy", exporter, c.policyEngine!, policiesAbi, "setPolicy", [id, policy]);
-  if (process.env.MODE !== "request") await tx("create facility", exporter, c.financingController!, controllerAbi, "createFacility", [id, financier.account!.address, 300, buildMilestones(total, 5, Number(defaultPolicyForm.minScore), ref)]);
-  if (process.env.MODE === "request") {
-    await api("POST", "/v1/shipments/mirror", { shipmentId: id, externalRef: ref, route, maxGapSec: 1800, minSensors: 2 });
-    const at = Math.floor(Date.now() / 1000);
-    const msig = await exporter.account!.signMessage!({ message: requestMessage(id, total, 400, 5, at) });
-    const r = await api<{ id: string }>("POST", "/v1/requests", { shipmentId: id, amount: total.toString(), maxFeeBps: 400, milestoneCount: 5, note: "Vaccines, 2-8 °C, Nhava Sheva to Singapore", issuedAt: at, signature: msig });
-    console.log(`  market request ${r.id} for ${id}`);
-    return;
-  }
-  await api("POST", "/v1/shipments/mirror", { shipmentId: id, externalRef: ref, route, maxGapSec: 1800, minSensors: 2 });
-  console.log(`  dashboard id ${id}`);
-  if (process.env.TELEGRAM === "1") {
-    const at = Math.floor(Date.now() / 1000);
-    const tsig = await exporter.account!.signMessage!({ message: alertsMessage(id, "telegram", "", at) });
-    const sub = await api<{ id: string; linkUrl?: string }>("POST", `/v1/shipments/${id}/subscriptions`, { channel: "telegram", target: "", events: ["RELEASED", "PAUSED", "RESUMED", "RECOVERY_READY", "DELIVERED", "SETTLED"], issuedAt: at, signature: tsig });
-    console.log(`  TELEGRAM_LINK ${sub.linkUrl}`);
-    for (let i = 0; i < 120; i++) {
-      const list = await api<{ subscriptions: { id: string; active: boolean }[] }>("GET", `/v1/shipments/${id}/subscriptions?address=${exporter.account!.address.toLowerCase()}`);
-      if (list.subscriptions.some((x) => x.id === sub.id && x.active)) break;
-      if (i === 119) throw new Error("Telegram subscription was not activated (press Start in the bot)");
-      await new Promise((r) => setTimeout(r, 5000));
+  // CONTINUE=<shipment id> picks up a facility a previous run left paused (skips registration, funding and legs 1-3)
+  const cont = process.env.CONTINUE as Hex | undefined;
+  let id: Hex = cont ?? "0x";
+  if (!cont) {
+    // 1. the exporter registers the shipment, its policy and the facility (the wizard's three transactions)
+    const refHash = keccak256(toBytes(ref));
+    id = (await pub.readContract({ address: c.shipmentRegistry!, abi: registryAbi, functionName: "shipmentIdFor", args: [exporter.account!.address, refHash] })) as Hex;
+    const commitment = (await pub.readContract({ address: c.policyEngine!, abi: policiesAbi, functionName: "hashPolicy", args: [policy] })) as Hex;
+    await tx("register shipment", exporter, c.shipmentRegistry!, registryAbi, "registerShipment", [refHash, buyer.account!.address, keccak256(toBytes(`invoice:${ref}:${invoice}`)), routeCommitment(route), commitment, invoice]);
+    await tx("set policy", exporter, c.policyEngine!, policiesAbi, "setPolicy", [id, policy]);
+    if (process.env.MODE !== "request") await tx("create facility", exporter, c.financingController!, controllerAbi, "createFacility", [id, financier.account!.address, 300, buildMilestones(total, 5, Number(defaultPolicyForm.minScore), ref)]);
+    if (process.env.MODE === "request") {
+      await api("POST", "/v1/shipments/mirror", { shipmentId: id, externalRef: ref, route, maxGapSec: 1800, minSensors: 2 });
+      const at = Math.floor(Date.now() / 1000);
+      const msig = await exporter.account!.signMessage!({ message: requestMessage(id, total, 400, 5, at) });
+      const r = await api<{ id: string }>("POST", "/v1/requests", { shipmentId: id, amount: total.toString(), maxFeeBps: 400, milestoneCount: 5, note: "Vaccines, 2-8 °C, Nhava Sheva to Singapore", issuedAt: at, signature: msig });
+      console.log(`  market request ${r.id} for ${id}`);
+      return;
     }
-    console.log("  telegram subscription active");
-  }
-  if (process.env.STOP === "created") {
-    console.log(`  stopped awaiting deposit: ${id}`);
-    return;
-  }
+    await api("POST", "/v1/shipments/mirror", { shipmentId: id, externalRef: ref, route, maxGapSec: 1800, minSensors: 2 });
+    console.log(`  dashboard id ${id}`);
+    if (process.env.TELEGRAM === "1") {
+      const at = Math.floor(Date.now() / 1000);
+      const tsig = await exporter.account!.signMessage!({ message: alertsMessage(id, "telegram", "", at) });
+      const sub = await api<{ id: string; linkUrl?: string }>("POST", `/v1/shipments/${id}/subscriptions`, { channel: "telegram", target: "", events: ["RELEASED", "PAUSED", "RESUMED", "RECOVERY_READY", "DELIVERED", "SETTLED"], issuedAt: at, signature: tsig });
+      console.log(`  TELEGRAM_LINK ${sub.linkUrl}`);
+      for (let i = 0; i < 120; i++) {
+        const list = await api<{ subscriptions: { id: string; active: boolean }[] }>("GET", `/v1/shipments/${id}/subscriptions?address=${exporter.account!.address.toLowerCase()}`);
+        if (list.subscriptions.some((x) => x.id === sub.id && x.active)) break;
+        if (i === 119) throw new Error("Telegram subscription was not activated (press Start in the bot)");
+        await new Promise((r) => setTimeout(r, 5000));
+      }
+      console.log("  telegram subscription active");
+    }
+    if (process.env.STOP === "created") {
+      console.log(`  stopped awaiting deposit: ${id}`);
+      return;
+    }
 
-  // 2. the financier funds it
-  await tx("approve vault (financier)", financier, c.usdg!, usdgAbi, "approve", [c.receivableVault!, total]);
-  await tx("deposit capital", financier, c.financingController!, controllerAbi, "depositCapital", [id]);
+    // 2. the financier funds it
+    await tx("approve vault (financier)", financier, c.usdg!, usdgAbi, "approve", [c.receivableVault!, total]);
+    await tx("deposit capital", financier, c.financingController!, controllerAbi, "depositCapital", [id]);
 
-  // 3. the exporter starts transit and adds the data logger as a gateway (wallet-signed authorization)
-  await tx("start transit", exporter, c.financingController!, controllerAbi, "startTransit", [id]);
+    // 3. the exporter starts transit and adds the data logger as a gateway (wallet-signed authorization)
+    await tx("start transit", exporter, c.financingController!, controllerAbi, "startTransit", [id]);
+  }
   const g = newGatewayKey();
   const sensors = ["probe-1", "probe-2"];
   const issuedAt = Math.floor(Date.now() / 1000);
@@ -140,24 +149,44 @@ async function main() {
     console.log(`  ${label}: ${r.accepted} accepted, ${r.rejected.length} quarantined; epochs: ${r.epochs.map((e) => `#${e.sequence} M${e.milestoneIndex === 255 ? "-" : e.milestoneIndex + 1} ${e.skipped ? "skipped" : e.action}${e.releaseTx ? " released" : ""}${e.pauseTx ? " PAUSED" : ""}${e.error ? ` error=${e.error}` : ""}`).join("; ")}`);
     return r;
   };
-  await send("leg 1, healthy", leg(16));
-  await send("leg 2, reefer fails", leg(8, [5.2, 6.8, 8.9, 10.4, 11.7]));
-  await send("leg 3, probe-2 still in range", leg(8));
+  if (!cont) {
+    await send("leg 1, healthy", leg(16));
+    await send("leg 2, reefer fails", leg(8, [5.2, 6.8, 8.9, 10.4, 11.7]));
+    await send("leg 3, probe-2 still in range", leg(8));
+  } else t += 32 * 5; // the earlier run already sent readings up to about now
   if (process.env.STOP === "paused") {
     console.log(`  stopped while paused: ${id}`);
     return;
   }
 
-  // 5. recovery: the exporter signs, the backend proves bound to the exporter, the exporter submits the proof
-  const ri = Math.floor(Date.now() / 1000);
-  const rsig = await exporter.account!.signMessage!({ message: recoveryAuthorizationMessage(id, "probe-2", exporter.account!.address, ri) });
-  const p = await api<{ milestoneIndex: number; sequence: number; a: [string, string]; b: [[string, string], [string, string]]; c: [string, string]; commitTx: string }>("POST", `/v1/shipments/${id}/recovery`, { sensorId: "probe-2", submitter: exporter.account!.address, issuedAt: ri, signature: rsig });
-  console.log(`  recovery epoch committed: ${p.commitTx}`);
-  await tx("resume with proof (exporter)", exporter, c.financingController!, controllerAbi, "resumeWithProof", [id, p.milestoneIndex, p.sequence, p.a.map(BigInt), p.b.map((r) => r.map(BigInt)), p.c.map(BigInt)]);
-  const f = (await pub.readContract({ address: c.financingController!, abi: controllerAbi, functionName: "getFacility", args: [id] })) as { nextMilestone: number };
-  if (Number(f.nextMilestone) === p.milestoneIndex) {
-    await tx(`release milestone ${p.milestoneIndex + 1}`, exporter, c.financingController!, controllerAbi, "evaluateAndReleaseMilestone", [id, p.milestoneIndex, p.sequence]);
-  } else console.log(`  milestone ${p.milestoneIndex + 1} was already released by the backend`);
+  if (process.env.SKIP_RECOVERY !== "1") {
+    // 5. recovery: the exporter signs, the backend proves bound to the exporter, the exporter submits the proof
+    const ri = Math.floor(Date.now() / 1000);
+    const rsig = await exporter.account!.signMessage!({ message: recoveryAuthorizationMessage(id, "probe-2", exporter.account!.address, ri) });
+    const p = await api<{ milestoneIndex: number; sequence: number; a: [string, string]; b: [[string, string], [string, string]]; c: [string, string]; commitTx: string }>("POST", `/v1/shipments/${id}/recovery`, { sensorId: "probe-2", submitter: exporter.account!.address, issuedAt: ri, signature: rsig });
+    console.log(`  recovery epoch committed: ${p.commitTx}`);
+    await tx("resume with proof (exporter)", exporter, c.financingController!, controllerAbi, "resumeWithProof", [id, p.milestoneIndex, p.sequence, p.a.map(BigInt), p.b.map((r) => r.map(BigInt)), p.c.map(BigInt)]);
+    const f = (await pub.readContract({ address: c.financingController!, abi: controllerAbi, functionName: "getFacility", args: [id] })) as { nextMilestone: number };
+    if (Number(f.nextMilestone) === p.milestoneIndex) {
+      await tx(`release milestone ${p.milestoneIndex + 1}`, exporter, c.financingController!, controllerAbi, "evaluateAndReleaseMilestone", [id, p.milestoneIndex, p.sequence]);
+    } else console.log(`  milestone ${p.milestoneIndex + 1} was already released by the backend`);
+
+  }
+
+  // 5b. Cargo Notes: the financier sells its position mid-voyage, priced off the on-chain evidence mark
+  if (process.env.NOTE_TRADE === "1" && c.noteMarket) {
+    const trader = wallet(env.TRADER_KEY ? "TRADER_KEY" : "private_key");
+    const mark = (await pub.readContract({ address: c.noteMarket, abi: noteMarketAbi, functionName: "markPrice", args: [id] })) as bigint;
+    const claim = (await pub.readContract({ address: c.noteMarket, abi: noteMarketAbi, functionName: "claimValue", args: [id] })) as bigint;
+    const price = (mark * 99n) / 100n; // 1% under the mark
+    console.log(`  note: claim ${Number(claim) / 1e6} USDC, evidence mark ${Number(mark) / 1e6}, ask ${Number(price) / 1e6}`);
+    await tx("allow market as note operator (financier)", financier, c.financingController!, controllerAbi, "setPositionOperator", [id, c.noteMarket]);
+    await tx("place ask (financier)", financier, c.noteMarket, noteMarketAbi, "placeAsk", [id, price]);
+    await tx("approve market (trader)", trader, c.usdg!, usdgAbi, "approve", [c.noteMarket, price]);
+    await tx("buy note (trader)", trader, c.noteMarket, noteMarketAbi, "buy", [id, price]);
+    const after = (await pub.readContract({ address: c.financingController!, abi: controllerAbi, functionName: "getFacility", args: [id] })) as { financier: Address };
+    console.log(`  note holder is now ${after.financier}`);
+  }
 
   // 6. the rest of the voyage, then the buyer confirms delivery and pays
   await send("leg 4, healthy", leg(16));
