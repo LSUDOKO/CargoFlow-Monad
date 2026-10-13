@@ -575,6 +575,40 @@ are in this repository.
 | **OpenZeppelin** | v5.4: `AccessControlDefaultAdminRules`, `SafeERC20`, `ReentrancyGuard`, `Pausable`, `ERC721`, `Math` | live | [dependency matrix](docs/architecture.md#openzeppelin-dependency-matrix-v540-vendored) |
 | **MonadVision · Sourcify** | Source verification of every deployed contract | live | [`scripts/verify-testnet.sh`](scripts/verify-testnet.sh) |
 
+### Sponsor proof, in screenshots
+
+Every card below is real output from Monad Testnet on 14 October 2026; each transaction is linked in
+[`docs/runs/monad-testnet.md`](docs/runs/monad-testnet.md). The terminal cards are rendered from the captured
+command output ([`video/proofs/`](video/proofs)); the two app captures are the live site.
+
+**The live app:** the note order book, marked on chain to each cargo's evidence (one note paused at score 48 with its mark haircut).
+
+<p align="center"><a href="https://cargoflow-monad.vercel.app/notes"><img src="docs/assets/proofs/live-notes-orderbook.png" alt="Live /notes page on Monad Testnet: block counter, 3 notes outstanding, 9.108 USDC claim at settlement, an order book with two ACTIVE notes at score 100 and mark 3.036 and one PAUSED note at score 48 with mark 2.440248, ask 2.452449 and best bid 2.36704, plus the Cargo Notes on Kuru table." width="100%"></a></p>
+
+**MetaMask Agent Wallet:** the `cargo-notes` plugin refuses a paused note without signing, then buys an active one;
+each transaction waited for the owner's email approval (2FA). Approve [0x10c17841…](https://testnet.monadvision.com/tx/0x10c178413612c177dffba0e71e12ca3cb8941c53b61b515de30504c80060519c) ·
+buy [0x55a0bf98…](https://testnet.monadvision.com/tx/0x55a0bf9840c9d028848cd0136e8a8cf0218c96aee1732b4cd0554f01e2ae357c).
+
+<p align="center"><img src="docs/assets/proofs/metamask.png" alt="Terminal: mm cargo buy on the paused note fails with CARGO_NOT_BUYABLE (status PAUSED, evidence score 48 below 75, ask above the mark; nothing signed). Then mm cargo buy on the active note: approve 3.00564 USDC and buy, each AWAITING_MFA then BROADCASTED; bought for 3.00564 USDC, claim 3.036, mark 3.036, evidence 100, upside 101 bps." width="100%"></p>
+
+**Kuru:** a note wrapped into `cNOTE-0516` and listed on Kuru's spot order book through its permissionless Router; a limit sell at
+0.99 USDC and a market buy filled. Wrap [0xf130430c…](https://testnet.monadvision.com/tx/0xf130430ceadd960f220de6267dfb9fe8af68a11df3de2e2221a089c4b6f82e1c) ·
+market [0x13f02ef0…](https://testnet.monadvision.com/address/0x13f02ef0c5CF7357267C52947709acfE52021520) ·
+fill [0xade132a7…](https://testnet.monadvision.com/tx/0xade132a7524680c7e3b9270923ccbb61be845c026173d5e1f0cd13753bf4c01b).
+
+<p align="center"><img src="docs/assets/proofs/kuru.png" alt="Terminal: scripts/kuru-list-note.sh wraps the note into the cNOTE-0516 token (supply 3036000), creates the Kuru market 0x13f02ef0c5CF7357267C52947709acfE52021520 via Router.deployProxy, posts a limit sell of 3 at 0.99 and a market buy leaves the trader holding 1009090 cNOTE-0516; cast call bestBidAsk returns an ask of 0.99 USDC." width="100%"></p>
+
+**Envio:** the HyperIndex indexer on Envio Cloud, synced to the chain head ([GraphQL](https://indexer.dev.hyperindex.xyz/bc5a6d2/v1/graphql)), and the
+**Market activity** feed it powers on the live site (both trades, including the agent's buy from `0x4124…9407`).
+
+<p align="center"><img src="docs/assets/proofs/envio.png" alt="Terminal: a GraphQL query to indexer.dev.hyperindex.xyz/bc5a6d2 returns MarketStats with 2 trades, 7012447 volume, 4 asks and 2 bids, the latest trade bought by 0x4124348e…9407 for 3005640 with mark 3036000, and the latest processed block." width="100%"></p>
+
+<p align="center"><a href="https://cargoflow-monad.vercel.app/notes"><img src="docs/assets/proofs/live-notes-kuru-envio.png" alt="Live /notes page: the Cargo Notes on Kuru table (cNOTE-0516, supply 3.036, mark per token 1.0000, Kuru ask 0.9900, market 0x13f02e…) and the Market activity feed indexed by Envio HyperIndex: 2 trades, 7.012447 USDC volume, 4 asks, 2 bids, with every ask, bid, trade and position move linked to its transaction." width="100%"></a></p>
+
+**Alchemy:** the hosted API runs on Alchemy's Monad Testnet endpoint as its primary RPC (`"rpc":"primary"`), with the public RPC as the automatic fallback.
+
+<p align="center"><img src="docs/assets/proofs/alchemy.png" alt="Terminal: curl cargoflow-monad-api.onrender.com/v1/health returns status ok, database ok, chainId 10143, rpc primary; primary is monad-testnet.g.alchemy.com with the key hidden, fallback testnet-rpc.monad.xyz." width="100%"></p>
+
 ## Measured, not claimed
 
 <p align="center"><img src="docs/assets/v3/measured.png" alt="Measured, not claimed: 379 contract tests including 13 for Cargo Notes, 25 circuit tests, 300 frontend unit tests in 32 files, 22 live transactions on Monad testnet; packages SDK 92, MCP 27, gateway 36, Python 25; 13,494 circuit constraints, about 1 s to prove, about 0.25 M gas for resumeWithProof." width="100%"></p>
