@@ -1,0 +1,300 @@
+{
+ "fps": 30,
+ "totalFrames": 5058,
+ "scenes": [
+  {
+   "id": "A",
+   "kind": "clip",
+   "clip": "S00",
+   "from": 0,
+   "frames": 233,
+   "speed": 1.3543,
+   "cues": [
+    {
+     "id": "m001",
+     "text": "This reefer carries vaccines to Singapore.",
+     "start": 9,
+     "end": 77
+    },
+    {
+     "id": "m002",
+     "text": "It's at five point two degrees.",
+     "start": 86,
+     "end": 134
+    },
+    {
+     "id": "m003",
+     "text": "Its lenders can't see that. They see paperwork.",
+     "start": 142,
+     "end": 219
+    }
+   ]
+  },
+  {
+   "id": "B",
+   "kind": "clip",
+   "clip": "S02",
+   "from": 233,
+   "frames": 450,
+   "speed": 1.8,
+   "cues": [
+    {
+     "id": "m004",
+     "text": "Daniel runs a credit fund. He'd finance the shipment, but he gets an invoice, not the container.",
+     "start": 242,
+     "end": 411
+    },
+    {
+     "id": "m005",
+     "text": "So he lends blind, or not at all.",
+     "start": 420,
+     "end": 476
+    },
+    {
+     "id": "m006",
+     "text": "The Asian Development Bank puts the trade finance gap at two and a half trillion dollars.",
+     "start": 484,
+     "end": 636
+    }
+   ]
+  },
+  {
+   "id": "C",
+   "kind": "clip",
+   "clip": "S04",
+   "from": 683,
+   "frames": 254,
+   "speed": 1.4194,
+   "cues": [
+    {
+     "id": "m007",
+     "text": "CargoFlow lets the cargo's own sensor evidence decide how much capital is available.",
+     "start": 692,
+     "end": 857
+    },
+    {
+     "id": "m008",
+     "text": "On Monad, milestone by milestone.",
+     "start": 865,
+     "end": 923
+    }
+   ]
+  },
+  {
+   "id": "D1",
+   "kind": "clip",
+   "clip": "S05a",
+   "from": 936,
+   "frames": 254,
+   "speed": 1.7703,
+   "cues": [
+    {
+     "id": "m009",
+     "text": "Meera registers the shipment and its policy. Daniel escrows the facility in USDC, paid out in milestones.",
+     "start": 945,
+     "end": 1177
+    }
+   ]
+  },
+  {
+   "id": "D2",
+   "kind": "clip",
+   "clip": "S05b",
+   "from": 1190,
+   "frames": 317,
+   "speed": 1.8,
+   "cues": [
+    {
+     "id": "m010",
+     "text": "The reefer's logger signs every reading. CargoFlow fuses the probes and scores each epoch out of a hundred.",
+     "start": 1199,
+     "end": 1407
+    }
+   ]
+  },
+  {
+   "id": "D3",
+   "kind": "clip",
+   "clip": "S05d",
+   "from": 1507,
+   "frames": 317,
+   "speed": 1.8,
+   "cues": [
+    {
+     "id": "m011",
+     "text": "Off Sri Lanka, probe one climbs to eleven point seven degrees. The score falls to forty-eight, and the facility pauses.",
+     "start": 1516,
+     "end": 1748
+    }
+   ]
+  },
+  {
+   "id": "D4",
+   "kind": "clip",
+   "clip": "S05e",
+   "from": 1824,
+   "frames": 283,
+   "speed": 1.8,
+   "cues": [
+    {
+     "id": "m012",
+     "text": "Once probe two has fresh readings in band, a zero-knowledge proof, checked by the contract, resumes it.",
+     "start": 1833,
+     "end": 2020
+    }
+   ]
+  },
+  {
+   "id": "D5",
+   "kind": "clip",
+   "clip": "S05f",
+   "from": 2107,
+   "frames": 317,
+   "speed": 1.8,
+   "cues": [
+    {
+     "id": "m013",
+     "text": "Wei Lin pays once. Daniel is repaid with his fee, Meera gets the rest, and the bill of lading moves with the money.",
+     "start": 2116,
+     "end": 2320
+    }
+   ]
+  },
+  {
+   "id": "E",
+   "kind": "notes",
+   "clip": null,
+   "from": 2424,
+   "frames": 737,
+   "speed": 1.0,
+   "cues": [
+    {
+     "id": "m014",
+     "text": "New on Monad: Cargo Notes.",
+     "start": 2433,
+     "end": 2481
+    },
+    {
+     "id": "m015",
+     "text": "Daniel's position is now an asset, marked on chain to the cargo's latest evidence.",
+     "start": 2490,
+     "end": 2645
+    },
+    {
+     "id": "m016",
+     "text": "Undrawn cash counts at par. The drawn part is discounted as the score falls, and more while paused.",
+     "start": 2654,
+     "end": 2846
+    },
+    {
+     "id": "m017",
+     "text": "Asks and bids meet on an order book. A trade moves the note, and settlement pays whoever holds it.",
+     "start": 2854,
+     "end": 3026
+    },
+    {
+     "id": "m018",
+     "text": "With four-hundred-millisecond blocks, every mark stays live.",
+     "start": 3034,
+     "end": 3137
+    }
+   ]
+  },
+  {
+   "id": "F",
+   "kind": "demo",
+   "clip": null,
+   "from": 3161,
+   "frames": 836,
+   "speed": 1.0,
+   "cues": [
+    {
+     "id": "m019",
+     "text": "This is the live app on Monad testnet.",
+     "start": 3170,
+     "end": 3229
+    },
+    {
+     "id": "m020",
+     "text": "The fleet. A settled shipment, with every epoch, release, pause and proof linked to its transaction.",
+     "start": 3237,
+     "end": 3405
+    },
+    {
+     "id": "m021",
+     "text": "The Cargo Notes page reads the chain every block: an active note at its mark, a paused one with its haircut.",
+     "start": 3413,
+     "end": 3614
+    },
+    {
+     "id": "m022",
+     "text": "Below, a note wrapped as a token trades on Kuru, and every fill is indexed by Envio.",
+     "start": 3622,
+     "end": 3800
+    },
+    {
+     "id": "m023",
+     "text": "On MonadVision: the proof that resumed the facility, and the settlement that paid the note holder.",
+     "start": 3808,
+     "end": 3970
+    }
+   ]
+  },
+  {
+   "id": "G",
+   "kind": "proofs",
+   "clip": null,
+   "from": 3997,
+   "frames": 727,
+   "speed": 1.0,
+   "cues": [
+    {
+     "id": "m024",
+     "text": "An AI agent can trade notes too.",
+     "start": 4006,
+     "end": 4066
+    },
+    {
+     "id": "m025",
+     "text": "Our MetaMask Agent Wallet plugin refuses a paused note, then buys an active one after the owner approves by email.",
+     "start": 4074,
+     "end": 4301
+    },
+    {
+     "id": "m026",
+     "text": "On Kuru, the wrapped note gets its own spot market, and a market buy fills on chain.",
+     "start": 4310,
+     "end": 4465
+    },
+    {
+     "id": "m027",
+     "text": "Envio's HyperIndex serves the market history, and Alchemy is the primary Monad RPC behind the API.",
+     "start": 4474,
+     "end": 4697
+    }
+   ]
+  },
+  {
+   "id": "H",
+   "kind": "outro",
+   "clip": null,
+   "from": 4724,
+   "frames": 334,
+   "speed": 1.0,
+   "cues": [
+    {
+     "id": "m028",
+     "text": "Eleven contracts, source-verified. Three hundred seventy-nine contract tests.",
+     "start": 4733,
+     "end": 4877
+    },
+    {
+     "id": "m029",
+     "text": "CargoFlow. Capital that moves with your cargo.",
+     "start": 4886,
+     "end": 4968
+    }
+   ]
+  }
+ ]
+}
