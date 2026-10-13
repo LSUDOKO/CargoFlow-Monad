@@ -1,0 +1,205 @@
+[
+ {
+  "id": "m001",
+  "scene": "A",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "This reefer carries vaccines to Singapore."
+ },
+ {
+  "id": "m002",
+  "scene": "A",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "It's at five point two degrees."
+ },
+ {
+  "id": "m003",
+  "scene": "A",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "Its lenders can't see that. They see paperwork."
+ },
+ {
+  "id": "m004",
+  "scene": "B",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "Daniel runs a credit fund. He'd finance the shipment, but he gets an invoice, not the container."
+ },
+ {
+  "id": "m005",
+  "scene": "B",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "So he lends blind, or not at all."
+ },
+ {
+  "id": "m006",
+  "scene": "B",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "The Asian Development Bank puts the trade finance gap at two and a half trillion dollars."
+ },
+ {
+  "id": "m007",
+  "scene": "C",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "CargoFlow lets the cargo's own sensor evidence decide how much capital is available."
+ },
+ {
+  "id": "m008",
+  "scene": "C",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "On Monad, milestone by milestone."
+ },
+ {
+  "id": "m009",
+  "scene": "D1",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "Meera registers the shipment and its policy. Daniel escrows the facility in USDC, paid out in milestones."
+ },
+ {
+  "id": "m010",
+  "scene": "D2",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "The reefer's logger signs every reading. CargoFlow fuses the probes and scores each epoch out of a hundred."
+ },
+ {
+  "id": "m011",
+  "scene": "D3",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "Off Sri Lanka, probe one climbs to eleven point seven degrees. The score falls to forty-eight, and the facility pauses."
+ },
+ {
+  "id": "m012",
+  "scene": "D4",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "Once probe two has fresh readings in band, a zero-knowledge proof, checked by the contract, resumes it."
+ },
+ {
+  "id": "m013",
+  "scene": "D5",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "Wei Lin pays once. Daniel is repaid with his fee, Meera gets the rest, and the bill of lading moves with the money."
+ },
+ {
+  "id": "m014",
+  "scene": "E",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "New on Monad: Cargo Notes."
+ },
+ {
+  "id": "m015",
+  "scene": "E",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "Daniel's position is now an asset, marked on chain to the cargo's latest evidence."
+ },
+ {
+  "id": "m016",
+  "scene": "E",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "Undrawn cash counts at par. The drawn part is discounted as the score falls, and more while paused."
+ },
+ {
+  "id": "m017",
+  "scene": "E",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "Asks and bids meet on an order book. A trade moves the note, and settlement pays whoever holds it."
+ },
+ {
+  "id": "m018",
+  "scene": "E",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "With four-hundred-millisecond blocks, every mark stays live."
+ },
+ {
+  "id": "m019",
+  "scene": "F",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "This is the live app on Monad testnet."
+ },
+ {
+  "id": "m020",
+  "scene": "F",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "The fleet. A settled shipment, with every epoch, release, pause and proof linked to its transaction."
+ },
+ {
+  "id": "m021",
+  "scene": "F",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "The Cargo Notes page reads the chain every block: an active note at its mark, a paused one with its haircut."
+ },
+ {
+  "id": "m022",
+  "scene": "F",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "Below, a note wrapped as a token trades on Kuru, and every fill is indexed by Envio."
+ },
+ {
+  "id": "m023",
+  "scene": "F",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "On MonadVision: the proof that resumed the facility, and the settlement that paid the note holder."
+ },
+ {
+  "id": "m024",
+  "scene": "G",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "An AI agent can trade notes too."
+ },
+ {
+  "id": "m025",
+  "scene": "G",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "Our MetaMask Agent Wallet plugin refuses a paused note, then buys an active one after the owner approves by email."
+ },
+ {
+  "id": "m026",
+  "scene": "G",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "On Kuru, the wrapped note gets its own spot market, and a market buy fills on chain."
+ },
+ {
+  "id": "m027",
+  "scene": "G",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "Envio's HyperIndex serves the market history, and Alchemy is the primary Monad RPC behind the API."
+ },
+ {
+  "id": "m028",
+  "scene": "H",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "Eleven contracts, source-verified. Three hundred seventy-nine contract tests."
+ },
+ {
+  "id": "m029",
+  "scene": "H",
+  "startMs": 0,
+  "endMs": 0,
+  "text": "CargoFlow. Capital that moves with your cargo."
+ }
+]

@@ -1,0 +1,2342 @@
+[
+{
+"word": "This",
+"startMs": 329,
+"endMs": 420,
+"cue": "m001"
+},
+{
+"word": "reefer",
+"startMs": 420,
+"endMs": 760,
+"cue": "m001"
+},
+{
+"word": "carries",
+"startMs": 760,
+"endMs": 1040,
+"cue": "m001"
+},
+{
+"word": "vaccines",
+"startMs": 1040,
+"endMs": 1480,
+"cue": "m001"
+},
+{
+"word": "to",
+"startMs": 1480,
+"endMs": 1820,
+"cue": "m001"
+},
+{
+"word": "Singapore.",
+"startMs": 1820,
+"endMs": 2510,
+"cue": "m001"
+},
+{
+"word": "It's",
+"startMs": 2882,
+"endMs": 3002,
+"cue": "m002"
+},
+{
+"word": "at",
+"startMs": 3002,
+"endMs": 3062,
+"cue": "m002"
+},
+{
+"word": "five",
+"startMs": 3062,
+"endMs": 3282,
+"cue": "m002"
+},
+{
+"word": "point",
+"startMs": 3282,
+"endMs": 3582,
+"cue": "m002"
+},
+{
+"word": "two",
+"startMs": 3582,
+"endMs": 3802,
+"cue": "m002"
+},
+{
+"word": "degrees.",
+"startMs": 3802,
+"endMs": 4403,
+"cue": "m002"
+},
+{
+"word": "Its",
+"startMs": 4762,
+"endMs": 4863,
+"cue": "m003"
+},
+{
+"word": "lenders",
+"startMs": 4863,
+"endMs": 5082,
+"cue": "m003"
+},
+{
+"word": "can't",
+"startMs": 5082,
+"endMs": 5582,
+"cue": "m003"
+},
+{
+"word": "see",
+"startMs": 5582,
+"endMs": 5722,
+"cue": "m003"
+},
+{
+"word": "that.",
+"startMs": 5722,
+"endMs": 6023,
+"cue": "m003"
+},
+{
+"word": "They",
+"startMs": 6162,
+"endMs": 6263,
+"cue": "m003"
+},
+{
+"word": "see",
+"startMs": 6263,
+"endMs": 6483,
+"cue": "m003"
+},
+{
+"word": "paperwork.",
+"startMs": 6483,
+"endMs": 7222,
+"cue": "m003"
+},
+{
+"word": "Daniel",
+"startMs": 8082,
+"endMs": 8353,
+"cue": "m004"
+},
+{
+"word": "runs",
+"startMs": 8353,
+"endMs": 8693,
+"cue": "m004"
+},
+{
+"word": "a",
+"startMs": 8693,
+"endMs": 8953,
+"cue": "m004"
+},
+{
+"word": "credit",
+"startMs": 8953,
+"endMs": 9232,
+"cue": "m004"
+},
+{
+"word": "fund.",
+"startMs": 9232,
+"endMs": 9843,
+"cue": "m004"
+},
+{
+"word": "He'd",
+"startMs": 10162,
+"endMs": 10253,
+"cue": "m004"
+},
+{
+"word": "finance",
+"startMs": 10253,
+"endMs": 10472,
+"cue": "m004"
+},
+{
+"word": "the",
+"startMs": 10472,
+"endMs": 10892,
+"cue": "m004"
+},
+{
+"word": "shipment,",
+"startMs": 10892,
+"endMs": 11412,
+"cue": "m004"
+},
+{
+"word": "but",
+"startMs": 11482,
+"endMs": 11533,
+"cue": "m004"
+},
+{
+"word": "he",
+"startMs": 11533,
+"endMs": 11633,
+"cue": "m004"
+},
+{
+"word": "gets",
+"startMs": 11633,
+"endMs": 11812,
+"cue": "m004"
+},
+{
+"word": "an",
+"startMs": 11812,
+"endMs": 11992,
+"cue": "m004"
+},
+{
+"word": "invoice,",
+"startMs": 11992,
+"endMs": 12253,
+"cue": "m004"
+},
+{
+"word": "not",
+"startMs": 12652,
+"endMs": 12793,
+"cue": "m004"
+},
+{
+"word": "the",
+"startMs": 12793,
+"endMs": 12953,
+"cue": "m004"
+},
+{
+"word": "container.",
+"startMs": 12953,
+"endMs": 13623,
+"cue": "m004"
+},
+{
+"word": "So",
+"startMs": 14005,
+"endMs": 14105,
+"cue": "m005"
+},
+{
+"word": "he",
+"startMs": 14105,
+"endMs": 14185,
+"cue": "m005"
+},
+{
+"word": "lends",
+"startMs": 14185,
+"endMs": 14366,
+"cue": "m005"
+},
+{
+"word": "blind,",
+"startMs": 14366,
+"endMs": 14745,
+"cue": "m005"
+},
+{
+"word": "or",
+"startMs": 15065,
+"endMs": 15126,
+"cue": "m005"
+},
+{
+"word": "not",
+"startMs": 15126,
+"endMs": 15265,
+"cue": "m005"
+},
+{
+"word": "at",
+"startMs": 15265,
+"endMs": 15405,
+"cue": "m005"
+},
+{
+"word": "all.",
+"startMs": 15405,
+"endMs": 15716,
+"cue": "m005"
+},
+{
+"word": "The",
+"startMs": 16183,
+"endMs": 16243,
+"cue": "m006"
+},
+{
+"word": "Asian",
+"startMs": 16243,
+"endMs": 16483,
+"cue": "m006"
+},
+{
+"word": "Development",
+"startMs": 16483,
+"endMs": 16963,
+"cue": "m006"
+},
+{
+"word": "Bank",
+"startMs": 16963,
+"endMs": 17593,
+"cue": "m006"
+},
+{
+"word": "puts",
+"startMs": 17653,
+"endMs": 17743,
+"cue": "m006"
+},
+{
+"word": "the",
+"startMs": 17743,
+"endMs": 17943,
+"cue": "m006"
+},
+{
+"word": "trade",
+"startMs": 17943,
+"endMs": 18203,
+"cue": "m006"
+},
+{
+"word": "finance",
+"startMs": 18203,
+"endMs": 18643,
+"cue": "m006"
+},
+{
+"word": "gap",
+"startMs": 18643,
+"endMs": 19043,
+"cue": "m006"
+},
+{
+"word": "at",
+"startMs": 19043,
+"endMs": 19353,
+"cue": "m006"
+},
+{
+"word": "two",
+"startMs": 19433,
+"endMs": 19583,
+"cue": "m006"
+},
+{
+"word": "and",
+"startMs": 19583,
+"endMs": 19743,
+"cue": "m006"
+},
+{
+"word": "a",
+"startMs": 19743,
+"endMs": 19803,
+"cue": "m006"
+},
+{
+"word": "half",
+"startMs": 19803,
+"endMs": 20003,
+"cue": "m006"
+},
+{
+"word": "trillion",
+"startMs": 20003,
+"endMs": 20323,
+"cue": "m006"
+},
+{
+"word": "dollars.",
+"startMs": 20323,
+"endMs": 21143,
+"cue": "m006"
+},
+{
+"word": "CargoFlow",
+"startMs": 23083,
+"endMs": 23653,
+"cue": "m007"
+},
+{
+"word": "lets",
+"startMs": 23653,
+"endMs": 24033,
+"cue": "m007"
+},
+{
+"word": "the",
+"startMs": 24033,
+"endMs": 24253,
+"cue": "m007"
+},
+{
+"word": "cargo's",
+"startMs": 24253,
+"endMs": 24853,
+"cue": "m007"
+},
+{
+"word": "own",
+"startMs": 24853,
+"endMs": 25093,
+"cue": "m007"
+},
+{
+"word": "sensor",
+"startMs": 25093,
+"endMs": 25453,
+"cue": "m007"
+},
+{
+"word": "evidence",
+"startMs": 25453,
+"endMs": 25933,
+"cue": "m007"
+},
+{
+"word": "decide",
+"startMs": 25933,
+"endMs": 26353,
+"cue": "m007"
+},
+{
+"word": "how",
+"startMs": 26353,
+"endMs": 26893,
+"cue": "m007"
+},
+{
+"word": "much",
+"startMs": 26893,
+"endMs": 27113,
+"cue": "m007"
+},
+{
+"word": "capital",
+"startMs": 27113,
+"endMs": 27453,
+"cue": "m007"
+},
+{
+"word": "is",
+"startMs": 27453,
+"endMs": 27833,
+"cue": "m007"
+},
+{
+"word": "available.",
+"startMs": 27833,
+"endMs": 28463,
+"cue": "m007"
+},
+{
+"word": "On",
+"startMs": 28867,
+"endMs": 28937,
+"cue": "m008"
+},
+{
+"word": "Monad,",
+"startMs": 28937,
+"endMs": 29257,
+"cue": "m008"
+},
+{
+"word": "milestone",
+"startMs": 29377,
+"endMs": 29657,
+"cue": "m008"
+},
+{
+"word": "by",
+"startMs": 29657,
+"endMs": 29937,
+"cue": "m008"
+},
+{
+"word": "milestone.",
+"startMs": 29937,
+"endMs": 30637,
+"cue": "m008"
+},
+{
+"word": "Meera",
+"startMs": 31537,
+"endMs": 31807,
+"cue": "m009"
+},
+{
+"word": "registers",
+"startMs": 31807,
+"endMs": 32247,
+"cue": "m009"
+},
+{
+"word": "the",
+"startMs": 32247,
+"endMs": 32627,
+"cue": "m009"
+},
+{
+"word": "shipment",
+"startMs": 32627,
+"endMs": 32907,
+"cue": "m009"
+},
+{
+"word": "and",
+"startMs": 32907,
+"endMs": 33347,
+"cue": "m009"
+},
+{
+"word": "its",
+"startMs": 33347,
+"endMs": 33507,
+"cue": "m009"
+},
+{
+"word": "policy.",
+"startMs": 33507,
+"endMs": 34267,
+"cue": "m009"
+},
+{
+"word": "Daniel",
+"startMs": 34627,
+"endMs": 34867,
+"cue": "m009"
+},
+{
+"word": "escrows",
+"startMs": 34867,
+"endMs": 35427,
+"cue": "m009"
+},
+{
+"word": "the",
+"startMs": 35427,
+"endMs": 35647,
+"cue": "m009"
+},
+{
+"word": "facility",
+"startMs": 35647,
+"endMs": 35987,
+"cue": "m009"
+},
+{
+"word": "in",
+"startMs": 35987,
+"endMs": 36367,
+"cue": "m009"
+},
+{
+"word": "USDC,",
+"startMs": 36367,
+"endMs": 37657,
+"cue": "m009"
+},
+{
+"word": "paid",
+"startMs": 37717,
+"endMs": 37807,
+"cue": "m009"
+},
+{
+"word": "out",
+"startMs": 37807,
+"endMs": 38047,
+"cue": "m009"
+},
+{
+"word": "in",
+"startMs": 38047,
+"endMs": 38227,
+"cue": "m009"
+},
+{
+"word": "milestones.",
+"startMs": 38227,
+"endMs": 39167,
+"cue": "m009"
+},
+{
+"word": "The",
+"startMs": 40020,
+"endMs": 40080,
+"cue": "m010"
+},
+{
+"word": "reefer's",
+"startMs": 40080,
+"endMs": 40580,
+"cue": "m010"
+},
+{
+"word": "logger",
+"startMs": 40580,
+"endMs": 40840,
+"cue": "m010"
+},
+{
+"word": "signs",
+"startMs": 40840,
+"endMs": 41200,
+"cue": "m010"
+},
+{
+"word": "every",
+"startMs": 41200,
+"endMs": 41740,
+"cue": "m010"
+},
+{
+"word": "reading.",
+"startMs": 41740,
+"endMs": 42330,
+"cue": "m010"
+},
+{
+"word": "CargoFlow",
+"startMs": 42650,
+"endMs": 43220,
+"cue": "m010"
+},
+{
+"word": "fuses",
+"startMs": 43220,
+"endMs": 43840,
+"cue": "m010"
+},
+{
+"word": "the",
+"startMs": 43840,
+"endMs": 44060,
+"cue": "m010"
+},
+{
+"word": "probes",
+"startMs": 44060,
+"endMs": 44340,
+"cue": "m010"
+},
+{
+"word": "and",
+"startMs": 44340,
+"endMs": 44660,
+"cue": "m010"
+},
+{
+"word": "scores",
+"startMs": 44660,
+"endMs": 44920,
+"cue": "m010"
+},
+{
+"word": "each",
+"startMs": 44920,
+"endMs": 45400,
+"cue": "m010"
+},
+{
+"word": "epoch",
+"startMs": 45400,
+"endMs": 45760,
+"cue": "m010"
+},
+{
+"word": "out",
+"startMs": 45760,
+"endMs": 46140,
+"cue": "m010"
+},
+{
+"word": "of",
+"startMs": 46140,
+"endMs": 46240,
+"cue": "m010"
+},
+{
+"word": "a",
+"startMs": 46240,
+"endMs": 46300,
+"cue": "m010"
+},
+{
+"word": "hundred.",
+"startMs": 46300,
+"endMs": 46810,
+"cue": "m010"
+},
+{
+"word": "Off",
+"startMs": 50555,
+"endMs": 50715,
+"cue": "m011"
+},
+{
+"word": "Sri",
+"startMs": 50715,
+"endMs": 50995,
+"cue": "m011"
+},
+{
+"word": "Lanka,",
+"startMs": 50995,
+"endMs": 51565,
+"cue": "m011"
+},
+{
+"word": "probe",
+"startMs": 51635,
+"endMs": 51755,
+"cue": "m011"
+},
+{
+"word": "one",
+"startMs": 51755,
+"endMs": 52175,
+"cue": "m011"
+},
+{
+"word": "climbs",
+"startMs": 52175,
+"endMs": 52455,
+"cue": "m011"
+},
+{
+"word": "to",
+"startMs": 52455,
+"endMs": 52875,
+"cue": "m011"
+},
+{
+"word": "eleven",
+"startMs": 52875,
+"endMs": 53135,
+"cue": "m011"
+},
+{
+"word": "point",
+"startMs": 53135,
+"endMs": 53555,
+"cue": "m011"
+},
+{
+"word": "seven",
+"startMs": 53555,
+"endMs": 54055,
+"cue": "m011"
+},
+{
+"word": "degrees.",
+"startMs": 54055,
+"endMs": 54745,
+"cue": "m011"
+},
+{
+"word": "The",
+"startMs": 55065,
+"endMs": 55115,
+"cue": "m011"
+},
+{
+"word": "score",
+"startMs": 55115,
+"endMs": 55355,
+"cue": "m011"
+},
+{
+"word": "falls",
+"startMs": 55355,
+"endMs": 55755,
+"cue": "m011"
+},
+{
+"word": "to",
+"startMs": 55755,
+"endMs": 56015,
+"cue": "m011"
+},
+{
+"word": "forty-eight,",
+"startMs": 56015,
+"endMs": 56695,
+"cue": "m011"
+},
+{
+"word": "and",
+"startMs": 56695,
+"endMs": 56915,
+"cue": "m011"
+},
+{
+"word": "the",
+"startMs": 56915,
+"endMs": 57015,
+"cue": "m011"
+},
+{
+"word": "facility",
+"startMs": 57015,
+"endMs": 57275,
+"cue": "m011"
+},
+{
+"word": "pauses.",
+"startMs": 57275,
+"endMs": 58225,
+"cue": "m011"
+},
+{
+"word": "Once",
+"startMs": 61121,
+"endMs": 61331,
+"cue": "m012"
+},
+{
+"word": "probe",
+"startMs": 61331,
+"endMs": 61591,
+"cue": "m012"
+},
+{
+"word": "two",
+"startMs": 61591,
+"endMs": 61891,
+"cue": "m012"
+},
+{
+"word": "has",
+"startMs": 61891,
+"endMs": 62171,
+"cue": "m012"
+},
+{
+"word": "fresh",
+"startMs": 62171,
+"endMs": 62411,
+"cue": "m012"
+},
+{
+"word": "readings",
+"startMs": 62411,
+"endMs": 62751,
+"cue": "m012"
+},
+{
+"word": "in",
+"startMs": 62751,
+"endMs": 63151,
+"cue": "m012"
+},
+{
+"word": "band,",
+"startMs": 63151,
+"endMs": 63671,
+"cue": "m012"
+},
+{
+"word": "a",
+"startMs": 63861,
+"endMs": 63911,
+"cue": "m012"
+},
+{
+"word": "zero-knowledge",
+"startMs": 63911,
+"endMs": 64571,
+"cue": "m012"
+},
+{
+"word": "proof,",
+"startMs": 64571,
+"endMs": 65011,
+"cue": "m012"
+},
+{
+"word": "checked",
+"startMs": 65011,
+"endMs": 65511,
+"cue": "m012"
+},
+{
+"word": "by",
+"startMs": 65571,
+"endMs": 65731,
+"cue": "m012"
+},
+{
+"word": "the",
+"startMs": 65731,
+"endMs": 65851,
+"cue": "m012"
+},
+{
+"word": "contract,",
+"startMs": 65851,
+"endMs": 66171,
+"cue": "m012"
+},
+{
+"word": "resumes",
+"startMs": 66171,
+"endMs": 66461,
+"cue": "m012"
+},
+{
+"word": "it.",
+"startMs": 66521,
+"endMs": 67201,
+"cue": "m012"
+},
+{
+"word": "Wei",
+"startMs": 70565,
+"endMs": 70655,
+"cue": "m013"
+},
+{
+"word": "Lin",
+"startMs": 70655,
+"endMs": 70915,
+"cue": "m013"
+},
+{
+"word": "pays",
+"startMs": 70915,
+"endMs": 71295,
+"cue": "m013"
+},
+{
+"word": "once.",
+"startMs": 71295,
+"endMs": 71965,
+"cue": "m013"
+},
+{
+"word": "Daniel",
+"startMs": 72275,
+"endMs": 72535,
+"cue": "m013"
+},
+{
+"word": "is",
+"startMs": 72535,
+"endMs": 72755,
+"cue": "m013"
+},
+{
+"word": "repaid",
+"startMs": 72755,
+"endMs": 73055,
+"cue": "m013"
+},
+{
+"word": "with",
+"startMs": 73055,
+"endMs": 73355,
+"cue": "m013"
+},
+{
+"word": "his",
+"startMs": 73355,
+"endMs": 73475,
+"cue": "m013"
+},
+{
+"word": "fee,",
+"startMs": 73475,
+"endMs": 73755,
+"cue": "m013"
+},
+{
+"word": "Meera",
+"startMs": 73995,
+"endMs": 74175,
+"cue": "m013"
+},
+{
+"word": "gets",
+"startMs": 74175,
+"endMs": 74415,
+"cue": "m013"
+},
+{
+"word": "the",
+"startMs": 74415,
+"endMs": 74615,
+"cue": "m013"
+},
+{
+"word": "rest,",
+"startMs": 74615,
+"endMs": 75105,
+"cue": "m013"
+},
+{
+"word": "and",
+"startMs": 75175,
+"endMs": 75255,
+"cue": "m013"
+},
+{
+"word": "the",
+"startMs": 75255,
+"endMs": 75335,
+"cue": "m013"
+},
+{
+"word": "bill",
+"startMs": 75335,
+"endMs": 75535,
+"cue": "m013"
+},
+{
+"word": "of",
+"startMs": 75535,
+"endMs": 75775,
+"cue": "m013"
+},
+{
+"word": "lading",
+"startMs": 75775,
+"endMs": 76055,
+"cue": "m013"
+},
+{
+"word": "moves",
+"startMs": 76055,
+"endMs": 76375,
+"cue": "m013"
+},
+{
+"word": "with",
+"startMs": 76375,
+"endMs": 76695,
+"cue": "m013"
+},
+{
+"word": "the",
+"startMs": 76695,
+"endMs": 76815,
+"cue": "m013"
+},
+{
+"word": "money.",
+"startMs": 76815,
+"endMs": 77235,
+"cue": "m013"
+},
+{
+"word": "New",
+"startMs": 81121,
+"endMs": 81211,
+"cue": "m014"
+},
+{
+"word": "on",
+"startMs": 81211,
+"endMs": 81351,
+"cue": "m014"
+},
+{
+"word": "Monad:",
+"startMs": 81351,
+"endMs": 81831,
+"cue": "m014"
+},
+{
+"word": "Cargo",
+"startMs": 81891,
+"endMs": 82091,
+"cue": "m014"
+},
+{
+"word": "Notes.",
+"startMs": 82091,
+"endMs": 82671,
+"cue": "m014"
+},
+{
+"word": "Daniel's",
+"startMs": 83022,
+"endMs": 83412,
+"cue": "m015"
+},
+{
+"word": "position",
+"startMs": 83412,
+"endMs": 83672,
+"cue": "m015"
+},
+{
+"word": "is",
+"startMs": 83672,
+"endMs": 84052,
+"cue": "m015"
+},
+{
+"word": "now",
+"startMs": 84052,
+"endMs": 84312,
+"cue": "m015"
+},
+{
+"word": "an",
+"startMs": 84312,
+"endMs": 84532,
+"cue": "m015"
+},
+{
+"word": "asset,",
+"startMs": 84532,
+"endMs": 85082,
+"cue": "m015"
+},
+{
+"word": "marked",
+"startMs": 85332,
+"endMs": 85562,
+"cue": "m015"
+},
+{
+"word": "on",
+"startMs": 85622,
+"endMs": 85732,
+"cue": "m015"
+},
+{
+"word": "chain",
+"startMs": 85732,
+"endMs": 86112,
+"cue": "m015"
+},
+{
+"word": "to",
+"startMs": 86112,
+"endMs": 86412,
+"cue": "m015"
+},
+{
+"word": "the",
+"startMs": 86412,
+"endMs": 86492,
+"cue": "m015"
+},
+{
+"word": "cargo's",
+"startMs": 86492,
+"endMs": 87032,
+"cue": "m015"
+},
+{
+"word": "latest",
+"startMs": 87032,
+"endMs": 87272,
+"cue": "m015"
+},
+{
+"word": "evidence.",
+"startMs": 87272,
+"endMs": 88122,
+"cue": "m015"
+},
+{
+"word": "Undrawn",
+"startMs": 88466,
+"endMs": 88876,
+"cue": "m016"
+},
+{
+"word": "cash",
+"startMs": 88876,
+"endMs": 89256,
+"cue": "m016"
+},
+{
+"word": "counts",
+"startMs": 89256,
+"endMs": 89816,
+"cue": "m016"
+},
+{
+"word": "at",
+"startMs": 89816,
+"endMs": 89996,
+"cue": "m016"
+},
+{
+"word": "par.",
+"startMs": 89996,
+"endMs": 90516,
+"cue": "m016"
+},
+{
+"word": "The",
+"startMs": 90786,
+"endMs": 90836,
+"cue": "m016"
+},
+{
+"word": "drawn",
+"startMs": 90836,
+"endMs": 91036,
+"cue": "m016"
+},
+{
+"word": "part",
+"startMs": 91036,
+"endMs": 91356,
+"cue": "m016"
+},
+{
+"word": "is",
+"startMs": 91356,
+"endMs": 91656,
+"cue": "m016"
+},
+{
+"word": "discounted",
+"startMs": 91656,
+"endMs": 91996,
+"cue": "m016"
+},
+{
+"word": "as",
+"startMs": 91996,
+"endMs": 92456,
+"cue": "m016"
+},
+{
+"word": "the",
+"startMs": 92456,
+"endMs": 92616,
+"cue": "m016"
+},
+{
+"word": "score",
+"startMs": 92616,
+"endMs": 92856,
+"cue": "m016"
+},
+{
+"word": "falls,",
+"startMs": 92856,
+"endMs": 93336,
+"cue": "m016"
+},
+{
+"word": "and",
+"startMs": 93336,
+"endMs": 93636,
+"cue": "m016"
+},
+{
+"word": "more",
+"startMs": 93636,
+"endMs": 93816,
+"cue": "m016"
+},
+{
+"word": "while",
+"startMs": 93816,
+"endMs": 94076,
+"cue": "m016"
+},
+{
+"word": "paused.",
+"startMs": 94076,
+"endMs": 94786,
+"cue": "m016"
+},
+{
+"word": "Asks",
+"startMs": 95166,
+"endMs": 95536,
+"cue": "m017"
+},
+{
+"word": "and",
+"startMs": 95536,
+"endMs": 95696,
+"cue": "m017"
+},
+{
+"word": "bids",
+"startMs": 95696,
+"endMs": 95936,
+"cue": "m017"
+},
+{
+"word": "meet",
+"startMs": 95936,
+"endMs": 96336,
+"cue": "m017"
+},
+{
+"word": "on",
+"startMs": 96336,
+"endMs": 96576,
+"cue": "m017"
+},
+{
+"word": "an",
+"startMs": 96576,
+"endMs": 96656,
+"cue": "m017"
+},
+{
+"word": "order",
+"startMs": 96656,
+"endMs": 96816,
+"cue": "m017"
+},
+{
+"word": "book.",
+"startMs": 96816,
+"endMs": 97296,
+"cue": "m017"
+},
+{
+"word": "A",
+"startMs": 97566,
+"endMs": 97616,
+"cue": "m017"
+},
+{
+"word": "trade",
+"startMs": 97616,
+"endMs": 97876,
+"cue": "m017"
+},
+{
+"word": "moves",
+"startMs": 97876,
+"endMs": 98256,
+"cue": "m017"
+},
+{
+"word": "the",
+"startMs": 98256,
+"endMs": 98536,
+"cue": "m017"
+},
+{
+"word": "note,",
+"startMs": 98536,
+"endMs": 98756,
+"cue": "m017"
+},
+{
+"word": "and",
+"startMs": 98936,
+"endMs": 98976,
+"cue": "m017"
+},
+{
+"word": "settlement",
+"startMs": 98976,
+"endMs": 99256,
+"cue": "m017"
+},
+{
+"word": "pays",
+"startMs": 99256,
+"endMs": 99616,
+"cue": "m017"
+},
+{
+"word": "whoever",
+"startMs": 99616,
+"endMs": 99956,
+"cue": "m017"
+},
+{
+"word": "holds",
+"startMs": 99956,
+"endMs": 100436,
+"cue": "m017"
+},
+{
+"word": "it.",
+"startMs": 100436,
+"endMs": 100776,
+"cue": "m017"
+},
+{
+"word": "With",
+"startMs": 101163,
+"endMs": 101253,
+"cue": "m018"
+},
+{
+"word": "four-hundred-millisecond",
+"startMs": 101253,
+"endMs": 102453,
+"cue": "m018"
+},
+{
+"word": "blocks,",
+"startMs": 102453,
+"endMs": 102993,
+"cue": "m018"
+},
+{
+"word": "every",
+"startMs": 103103,
+"endMs": 103273,
+"cue": "m018"
+},
+{
+"word": "mark",
+"startMs": 103273,
+"endMs": 103493,
+"cue": "m018"
+},
+{
+"word": "stays",
+"startMs": 103493,
+"endMs": 103873,
+"cue": "m018"
+},
+{
+"word": "live.",
+"startMs": 103873,
+"endMs": 104423,
+"cue": "m018"
+},
+{
+"word": "This",
+"startMs": 105698,
+"endMs": 105788,
+"cue": "m019"
+},
+{
+"word": "is",
+"startMs": 105788,
+"endMs": 105908,
+"cue": "m019"
+},
+{
+"word": "the",
+"startMs": 105908,
+"endMs": 106028,
+"cue": "m019"
+},
+{
+"word": "live",
+"startMs": 106028,
+"endMs": 106208,
+"cue": "m019"
+},
+{
+"word": "app",
+"startMs": 106208,
+"endMs": 106448,
+"cue": "m019"
+},
+{
+"word": "on",
+"startMs": 106448,
+"endMs": 106628,
+"cue": "m019"
+},
+{
+"word": "Monad",
+"startMs": 106628,
+"endMs": 106968,
+"cue": "m019"
+},
+{
+"word": "testnet.",
+"startMs": 106968,
+"endMs": 107478,
+"cue": "m019"
+},
+{
+"word": "The",
+"startMs": 107941,
+"endMs": 107991,
+"cue": "m020"
+},
+{
+"word": "fleet.",
+"startMs": 107991,
+"endMs": 108371,
+"cue": "m020"
+},
+{
+"word": "A",
+"startMs": 108491,
+"endMs": 108551,
+"cue": "m020"
+},
+{
+"word": "settled",
+"startMs": 108551,
+"endMs": 108831,
+"cue": "m020"
+},
+{
+"word": "shipment,",
+"startMs": 108831,
+"endMs": 109211,
+"cue": "m020"
+},
+{
+"word": "with",
+"startMs": 109491,
+"endMs": 109571,
+"cue": "m020"
+},
+{
+"word": "every",
+"startMs": 109571,
+"endMs": 109851,
+"cue": "m020"
+},
+{
+"word": "epoch,",
+"startMs": 109851,
+"endMs": 110251,
+"cue": "m020"
+},
+{
+"word": "release,",
+"startMs": 110611,
+"endMs": 111151,
+"cue": "m020"
+},
+{
+"word": "pause",
+"startMs": 111221,
+"endMs": 111371,
+"cue": "m020"
+},
+{
+"word": "and",
+"startMs": 111371,
+"endMs": 111731,
+"cue": "m020"
+},
+{
+"word": "proof",
+"startMs": 111731,
+"endMs": 111951,
+"cue": "m020"
+},
+{
+"word": "linked",
+"startMs": 111951,
+"endMs": 112381,
+"cue": "m020"
+},
+{
+"word": "to",
+"startMs": 112441,
+"endMs": 112531,
+"cue": "m020"
+},
+{
+"word": "its",
+"startMs": 112531,
+"endMs": 112651,
+"cue": "m020"
+},
+{
+"word": "transaction.",
+"startMs": 112651,
+"endMs": 113431,
+"cue": "m020"
+},
+{
+"word": "The",
+"startMs": 113820,
+"endMs": 113880,
+"cue": "m021"
+},
+{
+"word": "Cargo",
+"startMs": 113880,
+"endMs": 114140,
+"cue": "m021"
+},
+{
+"word": "Notes",
+"startMs": 114140,
+"endMs": 114580,
+"cue": "m021"
+},
+{
+"word": "page",
+"startMs": 114580,
+"endMs": 114940,
+"cue": "m021"
+},
+{
+"word": "reads",
+"startMs": 114940,
+"endMs": 115420,
+"cue": "m021"
+},
+{
+"word": "the",
+"startMs": 115420,
+"endMs": 115700,
+"cue": "m021"
+},
+{
+"word": "chain",
+"startMs": 115700,
+"endMs": 115960,
+"cue": "m021"
+},
+{
+"word": "every",
+"startMs": 115960,
+"endMs": 116380,
+"cue": "m021"
+},
+{
+"word": "block:",
+"startMs": 116380,
+"endMs": 116970,
+"cue": "m021"
+},
+{
+"word": "an",
+"startMs": 117230,
+"endMs": 117280,
+"cue": "m021"
+},
+{
+"word": "active",
+"startMs": 117280,
+"endMs": 117560,
+"cue": "m021"
+},
+{
+"word": "note",
+"startMs": 117630,
+"endMs": 117940,
+"cue": "m021"
+},
+{
+"word": "at",
+"startMs": 117940,
+"endMs": 118120,
+"cue": "m021"
+},
+{
+"word": "its",
+"startMs": 118120,
+"endMs": 118280,
+"cue": "m021"
+},
+{
+"word": "mark,",
+"startMs": 118280,
+"endMs": 118540,
+"cue": "m021"
+},
+{
+"word": "a",
+"startMs": 118800,
+"endMs": 118840,
+"cue": "m021"
+},
+{
+"word": "paused",
+"startMs": 118840,
+"endMs": 119140,
+"cue": "m021"
+},
+{
+"word": "one",
+"startMs": 119140,
+"endMs": 119460,
+"cue": "m021"
+},
+{
+"word": "with",
+"startMs": 119460,
+"endMs": 119640,
+"cue": "m021"
+},
+{
+"word": "its",
+"startMs": 119640,
+"endMs": 119780,
+"cue": "m021"
+},
+{
+"word": "haircut.",
+"startMs": 119780,
+"endMs": 120370,
+"cue": "m021"
+},
+{
+"word": "Below,",
+"startMs": 120787,
+"endMs": 120997,
+"cue": "m022"
+},
+{
+"word": "a",
+"startMs": 121297,
+"endMs": 121317,
+"cue": "m022"
+},
+{
+"word": "note",
+"startMs": 121317,
+"endMs": 121537,
+"cue": "m022"
+},
+{
+"word": "wrapped",
+"startMs": 121537,
+"endMs": 121877,
+"cue": "m022"
+},
+{
+"word": "as",
+"startMs": 121947,
+"endMs": 122057,
+"cue": "m022"
+},
+{
+"word": "a",
+"startMs": 122057,
+"endMs": 122157,
+"cue": "m022"
+},
+{
+"word": "token",
+"startMs": 122157,
+"endMs": 122417,
+"cue": "m022"
+},
+{
+"word": "trades",
+"startMs": 122417,
+"endMs": 122897,
+"cue": "m022"
+},
+{
+"word": "on",
+"startMs": 122897,
+"endMs": 123157,
+"cue": "m022"
+},
+{
+"word": "Kuru,",
+"startMs": 123157,
+"endMs": 123817,
+"cue": "m022"
+},
+{
+"word": "and",
+"startMs": 124027,
+"endMs": 124097,
+"cue": "m022"
+},
+{
+"word": "every",
+"startMs": 124097,
+"endMs": 124377,
+"cue": "m022"
+},
+{
+"word": "fill",
+"startMs": 124377,
+"endMs": 124697,
+"cue": "m022"
+},
+{
+"word": "is",
+"startMs": 124697,
+"endMs": 124917,
+"cue": "m022"
+},
+{
+"word": "indexed",
+"startMs": 124917,
+"endMs": 125337,
+"cue": "m022"
+},
+{
+"word": "by",
+"startMs": 125337,
+"endMs": 125697,
+"cue": "m022"
+},
+{
+"word": "Envio.",
+"startMs": 125697,
+"endMs": 126577,
+"cue": "m022"
+},
+{
+"word": "On",
+"startMs": 126978,
+"endMs": 127128,
+"cue": "m023"
+},
+{
+"word": "MonadVision:",
+"startMs": 127128,
+"endMs": 128148,
+"cue": "m023"
+},
+{
+"word": "the",
+"startMs": 128298,
+"endMs": 128348,
+"cue": "m023"
+},
+{
+"word": "proof",
+"startMs": 128348,
+"endMs": 128608,
+"cue": "m023"
+},
+{
+"word": "that",
+"startMs": 128608,
+"endMs": 128848,
+"cue": "m023"
+},
+{
+"word": "resumed",
+"startMs": 128848,
+"endMs": 129088,
+"cue": "m023"
+},
+{
+"word": "the",
+"startMs": 129088,
+"endMs": 129468,
+"cue": "m023"
+},
+{
+"word": "facility,",
+"startMs": 129468,
+"endMs": 129808,
+"cue": "m023"
+},
+{
+"word": "and",
+"startMs": 129808,
+"endMs": 130228,
+"cue": "m023"
+},
+{
+"word": "the",
+"startMs": 130228,
+"endMs": 130348,
+"cue": "m023"
+},
+{
+"word": "settlement",
+"startMs": 130348,
+"endMs": 130668,
+"cue": "m023"
+},
+{
+"word": "that",
+"startMs": 130668,
+"endMs": 131068,
+"cue": "m023"
+},
+{
+"word": "paid",
+"startMs": 131128,
+"endMs": 131228,
+"cue": "m023"
+},
+{
+"word": "the",
+"startMs": 131228,
+"endMs": 131468,
+"cue": "m023"
+},
+{
+"word": "note",
+"startMs": 131468,
+"endMs": 131648,
+"cue": "m023"
+},
+{
+"word": "holder.",
+"startMs": 131648,
+"endMs": 132248,
+"cue": "m023"
+},
+{
+"word": "An",
+"startMs": 133544,
+"endMs": 133604,
+"cue": "m024"
+},
+{
+"word": "AI",
+"startMs": 133604,
+"endMs": 133904,
+"cue": "m024"
+},
+{
+"word": "agent",
+"startMs": 134224,
+"endMs": 134284,
+"cue": "m024"
+},
+{
+"word": "can",
+"startMs": 134284,
+"endMs": 134444,
+"cue": "m024"
+},
+{
+"word": "trade",
+"startMs": 134444,
+"endMs": 134624,
+"cue": "m024"
+},
+{
+"word": "notes",
+"startMs": 134624,
+"endMs": 134864,
+"cue": "m024"
+},
+{
+"word": "too.",
+"startMs": 134864,
+"endMs": 135444,
+"cue": "m024"
+},
+{
+"word": "Our",
+"startMs": 135829,
+"endMs": 135909,
+"cue": "m025"
+},
+{
+"word": "MetaMask",
+"startMs": 135909,
+"endMs": 136529,
+"cue": "m025"
+},
+{
+"word": "Agent",
+"startMs": 136529,
+"endMs": 136779,
+"cue": "m025"
+},
+{
+"word": "Wallet",
+"startMs": 136839,
+"endMs": 137569,
+"cue": "m025"
+},
+{
+"word": "plugin",
+"startMs": 137649,
+"endMs": 137909,
+"cue": "m025"
+},
+{
+"word": "refuses",
+"startMs": 137909,
+"endMs": 138429,
+"cue": "m025"
+},
+{
+"word": "a",
+"startMs": 138429,
+"endMs": 138769,
+"cue": "m025"
+},
+{
+"word": "paused",
+"startMs": 138769,
+"endMs": 139109,
+"cue": "m025"
+},
+{
+"word": "note,",
+"startMs": 139109,
+"endMs": 139669,
+"cue": "m025"
+},
+{
+"word": "then",
+"startMs": 139859,
+"endMs": 139969,
+"cue": "m025"
+},
+{
+"word": "buys",
+"startMs": 139969,
+"endMs": 140229,
+"cue": "m025"
+},
+{
+"word": "an",
+"startMs": 140229,
+"endMs": 140529,
+"cue": "m025"
+},
+{
+"word": "active",
+"startMs": 140529,
+"endMs": 140809,
+"cue": "m025"
+},
+{
+"word": "one",
+"startMs": 140879,
+"endMs": 141169,
+"cue": "m025"
+},
+{
+"word": "after",
+"startMs": 141169,
+"endMs": 141489,
+"cue": "m025"
+},
+{
+"word": "the",
+"startMs": 141489,
+"endMs": 141649,
+"cue": "m025"
+},
+{
+"word": "owner",
+"startMs": 141649,
+"endMs": 141889,
+"cue": "m025"
+},
+{
+"word": "approves",
+"startMs": 141889,
+"endMs": 142369,
+"cue": "m025"
+},
+{
+"word": "by",
+"startMs": 142369,
+"endMs": 142689,
+"cue": "m025"
+},
+{
+"word": "email.",
+"startMs": 142689,
+"endMs": 143269,
+"cue": "m025"
+},
+{
+"word": "On",
+"startMs": 143682,
+"endMs": 143802,
+"cue": "m026"
+},
+{
+"word": "Kuru,",
+"startMs": 143802,
+"endMs": 144262,
+"cue": "m026"
+},
+{
+"word": "the",
+"startMs": 144482,
+"endMs": 144522,
+"cue": "m026"
+},
+{
+"word": "wrapped",
+"startMs": 144522,
+"endMs": 144722,
+"cue": "m026"
+},
+{
+"word": "note",
+"startMs": 144722,
+"endMs": 145042,
+"cue": "m026"
+},
+{
+"word": "gets",
+"startMs": 145042,
+"endMs": 145302,
+"cue": "m026"
+},
+{
+"word": "its",
+"startMs": 145302,
+"endMs": 145502,
+"cue": "m026"
+},
+{
+"word": "own",
+"startMs": 145502,
+"endMs": 145702,
+"cue": "m026"
+},
+{
+"word": "spot",
+"startMs": 145702,
+"endMs": 146002,
+"cue": "m026"
+},
+{
+"word": "market,",
+"startMs": 146002,
+"endMs": 146612,
+"cue": "m026"
+},
+{
+"word": "and",
+"startMs": 146782,
+"endMs": 146842,
+"cue": "m026"
+},
+{
+"word": "a",
+"startMs": 146842,
+"endMs": 146902,
+"cue": "m026"
+},
+{
+"word": "market",
+"startMs": 146902,
+"endMs": 147202,
+"cue": "m026"
+},
+{
+"word": "buy",
+"startMs": 147202,
+"endMs": 147462,
+"cue": "m026"
+},
+{
+"word": "fills",
+"startMs": 147462,
+"endMs": 147862,
+"cue": "m026"
+},
+{
+"word": "on",
+"startMs": 147862,
+"endMs": 148142,
+"cue": "m026"
+},
+{
+"word": "chain.",
+"startMs": 148142,
+"endMs": 148742,
+"cue": "m026"
+},
+{
+"word": "Envio's",
+"startMs": 149146,
+"endMs": 149806,
+"cue": "m027"
+},
+{
+"word": "HyperIndex",
+"startMs": 149806,
+"endMs": 150466,
+"cue": "m027"
+},
+{
+"word": "serves",
+"startMs": 150466,
+"endMs": 150906,
+"cue": "m027"
+},
+{
+"word": "the",
+"startMs": 150906,
+"endMs": 151206,
+"cue": "m027"
+},
+{
+"word": "market",
+"startMs": 151206,
+"endMs": 151426,
+"cue": "m027"
+},
+{
+"word": "history,",
+"startMs": 151426,
+"endMs": 152066,
+"cue": "m027"
+},
+{
+"word": "and",
+"startMs": 152256,
+"endMs": 152326,
+"cue": "m027"
+},
+{
+"word": "Alchemy",
+"startMs": 152326,
+"endMs": 152646,
+"cue": "m027"
+},
+{
+"word": "is",
+"startMs": 152646,
+"endMs": 153026,
+"cue": "m027"
+},
+{
+"word": "the",
+"startMs": 153026,
+"endMs": 153166,
+"cue": "m027"
+},
+{
+"word": "primary",
+"startMs": 153166,
+"endMs": 153406,
+"cue": "m027"
+},
+{
+"word": "Monad",
+"startMs": 153406,
+"endMs": 154166,
+"cue": "m027"
+},
+{
+"word": "RPC",
+"startMs": 154166,
+"endMs": 155006,
+"cue": "m027"
+},
+{
+"word": "behind",
+"startMs": 155006,
+"endMs": 155466,
+"cue": "m027"
+},
+{
+"word": "the",
+"startMs": 155466,
+"endMs": 155836,
+"cue": "m027"
+},
+{
+"word": "API.",
+"startMs": 155896,
+"endMs": 156436,
+"cue": "m027"
+},
+{
+"word": "Eleven",
+"startMs": 157791,
+"endMs": 158031,
+"cue": "m028"
+},
+{
+"word": "contracts,",
+"startMs": 158031,
+"endMs": 158571,
+"cue": "m028"
+},
+{
+"word": "source-verified.",
+"startMs": 159051,
+"endMs": 160041,
+"cue": "m028"
+},
+{
+"word": "Three",
+"startMs": 160231,
+"endMs": 160351,
+"cue": "m028"
+},
+{
+"word": "hundred",
+"startMs": 160351,
+"endMs": 160671,
+"cue": "m028"
+},
+{
+"word": "seventy-nine",
+"startMs": 160671,
+"endMs": 161371,
+"cue": "m028"
+},
+{
+"word": "contract",
+"startMs": 161371,
+"endMs": 161931,
+"cue": "m028"
+},
+{
+"word": "tests.",
+"startMs": 162001,
+"endMs": 162511,
+"cue": "m028"
+},
+{
+"word": "CargoFlow.",
+"startMs": 162871,
+"endMs": 163701,
+"cue": "m029"
+},
+{
+"word": "Capital",
+"startMs": 163821,
+"endMs": 164091,
+"cue": "m029"
+},
+{
+"word": "that",
+"startMs": 164091,
+"endMs": 164371,
+"cue": "m029"
+},
+{
+"word": "moves",
+"startMs": 164371,
+"endMs": 164571,
+"cue": "m029"
+},
+{
+"word": "with",
+"startMs": 164571,
+"endMs": 164851,
+"cue": "m029"
+},
+{
+"word": "your",
+"startMs": 164851,
+"endMs": 164951,
+"cue": "m029"
+},
+{
+"word": "cargo.",
+"startMs": 164951,
+"endMs": 165511,
+"cue": "m029"
+}
+]
