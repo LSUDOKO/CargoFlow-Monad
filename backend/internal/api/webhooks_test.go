@@ -139,7 +139,7 @@ func TestAlchemyWebhookAcceptsAddressActivity(t *testing.T) {
 	key := "whsec_key_000000000000"
 	srv := webhookServer(t, []string{key}, w)
 	body, _ := json.Marshal(map[string]any{"webhookId": "wh_x", "id": "whevt_aa", "type": "ADDRESS_ACTIVITY",
-		"event": map[string]any{"network": "ROBINHOOD_TESTNET", "activity": []map[string]any{
+		"event": map[string]any{"network": "MONAD_TESTNET", "activity": []map[string]any{
 			{"blockNum": "0x10", "fromAddress": someContract, "toAddress": someContract, "category": "token",
 				"rawContract": map[string]any{"address": someContract}},
 			{"blockNum": "0x1f", "fromAddress": someContract, "toAddress": ourContract, "category": "external",

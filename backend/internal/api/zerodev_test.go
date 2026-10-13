@@ -30,7 +30,7 @@ func zerodevServer(t *testing.T, perSender, global int) *httptest.Server {
 		t.Fatal(err)
 	}
 	srv := httptest.NewServer(api.NewServer(api.Config{Store: store.New(pool), ZeroDev: &api.ZeroDevSponsor{
-		Secret: zdSecret, ProjectID: "proj-1", ChainID: 46630, PerSender: perSender, Global: global,
+		Secret: zdSecret, ProjectID: "proj-1", ChainID: 10143, PerSender: perSender, Global: global,
 		Policy: sponsor.Policy{Contracts: map[common.Address]bool{zdController: true}, MaxWei: big.NewInt(1e15)},
 	}}).Handler())
 	t.Cleanup(srv.Close)
@@ -71,30 +71,30 @@ func TestZeroDevGasPolicy(t *testing.T) {
 	srv := zerodevServer(t, 2, 3)
 	alice, bob := "0x00000000000000000000000000000000000a11ce", "0x0000000000000000000000000000000000000b0b"
 
-	if code, _ := zdPost(t, srv, "wrong-secret-wrong-secret-000", zdBody("proj-1", 46630, alice, zdController)); code != 404 {
+	if code, _ := zdPost(t, srv, "wrong-secret-wrong-secret-000", zdBody("proj-1", 10143, alice, zdController)); code != 404 {
 		t.Fatalf("a wrong secret looks like an unknown path, got %d", code)
 	}
-	if code, out := zdPost(t, srv, zdSecret, zdBody("proj-2", 46630, alice, zdController)); code != 200 || out["proceed"] != false {
+	if code, out := zdPost(t, srv, zdSecret, zdBody("proj-2", 10143, alice, zdController)); code != 200 || out["proceed"] != false {
 		t.Fatalf("wrong project: %d %v", code, out)
 	}
 	if code, out := zdPost(t, srv, zdSecret, zdBody("proj-1", 1, alice, zdController)); code != 200 || out["proceed"] != false {
 		t.Fatalf("wrong chain: %d %v", code, out)
 	}
-	if code, out := zdPost(t, srv, zdSecret, zdBody("proj-1", 46630, alice, common.HexToAddress("0xbeef"))); code != 200 || out["proceed"] != false {
+	if code, out := zdPost(t, srv, zdSecret, zdBody("proj-1", 10143, alice, common.HexToAddress("0xbeef"))); code != 200 || out["proceed"] != false {
 		t.Fatalf("foreign target: %d %v", code, out)
 	}
 	for i := 0; i < 2; i++ {
-		if code, out := zdPost(t, srv, zdSecret, zdBody("proj-1", 46630, alice, zdController)); code != 200 || out["proceed"] != true {
+		if code, out := zdPost(t, srv, zdSecret, zdBody("proj-1", 10143, alice, zdController)); code != 200 || out["proceed"] != true {
 			t.Fatalf("allowed (with deployment) %d: %d %v", i, code, out)
 		}
 	}
-	if _, out := zdPost(t, srv, zdSecret, zdBody("proj-1", 46630, alice, zdController)); out["proceed"] != false {
+	if _, out := zdPost(t, srv, zdSecret, zdBody("proj-1", 10143, alice, zdController)); out["proceed"] != false {
 		t.Fatal("the per-sender limit stops the third")
 	}
-	if _, out := zdPost(t, srv, zdSecret, zdBody("proj-1", 46630, bob, zdController)); out["proceed"] != true {
+	if _, out := zdPost(t, srv, zdSecret, zdBody("proj-1", 10143, bob, zdController)); out["proceed"] != true {
 		t.Fatal("another sender still proceeds (denials are not counted)")
 	}
-	if _, out := zdPost(t, srv, zdSecret, zdBody("proj-1", 46630, "0x0000000000000000000000000000000000000c0c", zdController)); out["proceed"] != false {
+	if _, out := zdPost(t, srv, zdSecret, zdBody("proj-1", 10143, "0x0000000000000000000000000000000000000c0c", zdController)); out["proceed"] != false {
 		t.Fatal("the global limit stops the fourth sponsorship")
 	}
 	if code, out := zdPost(t, srv, zdSecret, map[string]any{"projectId": 5}); code != 200 || out["proceed"] != false {
@@ -109,7 +109,7 @@ func TestZeroDevGasPolicyOffIs404(t *testing.T) {
 	}
 	srv := httptest.NewServer(api.NewServer(api.Config{Store: store.New(pool)}).Handler())
 	defer srv.Close()
-	if code, _ := zdPost(t, srv, zdSecret, zdBody("proj-1", 46630, "0x00000000000000000000000000000000000a11ce", zdController)); code != 404 {
+	if code, _ := zdPost(t, srv, zdSecret, zdBody("proj-1", 10143, "0x00000000000000000000000000000000000a11ce", zdController)); code != 404 {
 		t.Fatalf("unset: %d", code)
 	}
 }

@@ -16,7 +16,7 @@ import (
 var (
 	Controller = common.HexToAddress("0x00000000000000000000000000000000000000c1")
 	Vault      = common.HexToAddress("0x00000000000000000000000000000000000000c2")
-	USDG       = common.HexToAddress("0x7E955252E15c84f5768B83c41a71F9eba181802F")
+	USDG       = common.HexToAddress("0x534b2f3A21130d7a60830c2Df862319e593943A3")
 	Foreign    = common.HexToAddress("0x000000000000000000000000000000000000beef")
 )
 

@@ -53,9 +53,9 @@ func newFakeRPC(t *testing.T, chainID, block uint64) *fakeRPC {
 }
 
 func TestFailoverMovesToTheFallbackAndBackWhenThePrimaryRecovers(t *testing.T) {
-	primary, fallback := newFakeRPC(t, 46630, 100), newFakeRPC(t, 46630, 200)
+	primary, fallback := newFakeRPC(t, 10143, 100), newFakeRPC(t, 10143, 200)
 	ctx := context.Background()
-	c, err := DialFailover(ctx, primary.srv.URL+"/secret-token/", []string{fallback.srv.URL}, Manifest{ChainID: 46630})
+	c, err := DialFailover(ctx, primary.srv.URL+"/secret-token/", []string{fallback.srv.URL}, Manifest{ChainID: 10143})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -87,9 +87,9 @@ func TestFailoverMovesToTheFallbackAndBackWhenThePrimaryRecovers(t *testing.T) {
 }
 
 func TestFailoverWalksAListOfFallbacks(t *testing.T) {
-	primary, second, third := newFakeRPC(t, 46630, 100), newFakeRPC(t, 46630, 200), newFakeRPC(t, 46630, 300)
+	primary, second, third := newFakeRPC(t, 10143, 100), newFakeRPC(t, 10143, 200), newFakeRPC(t, 10143, 300)
 	ctx := context.Background()
-	c, err := DialFailover(ctx, primary.srv.URL, []string{second.srv.URL, "", third.srv.URL}, Manifest{ChainID: 46630})
+	c, err := DialFailover(ctx, primary.srv.URL, []string{second.srv.URL, "", third.srv.URL}, Manifest{ChainID: 10143})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -108,16 +108,16 @@ func TestFailoverWalksAListOfFallbacks(t *testing.T) {
 }
 
 func TestFailoverRefusesAFallbackOnAnotherChain(t *testing.T) {
-	primary, fallback := newFakeRPC(t, 46630, 1), newFakeRPC(t, 1, 1)
-	_, err := DialFailover(context.Background(), primary.srv.URL, []string{fallback.srv.URL}, Manifest{ChainID: 46630})
+	primary, fallback := newFakeRPC(t, 10143, 1), newFakeRPC(t, 1, 1)
+	_, err := DialFailover(context.Background(), primary.srv.URL, []string{fallback.srv.URL}, Manifest{ChainID: 10143})
 	if err == nil || !strings.Contains(err.Error(), "fallback") {
 		t.Fatalf("a fallback on another chain must be refused, got %v", err)
 	}
 }
 
 func TestFailoverToleratesAnUnreachableFallbackAtStartup(t *testing.T) {
-	primary := newFakeRPC(t, 46630, 7)
-	c, err := DialFailover(context.Background(), primary.srv.URL, []string{"http://127.0.0.1:1"}, Manifest{ChainID: 46630})
+	primary := newFakeRPC(t, 10143, 7)
+	c, err := DialFailover(context.Background(), primary.srv.URL, []string{"http://127.0.0.1:1"}, Manifest{ChainID: 10143})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -130,7 +130,7 @@ func TestFailoverToleratesAnUnreachableFallbackAtStartup(t *testing.T) {
 func TestRedactHidesRPCCredentials(t *testing.T) {
 	for in, want := range map[string]string{
 		"https://example.quiknode.pro/abc123token/":  "https://example.quiknode.pro/…",
-		"https://rpc.testnet.chain.robinhood.com":    "https://rpc.testnet.chain.robinhood.com",
+		"https://testnet-rpc.monad.xyz":    "https://testnet-rpc.monad.xyz",
 		"https://user:pw@host.example/":              "https://host.example/…",
 		"https://host.example/?apikey=secret":        "https://host.example/…",
 		"wss://example.quiknode.pro/abc123token/x/y": "wss://example.quiknode.pro/…",

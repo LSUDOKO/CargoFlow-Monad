@@ -1,5 +1,5 @@
 // Package dune pushes CargoFlow's indexed data to Dune through the uploads API, so the Dune queries in
-// analytics/dune run even where Dune does not decode Robinhood Chain Testnet logs.
+// analytics/dune run even where Dune does not decode Monad Testnet logs.
 //
 // Endpoints (https://docs.dune.com/api-reference/tables/endpoint/uploads-create, .../uploads-insert, .../uploads-clear):
 //
@@ -47,14 +47,14 @@ type Table struct {
 // The uploaded tables (analytics/dune/upload-schema.md).
 var (
 	ChainEventsTable = Table{Name: "cargoflow_chain_events",
-		Description: "CargoFlow contract events on Robinhood Chain Testnet (46630), pushed by the CargoFlow indexer",
+		Description: "CargoFlow contract events on Monad Testnet (10143), pushed by the CargoFlow indexer",
 		Schema: []Column{
 			{"tx_hash", "varchar", false}, {"log_index", "integer", false}, {"block_number", "bigint", false},
 			{"block_time", "timestamp", false}, {"block_hash", "varchar", false}, {"contract", "varchar", false},
 			{"event_name", "varchar", false}, {"shipment_id", "varchar", true}, {"args", "varchar", false},
 		}}
 	ShipmentsTable = Table{Name: "cargoflow_shipments",
-		Description: "CargoFlow shipments mirrored from Robinhood Chain Testnet (46630); no route waypoints, telemetry or documents",
+		Description: "CargoFlow shipments mirrored from Monad Testnet (10143); no route waypoints, telemetry or documents",
 		Schema: []Column{
 			{"shipment_id", "varchar", false}, {"external_ref", "varchar", false}, {"exporter", "varchar", false},
 			{"buyer", "varchar", false}, {"financier", "varchar", true}, {"invoice_value_usdg", "double", false},
