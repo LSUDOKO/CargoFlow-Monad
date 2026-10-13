@@ -23,6 +23,9 @@ contract EvidenceRegistry is Controlled, IEvidenceRegistryV3 {
     mapping(bytes32 epochId => bytes32[]) private _sources;
     mapping(bytes32 epochId => uint32) private _ordinals;
     mapping(bytes32 shipmentId => uint32) private _epochCounts;
+    /// @notice Monad: the most recently committed epoch of each shipment (zero when none), read by the
+    ///         note market to mark a position to its latest evidence.
+    mapping(bytes32 shipmentId => bytes32) public latestEpochId;
 
     constructor(address access) Controlled(access) {}
 
@@ -147,6 +150,7 @@ contract EvidenceRegistry is Controlled, IEvidenceRegistryV3 {
         uint32 ordinal = _epochCounts[shipmentId] + 1;
         _epochCounts[shipmentId] = ordinal;
         _ordinals[epochId] = ordinal;
+        latestEpochId[shipmentId] = epochId;
     }
 
     /// @inheritdoc IEvidenceRegistry
