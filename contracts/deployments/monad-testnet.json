@@ -11,9 +11,27 @@
     "noteMarket": "0x120142b2e5A90F2676F41d8d20bDCC94C66ec55d",
     "policyEngine": "0x93f2cd67f404f62Ff34F729aad1118ea9e1582d0",
     "receivableVault": "0x5298dCdBDf6EC799475B09c2Ecd0f089bD4D6902",
-    "shipmentRegistry": "0x2f7cAc603654eC106dA242cD0b16044b31f7608d"
+    "shipmentRegistry": "0x2f7cAc603654eC106dA242cD0b16044b31f7608d",
+    "noteWrapper": "0xD176E4e02f97F12462e68014F92B2A13A664552e"
   },
   "deployer": "0xA6C05ec62A222b0fb65BD30B2d2f9B2fd378911b",
   "network": "monad-testnet",
-  "usdg": "0x534b2f3A21130d7a60830c2Df862319e593943A3"
+  "usdg": "0x534b2f3A21130d7a60830c2Df862319e593943A3",
+  "kuru": {
+    "router": "0x7EFbE105Ca7415dE98F96622173458ac1c054630",
+    "marginAccount": "0xd029C2D98ff85D8F64799017fE00a59B1159CE02",
+    "markets": [
+      {
+        "shipmentId": "0xdfce8f865ac7e5f2f4d97e0d4cf3a5067a5b007a08415cee3eda23d4e5f6fa84",
+        "externalRef": "CF-LIVE-1791917840516",
+        "token": "0x427c9617808445509e2E1877655251A5CE4c6D1e",
+        "symbol": "cNOTE-0516",
+        "market": "0x13f02ef0c5CF7357267C52947709acfE52021520",
+        "quote": "0x534b2f3A21130d7a60830c2Df862319e593943A3",
+        "pricePrecision": 10000,
+        "sizePrecision": 1000000,
+        "takerFeeBps": 10
+      }
+    ]
+  }
 }
