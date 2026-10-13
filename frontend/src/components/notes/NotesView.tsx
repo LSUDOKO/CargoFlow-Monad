@@ -6,6 +6,7 @@ import { type Address, maxUint256 } from "viem";
 import { useAccount, useBlockNumber, useReadContracts } from "wagmi";
 import { Callout } from "@/components/ui/Banner";
 import { Button } from "@/components/ui/Button";
+import { NoteActivity } from "@/components/notes/NoteActivity";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Field } from "@/components/ui/Field";
 import { Badge, StatusPill } from "@/components/ui/Pill";
@@ -182,6 +183,7 @@ export function NotesView() {
           {current && market && <TradePanel note={current} market={market} />}
         </div>
       )}
+      <div className="mt-12"><NoteActivity /></div>
     </div>
   );
 }
