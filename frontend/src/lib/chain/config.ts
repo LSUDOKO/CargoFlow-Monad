@@ -1,4 +1,4 @@
-import { createConfig, http, type CreateConnectorFn } from "wagmi";
+import { createConfig, fallback, http, type CreateConnectorFn } from "wagmi";
 import { injected, mock, walletConnect } from "wagmi/connectors";
 import { defineChain, type Address, type EIP1193Provider } from "viem";
 import { anvil } from "viem/chains";
@@ -10,8 +10,10 @@ export const monadTestnet = defineChain({
   id: 10143,
   name: "Monad Testnet",
   nativeCurrency: { name: "Monad", symbol: "MON", decimals: 18 },
-  rpcUrls: { default: { http: ["https://testnet-rpc.monad.xyz"] } },
+  rpcUrls: { default: { http: ["https://testnet-rpc.monad.xyz", "https://rpc.ankr.com/monad_testnet"] } },
   blockExplorers: { default: { name: "MonadVision", url: MONAD_EXPLORER } },
+  // batches every useReadContracts call into one eth_call (the public RPC rate-limits per request)
+  contracts: { multicall3: { address: "0xcA11bde05977b3631167028862bE2a173976CA11" } },
   testnet: true,
 });
 
@@ -94,7 +96,7 @@ const create = () =>
   createConfig({
     chains: supportedChains,
     connectors,
-    transports: { [monadTestnet.id]: http(), [localChain.id]: http(localRpc) },
+    transports: { [monadTestnet.id]: fallback([http("https://testnet-rpc.monad.xyz", { batch: true }), http("https://rpc.ankr.com/monad_testnet", { batch: true })]), [localChain.id]: http(localRpc) },
     ssr: true,
   });
 
