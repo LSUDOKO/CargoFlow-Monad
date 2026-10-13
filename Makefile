@@ -5,7 +5,7 @@ FORGE ?= $(shell for p in "$$(command -v forge)" "$$HOME/.foundry/bin/forge" "$$
 CAST ?= $(dir $(FORGE))cast
 ENV_FILE ?= .env
 
-.PHONY: frontend-e2e frontend-dev stylus-test stylus-check bench slither demo testnet-keys testnet-fund testnet-deploy testnet-verify ai-live anvil deploy-local demo-local zk-fixture circuits-test abi serve migrate keygen help check contracts-build contracts-test contracts-fmt contracts-fmt-check backend-test frontend-check usdg-info
+.PHONY: frontend-e2e frontend-dev bench slither demo testnet-keys testnet-fund testnet-deploy testnet-verify ai-live anvil deploy-local demo-local zk-fixture circuits-test abi serve migrate keygen help check contracts-build contracts-test contracts-fmt contracts-fmt-check backend-test frontend-check usdg-info
 
 help: ## List commands
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN{FS=":.*?## "}{printf "  %-20s %s\n",$$1,$$2}'
@@ -77,10 +77,10 @@ testnet-keys: ## Generate a separate wallet per role into .env (never printed)
 testnet-fund: ## Send gas ETH from the deployer to every role wallet
 	@CAST=$(dir $(FORGE))cast ./scripts/testnet-fund.sh
 
-testnet-deploy: ## Dry-run the Robinhood testnet deployment (BROADCAST=1 to send)
+testnet-deploy: ## Dry-run the Monad testnet deployment (BROADCAST=1 to send)
 	@CAST=$(dir $(FORGE))cast FORGE=$(FORGE) ./scripts/deploy-testnet.sh
 
-testnet-verify: ## Verify the deployed contracts on the Robinhood testnet explorer
+testnet-verify: ## Verify the deployed contracts on the Monad testnet explorer
 	@CAST=$(dir $(FORGE))cast FORGE=$(FORGE) ./scripts/verify-testnet.sh
 
 frontend-e2e: ## Run the Playwright suite against a fresh local stack (anvil, Postgres, backend, built frontend)
@@ -89,14 +89,8 @@ frontend-e2e: ## Run the Playwright suite against a fresh local stack (anvil, Po
 frontend-dev: ## Run the frontend dev server against .env.local in frontend/
 	@cd frontend && pnpm dev
 
-stylus-test: ## Test the Rust engine against the shared Go vectors
-	@cd stylus && cargo test -p cargoflow-engine
-
-stylus-check: ## Check the Stylus contract activates on Arbitrum Sepolia (no funds needed)
-	@cd stylus && cargo stylus check --endpoint https://arbitrum-sepolia-rpc.publicnode.com
-
 keygen: ## Generate an Ed25519 key pair for an evidence source
 	@cd backend && go run ./cmd/cargoflow keygen
 
-usdg-info: ## Read USDG metadata from Robinhood testnet
+usdg-info: ## Read USDC metadata from Monad testnet
 	@CAST=$(CAST) ./scripts/usdg-info.sh
