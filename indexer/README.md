@@ -1,5 +1,11 @@
 # CargoFlow indexer (Envio HyperIndex)
 
+<p align="center">
+  <a href="https://youtu.be/F-bYs_ix49s"><img src="https://img.youtube.com/vi/F-bYs_ix49s/maxresdefault.jpg" alt="Video: CargoFlow Envio demo. A new bid on Monad Testnet is mined, returned by the HyperIndex GraphQL endpoint and shown in the live /notes activity feed within seconds." width="100%"></a><br>
+  <b>▶ <a href="https://youtu.be/F-bYs_ix49s">Watch the demo: Envio HyperIndex on Monad (1:17)</a></b>
+</p>
+
+
 Indexes the Cargo Note market on Monad Testnet (chain 10143) with [Envio HyperIndex](https://docs.envio.dev), reading
 from HyperSync (`https://10143.hypersync.xyz`) with the public RPC as a fallback. It powers the **Market activity** feed
 and the trade/volume counters on [`/notes`](https://cargoflow-monad.vercel.app/notes).

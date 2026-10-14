@@ -43,6 +43,7 @@ Everything in one place.
 | **Hackathon** | Monad Metropolis | Track 01 · Onchain Finance & Trading; sponsor fit: Kuru, Envio, MetaMask Agent Wallet, Alchemy ([integrations](#sponsor-and-partner-integrations)) |
 | **Live app** | [cargoflow-monad.vercel.app](https://cargoflow-monad.vercel.app) | Connect any wallet on Monad Testnet (10143); no test credentials needed |
 | **Cargo Notes** | [/notes](https://cargoflow-monad.vercel.app/notes) | The order book: evidence mark, claim, ask, best bid, upside; re-read every block |
+| **Sponsor demo videos** | [Alchemy (1:09)](https://youtu.be/vqd3-VOrORo) · [Envio (1:17)](https://youtu.be/F-bYs_ix49s) | Real flows on Monad Testnet; also at the top of [sponsor integrations](#sponsor-and-partner-integrations) and [`indexer/`](indexer) |
 | **Portals** | [exporter](https://cargoflow-monad.vercel.app/exporter) · [financier](https://cargoflow-monad.vercel.app/financier) · [buyer](https://cargoflow-monad.vercel.app/buyer) · [carrier](https://cargoflow-monad.vercel.app/ebl) · [market](https://cargoflow-monad.vercel.app/market) · [arbiter](https://cargoflow-monad.vercel.app/arbiter) | Every action is a transaction the party signs |
 | **Fleet** | [/shipments](https://cargoflow-monad.vercel.app/shipments) | Every shipment, with its live dashboard |
 | **API** | [cargoflow-monad-api.onrender.com/v1/health](https://cargoflow-monad-api.onrender.com/v1/health) | REST and WebSocket; [OpenAPI 3.1](https://cargoflow-monad-api.onrender.com/v1/openapi.json). Free tier: the first request after idle can take about a minute |
@@ -560,6 +561,16 @@ are in this repository.
 | Remote MCP server | Cloudflare Workers | `cd packages/mcp && npx wrangler deploy` |
 
 ## Sponsor and partner integrations
+
+<p align="center">
+  <a href="https://youtu.be/vqd3-VOrORo"><img src="https://img.youtube.com/vi/vqd3-VOrORo/maxresdefault.jpg" alt="Video: CargoFlow Alchemy demo. The hosted API runs on Alchemy Monad Testnet RPC as primary with public fallback; health check, failover code and the live dashboards it powers." width="100%"></a><br>
+  <b>▶ <a href="https://youtu.be/vqd3-VOrORo">Watch the demo: Alchemy as the primary Monad RPC (1:09)</a></b>
+</p>
+
+<p align="center">
+  <a href="https://youtu.be/F-bYs_ix49s"><img src="https://img.youtube.com/vi/F-bYs_ix49s/maxresdefault.jpg" alt="Video: CargoFlow Envio demo. A new on-chain bid flows through HyperSync and HyperIndex into the live activity feed." width="100%"></a><br>
+  <b>▶ <a href="https://youtu.be/F-bYs_ix49s">Watch the demo: Envio HyperIndex, data flowing end to end (1:17)</a></b>
+</p>
 
 <p align="center"><img src="docs/assets/v3/sponsors.png" alt="Sponsors, honestly: Monad, settlement layer, live; Circle USDC, the only money, live; Kuru, notes as ERC-20 spot markets, integration; Envio, HyperIndex indexer, integration; MetaMask, Agent Wallet plugin, integration; Alchemy, RPC failover and webhook, integration; ZeroDev, passkey accounts on Monad's P-256 precompile; OpenZeppelin, live." width="100%"></p>
 
