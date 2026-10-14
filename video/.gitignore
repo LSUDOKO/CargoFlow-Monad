@@ -43,3 +43,6 @@ public/clips/
 public/live/*-full.png
 public/live/rec/
 public/clips-orig/
+# sponsor videos: raw takes and the screen recording
+voiceover/raw-sponsors/
+public/live/rec-sponsors/
