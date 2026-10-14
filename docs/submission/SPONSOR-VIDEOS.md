@@ -4,12 +4,12 @@ Four short films for the Monad Metropolis sponsor tracks, built in `video/` with
 
 | Video | Composition | File (local, not in git) | Length | Thumbnail | Upload to |
 | --- | --- | --- | --- | --- | --- |
-| MetaMask Agent Wallet plugin | `SponsorMetaMask` | `video/out/CargoFlow-MetaMask-AgentWallet-Plugin.mp4` | MM_LEN | `thumb-metamask.png` | [MetaMask Drive folder](https://drive.google.com/drive/folders/1tT2QDaQUd3RCqKfx-0GugMXqpPh_oQAE) |
-| Envio HyperIndex | `SponsorEnvio` | `video/out/CargoFlow-Envio-HyperIndex.mp4` | EN_LEN | `thumb-envio.png` | a Drive folder or YouTube (the form takes a video link) |
-| Alchemy | `SponsorAlchemy` | `video/out/CargoFlow-Alchemy.mp4` | AL_LEN | `thumb-alchemy.png` | a Drive folder or YouTube (the form takes a video link) |
-| 30-second promo | `PromoAd` | `video/out/CargoFlow-Promo-30s.mp4` | PR_LEN | `thumb-promo.png` | [Promo Drive folder](https://drive.google.com/drive/folders/1vN7SQIzEJCcO8-TWKBf2mJKttw8p16wf) |
+| MetaMask Agent Wallet plugin | `SponsorMetaMask` | `video/out/CargoFlow-MetaMask-AgentWallet-Plugin.mp4` | 2:31 (150.5 s, 20.4 MB) | `thumb-metamask.png` | [MetaMask Drive folder](https://drive.google.com/drive/folders/1tT2QDaQUd3RCqKfx-0GugMXqpPh_oQAE) |
+| Envio HyperIndex | `SponsorEnvio` | `video/out/CargoFlow-Envio-HyperIndex.mp4` | 1:17 (77.2 s, 13.8 MB) | `thumb-envio.png` | a Drive folder or YouTube (the form takes a video link) |
+| Alchemy | `SponsorAlchemy` | `video/out/CargoFlow-Alchemy.mp4` | 1:09 (68.6 s, 11.1 MB) | `thumb-alchemy.png` | a Drive folder or YouTube (the form takes a video link) |
+| 30-second promo | `PromoAd` | `video/out/CargoFlow-Promo-30s.mp4` | 0:30 (30.0 s, 9.2 MB) | `thumb-promo.png` | [Promo Drive folder](https://drive.google.com/drive/folders/1vN7SQIzEJCcO8-TWKBf2mJKttw8p16wf) |
 
-All are 1920×1080, 30 fps, H.264 + AAC, with burned-in word-timed captions (except the promo, which is kinetic type).
+All are 1920×1080, 30 fps, H.264 + AAC, audio peaks −2.6 to −2.9 dBFS, with burned-in word-timed captions (except the promo, which is kinetic type).
 
 ## What is real
 
