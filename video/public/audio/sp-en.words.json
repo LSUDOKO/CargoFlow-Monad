@@ -1,0 +1,998 @@
+[
+{
+"word": "CargoFlow's",
+"startMs": 380,
+"endMs": 1109,
+"cue": "en01"
+},
+{
+"word": "Cargo",
+"startMs": 1109,
+"endMs": 1370,
+"cue": "en01"
+},
+{
+"word": "Note",
+"startMs": 1370,
+"endMs": 1710,
+"cue": "en01"
+},
+{
+"word": "market",
+"startMs": 1710,
+"endMs": 2090,
+"cue": "en01"
+},
+{
+"word": "runs",
+"startMs": 2090,
+"endMs": 2550,
+"cue": "en01"
+},
+{
+"word": "on",
+"startMs": 2550,
+"endMs": 2980,
+"cue": "en01"
+},
+{
+"word": "Envio",
+"startMs": 3040,
+"endMs": 3650,
+"cue": "en01"
+},
+{
+"word": "HyperIndex,",
+"startMs": 3650,
+"endMs": 4680,
+"cue": "en01"
+},
+{
+"word": "reading",
+"startMs": 4899,
+"endMs": 5130,
+"cue": "en01"
+},
+{
+"word": "Monad",
+"startMs": 5130,
+"endMs": 5670,
+"cue": "en01"
+},
+{
+"word": "testnet",
+"startMs": 5670,
+"endMs": 6250,
+"cue": "en01"
+},
+{
+"word": "through",
+"startMs": 6350,
+"endMs": 6470,
+"cue": "en01"
+},
+{
+"word": "HyperSync.",
+"startMs": 6470,
+"endMs": 7319,
+"cue": "en01"
+},
+{
+"word": "One",
+"startMs": 8591,
+"endMs": 8801,
+"cue": "en02"
+},
+{
+"word": "config",
+"startMs": 8801,
+"endMs": 9001,
+"cue": "en02"
+},
+{
+"word": "indexes",
+"startMs": 9001,
+"endMs": 9881,
+"cue": "en02"
+},
+{
+"word": "three",
+"startMs": 9881,
+"endMs": 10241,
+"cue": "en02"
+},
+{
+"word": "contracts:",
+"startMs": 10241,
+"endMs": 11181,
+"cue": "en02"
+},
+{
+"word": "the",
+"startMs": 11431,
+"endMs": 11481,
+"cue": "en02"
+},
+{
+"word": "note",
+"startMs": 11481,
+"endMs": 11661,
+"cue": "en02"
+},
+{
+"word": "market,",
+"startMs": 11661,
+"endMs": 12221,
+"cue": "en02"
+},
+{
+"word": "the",
+"startMs": 12291,
+"endMs": 12361,
+"cue": "en02"
+},
+{
+"word": "financing",
+"startMs": 12361,
+"endMs": 12780,
+"cue": "en02"
+},
+{
+"word": "controller",
+"startMs": 12780,
+"endMs": 13341,
+"cue": "en02"
+},
+{
+"word": "and",
+"startMs": 13341,
+"endMs": 13801,
+"cue": "en02"
+},
+{
+"word": "the",
+"startMs": 13801,
+"endMs": 13921,
+"cue": "en02"
+},
+{
+"word": "evidence",
+"startMs": 13921,
+"endMs": 14181,
+"cue": "en02"
+},
+{
+"word": "registry,",
+"startMs": 14181,
+"endMs": 14801,
+"cue": "en02"
+},
+{
+"word": "from",
+"startMs": 15101,
+"endMs": 15221,
+"cue": "en02"
+},
+{
+"word": "the",
+"startMs": 15221,
+"endMs": 15361,
+"cue": "en02"
+},
+{
+"word": "deployment",
+"startMs": 15361,
+"endMs": 15741,
+"cue": "en02"
+},
+{
+"word": "block.",
+"startMs": 15741,
+"endMs": 16341,
+"cue": "en02"
+},
+{
+"word": "Handlers",
+"startMs": 18243,
+"endMs": 18583,
+"cue": "en03"
+},
+{
+"word": "turn",
+"startMs": 18583,
+"endMs": 18883,
+"cue": "en03"
+},
+{
+"word": "every",
+"startMs": 18883,
+"endMs": 19223,
+"cue": "en03"
+},
+{
+"word": "ask,",
+"startMs": 19223,
+"endMs": 19643,
+"cue": "en03"
+},
+{
+"word": "bid,",
+"startMs": 19983,
+"endMs": 20123,
+"cue": "en03"
+},
+{
+"word": "trade",
+"startMs": 20323,
+"endMs": 20543,
+"cue": "en03"
+},
+{
+"word": "and",
+"startMs": 20543,
+"endMs": 20942,
+"cue": "en03"
+},
+{
+"word": "transfer",
+"startMs": 20942,
+"endMs": 21403,
+"cue": "en03"
+},
+{
+"word": "into",
+"startMs": 21403,
+"endMs": 21703,
+"cue": "en03"
+},
+{
+"word": "entities:",
+"startMs": 21703,
+"endMs": 22383,
+"cue": "en03"
+},
+{
+"word": "notes,",
+"startMs": 22643,
+"endMs": 23073,
+"cue": "en03"
+},
+{
+"word": "trades,",
+"startMs": 23133,
+"endMs": 23303,
+"cue": "en03"
+},
+{
+"word": "order",
+"startMs": 23703,
+"endMs": 23803,
+"cue": "en03"
+},
+{
+"word": "events",
+"startMs": 23803,
+"endMs": 24163,
+"cue": "en03"
+},
+{
+"word": "and",
+"startMs": 24163,
+"endMs": 24463,
+"cue": "en03"
+},
+{
+"word": "market",
+"startMs": 24463,
+"endMs": 24643,
+"cue": "en03"
+},
+{
+"word": "stats.",
+"startMs": 24643,
+"endMs": 25403,
+"cue": "en03"
+},
+{
+"word": "It's",
+"startMs": 27238,
+"endMs": 27387,
+"cue": "en04"
+},
+{
+"word": "deployed",
+"startMs": 27387,
+"endMs": 27747,
+"cue": "en04"
+},
+{
+"word": "on",
+"startMs": 27747,
+"endMs": 28107,
+"cue": "en04"
+},
+{
+"word": "Envio",
+"startMs": 28107,
+"endMs": 28828,
+"cue": "en04"
+},
+{
+"word": "Cloud,",
+"startMs": 28828,
+"endMs": 29508,
+"cue": "en04"
+},
+{
+"word": "synced",
+"startMs": 29567,
+"endMs": 29887,
+"cue": "en04"
+},
+{
+"word": "to",
+"startMs": 29958,
+"endMs": 30048,
+"cue": "en04"
+},
+{
+"word": "the",
+"startMs": 30048,
+"endMs": 30107,
+"cue": "en04"
+},
+{
+"word": "chain",
+"startMs": 30107,
+"endMs": 30348,
+"cue": "en04"
+},
+{
+"word": "head,",
+"startMs": 30348,
+"endMs": 30848,
+"cue": "en04"
+},
+{
+"word": "behind",
+"startMs": 30958,
+"endMs": 31168,
+"cue": "en04"
+},
+{
+"word": "a",
+"startMs": 31168,
+"endMs": 31368,
+"cue": "en04"
+},
+{
+"word": "public",
+"startMs": 31368,
+"endMs": 31747,
+"cue": "en04"
+},
+{
+"word": "GraphQL",
+"startMs": 31828,
+"endMs": 32588,
+"cue": "en04"
+},
+{
+"word": "endpoint.",
+"startMs": 32588,
+"endMs": 33348,
+"cue": "en04"
+},
+{
+"word": "Now,",
+"startMs": 35196,
+"endMs": 35566,
+"cue": "en05"
+},
+{
+"word": "end",
+"startMs": 35636,
+"endMs": 35786,
+"cue": "en05"
+},
+{
+"word": "to",
+"startMs": 35786,
+"endMs": 36046,
+"cue": "en05"
+},
+{
+"word": "end.",
+"startMs": 36046,
+"endMs": 36506,
+"cue": "en05"
+},
+{
+"word": "With",
+"startMs": 36786,
+"endMs": 36846,
+"cue": "en05"
+},
+{
+"word": "the",
+"startMs": 36846,
+"endMs": 36946,
+"cue": "en05"
+},
+{
+"word": "trading",
+"startMs": 36946,
+"endMs": 37186,
+"cue": "en05"
+},
+{
+"word": "page",
+"startMs": 37186,
+"endMs": 37506,
+"cue": "en05"
+},
+{
+"word": "open,",
+"startMs": 37506,
+"endMs": 37926,
+"cue": "en05"
+},
+{
+"word": "we",
+"startMs": 38266,
+"endMs": 38326,
+"cue": "en05"
+},
+{
+"word": "raise",
+"startMs": 38326,
+"endMs": 38546,
+"cue": "en05"
+},
+{
+"word": "a",
+"startMs": 38546,
+"endMs": 38766,
+"cue": "en05"
+},
+{
+"word": "bid",
+"startMs": 38766,
+"endMs": 39006,
+"cue": "en05"
+},
+{
+"word": "on",
+"startMs": 39006,
+"endMs": 39166,
+"cue": "en05"
+},
+{
+"word": "a",
+"startMs": 39166,
+"endMs": 39266,
+"cue": "en05"
+},
+{
+"word": "note,",
+"startMs": 39266,
+"endMs": 39486,
+"cue": "en05"
+},
+{
+"word": "on",
+"startMs": 39686,
+"endMs": 39746,
+"cue": "en05"
+},
+{
+"word": "chain.",
+"startMs": 39746,
+"endMs": 40376,
+"cue": "en05"
+},
+{
+"word": "The",
+"startMs": 40818,
+"endMs": 40878,
+"cue": "en06"
+},
+{
+"word": "transaction",
+"startMs": 40878,
+"endMs": 41178,
+"cue": "en06"
+},
+{
+"word": "is",
+"startMs": 41178,
+"endMs": 41798,
+"cue": "en06"
+},
+{
+"word": "mined",
+"startMs": 41798,
+"endMs": 42098,
+"cue": "en06"
+},
+{
+"word": "in",
+"startMs": 42098,
+"endMs": 42518,
+"cue": "en06"
+},
+{
+"word": "about",
+"startMs": 42518,
+"endMs": 42888,
+"cue": "en06"
+},
+{
+"word": "two",
+"startMs": 42958,
+"endMs": 43098,
+"cue": "en06"
+},
+{
+"word": "and",
+"startMs": 43098,
+"endMs": 43318,
+"cue": "en06"
+},
+{
+"word": "a",
+"startMs": 43318,
+"endMs": 43378,
+"cue": "en06"
+},
+{
+"word": "half",
+"startMs": 43378,
+"endMs": 43618,
+"cue": "en06"
+},
+{
+"word": "seconds.",
+"startMs": 43618,
+"endMs": 44278,
+"cue": "en06"
+},
+{
+"word": "A",
+"startMs": 44588,
+"endMs": 44638,
+"cue": "en06"
+},
+{
+"word": "second",
+"startMs": 44638,
+"endMs": 44938,
+"cue": "en06"
+},
+{
+"word": "and",
+"startMs": 44938,
+"endMs": 45078,
+"cue": "en06"
+},
+{
+"word": "a",
+"startMs": 45078,
+"endMs": 45158,
+"cue": "en06"
+},
+{
+"word": "half",
+"startMs": 45158,
+"endMs": 45318,
+"cue": "en06"
+},
+{
+"word": "later,",
+"startMs": 45318,
+"endMs": 45638,
+"cue": "en06"
+},
+{
+"word": "HyperSync",
+"startMs": 45898,
+"endMs": 46438,
+"cue": "en06"
+},
+{
+"word": "has",
+"startMs": 46438,
+"endMs": 46718,
+"cue": "en06"
+},
+{
+"word": "delivered",
+"startMs": 46718,
+"endMs": 47038,
+"cue": "en06"
+},
+{
+"word": "the",
+"startMs": 47038,
+"endMs": 47318,
+"cue": "en06"
+},
+{
+"word": "log,",
+"startMs": 47318,
+"endMs": 47618,
+"cue": "en06"
+},
+{
+"word": "and",
+"startMs": 47898,
+"endMs": 47958,
+"cue": "en06"
+},
+{
+"word": "HyperIndex",
+"startMs": 47958,
+"endMs": 48638,
+"cue": "en06"
+},
+{
+"word": "has",
+"startMs": 48638,
+"endMs": 48978,
+"cue": "en06"
+},
+{
+"word": "written",
+"startMs": 48978,
+"endMs": 49198,
+"cue": "en06"
+},
+{
+"word": "it.",
+"startMs": 49198,
+"endMs": 49568,
+"cue": "en06"
+},
+{
+"word": "The",
+"startMs": 50121,
+"endMs": 50161,
+"cue": "en07"
+},
+{
+"word": "GraphQL",
+"startMs": 50161,
+"endMs": 50961,
+"cue": "en07"
+},
+{
+"word": "endpoint",
+"startMs": 50961,
+"endMs": 51561,
+"cue": "en07"
+},
+{
+"word": "already",
+"startMs": 51561,
+"endMs": 52001,
+"cue": "en07"
+},
+{
+"word": "returns",
+"startMs": 52001,
+"endMs": 52481,
+"cue": "en07"
+},
+{
+"word": "the",
+"startMs": 52481,
+"endMs": 52761,
+"cue": "en07"
+},
+{
+"word": "new",
+"startMs": 52761,
+"endMs": 52901,
+"cue": "en07"
+},
+{
+"word": "bid,",
+"startMs": 52901,
+"endMs": 53381,
+"cue": "en07"
+},
+{
+"word": "with",
+"startMs": 53511,
+"endMs": 53601,
+"cue": "en07"
+},
+{
+"word": "its",
+"startMs": 53601,
+"endMs": 53761,
+"cue": "en07"
+},
+{
+"word": "price",
+"startMs": 53761,
+"endMs": 54061,
+"cue": "en07"
+},
+{
+"word": "and",
+"startMs": 54061,
+"endMs": 54461,
+"cue": "en07"
+},
+{
+"word": "the",
+"startMs": 54461,
+"endMs": 54561,
+"cue": "en07"
+},
+{
+"word": "note's",
+"startMs": 54561,
+"endMs": 54941,
+"cue": "en07"
+},
+{
+"word": "evidence",
+"startMs": 54941,
+"endMs": 55241,
+"cue": "en07"
+},
+{
+"word": "mark.",
+"startMs": 55241,
+"endMs": 55831,
+"cue": "en07"
+},
+{
+"word": "And",
+"startMs": 56246,
+"endMs": 56326,
+"cue": "en08"
+},
+{
+"word": "the",
+"startMs": 56326,
+"endMs": 56406,
+"cue": "en08"
+},
+{
+"word": "page's",
+"startMs": 56406,
+"endMs": 56885,
+"cue": "en08"
+},
+{
+"word": "market",
+"startMs": 56885,
+"endMs": 57126,
+"cue": "en08"
+},
+{
+"word": "activity",
+"startMs": 57126,
+"endMs": 57406,
+"cue": "en08"
+},
+{
+"word": "feed",
+"startMs": 57466,
+"endMs": 57986,
+"cue": "en08"
+},
+{
+"word": "shows",
+"startMs": 57986,
+"endMs": 58426,
+"cue": "en08"
+},
+{
+"word": "it",
+"startMs": 58426,
+"endMs": 58686,
+"cue": "en08"
+},
+{
+"word": "on",
+"startMs": 58686,
+"endMs": 58826,
+"cue": "en08"
+},
+{
+"word": "its",
+"startMs": 58826,
+"endMs": 58966,
+"cue": "en08"
+},
+{
+"word": "next",
+"startMs": 58966,
+"endMs": 59186,
+"cue": "en08"
+},
+{
+"word": "refresh,",
+"startMs": 59186,
+"endMs": 59626,
+"cue": "en08"
+},
+{
+"word": "about",
+"startMs": 60066,
+"endMs": 60226,
+"cue": "en08"
+},
+{
+"word": "seven",
+"startMs": 60226,
+"endMs": 60626,
+"cue": "en08"
+},
+{
+"word": "seconds",
+"startMs": 60626,
+"endMs": 60946,
+"cue": "en08"
+},
+{
+"word": "after",
+"startMs": 60946,
+"endMs": 61486,
+"cue": "en08"
+},
+{
+"word": "we",
+"startMs": 61486,
+"endMs": 61626,
+"cue": "en08"
+},
+{
+"word": "sent",
+"startMs": 61626,
+"endMs": 61866,
+"cue": "en08"
+},
+{
+"word": "it.",
+"startMs": 61866,
+"endMs": 62096,
+"cue": "en08"
+},
+{
+"word": "Three",
+"startMs": 62506,
+"endMs": 62646,
+"cue": "en08"
+},
+{
+"word": "bids",
+"startMs": 62646,
+"endMs": 62926,
+"cue": "en08"
+},
+{
+"word": "now.",
+"startMs": 62926,
+"endMs": 63525,
+"cue": "en08"
+},
+{
+"word": "Here",
+"startMs": 65239,
+"endMs": 65339,
+"cue": "en09"
+},
+{
+"word": "is",
+"startMs": 65339,
+"endMs": 65479,
+"cue": "en09"
+},
+{
+"word": "the",
+"startMs": 65479,
+"endMs": 65619,
+"cue": "en09"
+},
+{
+"word": "same",
+"startMs": 65619,
+"endMs": 65839,
+"cue": "en09"
+},
+{
+"word": "transaction",
+"startMs": 65839,
+"endMs": 66359,
+"cue": "en09"
+},
+{
+"word": "on",
+"startMs": 66359,
+"endMs": 66779,
+"cue": "en09"
+},
+{
+"word": "MonadVision.",
+"startMs": 66779,
+"endMs": 67659,
+"cue": "en09"
+},
+{
+"word": "Envio",
+"startMs": 70199,
+"endMs": 70679,
+"cue": "en10"
+},
+{
+"word": "gives",
+"startMs": 70679,
+"endMs": 70899,
+"cue": "en10"
+},
+{
+"word": "traders",
+"startMs": 70899,
+"endMs": 71259,
+"cue": "en10"
+},
+{
+"word": "the",
+"startMs": 71259,
+"endMs": 71639,
+"cue": "en10"
+},
+{
+"word": "full",
+"startMs": 71639,
+"endMs": 71839,
+"cue": "en10"
+},
+{
+"word": "history",
+"startMs": 71839,
+"endMs": 72099,
+"cue": "en10"
+},
+{
+"word": "of",
+"startMs": 72099,
+"endMs": 72479,
+"cue": "en10"
+},
+{
+"word": "every",
+"startMs": 72479,
+"endMs": 72779,
+"cue": "en10"
+},
+{
+"word": "note,",
+"startMs": 72779,
+"endMs": 73219,
+"cue": "en10"
+},
+{
+"word": "live,",
+"startMs": 73379,
+"endMs": 73619,
+"cue": "en10"
+},
+{
+"word": "from",
+"startMs": 73619,
+"endMs": 73979,
+"cue": "en10"
+},
+{
+"word": "Monad.",
+"startMs": 73979,
+"endMs": 74579,
+"cue": "en10"
+}
+]

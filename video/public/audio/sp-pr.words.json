@@ -1,0 +1,122 @@
+[
+{
+"word": "Your",
+"startMs": 730,
+"endMs": 799,
+"cue": "pr01"
+},
+{
+"word": "loan",
+"startMs": 799,
+"endMs": 980,
+"cue": "pr01"
+},
+{
+"word": "is",
+"startMs": 980,
+"endMs": 1160,
+"cue": "pr01"
+},
+{
+"word": "stuck",
+"startMs": 1160,
+"endMs": 1359,
+"cue": "pr01"
+},
+{
+"word": "at",
+"startMs": 1359,
+"endMs": 1520,
+"cue": "pr01"
+},
+{
+"word": "sea.",
+"startMs": 1520,
+"endMs": 1950,
+"cue": "pr01"
+},
+{
+"word": "Until",
+"startMs": 8219,
+"endMs": 8399,
+"cue": "pr02"
+},
+{
+"word": "the",
+"startMs": 8399,
+"endMs": 8459,
+"cue": "pr02"
+},
+{
+"word": "cargo",
+"startMs": 8459,
+"endMs": 8660,
+"cue": "pr02"
+},
+{
+"word": "speaks",
+"startMs": 8660,
+"endMs": 9100,
+"cue": "pr02"
+},
+{
+"word": "for",
+"startMs": 9100,
+"endMs": 9360,
+"cue": "pr02"
+},
+{
+"word": "itself.",
+"startMs": 9360,
+"endMs": 9930,
+"cue": "pr02"
+},
+{
+"word": "Now",
+"startMs": 14920,
+"endMs": 15040,
+"cue": "pr03"
+},
+{
+"word": "it",
+"startMs": 15040,
+"endMs": 15160,
+"cue": "pr03"
+},
+{
+"word": "trades.",
+"startMs": 15160,
+"endMs": 15740,
+"cue": "pr03"
+},
+{
+"word": "Cargo",
+"startMs": 25030,
+"endMs": 25180,
+"cue": "pr04"
+},
+{
+"word": "Notes.",
+"startMs": 25180,
+"endMs": 25500,
+"cue": "pr04"
+},
+{
+"word": "CargoFlow,",
+"startMs": 25760,
+"endMs": 26260,
+"cue": "pr04"
+},
+{
+"word": "on",
+"startMs": 26460,
+"endMs": 26520,
+"cue": "pr04"
+},
+{
+"word": "Monad.",
+"startMs": 26520,
+"endMs": 27020,
+"cue": "pr04"
+}
+]

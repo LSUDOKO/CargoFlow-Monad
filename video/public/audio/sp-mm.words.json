@@ -1,0 +1,1994 @@
+[
+{
+"word": "CargoFlow's",
+"startMs": 370,
+"endMs": 1150,
+"cue": "mm01"
+},
+{
+"word": "cargo",
+"startMs": 1150,
+"endMs": 1370,
+"cue": "mm01"
+},
+{
+"word": "notes",
+"startMs": 1370,
+"endMs": 1950,
+"cue": "mm01"
+},
+{
+"word": "plugin",
+"startMs": 2009,
+"endMs": 2150,
+"cue": "mm01"
+},
+{
+"word": "gives",
+"startMs": 2150,
+"endMs": 2530,
+"cue": "mm01"
+},
+{
+"word": "the",
+"startMs": 2530,
+"endMs": 2750,
+"cue": "mm01"
+},
+{
+"word": "MetaMask",
+"startMs": 2750,
+"endMs": 3330,
+"cue": "mm01"
+},
+{
+"word": "Agent",
+"startMs": 3330,
+"endMs": 3890,
+"cue": "mm01"
+},
+{
+"word": "Wallet",
+"startMs": 3890,
+"endMs": 4270,
+"cue": "mm01"
+},
+{
+"word": "a",
+"startMs": 4270,
+"endMs": 4569,
+"cue": "mm01"
+},
+{
+"word": "new",
+"startMs": 4569,
+"endMs": 4750,
+"cue": "mm01"
+},
+{
+"word": "trading",
+"startMs": 4750,
+"endMs": 5130,
+"cue": "mm01"
+},
+{
+"word": "superpower:",
+"startMs": 5130,
+"endMs": 6080,
+"cue": "mm01"
+},
+{
+"word": "evidence-aware",
+"startMs": 6380,
+"endMs": 6970,
+"cue": "mm01"
+},
+{
+"word": "credit",
+"startMs": 6970,
+"endMs": 7500,
+"cue": "mm01"
+},
+{
+"word": "trading",
+"startMs": 7569,
+"endMs": 7790,
+"cue": "mm01"
+},
+{
+"word": "on",
+"startMs": 7790,
+"endMs": 8109,
+"cue": "mm01"
+},
+{
+"word": "Monad.",
+"startMs": 8109,
+"endMs": 8719,
+"cue": "mm01"
+},
+{
+"word": "An",
+"startMs": 9149,
+"endMs": 9219,
+"cue": "mm02"
+},
+{
+"word": "agent",
+"startMs": 9219,
+"endMs": 9479,
+"cue": "mm02"
+},
+{
+"word": "can",
+"startMs": 9479,
+"endMs": 9738,
+"cue": "mm02"
+},
+{
+"word": "find,",
+"startMs": 9738,
+"endMs": 10369,
+"cue": "mm02"
+},
+{
+"word": "price",
+"startMs": 10439,
+"endMs": 10599,
+"cue": "mm02"
+},
+{
+"word": "and",
+"startMs": 10599,
+"endMs": 10959,
+"cue": "mm02"
+},
+{
+"word": "buy",
+"startMs": 10959,
+"endMs": 11158,
+"cue": "mm02"
+},
+{
+"word": "Cargo",
+"startMs": 11158,
+"endMs": 11479,
+"cue": "mm02"
+},
+{
+"word": "Notes:",
+"startMs": 11479,
+"endMs": 12189,
+"cue": "mm02"
+},
+{
+"word": "short-dated",
+"startMs": 12429,
+"endMs": 13023,
+"cue": "mm02"
+},
+{
+"word": "trade-finance",
+"startMs": 13023,
+"endMs": 13818,
+"cue": "mm02"
+},
+{
+"word": "positions,",
+"startMs": 13818,
+"endMs": 14629,
+"cue": "mm02"
+},
+{
+"word": "priced",
+"startMs": 14689,
+"endMs": 14899,
+"cue": "mm02"
+},
+{
+"word": "by",
+"startMs": 14899,
+"endMs": 15239,
+"cue": "mm02"
+},
+{
+"word": "the",
+"startMs": 15239,
+"endMs": 15359,
+"cue": "mm02"
+},
+{
+"word": "cargo's",
+"startMs": 15359,
+"endMs": 15919,
+"cue": "mm02"
+},
+{
+"word": "own",
+"startMs": 15919,
+"endMs": 16158,
+"cue": "mm02"
+},
+{
+"word": "sensor",
+"startMs": 16158,
+"endMs": 16499,
+"cue": "mm02"
+},
+{
+"word": "evidence.",
+"startMs": 16499,
+"endMs": 17389,
+"cue": "mm02"
+},
+{
+"word": "It's",
+"startMs": 18619,
+"endMs": 18749,
+"cue": "mm03"
+},
+{
+"word": "a",
+"startMs": 18749,
+"endMs": 18829,
+"cue": "mm03"
+},
+{
+"word": "native",
+"startMs": 18829,
+"endMs": 19149,
+"cue": "mm03"
+},
+{
+"word": "mm",
+"startMs": 19149,
+"endMs": 19809,
+"cue": "mm03"
+},
+{
+"word": "plugin.",
+"startMs": 19809,
+"endMs": 20419,
+"cue": "mm03"
+},
+{
+"word": "Install",
+"startMs": 20649,
+"endMs": 20949,
+"cue": "mm03"
+},
+{
+"word": "it",
+"startMs": 20949,
+"endMs": 21229,
+"cue": "mm03"
+},
+{
+"word": "once,",
+"startMs": 21229,
+"endMs": 21449,
+"cue": "mm03"
+},
+{
+"word": "and",
+"startMs": 21669,
+"endMs": 21729,
+"cue": "mm03"
+},
+{
+"word": "the",
+"startMs": 21729,
+"endMs": 21809,
+"cue": "mm03"
+},
+{
+"word": "agent",
+"startMs": 21809,
+"endMs": 22069,
+"cue": "mm03"
+},
+{
+"word": "gets",
+"startMs": 22069,
+"endMs": 22369,
+"cue": "mm03"
+},
+{
+"word": "six",
+"startMs": 22369,
+"endMs": 22729,
+"cue": "mm03"
+},
+{
+"word": "new",
+"startMs": 22729,
+"endMs": 22989,
+"cue": "mm03"
+},
+{
+"word": "commands.",
+"startMs": 22989,
+"endMs": 23679,
+"cue": "mm03"
+},
+{
+"word": "mm",
+"startMs": 25649,
+"endMs": 25969,
+"cue": "mm04"
+},
+{
+"word": "cargo",
+"startMs": 25969,
+"endMs": 26289,
+"cue": "mm04"
+},
+{
+"word": "list",
+"startMs": 26289,
+"endMs": 26749,
+"cue": "mm04"
+},
+{
+"word": "reads",
+"startMs": 26749,
+"endMs": 27009,
+"cue": "mm04"
+},
+{
+"word": "the",
+"startMs": 27009,
+"endMs": 27289,
+"cue": "mm04"
+},
+{
+"word": "whole",
+"startMs": 27289,
+"endMs": 27449,
+"cue": "mm04"
+},
+{
+"word": "market",
+"startMs": 27449,
+"endMs": 27869,
+"cue": "mm04"
+},
+{
+"word": "from",
+"startMs": 27869,
+"endMs": 28129,
+"cue": "mm04"
+},
+{
+"word": "Monad:",
+"startMs": 28129,
+"endMs": 28729,
+"cue": "mm04"
+},
+{
+"word": "status,",
+"startMs": 28979,
+"endMs": 29649,
+"cue": "mm04"
+},
+{
+"word": "evidence",
+"startMs": 29769,
+"endMs": 29989,
+"cue": "mm04"
+},
+{
+"word": "score,",
+"startMs": 29989,
+"endMs": 30429,
+"cue": "mm04"
+},
+{
+"word": "claim,",
+"startMs": 30689,
+"endMs": 30949,
+"cue": "mm04"
+},
+{
+"word": "on-chain",
+"startMs": 31249,
+"endMs": 31629,
+"cue": "mm04"
+},
+{
+"word": "mark,",
+"startMs": 31629,
+"endMs": 31929,
+"cue": "mm04"
+},
+{
+"word": "ask",
+"startMs": 32229,
+"endMs": 32389,
+"cue": "mm04"
+},
+{
+"word": "and",
+"startMs": 32389,
+"endMs": 32649,
+"cue": "mm04"
+},
+{
+"word": "best",
+"startMs": 32649,
+"endMs": 32829,
+"cue": "mm04"
+},
+{
+"word": "bid",
+"startMs": 32829,
+"endMs": 33189,
+"cue": "mm04"
+},
+{
+"word": "for",
+"startMs": 33189,
+"endMs": 33449,
+"cue": "mm04"
+},
+{
+"word": "every",
+"startMs": 33449,
+"endMs": 33629,
+"cue": "mm04"
+},
+{
+"word": "note.",
+"startMs": 33629,
+"endMs": 34169,
+"cue": "mm04"
+},
+{
+"word": "mm",
+"startMs": 35809,
+"endMs": 36139,
+"cue": "mm05"
+},
+{
+"word": "cargo",
+"startMs": 36139,
+"endMs": 36399,
+"cue": "mm05"
+},
+{
+"word": "quote",
+"startMs": 36399,
+"endMs": 36909,
+"cue": "mm05"
+},
+{
+"word": "explains",
+"startMs": 36979,
+"endMs": 37259,
+"cue": "mm05"
+},
+{
+"word": "a",
+"startMs": 37259,
+"endMs": 37539,
+"cue": "mm05"
+},
+{
+"word": "price",
+"startMs": 37539,
+"endMs": 37819,
+"cue": "mm05"
+},
+{
+"word": "in",
+"startMs": 37819,
+"endMs": 38079,
+"cue": "mm05"
+},
+{
+"word": "plain",
+"startMs": 38079,
+"endMs": 38299,
+"cue": "mm05"
+},
+{
+"word": "words.",
+"startMs": 38299,
+"endMs": 38929,
+"cue": "mm05"
+},
+{
+"word": "This",
+"startMs": 39319,
+"endMs": 39459,
+"cue": "mm06"
+},
+{
+"word": "note",
+"startMs": 39459,
+"endMs": 39719,
+"cue": "mm06"
+},
+{
+"word": "is",
+"startMs": 39719,
+"endMs": 39959,
+"cue": "mm06"
+},
+{
+"word": "paused",
+"startMs": 39959,
+"endMs": 40259,
+"cue": "mm06"
+},
+{
+"word": "after",
+"startMs": 40259,
+"endMs": 40819,
+"cue": "mm06"
+},
+{
+"word": "a",
+"startMs": 40819,
+"endMs": 40959,
+"cue": "mm06"
+},
+{
+"word": "temperature",
+"startMs": 40959,
+"endMs": 41319,
+"cue": "mm06"
+},
+{
+"word": "excursion.",
+"startMs": 41319,
+"endMs": 42339,
+"cue": "mm06"
+},
+{
+"word": "Its",
+"startMs": 42699,
+"endMs": 42819,
+"cue": "mm06"
+},
+{
+"word": "evidence",
+"startMs": 42819,
+"endMs": 43079,
+"cue": "mm06"
+},
+{
+"word": "score",
+"startMs": 43079,
+"endMs": 43599,
+"cue": "mm06"
+},
+{
+"word": "is",
+"startMs": 43599,
+"endMs": 43899,
+"cue": "mm06"
+},
+{
+"word": "forty-eight,",
+"startMs": 43899,
+"endMs": 44639,
+"cue": "mm06"
+},
+{
+"word": "so",
+"startMs": 44839,
+"endMs": 44879,
+"cue": "mm06"
+},
+{
+"word": "the",
+"startMs": 44879,
+"endMs": 45019,
+"cue": "mm06"
+},
+{
+"word": "drawn",
+"startMs": 45019,
+"endMs": 45199,
+"cue": "mm06"
+},
+{
+"word": "leg",
+"startMs": 45199,
+"endMs": 45619,
+"cue": "mm06"
+},
+{
+"word": "is",
+"startMs": 45619,
+"endMs": 45819,
+"cue": "mm06"
+},
+{
+"word": "marked",
+"startMs": 45819,
+"endMs": 45999,
+"cue": "mm06"
+},
+{
+"word": "down,",
+"startMs": 45999,
+"endMs": 46399,
+"cue": "mm06"
+},
+{
+"word": "and",
+"startMs": 46399,
+"endMs": 46759,
+"cue": "mm06"
+},
+{
+"word": "down",
+"startMs": 46759,
+"endMs": 46999,
+"cue": "mm06"
+},
+{
+"word": "again",
+"startMs": 46999,
+"endMs": 47359,
+"cue": "mm06"
+},
+{
+"word": "while",
+"startMs": 47359,
+"endMs": 47659,
+"cue": "mm06"
+},
+{
+"word": "it's",
+"startMs": 47659,
+"endMs": 47859,
+"cue": "mm06"
+},
+{
+"word": "paused.",
+"startMs": 47859,
+"endMs": 48499,
+"cue": "mm06"
+},
+{
+"word": "So",
+"startMs": 50520,
+"endMs": 50640,
+"cue": "mm07"
+},
+{
+"word": "when",
+"startMs": 50640,
+"endMs": 50840,
+"cue": "mm07"
+},
+{
+"word": "the",
+"startMs": 50840,
+"endMs": 50980,
+"cue": "mm07"
+},
+{
+"word": "agent",
+"startMs": 50980,
+"endMs": 51280,
+"cue": "mm07"
+},
+{
+"word": "is",
+"startMs": 51280,
+"endMs": 51520,
+"cue": "mm07"
+},
+{
+"word": "asked",
+"startMs": 51520,
+"endMs": 51780,
+"cue": "mm07"
+},
+{
+"word": "to",
+"startMs": 51780,
+"endMs": 51980,
+"cue": "mm07"
+},
+{
+"word": "buy",
+"startMs": 51980,
+"endMs": 52160,
+"cue": "mm07"
+},
+{
+"word": "it,",
+"startMs": 52160,
+"endMs": 52420,
+"cue": "mm07"
+},
+{
+"word": "the",
+"startMs": 52610,
+"endMs": 52660,
+"cue": "mm07"
+},
+{
+"word": "plugin",
+"startMs": 52660,
+"endMs": 52920,
+"cue": "mm07"
+},
+{
+"word": "refuses",
+"startMs": 52920,
+"endMs": 53440,
+"cue": "mm07"
+},
+{
+"word": "before",
+"startMs": 53440,
+"endMs": 53940,
+"cue": "mm07"
+},
+{
+"word": "anything",
+"startMs": 53940,
+"endMs": 54320,
+"cue": "mm07"
+},
+{
+"word": "is",
+"startMs": 54320,
+"endMs": 54620,
+"cue": "mm07"
+},
+{
+"word": "signed.",
+"startMs": 54620,
+"endMs": 55170,
+"cue": "mm07"
+},
+{
+"word": "Paused,",
+"startMs": 55589,
+"endMs": 56019,
+"cue": "mm08"
+},
+{
+"word": "evidence",
+"startMs": 56179,
+"endMs": 56359,
+"cue": "mm08"
+},
+{
+"word": "below",
+"startMs": 56359,
+"endMs": 56819,
+"cue": "mm08"
+},
+{
+"word": "the",
+"startMs": 56819,
+"endMs": 57059,
+"cue": "mm08"
+},
+{
+"word": "minimum,",
+"startMs": 57059,
+"endMs": 57639,
+"cue": "mm08"
+},
+{
+"word": "ask",
+"startMs": 57719,
+"endMs": 57959,
+"cue": "mm08"
+},
+{
+"word": "above",
+"startMs": 57959,
+"endMs": 58259,
+"cue": "mm08"
+},
+{
+"word": "the",
+"startMs": 58259,
+"endMs": 58439,
+"cue": "mm08"
+},
+{
+"word": "mark.",
+"startMs": 58439,
+"endMs": 58879,
+"cue": "mm08"
+},
+{
+"word": "Nothing",
+"startMs": 59159,
+"endMs": 59459,
+"cue": "mm08"
+},
+{
+"word": "reaches",
+"startMs": 59459,
+"endMs": 59779,
+"cue": "mm08"
+},
+{
+"word": "the",
+"startMs": 59779,
+"endMs": 60059,
+"cue": "mm08"
+},
+{
+"word": "wallet.",
+"startMs": 60059,
+"endMs": 60579,
+"cue": "mm08"
+},
+{
+"word": "mm",
+"startMs": 62238,
+"endMs": 62708,
+"cue": "mm09"
+},
+{
+"word": "cargo",
+"startMs": 62708,
+"endMs": 63108,
+"cue": "mm09"
+},
+{
+"word": "scan",
+"startMs": 63108,
+"endMs": 63588,
+"cue": "mm09"
+},
+{
+"word": "is",
+"startMs": 63588,
+"endMs": 63988,
+"cue": "mm09"
+},
+{
+"word": "the",
+"startMs": 63988,
+"endMs": 64128,
+"cue": "mm09"
+},
+{
+"word": "strategy",
+"startMs": 64128,
+"endMs": 64568,
+"cue": "mm09"
+},
+{
+"word": "command.",
+"startMs": 64568,
+"endMs": 65248,
+"cue": "mm09"
+},
+{
+"word": "It",
+"startMs": 65598,
+"endMs": 65668,
+"cue": "mm09"
+},
+{
+"word": "checks",
+"startMs": 65668,
+"endMs": 65868,
+"cue": "mm09"
+},
+{
+"word": "every",
+"startMs": 65868,
+"endMs": 66268,
+"cue": "mm09"
+},
+{
+"word": "note",
+"startMs": 66268,
+"endMs": 66568,
+"cue": "mm09"
+},
+{
+"word": "against",
+"startMs": 66568,
+"endMs": 66888,
+"cue": "mm09"
+},
+{
+"word": "your",
+"startMs": 66888,
+"endMs": 67148,
+"cue": "mm09"
+},
+{
+"word": "rules",
+"startMs": 67148,
+"endMs": 67468,
+"cue": "mm09"
+},
+{
+"word": "and",
+"startMs": 67468,
+"endMs": 67788,
+"cue": "mm09"
+},
+{
+"word": "your",
+"startMs": 67788,
+"endMs": 67908,
+"cue": "mm09"
+},
+{
+"word": "budget,",
+"startMs": 67908,
+"endMs": 68228,
+"cue": "mm09"
+},
+{
+"word": "and",
+"startMs": 68228,
+"endMs": 68548,
+"cue": "mm09"
+},
+{
+"word": "explains",
+"startMs": 68548,
+"endMs": 68928,
+"cue": "mm09"
+},
+{
+"word": "each",
+"startMs": 68928,
+"endMs": 69298,
+"cue": "mm09"
+},
+{
+"word": "decision.",
+"startMs": 69358,
+"endMs": 70178,
+"cue": "mm09"
+},
+{
+"word": "Right",
+"startMs": 70602,
+"endMs": 70712,
+"cue": "mm10"
+},
+{
+"word": "now",
+"startMs": 70712,
+"endMs": 70852,
+"cue": "mm10"
+},
+{
+"word": "nothing",
+"startMs": 70852,
+"endMs": 71112,
+"cue": "mm10"
+},
+{
+"word": "qualifies,",
+"startMs": 71112,
+"endMs": 71472,
+"cue": "mm10"
+},
+{
+"word": "so",
+"startMs": 71992,
+"endMs": 72072,
+"cue": "mm10"
+},
+{
+"word": "nothing",
+"startMs": 72072,
+"endMs": 72272,
+"cue": "mm10"
+},
+{
+"word": "is",
+"startMs": 72272,
+"endMs": 72592,
+"cue": "mm10"
+},
+{
+"word": "bought.",
+"startMs": 72662,
+"endMs": 73022,
+"cue": "mm10"
+},
+{
+"word": "Earlier,",
+"startMs": 74669,
+"endMs": 74919,
+"cue": "mm11"
+},
+{
+"word": "a",
+"startMs": 75179,
+"endMs": 75199,
+"cue": "mm11"
+},
+{
+"word": "note",
+"startMs": 75199,
+"endMs": 75459,
+"cue": "mm11"
+},
+{
+"word": "was",
+"startMs": 75459,
+"endMs": 75659,
+"cue": "mm11"
+},
+{
+"word": "offered",
+"startMs": 75659,
+"endMs": 76039,
+"cue": "mm11"
+},
+{
+"word": "one",
+"startMs": 76039,
+"endMs": 76319,
+"cue": "mm11"
+},
+{
+"word": "percent",
+"startMs": 76319,
+"endMs": 76739,
+"cue": "mm11"
+},
+{
+"word": "under",
+"startMs": 76739,
+"endMs": 77059,
+"cue": "mm11"
+},
+{
+"word": "its",
+"startMs": 77059,
+"endMs": 77199,
+"cue": "mm11"
+},
+{
+"word": "mark,",
+"startMs": 77199,
+"endMs": 77459,
+"cue": "mm11"
+},
+{
+"word": "with",
+"startMs": 77719,
+"endMs": 77759,
+"cue": "mm11"
+},
+{
+"word": "a",
+"startMs": 77759,
+"endMs": 77839,
+"cue": "mm11"
+},
+{
+"word": "perfect",
+"startMs": 77839,
+"endMs": 78199,
+"cue": "mm11"
+},
+{
+"word": "evidence",
+"startMs": 78199,
+"endMs": 78679,
+"cue": "mm11"
+},
+{
+"word": "score.",
+"startMs": 78679,
+"endMs": 79289,
+"cue": "mm11"
+},
+{
+"word": "The",
+"startMs": 79599,
+"endMs": 79659,
+"cue": "mm11"
+},
+{
+"word": "agent",
+"startMs": 79659,
+"endMs": 79899,
+"cue": "mm11"
+},
+{
+"word": "bought",
+"startMs": 79899,
+"endMs": 80239,
+"cue": "mm11"
+},
+{
+"word": "it.",
+"startMs": 80239,
+"endMs": 80629,
+"cue": "mm11"
+},
+{
+"word": "Two",
+"startMs": 81018,
+"endMs": 81138,
+"cue": "mm12"
+},
+{
+"word": "transactions:",
+"startMs": 81138,
+"endMs": 81778,
+"cue": "mm12"
+},
+{
+"word": "an",
+"startMs": 82258,
+"endMs": 82298,
+"cue": "mm12"
+},
+{
+"word": "exact",
+"startMs": 82298,
+"endMs": 82718,
+"cue": "mm12"
+},
+{
+"word": "USDC",
+"startMs": 82778,
+"endMs": 83878,
+"cue": "mm12"
+},
+{
+"word": "approval,",
+"startMs": 83878,
+"endMs": 84318,
+"cue": "mm12"
+},
+{
+"word": "then",
+"startMs": 84658,
+"endMs": 84758,
+"cue": "mm12"
+},
+{
+"word": "the",
+"startMs": 84758,
+"endMs": 84878,
+"cue": "mm12"
+},
+{
+"word": "buy.",
+"startMs": 84878,
+"endMs": 85368,
+"cue": "mm12"
+},
+{
+"word": "MetaMask",
+"startMs": 85748,
+"endMs": 86258,
+"cue": "mm12"
+},
+{
+"word": "held",
+"startMs": 86258,
+"endMs": 86658,
+"cue": "mm12"
+},
+{
+"word": "each",
+"startMs": 86658,
+"endMs": 86918,
+"cue": "mm12"
+},
+{
+"word": "one",
+"startMs": 86918,
+"endMs": 87218,
+"cue": "mm12"
+},
+{
+"word": "until",
+"startMs": 87218,
+"endMs": 87498,
+"cue": "mm12"
+},
+{
+"word": "the",
+"startMs": 87498,
+"endMs": 87618,
+"cue": "mm12"
+},
+{
+"word": "owner",
+"startMs": 87618,
+"endMs": 87858,
+"cue": "mm12"
+},
+{
+"word": "approved",
+"startMs": 87858,
+"endMs": 88358,
+"cue": "mm12"
+},
+{
+"word": "it",
+"startMs": 88358,
+"endMs": 88638,
+"cue": "mm12"
+},
+{
+"word": "by",
+"startMs": 88728,
+"endMs": 88798,
+"cue": "mm12"
+},
+{
+"word": "email.",
+"startMs": 88798,
+"endMs": 89408,
+"cue": "mm12"
+},
+{
+"word": "Both",
+"startMs": 91091,
+"endMs": 91241,
+"cue": "mm13"
+},
+{
+"word": "landed",
+"startMs": 91241,
+"endMs": 91641,
+"cue": "mm13"
+},
+{
+"word": "on",
+"startMs": 91641,
+"endMs": 91861,
+"cue": "mm13"
+},
+{
+"word": "Monad:",
+"startMs": 91861,
+"endMs": 92471,
+"cue": "mm13"
+},
+{
+"word": "the",
+"startMs": 92691,
+"endMs": 92741,
+"cue": "mm13"
+},
+{
+"word": "approval,",
+"startMs": 92741,
+"endMs": 93041,
+"cue": "mm13"
+},
+{
+"word": "and",
+"startMs": 93041,
+"endMs": 93401,
+"cue": "mm13"
+},
+{
+"word": "the",
+"startMs": 93401,
+"endMs": 93501,
+"cue": "mm13"
+},
+{
+"word": "buy,",
+"startMs": 93501,
+"endMs": 93701,
+"cue": "mm13"
+},
+{
+"word": "for",
+"startMs": 93701,
+"endMs": 94081,
+"cue": "mm13"
+},
+{
+"word": "about",
+"startMs": 94081,
+"endMs": 94281,
+"cue": "mm13"
+},
+{
+"word": "three",
+"startMs": 94281,
+"endMs": 94681,
+"cue": "mm13"
+},
+{
+"word": "USDC.",
+"startMs": 94681,
+"endMs": 95961,
+"cue": "mm13"
+},
+{
+"word": "The",
+"startMs": 99121,
+"endMs": 99181,
+"cue": "mm14"
+},
+{
+"word": "agent",
+"startMs": 99181,
+"endMs": 99421,
+"cue": "mm14"
+},
+{
+"word": "wallet",
+"startMs": 99421,
+"endMs": 99801,
+"cue": "mm14"
+},
+{
+"word": "is",
+"startMs": 99801,
+"endMs": 100161,
+"cue": "mm14"
+},
+{
+"word": "now",
+"startMs": 100161,
+"endMs": 100381,
+"cue": "mm14"
+},
+{
+"word": "the",
+"startMs": 100381,
+"endMs": 100661,
+"cue": "mm14"
+},
+{
+"word": "note's",
+"startMs": 100661,
+"endMs": 101081,
+"cue": "mm14"
+},
+{
+"word": "financier",
+"startMs": 101081,
+"endMs": 101721,
+"cue": "mm14"
+},
+{
+"word": "of",
+"startMs": 101721,
+"endMs": 101941,
+"cue": "mm14"
+},
+{
+"word": "record.",
+"startMs": 101941,
+"endMs": 102491,
+"cue": "mm14"
+},
+{
+"word": "When",
+"startMs": 102831,
+"endMs": 102901,
+"cue": "mm14"
+},
+{
+"word": "the",
+"startMs": 102901,
+"endMs": 103021,
+"cue": "mm14"
+},
+{
+"word": "importer",
+"startMs": 103021,
+"endMs": 103381,
+"cue": "mm14"
+},
+{
+"word": "pays,",
+"startMs": 103381,
+"endMs": 103761,
+"cue": "mm14"
+},
+{
+"word": "it",
+"startMs": 104181,
+"endMs": 104201,
+"cue": "mm14"
+},
+{
+"word": "receives",
+"startMs": 104201,
+"endMs": 104481,
+"cue": "mm14"
+},
+{
+"word": "principal",
+"startMs": 104481,
+"endMs": 105021,
+"cue": "mm14"
+},
+{
+"word": "plus",
+"startMs": 105021,
+"endMs": 105421,
+"cue": "mm14"
+},
+{
+"word": "fee.",
+"startMs": 105421,
+"endMs": 105931,
+"cue": "mm14"
+},
+{
+"word": "And",
+"startMs": 106387,
+"endMs": 106457,
+"cue": "mm15"
+},
+{
+"word": "the",
+"startMs": 106457,
+"endMs": 106537,
+"cue": "mm15"
+},
+{
+"word": "trading",
+"startMs": 106537,
+"endMs": 106777,
+"cue": "mm15"
+},
+{
+"word": "page's",
+"startMs": 106777,
+"endMs": 107397,
+"cue": "mm15"
+},
+{
+"word": "market",
+"startMs": 107397,
+"endMs": 107597,
+"cue": "mm15"
+},
+{
+"word": "feed,",
+"startMs": 107597,
+"endMs": 108197,
+"cue": "mm15"
+},
+{
+"word": "indexed",
+"startMs": 108277,
+"endMs": 108497,
+"cue": "mm15"
+},
+{
+"word": "by",
+"startMs": 108497,
+"endMs": 108837,
+"cue": "mm15"
+},
+{
+"word": "Envio,",
+"startMs": 108837,
+"endMs": 109537,
+"cue": "mm15"
+},
+{
+"word": "shows",
+"startMs": 109697,
+"endMs": 109897,
+"cue": "mm15"
+},
+{
+"word": "the",
+"startMs": 109897,
+"endMs": 110157,
+"cue": "mm15"
+},
+{
+"word": "fill.",
+"startMs": 110157,
+"endMs": 110587,
+"cue": "mm15"
+},
+{
+"word": "Two",
+"startMs": 112068,
+"endMs": 112178,
+"cue": "mm16"
+},
+{
+"word": "layers",
+"startMs": 112178,
+"endMs": 112458,
+"cue": "mm16"
+},
+{
+"word": "keep",
+"startMs": 112458,
+"endMs": 112928,
+"cue": "mm16"
+},
+{
+"word": "this",
+"startMs": 113008,
+"endMs": 113078,
+"cue": "mm16"
+},
+{
+"word": "safe.",
+"startMs": 113078,
+"endMs": 113568,
+"cue": "mm16"
+},
+{
+"word": "The",
+"startMs": 113828,
+"endMs": 113878,
+"cue": "mm16"
+},
+{
+"word": "plugin",
+"startMs": 113878,
+"endMs": 114118,
+"cue": "mm16"
+},
+{
+"word": "enforces",
+"startMs": 114118,
+"endMs": 114678,
+"cue": "mm16"
+},
+{
+"word": "evidence,",
+"startMs": 114678,
+"endMs": 115508,
+"cue": "mm16"
+},
+{
+"word": "price",
+"startMs": 115588,
+"endMs": 115718,
+"cue": "mm16"
+},
+{
+"word": "and",
+"startMs": 115718,
+"endMs": 116078,
+"cue": "mm16"
+},
+{
+"word": "budget",
+"startMs": 116078,
+"endMs": 116338,
+"cue": "mm16"
+},
+{
+"word": "rules.",
+"startMs": 116338,
+"endMs": 117028,
+"cue": "mm16"
+},
+{
+"word": "MetaMask's",
+"startMs": 117403,
+"endMs": 118133,
+"cue": "mm17"
+},
+{
+"word": "Guard",
+"startMs": 118133,
+"endMs": 118393,
+"cue": "mm17"
+},
+{
+"word": "mode",
+"startMs": 118393,
+"endMs": 118713,
+"cue": "mm17"
+},
+{
+"word": "adds",
+"startMs": 118713,
+"endMs": 119093,
+"cue": "mm17"
+},
+{
+"word": "allowlists,",
+"startMs": 119093,
+"endMs": 120003,
+"cue": "mm17"
+},
+{
+"word": "an",
+"startMs": 120113,
+"endMs": 120173,
+"cue": "mm17"
+},
+{
+"word": "outflow",
+"startMs": 120173,
+"endMs": 120613,
+"cue": "mm17"
+},
+{
+"word": "limit",
+"startMs": 120613,
+"endMs": 120973,
+"cue": "mm17"
+},
+{
+"word": "and",
+"startMs": 120973,
+"endMs": 121233,
+"cue": "mm17"
+},
+{
+"word": "two-factor",
+"startMs": 121233,
+"endMs": 121763,
+"cue": "mm17"
+},
+{
+"word": "approval",
+"startMs": 121833,
+"endMs": 122133,
+"cue": "mm17"
+},
+{
+"word": "on",
+"startMs": 122133,
+"endMs": 122533,
+"cue": "mm17"
+},
+{
+"word": "every",
+"startMs": 122533,
+"endMs": 122793,
+"cue": "mm17"
+},
+{
+"word": "transaction.",
+"startMs": 122793,
+"endMs": 123683,
+"cue": "mm17"
+},
+{
+"word": "A",
+"startMs": 125122,
+"endMs": 125162,
+"cue": "mm18"
+},
+{
+"word": "skill",
+"startMs": 125162,
+"endMs": 125422,
+"cue": "mm18"
+},
+{
+"word": "file",
+"startMs": 125422,
+"endMs": 125762,
+"cue": "mm18"
+},
+{
+"word": "teaches",
+"startMs": 125762,
+"endMs": 126222,
+"cue": "mm18"
+},
+{
+"word": "any",
+"startMs": 126222,
+"endMs": 126602,
+"cue": "mm18"
+},
+{
+"word": "agent",
+"startMs": 126602,
+"endMs": 127022,
+"cue": "mm18"
+},
+{
+"word": "to",
+"startMs": 127022,
+"endMs": 127222,
+"cue": "mm18"
+},
+{
+"word": "plan",
+"startMs": 127222,
+"endMs": 127402,
+"cue": "mm18"
+},
+{
+"word": "first,",
+"startMs": 127402,
+"endMs": 128092,
+"cue": "mm18"
+},
+{
+"word": "explain",
+"startMs": 128282,
+"endMs": 128602,
+"cue": "mm18"
+},
+{
+"word": "refusals,",
+"startMs": 128602,
+"endMs": 129462,
+"cue": "mm18"
+},
+{
+"word": "and",
+"startMs": 129741,
+"endMs": 129762,
+"cue": "mm18"
+},
+{
+"word": "never",
+"startMs": 129762,
+"endMs": 129982,
+"cue": "mm18"
+},
+{
+"word": "loosen",
+"startMs": 129982,
+"endMs": 130342,
+"cue": "mm18"
+},
+{
+"word": "a",
+"startMs": 130342,
+"endMs": 130622,
+"cue": "mm18"
+},
+{
+"word": "limit",
+"startMs": 130622,
+"endMs": 130962,
+"cue": "mm18"
+},
+{
+"word": "to",
+"startMs": 131021,
+"endMs": 131082,
+"cue": "mm18"
+},
+{
+"word": "force",
+"startMs": 131082,
+"endMs": 131302,
+"cue": "mm18"
+},
+{
+"word": "a",
+"startMs": 131302,
+"endMs": 131522,
+"cue": "mm18"
+},
+{
+"word": "trade.",
+"startMs": 131522,
+"endMs": 132102,
+"cue": "mm18"
+},
+{
+"word": "And",
+"startMs": 132535,
+"endMs": 132605,
+"cue": "mm19"
+},
+{
+"word": "we",
+"startMs": 132605,
+"endMs": 132705,
+"cue": "mm19"
+},
+{
+"word": "made",
+"startMs": 132705,
+"endMs": 133025,
+"cue": "mm19"
+},
+{
+"word": "Agent",
+"startMs": 133085,
+"endMs": 133325,
+"cue": "mm19"
+},
+{
+"word": "Wallet",
+"startMs": 133325,
+"endMs": 133705,
+"cue": "mm19"
+},
+{
+"word": "work",
+"startMs": 133705,
+"endMs": 134085,
+"cue": "mm19"
+},
+{
+"word": "on",
+"startMs": 134085,
+"endMs": 134365,
+"cue": "mm19"
+},
+{
+"word": "Monad",
+"startMs": 134365,
+"endMs": 134865,
+"cue": "mm19"
+},
+{
+"word": "testnet.",
+"startMs": 134865,
+"endMs": 135565,
+"cue": "mm19"
+},
+{
+"word": "The",
+"startMs": 135875,
+"endMs": 135925,
+"cue": "mm19"
+},
+{
+"word": "plugin",
+"startMs": 135925,
+"endMs": 136165,
+"cue": "mm19"
+},
+{
+"word": "sends",
+"startMs": 136165,
+"endMs": 136525,
+"cue": "mm19"
+},
+{
+"word": "its",
+"startMs": 136525,
+"endMs": 136825,
+"cue": "mm19"
+},
+{
+"word": "own",
+"startMs": 136825,
+"endMs": 137065,
+"cue": "mm19"
+},
+{
+"word": "gas",
+"startMs": 137065,
+"endMs": 137365,
+"cue": "mm19"
+},
+{
+"word": "and",
+"startMs": 137365,
+"endMs": 137705,
+"cue": "mm19"
+},
+{
+"word": "fees,",
+"startMs": 137705,
+"endMs": 137985,
+"cue": "mm19"
+},
+{
+"word": "and",
+"startMs": 137985,
+"endMs": 138365,
+"cue": "mm19"
+},
+{
+"word": "loads",
+"startMs": 138365,
+"endMs": 138585,
+"cue": "mm19"
+},
+{
+"word": "the",
+"startMs": 138585,
+"endMs": 138905,
+"cue": "mm19"
+},
+{
+"word": "host's",
+"startMs": 138905,
+"endMs": 139425,
+"cue": "mm19"
+},
+{
+"word": "SDK.",
+"startMs": 139425,
+"endMs": 140325,
+"cue": "mm19"
+},
+{
+"word": "Cargo",
+"startMs": 141791,
+"endMs": 141991,
+"cue": "mm20"
+},
+{
+"word": "notes",
+"startMs": 141991,
+"endMs": 142351,
+"cue": "mm20"
+},
+{
+"word": "for",
+"startMs": 142351,
+"endMs": 142650,
+"cue": "mm20"
+},
+{
+"word": "MetaMask",
+"startMs": 142650,
+"endMs": 143250,
+"cue": "mm20"
+},
+{
+"word": "Agent",
+"startMs": 143250,
+"endMs": 143891,
+"cue": "mm20"
+},
+{
+"word": "Wallet.",
+"startMs": 143891,
+"endMs": 144500,
+"cue": "mm20"
+},
+{
+"word": "Evidence-aware",
+"startMs": 144791,
+"endMs": 145430,
+"cue": "mm20"
+},
+{
+"word": "credit,",
+"startMs": 145430,
+"endMs": 145940,
+"cue": "mm20"
+},
+{
+"word": "traded",
+"startMs": 146071,
+"endMs": 146291,
+"cue": "mm20"
+},
+{
+"word": "by",
+"startMs": 146291,
+"endMs": 146571,
+"cue": "mm20"
+},
+{
+"word": "agents,",
+"startMs": 146571,
+"endMs": 146951,
+"cue": "mm20"
+},
+{
+"word": "on",
+"startMs": 147271,
+"endMs": 147331,
+"cue": "mm20"
+},
+{
+"word": "Monad.",
+"startMs": 147331,
+"endMs": 147940,
+"cue": "mm20"
+}
+]

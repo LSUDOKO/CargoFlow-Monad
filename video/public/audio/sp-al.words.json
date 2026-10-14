@@ -1,0 +1,812 @@
+[
+{
+"word": "CargoFlow's",
+"startMs": 370,
+"endMs": 1230,
+"cue": "al01"
+},
+{
+"word": "hosted",
+"startMs": 1230,
+"endMs": 1759,
+"cue": "al01"
+},
+{
+"word": "API",
+"startMs": 1819,
+"endMs": 2190,
+"cue": "al01"
+},
+{
+"word": "runs",
+"startMs": 2190,
+"endMs": 2510,
+"cue": "al01"
+},
+{
+"word": "on",
+"startMs": 2510,
+"endMs": 2830,
+"cue": "al01"
+},
+{
+"word": "Alchemy's",
+"startMs": 2830,
+"endMs": 3470,
+"cue": "al01"
+},
+{
+"word": "Monad",
+"startMs": 3470,
+"endMs": 3850,
+"cue": "al01"
+},
+{
+"word": "testnet",
+"startMs": 3850,
+"endMs": 4330,
+"cue": "al01"
+},
+{
+"word": "RPC,",
+"startMs": 4330,
+"endMs": 5439,
+"cue": "al01"
+},
+{
+"word": "as",
+"startMs": 5699,
+"endMs": 5790,
+"cue": "al01"
+},
+{
+"word": "its",
+"startMs": 5790,
+"endMs": 6020,
+"cue": "al01"
+},
+{
+"word": "primary",
+"startMs": 6080,
+"endMs": 6210,
+"cue": "al01"
+},
+{
+"word": "endpoint.",
+"startMs": 6210,
+"endMs": 7270,
+"cue": "al01"
+},
+{
+"word": "The",
+"startMs": 8547,
+"endMs": 8597,
+"cue": "al02"
+},
+{
+"word": "health",
+"startMs": 8597,
+"endMs": 8777,
+"cue": "al02"
+},
+{
+"word": "check",
+"startMs": 8777,
+"endMs": 9036,
+"cue": "al02"
+},
+{
+"word": "says",
+"startMs": 9036,
+"endMs": 9377,
+"cue": "al02"
+},
+{
+"word": "it:",
+"startMs": 9377,
+"endMs": 9647,
+"cue": "al02"
+},
+{
+"word": "RPC,",
+"startMs": 9797,
+"endMs": 10867,
+"cue": "al02"
+},
+{
+"word": "primary.",
+"startMs": 10927,
+"endMs": 11547,
+"cue": "al02"
+},
+{
+"word": "The",
+"startMs": 11867,
+"endMs": 11917,
+"cue": "al02"
+},
+{
+"word": "service",
+"startMs": 11917,
+"endMs": 12177,
+"cue": "al02"
+},
+{
+"word": "logs",
+"startMs": 12177,
+"endMs": 12577,
+"cue": "al02"
+},
+{
+"word": "show",
+"startMs": 12577,
+"endMs": 12997,
+"cue": "al02"
+},
+{
+"word": "the",
+"startMs": 12997,
+"endMs": 13177,
+"cue": "al02"
+},
+{
+"word": "Alchemy",
+"startMs": 13177,
+"endMs": 13517,
+"cue": "al02"
+},
+{
+"word": "endpoint,",
+"startMs": 13517,
+"endMs": 13937,
+"cue": "al02"
+},
+{
+"word": "with",
+"startMs": 14437,
+"endMs": 14497,
+"cue": "al02"
+},
+{
+"word": "Monad's",
+"startMs": 14497,
+"endMs": 15147,
+"cue": "al02"
+},
+{
+"word": "public",
+"startMs": 15207,
+"endMs": 15397,
+"cue": "al02"
+},
+{
+"word": "RPC",
+"startMs": 15397,
+"endMs": 16337,
+"cue": "al02"
+},
+{
+"word": "as",
+"startMs": 16337,
+"endMs": 16616,
+"cue": "al02"
+},
+{
+"word": "the",
+"startMs": 16616,
+"endMs": 16777,
+"cue": "al02"
+},
+{
+"word": "fallback.",
+"startMs": 16777,
+"endMs": 17427,
+"cue": "al02"
+},
+{
+"word": "Behind",
+"startMs": 19350,
+"endMs": 19590,
+"cue": "al03"
+},
+{
+"word": "it",
+"startMs": 19590,
+"endMs": 19810,
+"cue": "al03"
+},
+{
+"word": "is",
+"startMs": 19810,
+"endMs": 20031,
+"cue": "al03"
+},
+{
+"word": "a",
+"startMs": 20031,
+"endMs": 20170,
+"cue": "al03"
+},
+{
+"word": "failover",
+"startMs": 20170,
+"endMs": 20770,
+"cue": "al03"
+},
+{
+"word": "client.",
+"startMs": 20770,
+"endMs": 21330,
+"cue": "al03"
+},
+{
+"word": "Alchemy",
+"startMs": 21660,
+"endMs": 21930,
+"cue": "al03"
+},
+{
+"word": "goes",
+"startMs": 21930,
+"endMs": 22270,
+"cue": "al03"
+},
+{
+"word": "first.",
+"startMs": 22270,
+"endMs": 22950,
+"cue": "al03"
+},
+{
+"word": "If",
+"startMs": 23260,
+"endMs": 23351,
+"cue": "al03"
+},
+{
+"word": "it's",
+"startMs": 23351,
+"endMs": 23531,
+"cue": "al03"
+},
+{
+"word": "unreachable,",
+"startMs": 23531,
+"endMs": 24461,
+"cue": "al03"
+},
+{
+"word": "errors,",
+"startMs": 24520,
+"endMs": 24650,
+"cue": "al03"
+},
+{
+"word": "or",
+"startMs": 25150,
+"endMs": 25190,
+"cue": "al03"
+},
+{
+"word": "rate-limits,",
+"startMs": 25190,
+"endMs": 26040,
+"cue": "al03"
+},
+{
+"word": "traffic",
+"startMs": 26101,
+"endMs": 26310,
+"cue": "al03"
+},
+{
+"word": "moves",
+"startMs": 26310,
+"endMs": 26711,
+"cue": "al03"
+},
+{
+"word": "to",
+"startMs": 26711,
+"endMs": 26990,
+"cue": "al03"
+},
+{
+"word": "the",
+"startMs": 26990,
+"endMs": 27070,
+"cue": "al03"
+},
+{
+"word": "fallback,",
+"startMs": 27070,
+"endMs": 27531,
+"cue": "al03"
+},
+{
+"word": "and",
+"startMs": 27730,
+"endMs": 27770,
+"cue": "al03"
+},
+{
+"word": "returns",
+"startMs": 27770,
+"endMs": 28110,
+"cue": "al03"
+},
+{
+"word": "on",
+"startMs": 28110,
+"endMs": 28491,
+"cue": "al03"
+},
+{
+"word": "its",
+"startMs": 28491,
+"endMs": 28650,
+"cue": "al03"
+},
+{
+"word": "own",
+"startMs": 28650,
+"endMs": 28930,
+"cue": "al03"
+},
+{
+"word": "after",
+"startMs": 28930,
+"endMs": 29250,
+"cue": "al03"
+},
+{
+"word": "a",
+"startMs": 29250,
+"endMs": 29410,
+"cue": "al03"
+},
+{
+"word": "cooldown.",
+"startMs": 29410,
+"endMs": 30120,
+"cue": "al03"
+},
+{
+"word": "Reverts",
+"startMs": 30844,
+"endMs": 31114,
+"cue": "al04"
+},
+{
+"word": "never",
+"startMs": 31114,
+"endMs": 31414,
+"cue": "al04"
+},
+{
+"word": "trigger",
+"startMs": 31414,
+"endMs": 31814,
+"cue": "al04"
+},
+{
+"word": "a",
+"startMs": 31814,
+"endMs": 32014,
+"cue": "al04"
+},
+{
+"word": "failover,",
+"startMs": 32014,
+"endMs": 32723,
+"cue": "al04"
+},
+{
+"word": "so",
+"startMs": 32824,
+"endMs": 32954,
+"cue": "al04"
+},
+{
+"word": "behaviour",
+"startMs": 32954,
+"endMs": 33294,
+"cue": "al04"
+},
+{
+"word": "stays",
+"startMs": 33294,
+"endMs": 33734,
+"cue": "al04"
+},
+{
+"word": "deterministic.",
+"startMs": 33734,
+"endMs": 34824,
+"cue": "al04"
+},
+{
+"word": "Alchemy's",
+"startMs": 36765,
+"endMs": 37245,
+"cue": "al05"
+},
+{
+"word": "free",
+"startMs": 37245,
+"endMs": 37445,
+"cue": "al05"
+},
+{
+"word": "tier",
+"startMs": 37445,
+"endMs": 37725,
+"cue": "al05"
+},
+{
+"word": "allows",
+"startMs": 37725,
+"endMs": 38185,
+"cue": "al05"
+},
+{
+"word": "ten-block",
+"startMs": 38185,
+"endMs": 38925,
+"cue": "al05"
+},
+{
+"word": "log",
+"startMs": 38925,
+"endMs": 39305,
+"cue": "al05"
+},
+{
+"word": "queries",
+"startMs": 39305,
+"endMs": 39645,
+"cue": "al05"
+},
+{
+"word": "on",
+"startMs": 39645,
+"endMs": 40065,
+"cue": "al05"
+},
+{
+"word": "Monad,",
+"startMs": 40065,
+"endMs": 40545,
+"cue": "al05"
+},
+{
+"word": "so",
+"startMs": 40705,
+"endMs": 40805,
+"cue": "al05"
+},
+{
+"word": "the",
+"startMs": 40805,
+"endMs": 40925,
+"cue": "al05"
+},
+{
+"word": "indexer",
+"startMs": 40925,
+"endMs": 41505,
+"cue": "al05"
+},
+{
+"word": "reads",
+"startMs": 41505,
+"endMs": 41725,
+"cue": "al05"
+},
+{
+"word": "ten",
+"startMs": 41725,
+"endMs": 42045,
+"cue": "al05"
+},
+{
+"word": "blocks",
+"startMs": 42045,
+"endMs": 42345,
+"cue": "al05"
+},
+{
+"word": "at",
+"startMs": 42345,
+"endMs": 42665,
+"cue": "al05"
+},
+{
+"word": "a",
+"startMs": 42665,
+"endMs": 42765,
+"cue": "al05"
+},
+{
+"word": "time.",
+"startMs": 42765,
+"endMs": 43245,
+"cue": "al05"
+},
+{
+"word": "That's",
+"startMs": 43605,
+"endMs": 43785,
+"cue": "al05"
+},
+{
+"word": "about",
+"startMs": 43785,
+"endMs": 44065,
+"cue": "al05"
+},
+{
+"word": "two",
+"startMs": 44125,
+"endMs": 44245,
+"cue": "al05"
+},
+{
+"word": "and",
+"startMs": 44245,
+"endMs": 44405,
+"cue": "al05"
+},
+{
+"word": "a",
+"startMs": 44405,
+"endMs": 44465,
+"cue": "al05"
+},
+{
+"word": "half",
+"startMs": 44465,
+"endMs": 44665,
+"cue": "al05"
+},
+{
+"word": "calls",
+"startMs": 44665,
+"endMs": 44945,
+"cue": "al05"
+},
+{
+"word": "a",
+"startMs": 44945,
+"endMs": 45185,
+"cue": "al05"
+},
+{
+"word": "second.",
+"startMs": 45185,
+"endMs": 45725,
+"cue": "al05"
+},
+{
+"word": "Every",
+"startMs": 47582,
+"endMs": 47782,
+"cue": "al06"
+},
+{
+"word": "chain",
+"startMs": 47782,
+"endMs": 48042,
+"cue": "al06"
+},
+{
+"word": "read,",
+"startMs": 48042,
+"endMs": 48632,
+"cue": "al06"
+},
+{
+"word": "evidence",
+"startMs": 48712,
+"endMs": 48922,
+"cue": "al06"
+},
+{
+"word": "commit,",
+"startMs": 48922,
+"endMs": 49472,
+"cue": "al06"
+},
+{
+"word": "milestone",
+"startMs": 49732,
+"endMs": 50042,
+"cue": "al06"
+},
+{
+"word": "release",
+"startMs": 50042,
+"endMs": 50662,
+"cue": "al06"
+},
+{
+"word": "and",
+"startMs": 50662,
+"endMs": 50982,
+"cue": "al06"
+},
+{
+"word": "pause",
+"startMs": 50982,
+"endMs": 51242,
+"cue": "al06"
+},
+{
+"word": "goes",
+"startMs": 51242,
+"endMs": 51642,
+"cue": "al06"
+},
+{
+"word": "through",
+"startMs": 51642,
+"endMs": 51922,
+"cue": "al06"
+},
+{
+"word": "Alchemy.",
+"startMs": 51922,
+"endMs": 52522,
+"cue": "al06"
+},
+{
+"word": "So",
+"startMs": 54388,
+"endMs": 54488,
+"cue": "al07"
+},
+{
+"word": "the",
+"startMs": 54488,
+"endMs": 54608,
+"cue": "al07"
+},
+{
+"word": "shipment",
+"startMs": 54608,
+"endMs": 54868,
+"cue": "al07"
+},
+{
+"word": "dashboards,",
+"startMs": 54928,
+"endMs": 55608,
+"cue": "al07"
+},
+{
+"word": "the",
+"startMs": 55908,
+"endMs": 55968,
+"cue": "al07"
+},
+{
+"word": "evidence-gated",
+"startMs": 55968,
+"endMs": 56768,
+"cue": "al07"
+},
+{
+"word": "money",
+"startMs": 56768,
+"endMs": 57008,
+"cue": "al07"
+},
+{
+"word": "and",
+"startMs": 57008,
+"endMs": 57348,
+"cue": "al07"
+},
+{
+"word": "the",
+"startMs": 57348,
+"endMs": 57448,
+"cue": "al07"
+},
+{
+"word": "Cargo",
+"startMs": 57448,
+"endMs": 57688,
+"cue": "al07"
+},
+{
+"word": "Note",
+"startMs": 57688,
+"endMs": 58028,
+"cue": "al07"
+},
+{
+"word": "market",
+"startMs": 58028,
+"endMs": 58608,
+"cue": "al07"
+},
+{
+"word": "all",
+"startMs": 58688,
+"endMs": 58808,
+"cue": "al07"
+},
+{
+"word": "run",
+"startMs": 58808,
+"endMs": 59108,
+"cue": "al07"
+},
+{
+"word": "live",
+"startMs": 59108,
+"endMs": 59528,
+"cue": "al07"
+},
+{
+"word": "on",
+"startMs": 59528,
+"endMs": 59768,
+"cue": "al07"
+},
+{
+"word": "Monad,",
+"startMs": 59768,
+"endMs": 60338,
+"cue": "al07"
+},
+{
+"word": "through",
+"startMs": 60518,
+"endMs": 60648,
+"cue": "al07"
+},
+{
+"word": "Alchemy.",
+"startMs": 60648,
+"endMs": 61298,
+"cue": "al07"
+},
+{
+"word": "CargoFlow,",
+"startMs": 62988,
+"endMs": 63478,
+"cue": "al08"
+},
+{
+"word": "on",
+"startMs": 63698,
+"endMs": 63758,
+"cue": "al08"
+},
+{
+"word": "Monad,",
+"startMs": 63758,
+"endMs": 64258,
+"cue": "al08"
+},
+{
+"word": "powered",
+"startMs": 64368,
+"endMs": 64558,
+"cue": "al08"
+},
+{
+"word": "by",
+"startMs": 64558,
+"endMs": 64798,
+"cue": "al08"
+},
+{
+"word": "Alchemy.",
+"startMs": 64798,
+"endMs": 65378,
+"cue": "al08"
+}
+]

@@ -1,0 +1,254 @@
+[
+  {
+    "id": "mm01",
+    "video": "mm",
+    "scene": "intro",
+    "text": "CargoFlow's cargo notes plugin gives the MetaMask Agent Wallet a new trading superpower: evidence-aware credit trading on Monad."
+  },
+  {
+    "id": "mm02",
+    "video": "mm",
+    "scene": "intro",
+    "text": "An agent can find, price and buy Cargo Notes: short-dated trade-finance positions, priced by the cargo's own sensor evidence."
+  },
+  {
+    "id": "mm03",
+    "video": "mm",
+    "scene": "install",
+    "text": "It's a native mm plugin. Install it once, and the agent gets six new commands."
+  },
+  {
+    "id": "mm04",
+    "video": "mm",
+    "scene": "list",
+    "text": "mm cargo list reads the whole market from Monad: status, evidence score, claim, on-chain mark, ask and best bid for every note."
+  },
+  {
+    "id": "mm05",
+    "video": "mm",
+    "scene": "quote",
+    "text": "mm cargo quote explains a price in plain words."
+  },
+  {
+    "id": "mm06",
+    "video": "mm",
+    "scene": "quote",
+    "text": "This note is paused after a temperature excursion. Its evidence score is forty-eight, so the drawn leg is marked down, and down again while it's paused."
+  },
+  {
+    "id": "mm07",
+    "video": "mm",
+    "scene": "refuse",
+    "text": "So when the agent is asked to buy it, the plugin refuses before anything is signed."
+  },
+  {
+    "id": "mm08",
+    "video": "mm",
+    "scene": "refuse",
+    "text": "Paused, evidence below the minimum, ask above the mark. Nothing reaches the wallet."
+  },
+  {
+    "id": "mm09",
+    "video": "mm",
+    "scene": "scan",
+    "text": "mm cargo scan is the strategy command. It checks every note against your rules and your budget, and explains each decision."
+  },
+  {
+    "id": "mm10",
+    "video": "mm",
+    "scene": "scan",
+    "text": "Right now nothing qualifies, so nothing is bought."
+  },
+  {
+    "id": "mm11",
+    "video": "mm",
+    "scene": "buy",
+    "text": "Earlier, a note was offered one percent under its mark, with a perfect evidence score. The agent bought it."
+  },
+  {
+    "id": "mm12",
+    "video": "mm",
+    "scene": "buy",
+    "text": "Two transactions: an exact USDC approval, then the buy. MetaMask held each one until the owner approved it by email."
+  },
+  {
+    "id": "mm13",
+    "video": "mm",
+    "scene": "chain",
+    "text": "Both landed on Monad: the approval, and the buy, for about three USDC."
+  },
+  {
+    "id": "mm14",
+    "video": "mm",
+    "scene": "holder",
+    "text": "The agent wallet is now the note's financier of record. When the importer pays, it receives principal plus fee."
+  },
+  {
+    "id": "mm15",
+    "video": "mm",
+    "scene": "holder",
+    "text": "And the trading page's market feed, indexed by Envio, shows the fill."
+  },
+  {
+    "id": "mm16",
+    "video": "mm",
+    "scene": "safety",
+    "text": "Two layers keep this safe. The plugin enforces evidence, price and budget rules."
+  },
+  {
+    "id": "mm17",
+    "video": "mm",
+    "scene": "safety",
+    "text": "MetaMask's Guard mode adds allowlists, an outflow limit and two-factor approval on every transaction."
+  },
+  {
+    "id": "mm18",
+    "video": "mm",
+    "scene": "skill",
+    "text": "A skill file teaches any agent to plan first, explain refusals, and never loosen a limit to force a trade."
+  },
+  {
+    "id": "mm19",
+    "video": "mm",
+    "scene": "skill",
+    "text": "And we made Agent Wallet work on Monad testnet. The plugin sends its own gas and fees, and loads the host's SDK."
+  },
+  {
+    "id": "mm20",
+    "video": "mm",
+    "scene": "outro",
+    "text": "Cargo notes for MetaMask Agent Wallet. Evidence-aware credit, traded by agents, on Monad."
+  },
+  {
+    "id": "en01",
+    "video": "en",
+    "scene": "intro",
+    "text": "CargoFlow's Cargo Note market runs on Envio HyperIndex, reading Monad testnet through HyperSync."
+  },
+  {
+    "id": "en02",
+    "video": "en",
+    "scene": "config",
+    "text": "One config indexes three contracts: the note market, the financing controller and the evidence registry, from the deployment block."
+  },
+  {
+    "id": "en03",
+    "video": "en",
+    "scene": "schema",
+    "text": "Handlers turn every ask, bid, trade and transfer into entities: notes, trades, order events and market stats."
+  },
+  {
+    "id": "en04",
+    "video": "en",
+    "scene": "cloud",
+    "text": "It's deployed on Envio Cloud, synced to the chain head, behind a public GraphQL endpoint."
+  },
+  {
+    "id": "en05",
+    "video": "en",
+    "scene": "e2e",
+    "text": "Now, end to end. With the trading page open, we raise a bid on a note, on chain."
+  },
+  {
+    "id": "en06",
+    "video": "en",
+    "scene": "e2e",
+    "text": "The transaction is mined in about two and a half seconds. A second and a half later, HyperSync has delivered the log, and HyperIndex has written it."
+  },
+  {
+    "id": "en07",
+    "video": "en",
+    "scene": "e2e",
+    "text": "The GraphQL endpoint already returns the new bid, with its price and the note's evidence mark."
+  },
+  {
+    "id": "en08",
+    "video": "en",
+    "scene": "e2e",
+    "text": "And the page's market activity feed shows it on its next refresh, about seven seconds after we sent it. Three bids now."
+  },
+  {
+    "id": "en09",
+    "video": "en",
+    "scene": "explorer",
+    "text": "Here is the same transaction on MonadVision."
+  },
+  {
+    "id": "en10",
+    "video": "en",
+    "scene": "outro",
+    "text": "Envio gives traders the full history of every note, live, from Monad."
+  },
+  {
+    "id": "al01",
+    "video": "al",
+    "scene": "intro",
+    "text": "CargoFlow's hosted API runs on Alchemy's Monad testnet RPC, as its primary endpoint."
+  },
+  {
+    "id": "al02",
+    "video": "al",
+    "scene": "health",
+    "text": "The health check says it: RPC, primary. The service logs show the Alchemy endpoint, with Monad's public RPC as the fallback."
+  },
+  {
+    "id": "al03",
+    "video": "al",
+    "scene": "failover",
+    "text": "Behind it is a failover client. Alchemy goes first. If it's unreachable, errors, or rate-limits, traffic moves to the fallback, and returns on its own after a cooldown."
+  },
+  {
+    "id": "al04",
+    "video": "al",
+    "scene": "failover",
+    "text": "Reverts never trigger a failover, so behaviour stays deterministic."
+  },
+  {
+    "id": "al05",
+    "video": "al",
+    "scene": "window",
+    "text": "Alchemy's free tier allows ten-block log queries on Monad, so the indexer reads ten blocks at a time. That's about two and a half calls a second."
+  },
+  {
+    "id": "al06",
+    "video": "al",
+    "scene": "runs",
+    "text": "Every chain read, evidence commit, milestone release and pause goes through Alchemy."
+  },
+  {
+    "id": "al07",
+    "video": "al",
+    "scene": "product",
+    "text": "So the shipment dashboards, the evidence-gated money and the Cargo Note market all run live on Monad, through Alchemy."
+  },
+  {
+    "id": "al08",
+    "video": "al",
+    "scene": "outro",
+    "text": "CargoFlow, on Monad, powered by Alchemy."
+  },
+  {
+    "id": "pr01",
+    "video": "pr",
+    "scene": "hook",
+    "text": "Your loan is stuck at sea."
+  },
+  {
+    "id": "pr02",
+    "video": "pr",
+    "scene": "evidence",
+    "text": "Until the cargo speaks for itself."
+  },
+  {
+    "id": "pr03",
+    "video": "pr",
+    "scene": "trades",
+    "text": "Now it trades."
+  },
+  {
+    "id": "pr04",
+    "video": "pr",
+    "scene": "end",
+    "text": "Cargo Notes. CargoFlow, on Monad."
+  }
+]
