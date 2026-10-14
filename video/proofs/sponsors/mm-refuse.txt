@@ -1,0 +1,2 @@
+Error [CARGO_NOT_BUYABLE]: Refusing to buy this note: Status is PAUSED; agents only buy FINANCED, ACTIVE or DELIVERED notes. Evidence score 48 is below the minimum 75. Ask is 49 bps above the evidence mark 2.440248 USDC; allowed premium is 0 bps.
+Hint: These limits come from your flags (--max-price, --min-score, --max-premium-to-mark-bps). Run `mm cargo quote <id>` to see the evidence and mark.

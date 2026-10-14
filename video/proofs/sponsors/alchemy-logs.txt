@@ -1,0 +1,1 @@
+2026-10-14 14:24:17  {"time":"2026-10-14T14:24:17.031564284Z","level":"INFO","msg":"starting","config":"config{http=:8080 chain=10143 rpc=https://monad-testnet.g.alchemy.com/… rpcFallback=https://testnet-rpc.monad.xyz deployment=/app/deployments/monad-testnet.json confirmations=1 poll=2s circuits=/app/circuits}"}

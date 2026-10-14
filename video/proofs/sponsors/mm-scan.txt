@@ -1,0 +1,42 @@
+action:           scan
+executed:         false
+rules:
+  budgetUsdc: 4
+  minScore: 90
+  minUpsideBps: 50
+  maxPremiumToMarkBps: 0
+scanned:          3
+selected:
+  []
+overBudget:
+  []
+rejected:
+  - shipmentId: 0xdfce8f865ac7e5f2f4d97e0d4cf3a5067a5b007a08415cee3eda23d4e5f6fa84
+    ref: CF-LIVE-1791917840516
+    status: ACTIVE
+    reasons:
+      - Nobody is offering this note (no ask).
+  - shipmentId: 0xb508ee5803f1531f5ef62d9df7e7760c091555550471dd98643f7114021239ff
+    ref: CF-LIVE-1791912900798
+    status: ACTIVE
+    reasons:
+      - Nobody is offering this note (no ask).
+  - shipmentId: 0xe27855155eae78aeb39aca53e5f50a861f503e0e7cd87730add2bf093f27e7dc
+    ref: CF-LIVE-1791912775389
+    status: PAUSED
+    reasons:
+      - Status is PAUSED; agents only buy FINANCED, ACTIVE or DELIVERED notes.
+      - Evidence score 48 is below the minimum 90.
+      - Ask is 49 bps above the evidence mark 2.440248 USDC; allowed premium is 0 bps.
+plannedSpendUsdc: 0
+bought:
+  []
+skipped:
+  []
+readErrors:
+  []
+
+Hint: Scanned 3 note(s) with min score 90, min upside 50 bps, max premium to mark 0 bps, budget 4 USDC.
+  skip CF-LIVE-1791917840516: Nobody is offering this note (no ask).
+  skip CF-LIVE-1791912900798: Nobody is offering this note (no ask).
+  skip CF-LIVE-1791912775389: Status is PAUSED; agents only buy FINANCED, ACTIVE or DELIVERED notes. Evidence score 48 is below the minimum 90. Ask is 49 bps above the evidence mark 2.440248 USDC; allowed premium is 0 bps.

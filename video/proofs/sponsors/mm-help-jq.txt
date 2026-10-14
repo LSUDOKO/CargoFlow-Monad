@@ -1,0 +1,6 @@
+mm cargo bid  Place (or replace) an escrowed USDC bid on a cargo note; refuses unhealthy shipments, low evidence scores and bids above the note's claim.
+mm cargo buy  Buy a cargo note at its ask, only if the shipment is healthy (FINANCED/ACTIVE/DELIVERED), its evidence score clears --min-score, and the ask is within --max-price and the evidence mark.
+mm cargo cancel-bid  Cancel your escrowed bid on a cargo note and get the USDC back (always allowed).
+mm cargo list  List live CargoFlow cargo notes on Monad testnet: status, evidence score, claim, mark, ask, best bid and upside at the ask.
+mm cargo quote  Quote one cargo note and explain its mark: undrawn capital at par plus the drawn leg haircut 0.5% per evidence point below 100 (x0.7 while paused).
+mm cargo scan  Scan every live cargo note, keep the ones whose sensor evidence, mark and upside clear your rules, and fill a USDC budget best-upside first. Dry run unless --execute.

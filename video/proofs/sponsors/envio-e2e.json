@@ -1,0 +1,22 @@
+{
+  "feedVisible": "27.12",
+  "sendStart": "27.12",
+  "mined": "29.59",
+  "tx": "0x7cced6e9df3074bf2d0f26abd72c0bae1483fae61fac108481fadb5f6e91571c",
+  "block": 70990433,
+  "indexed": "31.17",
+  "indexedBlock": 70990433,
+  "gqlRow": {
+    "id": "10143_70990433_9",
+    "kind": "BID",
+    "note_id": "0xe27855155eae78aeb39aca53e5f50a861f503e0e7cd87730add2bf093f27e7dc",
+    "account": "0xa6c05ec62a222b0fb65bd30b2d2f9b2fd378911b",
+    "price": "2400000",
+    "mark": "2440248",
+    "timestamp": 1791988119,
+    "txHash": "0x7cced6e9df3074bf2d0f26abd72c0bae1483fae61fac108481fadb5f6e91571c"
+  },
+  "ui": "34.51",
+  "end": "40.51",
+  "video": "/home/arpit/Desktop/hackathon_projects/CargoFlow-Monad/video/public/live/rec-sponsors/page@58f4aae856af3f1c9c0b8dfb8cda83fe.webm"
+}

@@ -1,0 +1,12 @@
+INDEXER: cargoflow-monad
+ORGANIZATION: lsudoko
+DESCRIPTION: 
+CREATED: 2026-10-13
+
+DEPLOYMENTS (2):
+CREATED      STATUS     TIER          COMMIT     QUERY ENDPOINT
+--------     --------   --------      --------   --------
+2026-10-13   none       development   dc07398    https://indexer.dev.hyperindex.xyz/4116ace/v1/graphql
+2026-10-13   none       development   c49454f    https://indexer.dev.hyperindex.xyz/bc5a6d2/v1/graphql
+
+Total deployments: 2

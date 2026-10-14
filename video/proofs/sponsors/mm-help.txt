@@ -1,0 +1,84 @@
+{
+  "ok": true,
+  "data": {
+    "kind": "topic",
+    "topic": {
+      "name": "cargo",
+      "description": "Trade CargoFlow cargo notes (tokenised trade-finance credit) on Monad, gated by sensor evidence"
+    },
+    "usage": "mm cargo <command> [flags]",
+    "commands": [
+      {
+        "id": "cargo bid",
+        "invocation": "mm cargo bid",
+        "summary": "Place (or replace) an escrowed USDC bid on a cargo note; refuses unhealthy shipments, low evidence scores and bids above the note's claim.",
+        "description": "Place (or replace) an escrowed USDC bid on a cargo note; refuses unhealthy shipments, low evidence scores and bids above the note's claim.",
+        "flags": []
+      },
+      {
+        "id": "cargo buy",
+        "invocation": "mm cargo buy",
+        "summary": "Buy a cargo note at its ask, only if the shipment is healthy (FINANCED/ACTIVE/DELIVERED), its evidence score clears --min-score, and the ask is within --max-price and the evidence mark.",
+        "description": "Buy a cargo note at its ask, only if the shipment is healthy (FINANCED/ACTIVE/DELIVERED), its evidence score clears --min-score, and the ask is within --max-price and the evidence mark.",
+        "flags": []
+      },
+      {
+        "id": "cargo cancel-bid",
+        "invocation": "mm cargo cancel-bid",
+        "summary": "Cancel your escrowed bid on a cargo note and get the USDC back (always allowed).",
+        "description": "Cancel your escrowed bid on a cargo note and get the USDC back (always allowed).",
+        "flags": []
+      },
+      {
+        "id": "cargo list",
+        "invocation": "mm cargo list",
+        "summary": "List live CargoFlow cargo notes on Monad testnet: status, evidence score, claim, mark, ask, best bid and upside at the ask.",
+        "description": "List live CargoFlow cargo notes on Monad testnet: status, evidence score, claim, mark, ask, best bid and upside at the ask.",
+        "flags": []
+      },
+      {
+        "id": "cargo quote",
+        "invocation": "mm cargo quote",
+        "summary": "Quote one cargo note and explain its mark: undrawn capital at par plus the drawn leg haircut 0.5% per evidence point below 100 (x0.7 while paused).",
+        "description": "Quote one cargo note and explain its mark: undrawn capital at par plus the drawn leg haircut 0.5% per evidence point below 100 (x0.7 while paused).",
+        "flags": []
+      },
+      {
+        "id": "cargo scan",
+        "invocation": "mm cargo scan",
+        "summary": "Scan every live cargo note, keep the ones whose sensor evidence, mark and upside clear your rules, and fill a USDC budget best-upside first. Dry run unless --execute.",
+        "description": "Scan every live cargo note, keep the ones whose sensor evidence, mark and upside clear your rules, and fill a USDC budget best-upside first. Dry run unless --execute.",
+        "flags": []
+      }
+    ],
+    "globalFlags": [
+      {
+        "long": "--format",
+        "short": "-f",
+        "description": "Output format: text | json | toon (defaults to text in TTY, json when piped)"
+      },
+      {
+        "long": "--json",
+        "description": "Shorthand for --format=json"
+      },
+      {
+        "long": "--toon",
+        "description": "Shorthand for --format=toon"
+      },
+      {
+        "long": "--verbose",
+        "short": "-v",
+        "description": "Show debug logs on stderr. Use this for troubleshooting"
+      },
+      {
+        "long": "--help",
+        "short": "-h",
+        "description": "Show help for a command"
+      },
+      {
+        "long": "--version",
+        "description": "Show CLI version"
+      }
+    ]
+  }
+}

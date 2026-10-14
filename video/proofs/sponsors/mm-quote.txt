@@ -1,0 +1,38 @@
+shipmentId:        0xe27855155eae78aeb39aca53e5f50a861f503e0e7cd87730add2bf093f27e7dc
+ref:               —
+status:            PAUSED
+evidenceScore:     48
+claimUsdc:         3.036
+markUsdc:          2.440248
+askUsdc:           2.452449
+askSeller:         0x2198AB4E7755510A6A94EE298cf70f44e0f86414
+bestBidUsdc:       2.36704
+bestBidder:        0xA6C05ec62A222b0fb65BD30B2d2f9B2fd378911b
+holder:            0x2198AB4E7755510A6A94EE298cf70f44e0f86414
+upsideAtAskBps:    2379
+askVsMarkBps:      49
+committedUsdc:     3
+drawnUsdc:         1.2
+undrawnUsdc:       1.8
+feeBps:            300
+pauseCount:        1
+drawnLegFactorBps: 5180
+markMatchesChain:  true
+whyThisMark:
+  - Claim at settlement = committed 3 + fee on drawn 0.036 (300 bps) = 3.036 USDC.
+  - Undrawn 1.8 USDC is still in escrow and is marked at par.
+  - Evidence score 48/100: drawn leg 1.236 x (1 - 0.5% x 52 pts) = x74.00%.
+  - Facility is PAUSED (a breach is open): drawn leg further x70% -> x51.80%.
+  - Mark = 1.8 + 0.640248 = 2.440248 USDC.
+  - Ask 2.452449 USDC pays 0.583551 USDC at settlement if the buyer pays in full.
+rpc:               public
+appUrl:            https://cargoflow-monad.vercel.app/notes
+
+Hint: 0xe27855155eae78aeb39aca53e5f50a861f503e0e7cd87730add2bf093f27e7dc  PAUSED  evidence 48/100
+claim 3.036  mark 2.440248  ask 2.452449  best bid 2.36704  upside at ask 2379 bps
+  - Claim at settlement = committed 3 + fee on drawn 0.036 (300 bps) = 3.036 USDC.
+  - Undrawn 1.8 USDC is still in escrow and is marked at par.
+  - Evidence score 48/100: drawn leg 1.236 x (1 - 0.5% x 52 pts) = x74.00%.
+  - Facility is PAUSED (a breach is open): drawn leg further x70% -> x51.80%.
+  - Mark = 1.8 + 0.640248 = 2.440248 USDC.
+  - Ask 2.452449 USDC pays 0.583551 USDC at settlement if the buyer pays in full.
