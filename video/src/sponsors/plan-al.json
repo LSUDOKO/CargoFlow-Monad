@@ -1,0 +1,103 @@
+{
+ "fps": 30,
+ "totalFrames": 2058,
+ "scenes": [
+  {
+   "id": "intro",
+   "from": 0,
+   "frames": 244,
+   "cues": [
+    {
+     "id": "al01",
+     "text": "CargoFlow's hosted API runs on Alchemy's Monad testnet RPC, as its primary endpoint.",
+     "start": 10,
+     "end": 220
+    }
+   ]
+  },
+  {
+   "id": "health",
+   "from": 244,
+   "frames": 324,
+   "cues": [
+    {
+     "id": "al02",
+     "text": "The health check says it: RPC, primary. The service logs show the Alchemy endpoint, with Monad's public RPC as the fallback.",
+     "start": 255,
+     "end": 526
+    }
+   ]
+  },
+  {
+   "id": "failover",
+   "from": 568,
+   "frames": 524,
+   "cues": [
+    {
+     "id": "al03",
+     "text": "Behind it is a failover client. Alchemy goes first. If it's unreachable, errors, or rate-limits, traffic moves to the fallback, and returns on its own after a cooldown.",
+     "start": 578,
+     "end": 915
+    },
+    {
+     "id": "al04",
+     "text": "Reverts never trigger a failover, so behaviour stays deterministic.",
+     "start": 924,
+     "end": 1050
+    }
+   ]
+  },
+  {
+   "id": "window",
+   "from": 1092,
+   "frames": 324,
+   "cues": [
+    {
+     "id": "al05",
+     "text": "Alchemy's free tier allows ten-block log queries on Monad, so the indexer reads ten blocks at a time. That's about two and a half calls a second.",
+     "start": 1102,
+     "end": 1374
+    }
+   ]
+  },
+  {
+   "id": "runs",
+   "from": 1416,
+   "frames": 205,
+   "cues": [
+    {
+     "id": "al06",
+     "text": "Every chain read, evidence commit, milestone release and pause goes through Alchemy.",
+     "start": 1427,
+     "end": 1579
+    }
+   ]
+  },
+  {
+   "id": "product",
+   "from": 1621,
+   "frames": 257,
+   "cues": [
+    {
+     "id": "al07",
+     "text": "So the shipment dashboards, the evidence-gated money and the Cargo Note market all run live on Monad, through Alchemy.",
+     "start": 1631,
+     "end": 1842
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "from": 1878,
+   "frames": 180,
+   "cues": [
+    {
+     "id": "al08",
+     "text": "CargoFlow, on Monad, powered by Alchemy.",
+     "start": 1889,
+     "end": 1964
+    }
+   ]
+  }
+ ]
+}

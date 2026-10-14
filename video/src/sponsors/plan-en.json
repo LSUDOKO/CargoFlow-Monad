@@ -1,0 +1,115 @@
+{
+ "fps": 30,
+ "totalFrames": 2315,
+ "scenes": [
+  {
+   "id": "intro",
+   "from": 0,
+   "frames": 246,
+   "cues": [
+    {
+     "id": "en01",
+     "text": "CargoFlow's Cargo Note market runs on Envio HyperIndex, reading Monad testnet through HyperSync.",
+     "start": 10,
+     "end": 222
+    }
+   ]
+  },
+  {
+   "id": "config",
+   "from": 246,
+   "frames": 289,
+   "cues": [
+    {
+     "id": "en02",
+     "text": "One config indexes three contracts: the note market, the financing controller and the evidence registry, from the deployment block.",
+     "start": 257,
+     "end": 493
+    }
+   ]
+  },
+  {
+   "id": "schema",
+   "from": 535,
+   "frames": 271,
+   "cues": [
+    {
+     "id": "en03",
+     "text": "Handlers turn every ask, bid, trade and transfer into entities: notes, trades, order events and market stats.",
+     "start": 545,
+     "end": 764
+    }
+   ]
+  },
+  {
+   "id": "cloud",
+   "from": 806,
+   "frames": 238,
+   "cues": [
+    {
+     "id": "en04",
+     "text": "It's deployed on Envio Cloud, synced to the chain head, behind a public GraphQL endpoint.",
+     "start": 816,
+     "end": 1002
+    }
+   ]
+  },
+  {
+   "id": "e2e",
+   "from": 1044,
+   "frames": 901,
+   "cues": [
+    {
+     "id": "en05",
+     "text": "Now, end to end. With the trading page open, we raise a bid on a note, on chain.",
+     "start": 1055,
+     "end": 1214
+    },
+    {
+     "id": "en06",
+     "text": "The transaction is mined in about two and a half seconds. A second and a half later, HyperSync has delivered the log, and HyperIndex has written it.",
+     "start": 1223,
+     "end": 1493
+    },
+    {
+     "id": "en07",
+     "text": "The GraphQL endpoint already returns the new bid, with its price and the note's evidence mark.",
+     "start": 1502,
+     "end": 1678
+    },
+    {
+     "id": "en08",
+     "text": "And the page's market activity feed shows it on its next refresh, about seven seconds after we sent it. Three bids now.",
+     "start": 1687,
+     "end": 1909
+    }
+   ]
+  },
+  {
+   "id": "explorer",
+   "from": 1945,
+   "frames": 150,
+   "cues": [
+    {
+     "id": "en09",
+     "text": "Here is the same transaction on MonadVision.",
+     "start": 1955,
+     "end": 2032
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "from": 2095,
+   "frames": 220,
+   "cues": [
+    {
+     "id": "en10",
+     "text": "Envio gives traders the full history of every note, live, from Monad.",
+     "start": 2105,
+     "end": 2240
+    }
+   ]
+  }
+ ]
+}

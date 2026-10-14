@@ -1,0 +1,210 @@
+{
+ "fps": 30,
+ "totalFrames": 4516,
+ "scenes": [
+  {
+   "id": "intro",
+   "from": 0,
+   "frames": 547,
+   "cues": [
+    {
+     "id": "mm01",
+     "text": "CargoFlow's cargo notes plugin gives the MetaMask Agent Wallet a new trading superpower: evidence-aware credit trading on Monad.",
+     "start": 10,
+     "end": 265
+    },
+    {
+     "id": "mm02",
+     "text": "An agent can find, price and buy Cargo Notes: short-dated trade-finance positions, priced by the cargo's own sensor evidence.",
+     "start": 274,
+     "end": 523
+    }
+   ]
+  },
+  {
+   "id": "install",
+   "from": 547,
+   "frames": 210,
+   "cues": [
+    {
+     "id": "mm03",
+     "text": "It's a native mm plugin. Install it once, and the agent gets six new commands.",
+     "start": 558,
+     "end": 712
+    }
+   ]
+  },
+  {
+   "id": "list",
+   "from": 757,
+   "frames": 306,
+   "cues": [
+    {
+     "id": "mm04",
+     "text": "mm cargo list reads the whole market from Monad: status, evidence score, claim, on-chain mark, ask and best bid for every note.",
+     "start": 768,
+     "end": 1027
+    }
+   ]
+  },
+  {
+   "id": "quote",
+   "from": 1063,
+   "frames": 441,
+   "cues": [
+    {
+     "id": "mm05",
+     "text": "mm cargo quote explains a price in plain words.",
+     "start": 1073,
+     "end": 1169
+    },
+    {
+     "id": "mm06",
+     "text": "This note is paused after a temperature excursion. Its evidence score is forty-eight, so the drawn leg is marked down, and down again while it's paused.",
+     "start": 1178,
+     "end": 1462
+    }
+   ]
+  },
+  {
+   "id": "refuse",
+   "from": 1504,
+   "frames": 352,
+   "cues": [
+    {
+     "id": "mm07",
+     "text": "So when the agent is asked to buy it, the plugin refuses before anything is signed.",
+     "start": 1514,
+     "end": 1658
+    },
+    {
+     "id": "mm08",
+     "text": "Paused, evidence below the minimum, ask above the mark. Nothing reaches the wallet.",
+     "start": 1667,
+     "end": 1820
+    }
+   ]
+  },
+  {
+   "id": "scan",
+   "from": 1856,
+   "frames": 373,
+   "cues": [
+    {
+     "id": "mm09",
+     "text": "mm cargo scan is the strategy command. It checks every note against your rules and your budget, and explains each decision.",
+     "start": 1866,
+     "end": 2108
+    },
+    {
+     "id": "mm10",
+     "text": "Right now nothing qualifies, so nothing is bought.",
+     "start": 2117,
+     "end": 2193
+    }
+   ]
+  },
+  {
+   "id": "buy",
+   "from": 2229,
+   "frames": 493,
+   "cues": [
+    {
+     "id": "mm11",
+     "text": "Earlier, a note was offered one percent under its mark, with a perfect evidence score. The agent bought it.",
+     "start": 2239,
+     "end": 2421
+    },
+    {
+     "id": "mm12",
+     "text": "Two transactions: an exact USDC approval, then the buy. MetaMask held each one until the owner approved it by email.",
+     "start": 2430,
+     "end": 2686
+    }
+   ]
+  },
+  {
+   "id": "chain",
+   "from": 2722,
+   "frames": 240,
+   "cues": [
+    {
+     "id": "mm13",
+     "text": "Both landed on Monad: the approval, and the buy, for about three USDC.",
+     "start": 2732,
+     "end": 2882
+    }
+   ]
+  },
+  {
+   "id": "holder",
+   "from": 2962,
+   "frames": 389,
+   "cues": [
+    {
+     "id": "mm14",
+     "text": "The agent wallet is now the note's financier of record. When the importer pays, it receives principal plus fee.",
+     "start": 2972,
+     "end": 3182
+    },
+    {
+     "id": "mm15",
+     "text": "And the trading page's market feed, indexed by Envio, shows the fill.",
+     "start": 3191,
+     "end": 3321
+    }
+   ]
+  },
+  {
+   "id": "safety",
+   "from": 3351,
+   "frames": 392,
+   "cues": [
+    {
+     "id": "mm16",
+     "text": "Two layers keep this safe. The plugin enforces evidence, price and budget rules.",
+     "start": 3361,
+     "end": 3512
+    },
+    {
+     "id": "mm17",
+     "text": "MetaMask's Guard mode adds allowlists, an outflow limit and two-factor approval on every transaction.",
+     "start": 3521,
+     "end": 3713
+    }
+   ]
+  },
+  {
+   "id": "skill",
+   "from": 3743,
+   "frames": 500,
+   "cues": [
+    {
+     "id": "mm18",
+     "text": "A skill file teaches any agent to plan first, explain refusals, and never loosen a limit to force a trade.",
+     "start": 3753,
+     "end": 3966
+    },
+    {
+     "id": "mm19",
+     "text": "And we made Agent Wallet work on Monad testnet. The plugin sends its own gas and fees, and loads the host's SDK.",
+     "start": 3975,
+     "end": 4213
+    }
+   ]
+  },
+  {
+   "id": "outro",
+   "from": 4243,
+   "frames": 273,
+   "cues": [
+    {
+     "id": "mm20",
+     "text": "Cargo notes for MetaMask Agent Wallet. Evidence-aware credit, traded by agents, on Monad.",
+     "start": 4253,
+     "end": 4441
+    }
+   ]
+  }
+ ]
+}

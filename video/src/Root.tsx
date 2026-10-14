@@ -15,6 +15,10 @@ import { ReadmeCompositions } from "./readme";
 import { FULL_V2_FRAMES, FullV2, SceneV2, fullV2Schema } from "./FullV2";
 import { SCENES } from "./scenes-v2/timing";
 import { MONAD_FILM_FRAMES, MonadFilm, ProofStill } from "./monad/MonadFilm";
+import { MM_FRAMES, MetaMaskFilm } from "./sponsors/MetaMaskFilm";
+import { EN_FRAMES, EnvioFilm } from "./sponsors/EnvioFilm";
+import { AL_FRAMES, AlchemyFilm } from "./sponsors/AlchemyFilm";
+import { PR_FRAMES, PromoAd } from "./sponsors/PromoAd";
 
 const demoMetadata: CalculateMetadataFunction<DemoProps> = ({ props }) => {
   const resolved = withAutoMedia(props);
@@ -26,6 +30,10 @@ export const RemotionRoot: React.FC = () => (
     {(["metamask", "kuru", "envio", "alchemy"] as const).map((w) => (
       <Composition key={w} id={`Proof-${w}`} component={ProofStill} durationInFrames={1} fps={30} width={1920} height={w === "metamask" ? 900 : w === "kuru" ? 760 : w === "envio" ? 560 : 460} defaultProps={{ which: w }} />
     ))}
+    <Composition id="PromoAd" component={PromoAd} durationInFrames={PR_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="SponsorAlchemy" component={AlchemyFilm} durationInFrames={AL_FRAMES} fps={30} width={1920} height={1080} defaultProps={{ captions: true }} />
+    <Composition id="SponsorEnvio" component={EnvioFilm} durationInFrames={EN_FRAMES} fps={30} width={1920} height={1080} defaultProps={{ captions: true }} />
+    <Composition id="SponsorMetaMask" component={MetaMaskFilm} durationInFrames={MM_FRAMES} fps={30} width={1920} height={1080} defaultProps={{ captions: true }} />
     <Composition id="MonadFilm" component={MonadFilm} durationInFrames={MONAD_FILM_FRAMES} fps={30} width={1920} height={1080} defaultProps={{ captions: true, music: 0.13 }} />
     <Composition
       id="Full"

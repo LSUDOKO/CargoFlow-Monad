@@ -1,0 +1,58 @@
+{
+ "fps": 30,
+ "totalFrames": 900,
+ "scenes": [
+  {
+   "id": "hook",
+   "from": 0,
+   "frames": 210,
+   "cues": [
+    {
+     "id": "pr01",
+     "text": "Your loan is stuck at sea.",
+     "start": 21,
+     "end": 61
+    }
+   ]
+  },
+  {
+   "id": "evidence",
+   "from": 210,
+   "frames": 210,
+   "cues": [
+    {
+     "id": "pr02",
+     "text": "Until the cargo speaks for itself.",
+     "start": 246,
+     "end": 302
+    }
+   ]
+  },
+  {
+   "id": "trades",
+   "from": 420,
+   "frames": 300,
+   "cues": [
+    {
+     "id": "pr03",
+     "text": "Now it trades.",
+     "start": 447,
+     "end": 474
+    }
+   ]
+  },
+  {
+   "id": "end",
+   "from": 720,
+   "frames": 180,
+   "cues": [
+    {
+     "id": "pr04",
+     "text": "Cargo Notes. CargoFlow, on Monad.",
+     "start": 750,
+     "end": 813
+    }
+   ]
+  }
+ ]
+}
